@@ -7,13 +7,13 @@
 <title>お気に入り</title>
 </head>
 <body>
-	<a href="top">トップ</a>
-	<a href="search">検索</a>
-	<a href="user">ユーザーページ</a>
-	<a href="form/inquiry">問い合わせ</a>
-	<a href="form/request">本のリクエスト</a>
-	<a href="admin/manage">管理画面</a>
-	<a href="introduction">本の紹介</a>
+	<a href = "top">トップ</a>
+	<a href = "search">検索</a>
+	<a href = "favorite">お気に入り</a>
+	<a href = "form/inquiry">問い合わせ</a>
+	<a href = "form/request">本のリクエスト</a>
+	<a href = "admin/manage">管理画面</a>
+	<a href = "introduction">本の紹介</a>
 
 </body>
 </html>
