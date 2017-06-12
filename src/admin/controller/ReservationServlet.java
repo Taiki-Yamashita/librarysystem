@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns = {"/admin/notReturned"})
-public class NotReturnedServlet extends HttpServlet {
+@WebServlet(urlPatterns = {"/admin/reservation"})
+public class ReservationServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
@@ -17,8 +17,6 @@ public class NotReturnedServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
 
-		System.out.println();
-		request.getRequestDispatcher("/admin/notReturn.jsp").forward(request, response);
-
+		request.getRequestDispatcher("/admin/reservation.jsp").forward(request, response);
 	}
 }

@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns = {"/form/request"})
+@WebServlet(urlPatterns = {"/request"})
 public class RequestServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -17,6 +17,6 @@ public class RequestServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
 
-		request.getRequestDispatcher("/form/request.jsp").forward(request, response);
+		request.getRequestDispatcher("/request.jsp").forward(request, response);
 	}
 }
