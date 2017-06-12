@@ -4,17 +4,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>本の紹介</title>
+<title>検索</title>
 </head>
 <body>
 	<a href="top">トップ</a>
-	<a href="search">検索</a>
 	<a href="user">ユーザーページ</a>
 	<a href="favorite">お気に入り</a>
 	<a href="form/inquiry">問い合わせ</a>
 	<a href="form/request">本のリクエスト</a>
 	<a href="admin/manage">管理画面</a>
-
+	<a href="introduction">本の紹介</a>
 
 </body>
 </html>
