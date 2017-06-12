@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns = { "/top" })
+@WebServlet(urlPatterns = { "/index.jsp" })
 public class TopServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 
@@ -17,6 +17,5 @@ public class TopServlet extends HttpServlet{
 			throws ServletException, IOException {
 
 		request.getRequestDispatcher("/top.jsp").forward(request, response);
-		System.out.println("");
 	}
 }

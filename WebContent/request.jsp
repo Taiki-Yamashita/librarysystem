@@ -7,7 +7,7 @@
 <title>リクエスト</title>
 </head>
 <body>
-	<a href = "top">トップ</a>
+	<a href = "./top">トップ</a>
 	<a href = "./">戻る</a>
 	<input type = submit value = "送信">
 </body>
