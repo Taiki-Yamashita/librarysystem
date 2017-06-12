@@ -4,11 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>問い合わせ</title>
+<title>本登録</title>
 </head>
 <body>
 	<a href = "top">トップ</a>
-	<a href="./">戻る</a>
-	<input type = submit value = "送信">
 </body>
 </html>
