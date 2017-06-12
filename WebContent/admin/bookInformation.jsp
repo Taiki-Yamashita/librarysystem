@@ -7,6 +7,6 @@
 <title>本情報管理</title>
 </head>
 <body>
-	<a href = "./">トップ</a>
+	<a href = "../">トップ</a>
 </body>
 </html>
