@@ -7,14 +7,14 @@
 <title>管理画面</title>
 </head>
 <body>
-	<a href = "reservation">予約管理</a>
-	<a href = "circulation">貸出管理</a>
-	<a href = "editUser">ユーザー情報管理</a>
-	<a href = "bookInformation">本の情報管理</a>
-	<a href = "notReturned">未返却リスト</a>
-	<a href = "response">問い合わせ受取</a>
-	<a href = "addBook">本の追加</a>
-	<a href = "addUser">ユーザーの追加</a>
+	<a href = "./reservation">予約管理</a>
+	<a href = "./circulation">貸出管理</a>
+	<a href = "./editUser">ユーザー情報管理</a>
+	<a href = "./bookInformation">本の情報管理</a>
+	<a href = "./notReturned">未返却リスト</a>
+	<a href = "./response">問い合わせ受取</a>
+	<a href = "./addBook">本の追加</a>
+	<a href = "./addUser">ユーザーの追加</a>
 
 </body>
 </html>
