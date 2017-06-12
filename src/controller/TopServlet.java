@@ -17,5 +17,6 @@ public class TopServlet extends HttpServlet{
 			throws ServletException, IOException {
 
 		request.getRequestDispatcher("/top.jsp").forward(request, response);
+		System.out.println("");
 	}
 }
