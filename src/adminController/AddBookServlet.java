@@ -1,4 +1,4 @@
-package controller;
+package adminController;
 
 import java.io.IOException;
 
@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns = {"/admin/circulation"})
-public class CirculationServlet extends HttpServlet {
+@WebServlet(urlPatterns = {"/admin/addBook"})
+public class AddBookServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
@@ -17,6 +17,6 @@ public class CirculationServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
 
-		request.getRequestDispatcher("/admin/circulation.jsp").forward(request, response);
+		request.getRequestDispatcher("/admin/addBook.jsp").forward(request, response);
 	}
 }
