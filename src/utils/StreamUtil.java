@@ -9,7 +9,7 @@ import exception.IORuntimeException;
 /**
  * ストリーム関係のユーティリティー
  */
-public class Streamutil {
+public class StreamUtil {
 	/**
 	 * input から outputにデータをコピーします。
 	 *

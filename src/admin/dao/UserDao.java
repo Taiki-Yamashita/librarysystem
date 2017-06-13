@@ -1,6 +1,6 @@
 package admin.dao;
 
-import static utils.Closeableutil.*;
+import static utils.CloseableUtil.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
