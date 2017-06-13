@@ -71,7 +71,7 @@ public class UserDao {
 			sql.append(", ?");
 			sql.append(", ?");
 			sql.append(", ?");
-			sql.append(", ?");
+			sql.append(", CURRENT_TIMESTAMP");
 			sql.append(", ?");
 			sql.append(", ?)");
 
@@ -81,11 +81,12 @@ public class UserDao {
 			ps.setString(2, user.getAddress());
 			ps.setString(3, user.getTel());
 			ps.setString(4, user.getMail());
-			ps.setString(5, user.getPoint());
-			ps.setString(6, user.getRegisterDate());
-			ps.setString(7, user.getLibraryId());
-			ps.setBoolean(8, user.isStopping());
+			ps.setString(5, "0");
+			//ps.setString(6, user.getRegisterDate());
+			ps.setString(6, user.getLibraryId());
+			ps.setBoolean(7, user.isStopping());
 
+			System.out.println(ps.toString());
 			ps.executeUpdate();
 		} catch (SQLException e){
 			throw new SQLRuntimeException(e);

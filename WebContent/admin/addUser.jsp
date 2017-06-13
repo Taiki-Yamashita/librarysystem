@@ -6,7 +6,38 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>ユーザー登録</title>
 	</head>
+
 	<body>
-		<a href = "../">トップ</a>
+		<h1>ユーザー登録画面</h1>
+
+		<c:if test="${ not empty errorMessages }">
+			<c:forEach items="${errorMessages}" var="message">
+				<c:out value="${message}"/>
+			</c:forEach>
+
+			<c:remove var="errorMessages" scope="session"/>
+		</c:if>
+
+		<a href = "top">トップ</a>
+
+		<form action="addUser" method="post">
+
+			<label for="name">名前</label>
+			<input name="name" value="${newUser.name}" id="name"/><br/>
+
+			<label for="address">住所</label>
+			<input name="address" value="${newUser.address}" id="address"/><br/>
+
+			<label for="tel">電話番号</label>
+			<input name="tel" value="${newUser.tel}" id="tel"/><br/>
+
+			<label for="mail">メールアドレス</label>
+			<input name="mail"  value="${newUser.mail}"  id="mail"/><br/>
+
+			<label for="libraryId">最寄り図書館</label>
+			<input name="libraryId"  value="${newUser.libraryId}"  id="libraryId"/><br/>
+
+			<input type="submit" value="登録" />
+		</form>
 	</body>
 </html>
