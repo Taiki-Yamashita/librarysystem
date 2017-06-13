@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,30 +15,32 @@ import service.BookService;
 
 
 @WebServlet(urlPatterns = { "/editBooks" })
-public class EditBooksServlet {
+public class EditBooksServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		List<Book> books = new BookService().selectAll();
+	//	List<Book> books = new BookService().selectAll();
 		String bookId = request.getParameter("id");
 
-			int book_id = Integer.parseInt(bookId);
-			Book editBook = new BookService().selectBook(book_id);
+		int book_id = Integer.parseInt(bookId);
+		Book editBook = new BookService().selectBook(book_id);
 
-				request.setAttribute("editBook", editBook);
-				request.getRequestDispatcher("/admin/bookInformation.jsp").forward(request, response);
-			}
-
+		request.setAttribute("editBook", editBook);
+		request.getRequestDispatcher("/admin/bookInformation.jsp").forward(request, response);
 
 
+	}
 
 
 	@Override
 	protected void doPost(HttpServletRequest request,HttpServletResponse response)
 		throws ServletException,IOException {
-	}
+
+		Book editBook = getEditBook(request);
+
 
 		private Book getEditBook(HttpServletRequest request) {
 
@@ -58,3 +61,4 @@ public class EditBooksServlet {
 			return editBook;
 		}
 	}
+}

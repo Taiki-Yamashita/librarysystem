@@ -150,6 +150,55 @@ public class BookDao {
 
 	}
 
+	public Book selectBook(Connection connection, int book_id){
+		PreparedStatement ps = null;
+		try {
+			String sql = "SELECT * FROM books WHERE id = ? ";
+
+
+
+			ps = connection.prepareStatement(sql);
+			ps.setInt(1, book_id);
+
+			ResultSet rs =ps.executeQuery();
+			List<Book> bookList = toBookList(rs);
+			if(bookList.isEmpty() == true) {
+				return null;
+			} else if(2<= bookList.size()) {
+				throw new IllegalStateException("2<= bookList.size()");
+			} else {
+				return bookList.get(0);
+
+			}
+		}catch(SQLException e) {
+			throw new SQLRuntimeException(e);
+		}finally {
+			close(ps);
+		}
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	private List<Book> toBookList(ResultSet rs) throws SQLException {
 
 		List<Book> ret = new ArrayList<Book>();

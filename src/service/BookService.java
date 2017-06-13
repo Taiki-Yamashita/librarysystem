@@ -58,11 +58,11 @@ public class BookService {
 			connection = getConnection();
 
 			BookDao bookDao = new BookDao();
-			Book book = bookDao.getUser(connection, bookId);
+			Book book = bookDao.selectBook(connection, book_id);
 
 			commit(connection);
 
-			return user;
+			return book;
 		} catch (RuntimeException e) {
 			rollback(connection);
 			throw e;
