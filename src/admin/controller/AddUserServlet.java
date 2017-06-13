@@ -44,7 +44,6 @@ public class AddUserServlet extends HttpServlet {
 			user.setTel(request.getParameter("tel"));
 			user.setMail(request.getParameter("mail"));
 			user.setLibraryId(request.getParameter("libraryId"));
-			System.out.println(request.getParameter("mail"));
 			new UserService().insert(user);
 
 			response.sendRedirect("./manage");
@@ -75,7 +74,10 @@ public class AddUserServlet extends HttpServlet {
 		String name = request.getParameter("name");
 		if (StringUtils.isEmpty(name) == true) {
 			messages.add("名前を入力してください");
+			return false;
 		}
-		return false;
+
+		return true;
+
 	}
 }
