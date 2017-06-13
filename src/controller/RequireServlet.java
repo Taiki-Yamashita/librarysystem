@@ -16,7 +16,7 @@ import org.apache.commons.lang.StringUtils;
 import beans.Require;
 import service.RequireService;
 
-@WebServlet(urlPatterns = {"/request"})
+@WebServlet(urlPatterns = {"/require"})
 public class RequireServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -45,7 +45,7 @@ public class RequireServlet extends HttpServlet {
 			require.setPublisher(request.getParameter("publisher"));
 			new RequireService().insert(require);
 
-			response.sendRedirect("./top");
+			response.sendRedirect("./");
 		} else {
 			session.setAttribute("errorMessages", messages);
 

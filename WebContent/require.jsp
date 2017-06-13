@@ -20,9 +20,9 @@
 			<c:remove var="errorMessages" scope="session"/>
 		</c:if>
 
-		<a href = "top">トップ</a>
+		<a href = "./">トップ</a>
 
-		<form action="request" method="post">
+		<form action="require" method="post">
 
 			<label for="userName">申請者</label>
 			<input name="userName" value="${newRequire.userName}" id="userName"/><br/>

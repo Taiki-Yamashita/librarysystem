@@ -10,7 +10,7 @@ import beans.Require;
 import exception.SQLRuntimeException;
 
 public class RequireDao {
-	public void insert(Connection connection, Require request) {
+	public void insert(Connection connection, Require require) {
 
 		PreparedStatement ps = null;
 		try {
@@ -31,10 +31,10 @@ public class RequireDao {
 
 			ps = connection.prepareStatement(sql.toString());
 
-			ps.setString(1, request.getUserName());
-			ps.setString(2, request.getBookName());
-			ps.setString(3, request.getAuthor());
-			ps.setString(4, request.getPublisher());
+			ps.setString(1, require.getUserName());
+			ps.setString(2, require.getBookName());
+			ps.setString(3, require.getAuthor());
+			ps.setString(4, require.getPublisher());
 
 			System.out.println(ps.toString());
 
