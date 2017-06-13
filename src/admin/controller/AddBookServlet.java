@@ -41,6 +41,6 @@ public class AddBookServlet extends HttpServlet {
 
 
 
-		response.sendRedirect("./admin/addBook");
+		response.sendRedirect("./addBook");
 	}
 }

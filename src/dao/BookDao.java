@@ -87,10 +87,10 @@ public class BookDao {
 			ps.setString(7, book.getLibraryId());
 			ps.setString(8, book.getShelfId());
 			ps.setString(9, book.getIsbnId());
-			ps.setString(10, book.getKeeping());
-			ps.setString(11, book.getLending());
-			ps.setString(12, book.getReserving());
-			ps.setString(13, book.getDisposing());
+			ps.setString(10, "0");
+			ps.setString(11, "0");
+			ps.setString(12, "0");
+			ps.setString(13, "0");
 
 			ps.executeUpdate();
 		} catch (SQLException e) {
