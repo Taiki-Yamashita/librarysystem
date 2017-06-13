@@ -1,6 +1,6 @@
 package dao;
 
-//import static utils.CloseableUtil.*;
+import static utils.CloseableUtil.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,9 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import beans.Favorite;
-
+import exception.NoRowsUpdatedRuntimeException;
 //import exception.NoRowsUpdatedRuntimeException;
-//import exception.SQLRuntimeException;
+import exception.SQLRuntimeException;
 
 public class FavoriteDao {
 

@@ -9,7 +9,7 @@ import exception.SQLRuntimeException;
 /**
  * DB(コネクション関係)のユーティリティー
  */
-public class DButil {
+public class DBUtil {
 
 
 	private static final String DRIVER = "com.mysql.jdbc.Driver";

@@ -1,12 +1,13 @@
 package service;
 
-//import static utils.CloseableUtil.*;
-//import static utils.DButil.*;
+import static utils.CloseableUtil.*;
+import static utils.DBUtil.*;
 
 import java.sql.Connection;
 import java.util.List;
 
 import beans.Book;
+import dao.BookDao;
 
 public class BookService {
 

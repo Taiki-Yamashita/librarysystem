@@ -1,6 +1,6 @@
 package dao;
 
-//import static utils.CloseableUtil.*;
+import static utils.CloseableUtil.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,9 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import beans.Circulation;
-
-//import exception.NoRowsUpdatedRuntimeException;
-//import exception.SQLRuntimeException;
+import exception.NoRowsUpdatedRuntimeException;
+import exception.SQLRuntimeException;
 
 public class CirculationDao {
 
@@ -75,7 +74,7 @@ public class CirculationDao {
 		}
 	}
 
-	public void update(Connection connection, Circulation book) {
+	public void update(Connection connection, Circulation circulation) {
 
 		PreparedStatement ps = null;
 		try {
@@ -92,12 +91,12 @@ public class CirculationDao {
 
 			ps = connection.prepareStatement(sql.toString());
 
-			ps.setString(1, book.getLentDate());
-			ps.setString(2, book.getLimitedDate());
-			ps.setString(3, book.getUserId());
-			ps.setString(4, book.getBookId());
-			ps.setString(5, book.getLibraryId());
-			ps.setString(6, book.getReturning());
+			ps.setString(1, circulation.getLentDate());
+			ps.setString(2, circulation.getLimitedDate());
+			ps.setString(3, circulation.getUserId());
+			ps.setString(4, circulation.getBookId());
+			ps.setString(5, circulation.getLibraryId());
+			ps.setString(6, circulation.getReturning());
 
 			int count = ps.executeUpdate();
 			if (count == 0) {
