@@ -40,7 +40,6 @@ public class AddBookServlet extends HttpServlet {
 		new BookService().insert(book);
 
 
-
 		response.sendRedirect("./addBook");
 	}
 }

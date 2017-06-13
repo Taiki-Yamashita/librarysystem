@@ -1,4 +1,4 @@
-package admin.dao;
+package dao;
 
 import static utils.CloseableUtil.*;
 
@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import admin.beans.User;
+import beans.User;
 import exception.SQLRuntimeException;
 
 public class UserDao {
@@ -53,6 +53,43 @@ public class UserDao {
 		}
 	}
 
+	public User toUser(ResultSet rs) throws SQLException {
+
+		User ret = new User();
+
+		try {
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String loginId = rs.getString("login_id");
+				String password = rs.getString("password");
+				String name = rs.getString("name");
+				String address = rs.getString("address");
+				String tel = rs.getString("tel");
+				String mail = rs.getString("mail");
+				String point = rs.getString("point");
+				String registerDate = rs.getString("register_date");
+				String libraryId = rs.getString("library_id");
+				String stopping = rs.getString("stopping");
+
+				ret.setId(id);
+				ret.setLoginId(loginId);
+				ret.setPassword(password);
+				ret.setName(name);
+				ret.setAddress(address);
+				ret.setTel(tel);
+				ret.setMail(mail);
+				ret.setPoint(point);
+				ret.setRegisterDate(registerDate);
+				ret.setLibraryId(libraryId);
+				ret.setStopping(stopping);
+
+			}
+			return ret;
+		} finally {
+			close(rs);
+		}
+	}
+
 	public void insert(Connection connection, User user) {
 
 		PreparedStatement ps = null;
@@ -72,7 +109,7 @@ public class UserDao {
 			sql.append(", stopping");
 
 			sql.append(")VALUES(");
-			sql.append("?");
+			sql.append("  ?");
 			sql.append(", ?");
 			sql.append(", ?");
 			sql.append(", ?");
@@ -161,6 +198,33 @@ public class UserDao {
 			ResultSet rs = ps.executeQuery();
 			List<User> ret = toUserList(rs);
 			return ret;
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
+
+	public User getLoginUser(Connection connection, String loginId, String password) {
+
+		PreparedStatement ps = null;
+		try {
+			StringBuilder sql = new StringBuilder();
+			sql.append("SELECT * FROM users WHERE");
+			sql.append(" login_id = ? AND");
+			sql.append(" password = ?");
+
+			ps = connection.prepareStatement(sql.toString());
+			ps.setString(1, loginId);
+			ps.setString(2, password);
+
+			ResultSet rs = ps.executeQuery();
+			User ret = toUser(rs);
+
+			if (ret.getLoginId() == null) {
+				return null;
+			}else return ret;
+
 		} catch (SQLException e) {
 			throw new SQLRuntimeException(e);
 		} finally {

@@ -8,18 +8,19 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>トップ</title>
+		<title>ログイン</title>
 	</head>
 	<body>
 		<h1>図書システム借りたいナ☆</h1>
 
-		<table border="1">
-			<tr><td><a href = "./search">検索</a></td></tr>
-			<tr><td><a href = "./favorite">お気に入り</a></td></tr>
-			<tr><td><a href = "./request">本のリクエスト</a></td></tr>
-			<tr><td><a href = "./admin/manage">管理画面</a></td></tr>
-			<tr><td><a href = "./introduction">本の紹介</a></td></tr>
-		</table>
+		<form action="./login" method="POST">
+			<table border="1">
+				<tr><td>ログインID:<input name="loginId" type="text"/></td></tr>
+				<tr><td>パスワード:<input name="password" type="password"/></td></tr>
+			</table>
+			<input type="submit"  value="ログイン" />
+		</form>
+
 
 	</body>
 </html>

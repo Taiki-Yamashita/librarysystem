@@ -1,4 +1,4 @@
-package admin.beans;
+package beans;
 
 public class User {
 
