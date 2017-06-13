@@ -51,6 +51,29 @@ public class BookService {
 		}
 	}
 
+	public Book selectBook(int book_id) {
+
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			BookDao bookDao = new BookDao();
+			Book book = bookDao.getUser(connection, bookId);
+
+			commit(connection);
+
+			return user;
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
+
 	public List<Book> selectAll() {
 
 		Connection connection = null;
