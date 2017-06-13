@@ -7,14 +7,18 @@
 <title>管理画面</title>
 </head>
 <body>
-	<a href = "./reservation">予約管理</a>
-	<a href = "./circulation">貸出管理</a>
-	<a href = "./editUser">ユーザー情報管理</a>
-	<a href = "./bookInformation">本の情報管理</a>
-	<a href = "./notReturned">未返却リスト</a>
-	<a href = "./response">問い合わせ受取</a>
-	<a href = "./addBook">本の追加</a>
-	<a href = "./addUser">ユーザーの追加</a>
+
+	<p><a href = "../">トップ画面</a></p>
+	<table border="1">
+		<tr><td><a href = "./reservation">予約管理</a></td></tr>
+		<tr><td><a href = "./circulation">貸出管理</a></td></tr>
+		<tr><td><a href = "./editUser">ユーザー情報管理</a></td></tr>
+		<tr><td><a href = "./bookInformation">本の情報管理</a></td></tr>
+		<tr><td><a href = "./notReturned">未返却リスト</a></td></tr>
+		<tr><td><a href = "./response">問い合わせ受取</a></td></tr>
+		<tr><td><a href = "./addBook">本の追加</a></td></tr>
+		<tr><td><a href = "./addUser">ユーザーの追加</a></td></tr>
+	</table>
 
 </body>
 </html>
