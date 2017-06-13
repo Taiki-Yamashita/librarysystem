@@ -45,7 +45,8 @@ public class LibraryDao {
 			StringBuilder sql = new StringBuilder();
 			sql.append("INSERT INTO libraries ( ");
 			sql.append(" name");
-			sql.append(", ?");
+			sql.append(") VALUES (");
+			sql.append(" ?");
 			sql.append(")");
 
 			ps = connection.prepareStatement(sql.toString());
