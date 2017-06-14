@@ -4,6 +4,7 @@ import static utils.CloseableUtil.*;
 import static utils.DBUtil.*;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -107,7 +108,9 @@ public class BookService {
 			connection = getConnection();
 			List<Book> books = new BookDao().getSelectedBooks(connection, columnMap.get(selectBox), freeWord);
 			commit(connection);
-			return books;
+
+			if(books == null) return getDefaultValue();
+			else return books;
 		} catch (RuntimeException e) {
 			rollback(connection);
 			throw e;
@@ -127,8 +130,33 @@ public class BookService {
 		map.put(3, "author");
 		map.put(4, "publisher");
 		map.put(5, "category");
-		map.put(6, "isbn");
+		map.put(6, "isbn_id");
 
 		return map;
+	}
+
+	public List<Book> getDefaultValue(){
+
+		List<Book> defaultBooks = new ArrayList<>();
+		Book defaultBook = new Book();
+
+		defaultBook.setId(0);
+		defaultBook.setAuthor("");
+		defaultBook.setCategory("");
+		defaultBook.setDisposing("");
+		defaultBook.setIsbnId("");
+		defaultBook.setKeeping("");
+		defaultBook.setLending("");
+		defaultBook.setLibraryId("");
+		defaultBook.setName("");
+		defaultBook.setPublishedDate("");
+		defaultBook.setPublisher("");
+		defaultBook.setReserving("");
+		defaultBook.setShelfId("");
+		defaultBook.setType("");
+
+		defaultBooks.add(defaultBook);
+
+		return defaultBooks;
 	}
 }
