@@ -35,17 +35,13 @@ public class UserService {
 		}
 	}
 
-	public void update(User user, String password) {
+	public void update(User user) {
 
 		Connection connection = null;
 		try {
 			connection = getConnection();
 
-			//String encPassword = Cipherutil.encrypt(user.getPassword());
-			//user.setPassword(encPassword);
-
-			UserDao userDao = new UserDao();
-			//userDao.update(connection, user, password);
+			new UserDao().update(connection, user);
 
 			commit(connection);
 		} catch (RuntimeException e) {
@@ -81,8 +77,33 @@ public class UserService {
 //			close(connection);
 //		}
 //	}
-//
-	public List<User> getSelectAllUser() {
+
+	public User selectUser(int user_id) {
+
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			UserDao userDao = new UserDao();
+			User user = userDao.selectUser(connection, user_id);
+
+			commit(connection);
+
+			return user;
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
+
+
+
+	public List<User> selectAll() {
 
 		Connection connection = null;
 		try {

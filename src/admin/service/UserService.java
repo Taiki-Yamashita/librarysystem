@@ -6,8 +6,9 @@ import static utils.DBUtil.*;
 import java.sql.Connection;
 import java.util.List;
 
-import admin.beans.User;
-import admin.dao.UserDao;
+import beans.User;
+import dao.UserDao;
+
 
 public class UserService {
 
@@ -35,17 +36,13 @@ public class UserService {
 		}
 	}
 
-	public void update(User user, String password) {
+	public void update(User user) {
 
 		Connection connection = null;
 		try {
 			connection = getConnection();
 
-			//String encPassword = Cipherutil.encrypt(user.getPassword());
-			//user.setPassword(encPassword);
-
-			UserDao userDao = new UserDao();
-			//userDao.update(connection, user, password);
+			new UserDao().update(connection, user);
 
 			commit(connection);
 		} catch (RuntimeException e) {
@@ -59,29 +56,29 @@ public class UserService {
 		}
 	}
 
-//	public User getSelectUser(int id) {
-//
-//		Connection connection = null;
-//		try {
-//			connection = getConnection();
-//
-//			UserDao userDao = new UserDao();
-//			User user = userDao.getSelectUser(connection, id);
-//
-//			commit(connection);
-//
-//			return user;
-//		} catch (RuntimeException e) {
-//			rollback(connection);
-//			throw e;
-//		} catch (Error e) {
-//			rollback(connection);
-//			throw e;
-//		} finally {
-//			close(connection);
-//		}
-//	}
-//
+	public User selectUser(int user_id) {
+
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			UserDao userDao = new UserDao();
+			User user = userDao.selectUser(connection, user_id);
+
+			commit(connection);
+
+			return user;
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
+
 	public List<User> getSelectAllUser() {
 
 		Connection connection = null;

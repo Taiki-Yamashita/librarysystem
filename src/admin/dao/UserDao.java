@@ -94,7 +94,7 @@ public class UserDao {
 			ps.setString(6, user.getMail());
 			ps.setString(7, "0");
 			ps.setString(8, user.getLibraryId());
-			ps.setString(9, "0");
+
 
 			ps.executeUpdate();
 		} catch (SQLException e){

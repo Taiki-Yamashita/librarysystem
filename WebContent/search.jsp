@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
@@ -7,11 +10,87 @@
 		<title>検索</title>
 	</head>
 	<body>
+		<h2>検索</h2>
+
 		<a href = "./">トップ</a>
-		<a href = "./search">検索</a>
 		<a href = "./favorite">お気に入り</a>
 		<a href = "./request">本のリクエスト</a>
 		<a href = "./admin/manage">管理画面</a>
-		<a href = "./introduction">本の紹介</a>
+		<a href = "./introduction">本の紹介</a><br/>
+
+		<hr width="1500px">
+
+		<!--
+			new books
+			check box
+			clear button
+		-->
+
+		<p>◎フリーワード検索</p>
+
+		<form action="./search" method="POST">
+			<table>
+				<tr>
+					<td>
+						<select name="selectBox">
+							<option value="1">全て</option>
+							<option value="2">名前</option>
+							<option value="3">著者</option>
+							<option value="4">出版社</option>
+							<option value="5">カテゴリ</option>
+							<option value="6">ISBN番号</option>
+						</select>
+					</td>
+					<td><input type="text" name="freeWord"/>で</td>
+					<td><input type="submit" value="検索"></td>
+				</tr>
+			</table>
+		</form>
+		<hr width="1500px">
+
+		<p>◎絞込み検索</p>
+		<table>
+			<tr>
+				<td>
+					<input type="checkbox" name="refine" value="1">全て
+					<input type="checkbox" name="refine" value="2">名前
+					<input type="checkbox" name="refine" value="3">著者
+					<input type="checkbox" name="refine" value="4">出版社
+					<input type="checkbox" name="refine" value="5">カテゴリ
+				</td>
+				<td>
+					で<input type="submit" value="絞り込む">
+				</td>
+			</tr>
+		</table>
+
+		<hr width="1500px">
+		<c:if test="${not empty selectedBooks}">
+			<form action="./search" method="POST">
+				<table>
+					<tr><th>本</th><th>予約</th></tr>
+					<c:forEach items="${selectedBooks}" var="book">
+						<tr>
+							<td><c:out value="${book.name}"/></td>
+							<td><input type="submit"  value="予約" /></td>
+						</tr>
+					</c:forEach>
+				</table>
+			</form>
+		</c:if>
+
+		<c:if test="${empty selectedBooks}">
+			<form action="./search" method="POST">
+				<table>
+					<tr><th>本</th><th>予約</th></tr>
+					<c:forEach items="${books}" var="book">
+						<tr>
+							<td><c:out value="${book.name}"/></td>
+							<td><input type="submit"  value="予約" /></td>
+						</tr>
+					</c:forEach>
+				</table>
+			</form>
+		</c:if>
 	</body>
 </html>
