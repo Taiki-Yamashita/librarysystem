@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import admin.beans.User;
+import beans.User;
 import exception.SQLRuntimeException;
 
 public class UserDao {
