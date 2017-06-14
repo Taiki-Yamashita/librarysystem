@@ -15,7 +15,7 @@
 		<tr><td><a href = "./usersInformation">ユーザー情報管理</a></td></tr>
 		<tr><td><a href = "./bookInformation">本の情報管理</a></td></tr>
 		<tr><td><a href = "./notReturned">未返却リスト</a></td></tr>
-		<tr><td><a href = "./response">問い合わせ受取</a></td></tr>
+		<tr><td><a href = "./recieve">問い合わせ受取</a></td></tr>
 		<tr><td><a href = "./addBook">本の追加</a></td></tr>
 		<tr><td><a href = "./addUser">ユーザーの追加</a></td></tr>
 	</table>

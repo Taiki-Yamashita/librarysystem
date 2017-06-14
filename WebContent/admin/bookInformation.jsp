@@ -11,7 +11,7 @@
 	<p>本の編集</p>
 	<p><a href="./manage">管理画面</a></p>
 	<table>
-		<tr><th>名前</th><th>著者</th><th>出版社</th><th>カテゴリ</th><th>種類出版日</th><th>図書館</th><th>棚番号</th><th>保管中<th>貸出中</th>予約中<th>整理中</th></tr>
+		<tr><th>名前</th><th>著者</th><th>出版社</th><th>カテゴリ</th><th>種類</th><th>種類出版日</th><th>図書館</th><th>棚番号</th><th>保管中<th>貸出中</th><th>予約中</th><th>整理中</th></tr>
 		<c:forEach items="${books}" var="book">
 			<tr>
 				<td>${book.name}</td>
@@ -32,7 +32,22 @@
 	   	 		<input type="hidden" name="id" value="${book.id }" >
 	   	 		<input type="submit" value="編集" />
 	   	 	</form>
-   	 	</td>
+
+   	 		<td>
+   	 			<form action="lendingBook" method="post">
+   	 				<input type="hidden" name="id" value="${book.id }" >
+					<c:if test="${book.lending == 0 }">
+						<input type="hidden" name="num" value=1 >
+						<input type="submit" value="貸出" />
+					</c:if>
+					<c:if test="${book.lending == 1 }">
+						<input type="hidden" name="num" value=0>
+						<input type="submit" value="返却" />
+					</c:if>
+   	 			</form>
+   	 		</td>
+
+
 			</tr>
 		</c:forEach>
 	</table>

@@ -20,7 +20,7 @@ public class FavoriteDao {
 
 		PreparedStatement ps = null;
 		try {
-			String sql = "SELECT * FROM favorites";
+			String sql = "SELECT * FROM users_favorites";
 			ps = connection.prepareStatement(sql);
 
 			ResultSet rs = ps.executeQuery();
@@ -98,12 +98,19 @@ public class FavoriteDao {
 			while (rs.next()) {
 				int id = rs.getInt("id");
 				String userId = rs.getString("user_id");
+				String userName = rs.getString("user_name");
 				String bookId = rs.getString("book_id");
+				String bookName = rs.getString("book_name");
+				String author = rs.getString("author");
+
 
 				Favorite favorite = new Favorite();
 				favorite.setId(id);
 				favorite.setUserId(userId);
+				favorite.setUserName(userName);
 				favorite.setBookId(bookId);
+				favorite.setBookName(bookName);
+				favorite.setAuthor(author);
 
 				ret.add(favorite);
 			}
