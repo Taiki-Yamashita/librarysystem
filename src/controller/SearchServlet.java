@@ -26,15 +26,13 @@ public class SearchServlet extends HttpServlet{
 		List<Book> selectedBooks = (List<Book>)request.getSession().getAttribute("selectedBooks");
 
 		request.setAttribute("books", books);
-
 		if(selectedBooks == null){
-
+			request.getRequestDispatcher("/search.jsp").forward(request, response);
+			return;
 		}
 
-		if(isValid(selectedBooks, request)){
-			request.setAttribute("selectedBooks", selectedBooks);
-			request.setAttribute("booksCount", selectedBooks.size());
-		}
+		if(isValid(selectedBooks, request)) request.getSession().setAttribute("booksCount", selectedBooks.size());
+		else request.getSession().setAttribute("selectedBooks", null);
 
 		request.getRequestDispatcher("/search.jsp").forward(request, response);
 	}
@@ -47,8 +45,8 @@ public class SearchServlet extends HttpServlet{
 		String freeWord = request.getParameter("freeWord");
 
 		List<Book> selectedBooks = new BookService().getSelectedBooks(selectBox, freeWord);
+		request.getSession().setAttribute("freeWord", freeWord);
 		request.getSession().setAttribute("selectedBooks", selectedBooks);
-		request.getSession().setAttribute("checkSelectedBooks", "1");
 
 		response.sendRedirect("./search");
 	}
@@ -57,16 +55,12 @@ public class SearchServlet extends HttpServlet{
 
 		List<String> errorMessages = new ArrayList<>();
 
-		if(selectedBooks != null){
-			if(selectedBooks.get(0).getId() == 0) errorMessages.add("検索結果が見つかりませんでした");
+		if(selectedBooks.get(0).getId() == 0) errorMessages.add("検索結果が見つかりませんでした");
 
-			if(errorMessages.isEmpty()) return true;
-			else{
-				request.getSession().setAttribute("errorMessages", errorMessages);
-				return false;
-			}
+		if(errorMessages.isEmpty()) return true;
+		else{
+			request.getSession().setAttribute("errorMessages", errorMessages);
+			return false;
 		}
-
-		return false;
 	}
 }

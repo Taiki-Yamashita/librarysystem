@@ -20,19 +20,6 @@
 
 		<hr width="1500px">
 
-		<c:if test="${ empty errorMessages }">
-			検索結果は
-			<font color="#ff0000"><c:out value="${booksCount}件" /></font>
-			です
-		</c:if>
-
-		<c:if test="${ not empty errorMessages }">
-			<c:forEach items="${errorMessages}" var="message">
-				<font color="#ff0000"><c:out value="${message}" /></font><br>
-			</c:forEach>
-			<c:remove var="errorMessages" scope="session"/>
-		</c:if>
-
 		<!--
 			new books
 			clear button
@@ -53,7 +40,14 @@
 							<option value="6">ISBN番号</option>
 						</select>
 					</td>
-					<td><input type="text" name="freeWord" placeholder="未記入で全て検索"/>で</td>
+					<td>
+						<c:if test="${not empty freeWord}">
+							<input type="text" name="freeWord" value="${freeWord}"/>で
+						</c:if>
+						<c:if test="${empty freeWord}">
+							<input type="text" name="freeWord" placeholder="未記入で全て検索"/>で
+						</c:if>
+					</td>
 					<td><input type="submit" value="検索"></td>
 				</tr>
 			</table>
@@ -77,16 +71,39 @@
 		</table>
 
 		<hr width="1500px">
-		<form action="./search" method="POST">
-			<table>
-				<tr><th>本</th><th>予約</th></tr>
-				<c:forEach items="${selectedBooks}" var="book">
-					<tr>
-						<td><c:out value="${book.name}"/></td>
-						<td><input type="submit"  value="予約" /></td>
-					</tr>
-				</c:forEach>
-			</table>
-		</form>
+
+		<c:if test="${ empty errorMessages && not empty booksCount}">
+			検索結果は
+			<font color="#ff0000"><c:out value="${booksCount}件" /></font>
+			です
+		</c:if>
+
+		<c:if test="${ not empty errorMessages }">
+			<c:forEach items="${errorMessages}" var="message">
+				<font color="#ff0000"><c:out value="${message}" /></font><br>
+			</c:forEach>
+		</c:if>
+
+		<c:if test="${not empty selectedBooks}">
+			<form action="./search" method="POST">
+				<table>
+					<tr><th>本</th><th>予約</th></tr>
+					<c:forEach items="${selectedBooks}" var="book">
+						<c:if test="${book.id != 0}">
+							<tr>
+								<td><c:out value="${book.name}"/></td>
+								<td><input type="submit"  value="予約" /></td>
+							</tr>
+						</c:if>
+					</c:forEach>
+				</table>
+			</form>
+		</c:if>
+
+		<c:remove var="freeWord" scope="session"/>
+		<c:remove var="booksCount" scope="session"/>
+		<c:remove var="selectedBooks" scope="session"/>
+		<c:remove var="errorMessages" scope="session"/>
+
 	</body>
 </html>
