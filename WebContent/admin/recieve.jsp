@@ -16,7 +16,7 @@
 			<c:out value="${recieve.bookName}" />
 			<c:out value="${recieve.author}" />
 			<c:out value="${recieve.publisher}" />
-			<c:out value="${recieve.requestDate}" />
+			<c:out value="${recieve.requiredDate}" />
 		</c:forEach>
 	</table>
 </body>
