@@ -8,5 +8,13 @@
 </head>
 <body>
 未返却リストだよ
+
+	<table>
+		<c:forEach items="${notReturnedlists}" var="notReturnedlist">
+			<c:out value="${notReturnedlist.userName}" />
+			<c:out value="${notReturnedlist.bookName}" />
+			<c:out value="${notReturnedlist.libraryName}" />
+		</c:forEach>
+	</table>
 </body>
 </html>

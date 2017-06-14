@@ -40,6 +40,9 @@ public class AddUserServlet extends HttpServlet {
 
 			User user = new User();
 			user.setName(request.getParameter("name"));
+			user.setLoginId(request.getParameter("loginId"));
+			user.setPassword(request.getParameter("password"));
+			user.setCheckPassword(request.getParameter("checkPassword"));
 			user.setAddress(request.getParameter("address"));
 			user.setTel(request.getParameter("tel"));
 			user.setMail(request.getParameter("mail"));
@@ -61,10 +64,13 @@ public class AddUserServlet extends HttpServlet {
 		User newUser = new User();;
 
 		newUser.setName(request.getParameter("name"));
+		newUser.setLoginId(request.getParameter("loginId"));
+		newUser.setPassword(request.getParameter("password"));
+		newUser.setCheckPassword(request.getParameter("checkPassword"));
 		newUser.setAddress(request.getParameter("address"));
-		newUser.setAddress(request.getParameter("tel"));
-		newUser.setAddress(request.getParameter("mail"));
-		newUser.setAddress(request.getParameter("libraryId"));
+		newUser.setTel(request.getParameter("tel"));
+		newUser.setMail(request.getParameter("mail"));
+		newUser.setLibraryId(request.getParameter("libraryId"));
 
 		return newUser;
 

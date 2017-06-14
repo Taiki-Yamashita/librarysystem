@@ -60,9 +60,9 @@ public class UserDao {
 			StringBuilder sql = new StringBuilder();
 
 			sql.append("INSERT INTO users(");
-			sql.append("  login_id");
+			sql.append(" name");
+			sql.append(", login_id");
 			sql.append(", password");
-			sql.append(", name");
 			sql.append(", address");
 			sql.append(", tel");
 			sql.append(", mail");
@@ -85,15 +85,16 @@ public class UserDao {
 
 			ps = connection.prepareStatement(sql.toString());
 
-			ps.setString(1, user.getLoginId());
-			ps.setString(2, user.getPassword());
-			ps.setString(3, user.getName());
+
+			ps.setString(1, user.getName());
+			ps.setString(2, user.getLoginId());
+			ps.setString(3, user.getPassword());
 			ps.setString(4, user.getAddress());
 			ps.setString(5, user.getTel());
 			ps.setString(6, user.getMail());
 			ps.setString(7, "0");
 			ps.setString(8, user.getLibraryId());
-			ps.setString(9, user.isStopping());
+			ps.setString(9, "0");
 
 			ps.executeUpdate();
 		} catch (SQLException e){

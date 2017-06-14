@@ -25,6 +25,15 @@
 			<label for="name">名前</label>
 			<input name="name" value="${newUser.name}" id="name"/><br/>
 
+			<label for="loginId">ログインID</label>
+			<input name="loginId" value="${newUser.loginId}" id="loginId"/><br/>
+
+			<label for="password">パスワード</label>
+			<input name="password" value="${newUser.password}" id="password"/><br/>
+
+			<label for="checkPassword">パスワード（確認）</label>
+			<input name="checkPassword" value="${newUser.checkPassword}" id="checkPassword"/><br/>
+
 			<label for="address">住所</label>
 			<input name="address" value="${newUser.address}" id="address"/><br/>
 

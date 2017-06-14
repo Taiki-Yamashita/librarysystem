@@ -5,6 +5,7 @@ public class User {
 	private int id;
 	private String loginId;
 	private String password;
+	private String checkPassword;
 	private String name;
 	private String address;
 	private String tel;
@@ -14,6 +15,15 @@ public class User {
 	private String libraryId;
 	private String stopping;
 
+	public String getCheckPassword() {
+		return checkPassword;
+	}
+	public void setCheckPassword(String checkPassword) {
+		this.checkPassword = checkPassword;
+	}
+	public String getStopping() {
+		return stopping;
+	}
 	public int getId() {
 		return id;
 	}
