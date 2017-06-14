@@ -157,8 +157,6 @@ public class BookDao {
 		try {
 			String sql = "SELECT * FROM books WHERE id = ? ";
 
-
-
 			ps = connection.prepareStatement(sql);
 			ps.setInt(1, book_id);
 
@@ -183,11 +181,14 @@ public class BookDao {
 
 		PreparedStatement ps = null;
 		try {
-			String sql = "SELECT * FROM books WHERE " + selectBox + " LIKE ?";
-			ps = connection.prepareStatement(sql);
 
+			StringBuilder sql = new StringBuilder();
+			sql.append("SELECT * FROM books WHERE ");
+			if(!selectBox.isEmpty()) sql.append(selectBox + " LIKE ?");
+			else sql.append("CONCAT(name, author, publisher, category, isbn_id) LIKE ?");
+
+			ps = connection.prepareStatement(sql.toString());
 			ps.setString(1, "%" + freeWord + "%");
-			System.out.println(ps);
 
 			ResultSet rs = ps.executeQuery();
 

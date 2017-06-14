@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -24,9 +25,17 @@ public class SearchServlet extends HttpServlet{
 		List<Book> books = new BookService().selectAll();
 		List<Book> selectedBooks = (List<Book>)request.getSession().getAttribute("selectedBooks");
 
-		System.out.println(selectedBooks);
 		request.setAttribute("books", books);
-		request.setAttribute("selectedBooks", selectedBooks);
+
+		if(selectedBooks == null){
+
+		}
+
+		if(isValid(selectedBooks, request)){
+			request.setAttribute("selectedBooks", selectedBooks);
+			request.setAttribute("booksCount", selectedBooks.size());
+		}
+
 		request.getRequestDispatcher("/search.jsp").forward(request, response);
 	}
 
@@ -39,7 +48,25 @@ public class SearchServlet extends HttpServlet{
 
 		List<Book> selectedBooks = new BookService().getSelectedBooks(selectBox, freeWord);
 		request.getSession().setAttribute("selectedBooks", selectedBooks);
+		request.getSession().setAttribute("checkSelectedBooks", "1");
 
 		response.sendRedirect("./search");
+	}
+
+	public boolean isValid(List<Book> selectedBooks, HttpServletRequest request){
+
+		List<String> errorMessages = new ArrayList<>();
+
+		if(selectedBooks != null){
+			if(selectedBooks.get(0).getId() == 0) errorMessages.add("検索結果が見つかりませんでした");
+
+			if(errorMessages.isEmpty()) return true;
+			else{
+				request.getSession().setAttribute("errorMessages", errorMessages);
+				return false;
+			}
+		}
+
+		return false;
 	}
 }
