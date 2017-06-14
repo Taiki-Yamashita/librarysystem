@@ -27,6 +27,7 @@ public class BookDao {
 			ps = connection.prepareStatement(sql);
 
 			ResultSet rs = ps.executeQuery();
+
 			List<Book> bookList = toBookList(rs);
 			if (bookList.isEmpty()) {
 				return null;
@@ -108,11 +109,11 @@ public class BookDao {
 			sql.append("UPDATE books SET");
 			sql.append("  name = ?");
 			sql.append(", author = ?");
-			sql.append(", published = ?");
+			sql.append(", publisher = ?");
 			sql.append(", category = ?");
 			sql.append(", type = ?");
 			sql.append(", published_date = ?");
-			sql.append(", library_date = ?");
+			sql.append(", library_id = ?");
 			sql.append(", shelf_id = ?");
 			sql.append(", isbn_id = ?");
 			sql.append(", keeping = ?");
@@ -137,6 +138,7 @@ public class BookDao {
 			ps.setString(11, book.getLending());
 			ps.setString(12, book.getReserving());
 			ps.setString(13, book.getDisposing());
+			ps.setInt(14, book.getId());
 
 			int count = ps.executeUpdate();
 			if (count == 0) {
@@ -178,27 +180,6 @@ public class BookDao {
 	}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	private List<Book> toBookList(ResultSet rs) throws SQLException {
 
 		List<Book> ret = new ArrayList<Book>();
@@ -210,7 +191,7 @@ public class BookDao {
 				String publisher = rs.getString("publisher");
 				String category = rs.getString("category");
 				String type = rs.getString("type");
-				String publishedDate = rs.getString("published_date");
+				String published_date = rs.getString("published_date");
 				String libraryId = rs.getString("library_id");
 				String shelfId = rs.getString("shelf_id");
 				String isbnId = rs.getString("isbn_id");
@@ -226,7 +207,7 @@ public class BookDao {
 				book.setPublisher(publisher);
 				book.setCategory(category);
 				book.setType(type);
-				book.setPublishedDate(publishedDate);
+				book.setPublishedDate(published_date);
 				book.setLibraryId(libraryId);
 				book.setShelfId(shelfId);
 				book.setIsbnId(isbnId);
