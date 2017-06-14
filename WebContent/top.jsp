@@ -21,5 +21,26 @@
 			<tr><td><a href = "./introduction">本の紹介</a></td></tr>
 		</table>
 
+	<h5>お知らせ</h5>
+		<c:forEach items="${informations}" var="information">
+
+			<div class="libraryId"><c:out value="${information.libraryId}" /></div>
+			<div class="registeredDate">投稿者:<c:out value="${information.registeredDate}" /></div>
+			<div class="message">カテゴリ:<c:out value="${information.message}" /></div>
+
+		</c:forEach>
+
+
+
+
+
+
+
+
+
+
+
+
+
 	</body>
 </html>

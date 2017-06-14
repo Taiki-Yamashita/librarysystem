@@ -4,9 +4,26 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>お知らせフォーム</title>
 </head>
 <body>
+	<a href = "./">管理画面</a>
 
+
+<form action = "information"method = "post"><br />
+
+
+	<label for = "libraryId">図書館</label><br>
+	<input name = "libraryId" id = "libraryId" value = "libraryId"/><br />
+
+	<label for = "registerDate">登校日</label><br>
+	<input name = "registerDate" id = "registerDate" value = "registerDate"/><br />
+
+	投稿(1000字まで)<br />
+	<textarea name="message" id="message" cols="100" rows="5" ></textarea><br>
+
+	<input type="submit" value="登録" />
+
+	</form>
 </body>
 </html>
