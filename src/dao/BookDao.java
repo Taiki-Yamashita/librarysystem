@@ -250,4 +250,29 @@ public class BookDao {
 		}
 	}
 
+	public void lendingBook(Connection connection, int lending, int num) {
+
+		PreparedStatement ps = null;
+		try {
+			StringBuilder sql = new StringBuilder();
+			sql.append("UPDATE books SET");
+			sql.append(" lending = ?");
+
+			sql.append(" WHERE");
+			sql.append(" id = ?");
+
+			ps = connection.prepareStatement(sql.toString());
+
+			ps.setInt(1, num);
+			ps.setInt(2, lending);
+
+			ps.executeUpdate();
+		}catch(SQLException e){
+			throw new SQLRuntimeException(e);
+		}finally{
+			close(ps);
+
+	}
+
+	}
 }
