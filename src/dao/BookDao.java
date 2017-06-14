@@ -191,7 +191,7 @@ public class BookDao {
 				String publisher = rs.getString("publisher");
 				String category = rs.getString("category");
 				String type = rs.getString("type");
-				String published_date = rs.getString("published_date");
+				String publishedDate = rs.getString("published_date");
 				String libraryId = rs.getString("library_id");
 				String shelfId = rs.getString("shelf_id");
 				String isbnId = rs.getString("isbn_id");
@@ -207,7 +207,7 @@ public class BookDao {
 				book.setPublisher(publisher);
 				book.setCategory(category);
 				book.setType(type);
-				book.setPublishedDate(published_date);
+				book.setPublishedDate(publishedDate);
 				book.setLibraryId(libraryId);
 				book.setShelfId(shelfId);
 				book.setIsbnId(isbnId);
