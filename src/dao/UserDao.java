@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import beans.User;
+import exception.NoRowsUpdatedRuntimeException;
 import exception.SQLRuntimeException;
 
 public class UserDao {
@@ -130,7 +131,7 @@ public class UserDao {
 			ps.setString(6, user.getMail());
 			ps.setString(7, "0");
 			ps.setString(8, user.getLibraryId());
-			ps.setString(9, user.isStopping());
+			ps.setString(9, user.getStopping());
 
 			ps.executeUpdate();
 		} catch (SQLException e){
@@ -140,50 +141,52 @@ public class UserDao {
 		}
 	}
 
-//	public void update(Connection connection, User user ) {
-//
-//		PreparedStatement ps = null;
-//		try {
-//			StringBuilder sql = new StringBuilder();
-//
-//			sql.append("UPDATE INTO users(");
-//			sql.append(" name");
-//			sql.append(", address");
-//			sql.append(", tel");
-//			sql.append(", mail");
-//			sql.append(", point");
-//			sql.append(", register_date");
-//			sql.append(", library_id");
-//			sql.append(", stopping");
-//
-//			sql.append(")VALUES(");
-//			sql.append("?");
-//			sql.append(", ?");
-//			sql.append(", ?");
-//			sql.append(", ?");
-//			sql.append(", ?");
-//			sql.append(", ?");
-//			sql.append(", ?");
-//			sql.append(", ?)");
-//
-//			ps = connection.prepareStatement(sql.toString());
-//
-//			ps.setString(1, user.getName());
-//			ps.setString(2, user.getAddress());
-//			ps.setString(3, user.getTel());
-//			ps.setString(4, user.getMail());
-//			ps.setString(5, user.getPoint());
-//			ps.setString(6, user.getRegisterDate());
-//			ps.setString(7, user.getLibraryId());
-//			ps.setBoolean(8, user.isStopping());
-//
-//			ps.executeUpdate();
-//		} catch (SQLException e){
-//			throw new SQLRuntimeException(e);
-//		} finally {
-//			close(ps);
-//		}
-//	}
+	public void update(Connection connection, User user) {
+
+		PreparedStatement ps = null;
+		try {
+			StringBuilder sql = new StringBuilder();
+			sql.append("UPDATE users SET");
+			sql.append("  login_id = ?");
+			sql.append(", password = ?");
+			sql.append(", name = ?");
+			sql.append(", address = ?");
+			sql.append(", tel = ?");
+			sql.append(", mail = ?");
+			sql.append(", point = ?");
+			sql.append(", register_date = ?");
+			sql.append(", library_id = ?");
+			sql.append(", stopping = ?");
+
+			sql.append(" WHERE");
+			sql.append(" id = ?");
+
+			ps = connection.prepareStatement(sql.toString());
+
+			ps.setString(1, user.getLoginId());
+			ps.setString(2, user.getPassword());
+			ps.setString(3, user.getName());
+			ps.setString(4, user.getAddress());
+			ps.setString(5, user.getTel());
+			ps.setString(6, user.getMail());
+			ps.setString(7, user.getPoint());
+			ps.setString(8, user.getRegisterDate());
+			ps.setString(9, user.getLibraryId());
+			ps.setString(10, user.getStopping());
+			ps.setInt(11, user.getId());
+
+			int count = ps.executeUpdate();
+			if (count == 0) {
+				throw new NoRowsUpdatedRuntimeException();
+			}
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+
+	}
+
 
 	public List<User> getSelectAllUser(Connection connection) {
 
@@ -232,30 +235,31 @@ public class UserDao {
 		}
 	}
 
-//	public User getSelectUser(Connection connection, int id) {
-//
-//		PreparedStatement ps = null;
-//		try {
-//			String sql = "SELECT * FROM users WHERE id = ?";
-//
-//			ps = connection.prepareStatement(sql);
-//			ps.setInt(1, id);
-//
-//			ResultSet rs = ps.executeQuery();
-//			List<User> userList = toUserList(rs);
-//			if (userList.isEmpty() == true) {
-//				return null;
-//			} else if (2 <= userList.size()) {
-//				throw new IllegalStateException("2 <= userList.size()");
-//			} else {
-//				return userList.get(0);
-//			}
-//		} catch (SQLException e) {
-//			throw new SQLRuntimeException(e);
-//		} finally {
-//			close(ps);
-//		}
-//	}
+
+public User selectUser(Connection connection, int user_id){
+	PreparedStatement ps = null;
+	try {
+		String sql = "SELECT * FROM users WHERE id = ? ";
+
+		ps = connection.prepareStatement(sql);
+		ps.setInt(1, user_id);
+
+		ResultSet rs =ps.executeQuery();
+		List<User> userList = toUserList(rs);
+		if(userList.isEmpty() == true) {
+			return null;
+		} else if(2<= userList.size()) {
+			throw new IllegalStateException("2<= userList.size()");
+		} else {
+			return userList.get(0);
+
+		}
+	}catch(SQLException e) {
+		throw new SQLRuntimeException(e);
+	}finally {
+		close(ps);
+	}
+}
 
 
 }

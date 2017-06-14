@@ -74,7 +74,7 @@ public class User {
 	public void setLibraryId(String libraryId) {
 		this.libraryId = libraryId;
 	}
-	public String isStopping() {
+	public String getStopping() {
 		return stopping;
 	}
 	public void setStopping(String stopping) {

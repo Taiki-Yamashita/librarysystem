@@ -12,7 +12,7 @@
 	<table border="1">
 		<tr><td><a href = "./reservation">予約管理</a></td></tr>
 		<tr><td><a href = "./circulation">貸出管理</a></td></tr>
-		<tr><td><a href = "./editUser">ユーザー情報管理</a></td></tr>
+		<tr><td><a href = "./usersInformation">ユーザー情報管理</a></td></tr>
 		<tr><td><a href = "./bookInformation">本の情報管理</a></td></tr>
 		<tr><td><a href = "./notReturned">未返却リスト</a></td></tr>
 		<tr><td><a href = "./response">問い合わせ受取</a></td></tr>
