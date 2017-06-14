@@ -20,7 +20,7 @@ public class RequireDao {
 			sql.append(", book_name");
 			sql.append(", author");
 			sql.append(", publisher");
-			sql.append(", request_date");
+			sql.append(", required_date");
 			sql.append(") VALUES (");
 			sql.append(" ?");
 			sql.append(", ?");

@@ -10,14 +10,14 @@
 </head>
 <body>
 	<a href = "./">トップ</a>
-
-	<c:forEach items="${recieves}" var="recieve">
-		<c:out value="${recieve.userName}" />
-		<c:out value="${recieve.bookName}" />
-		<c:out value="${recieve.author}" />
-		<c:out value="${recieve.publisher}" />
-		<c:out value="${recieve.requestDate}" />
-	</c:forEach>
-
+	<table>
+		<c:forEach items="${recieves}" var="recieve">
+			<c:out value="${recieve.userName}" />
+			<c:out value="${recieve.bookName}" />
+			<c:out value="${recieve.author}" />
+			<c:out value="${recieve.publisher}" />
+			<c:out value="${recieve.requestDate}" />
+		</c:forEach>
+	</table>
 </body>
 </html>

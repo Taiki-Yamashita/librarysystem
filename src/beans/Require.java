@@ -7,7 +7,7 @@ public class Require {
 	private String bookName;
 	private String author;
 	private String publisher;;
-	private String requestDate;
+	private String requiredDate;
 	public int getId() {
 		return id;
 	}
@@ -38,10 +38,10 @@ public class Require {
 	public void setPublisher(String publisher) {
 		this.publisher = publisher;
 	}
-	public String getRequestDate() {
-		return requestDate;
+	public String getRequiredDate() {
+		return requiredDate;
 	}
-	public void setRequestDate(String requestDate) {
-		this.requestDate = requestDate;
+	public void setRequiredDate(String requiredDate) {
+		this.requiredDate = requiredDate;
 	}
 }

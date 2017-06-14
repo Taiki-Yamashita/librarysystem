@@ -45,7 +45,7 @@ public class RecieveDao {
 				int id = rs.getInt("id");
 				String author = rs.getString("author");
 				String publisher = rs.getString("publisher");
-				String requestDate = rs.getString("request_date");
+				String requiredDate = rs.getString("required_date");
 
 				Require recieve = new Require();
 
@@ -54,7 +54,7 @@ public class RecieveDao {
 				recieve.setId(id);
 				recieve.setAuthor(author);
 				recieve.setPublisher(publisher);
-				recieve.setRequestDate(requestDate);
+				recieve.setRequiredDate(requiredDate);
 
 				ret.add(recieve);
 			}
