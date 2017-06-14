@@ -13,8 +13,8 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 
-import admin.beans.User;
-import admin.service.UserService;
+import beans.User;
+import service.UserService;
 
 @WebServlet(urlPatterns = {"/admin/addUser"})
 public class AddUserServlet extends HttpServlet {
@@ -42,7 +42,7 @@ public class AddUserServlet extends HttpServlet {
 			user.setName(request.getParameter("name"));
 			user.setLoginId(request.getParameter("loginId"));
 			user.setPassword(request.getParameter("password"));
-			user.setCheckPassword(request.getParameter("checkPassword"));
+			//user.setPassword(request.getParameter("checkPassword"));
 			user.setAddress(request.getParameter("address"));
 			user.setTel(request.getParameter("tel"));
 			user.setMail(request.getParameter("mail"));
@@ -66,7 +66,7 @@ public class AddUserServlet extends HttpServlet {
 		newUser.setName(request.getParameter("name"));
 		newUser.setLoginId(request.getParameter("loginId"));
 		newUser.setPassword(request.getParameter("password"));
-		newUser.setCheckPassword(request.getParameter("checkPassword"));
+		//newUser.setPassword(request.getParameter("checkPassword"));
 		newUser.setAddress(request.getParameter("address"));
 		newUser.setTel(request.getParameter("tel"));
 		newUser.setMail(request.getParameter("mail"));

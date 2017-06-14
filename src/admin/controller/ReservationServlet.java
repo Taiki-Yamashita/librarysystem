@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import admin.beans.Library;
 import admin.beans.Reservation;
-import admin.beans.User;
 import admin.service.LibraryService;
 import admin.service.ReservationService;
 import admin.service.UserService;
+import beans.User;
 
 @WebServlet(urlPatterns = {"/admin/reservation"})
 public class ReservationServlet extends HttpServlet {

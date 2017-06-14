@@ -21,9 +21,6 @@ public class User {
 	public void setCheckPassword(String checkPassword) {
 		this.checkPassword = checkPassword;
 	}
-	public String getStopping() {
-		return stopping;
-	}
 	public int getId() {
 		return id;
 	}
