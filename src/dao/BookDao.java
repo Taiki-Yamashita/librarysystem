@@ -179,6 +179,31 @@ public class BookDao {
 		}
 	}
 
+	public List<Book> getSelectedBooks(Connection connection, String selectBox, String freeWord){
+
+		PreparedStatement ps = null;
+		try {
+			String sql = "SELECT * FROM books WHERE " + selectBox + " LIKE ?";
+			ps = connection.prepareStatement(sql);
+
+			ps.setString(1, "%" + freeWord + "%");
+			System.out.println(ps);
+
+			ResultSet rs = ps.executeQuery();
+
+			List<Book> bookList = toBookList(rs);
+			if (bookList.isEmpty()) {
+				return null;
+			}else {
+				return bookList;
+			}
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
+
 
 	private List<Book> toBookList(ResultSet rs) throws SQLException {
 

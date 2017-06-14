@@ -4,7 +4,9 @@ import static utils.CloseableUtil.*;
 import static utils.DBUtil.*;
 
 import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import beans.Book;
 import dao.BookDao;
@@ -51,14 +53,14 @@ public class BookService {
 		}
 	}
 
-	public Book selectBook(int book_id) {
+	public Book selectBook(int bookId) {
 
 		Connection connection = null;
 		try {
 			connection = getConnection();
 
 			BookDao bookDao = new BookDao();
-			Book book = bookDao.selectBook(connection, book_id);
+			Book book = bookDao.selectBook(connection, bookId);
 
 			commit(connection);
 
@@ -94,5 +96,39 @@ public class BookService {
 		} finally {
 			close(connection);
 		}
+	}
+
+	public List<Book> getSelectedBooks(int selectBox, String freeWord) {
+
+		Map<Integer, String> columnMap = getMapData();
+		Connection connection = null;
+
+		try {
+			connection = getConnection();
+			List<Book> books = new BookDao().getSelectedBooks(connection, columnMap.get(selectBox), freeWord);
+			commit(connection);
+			return books;
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
+
+	public Map<Integer, String> getMapData(){
+
+		Map<Integer, String> map = new HashMap<>();
+		map.put(1, "");
+		map.put(2, "name");
+		map.put(3, "author");
+		map.put(4, "publisher");
+		map.put(5, "category");
+		map.put(6, "isbn");
+
+		return map;
 	}
 }
