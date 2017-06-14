@@ -19,7 +19,7 @@ public class CirculationDao {
 
 		PreparedStatement ps = null;
 		try {
-			String sql = "SELECT * FROM circulations";
+			String sql = "SELECT * FROM users_circulations";
 			ps = connection.prepareStatement(sql);
 
 			ResultSet rs = ps.executeQuery();
@@ -119,8 +119,11 @@ public class CirculationDao {
 				String lentDate = rs.getString("lent_date");
 				String limitedDate = rs.getString("limited_date");
 				String userId = rs.getString("user_id");
+				String userName = rs.getString("user_name");
 				String bookId = rs.getString("book_id");
+				String bookName = rs.getString("book_name");
 				String libraryId = rs.getString("library_id");
+				String libraryName = rs.getString("library_name");
 				String returning = rs.getString("returning");
 
 				Circulation circulation = new Circulation();
@@ -128,8 +131,11 @@ public class CirculationDao {
 				circulation.setLentDate(lentDate);
 				circulation.setLimitedDate(limitedDate);
 				circulation.setUserId(userId);
+				circulation.setUserName(userName);
 				circulation.setBookId(bookId);
+				circulation.setBookName(bookName);
 				circulation.setLibraryId(libraryId);
+				circulation.setLibraryName(libraryName);
 				circulation.setReturning(returning);
 
 				ret.add(circulation);

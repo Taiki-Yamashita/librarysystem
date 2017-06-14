@@ -6,10 +6,32 @@ public class Circulation {
 	private String lentDate;
 	private String limitedDate;
 	private String userId;
+	private String userName;
 	private String bookId;
+	private String bookName;
 	private String libraryId;
+	private String libraryName;
 	private String returning;
 
+
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public String getBookName() {
+		return bookName;
+	}
+	public void setBookName(String bookName) {
+		this.bookName = bookName;
+	}
+	public String getLibraryName() {
+		return libraryName;
+	}
+	public void setLibraryName(String libraryName) {
+		this.libraryName = libraryName;
+	}
 	public int getId() {
 		return id;
 	}

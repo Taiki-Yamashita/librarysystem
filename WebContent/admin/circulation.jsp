@@ -8,5 +8,14 @@
 </head>
 <body>
 	<a href="../">トップ</a>
+	<table>
+		<c:forEach items="${circulations}" var="circulation">
+			<c:out value="${circulation.userName}" />
+			<c:out value="${circulation.bookName}" />
+			<c:out value="${circulation.libraryName}" />
+			<c:out value="${circulation.lentDate}" />
+			<c:out value="${circulation.limitedDate}" />
+		</c:forEach>
+	</table>
 </body>
 </html>
