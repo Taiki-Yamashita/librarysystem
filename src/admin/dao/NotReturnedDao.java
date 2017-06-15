@@ -18,7 +18,7 @@ public class NotReturnedDao {
 		PreparedStatement ps = null;
 		try {
 			StringBuilder sql = new StringBuilder();
-			sql.append("SELECT * FROM users_circulations");
+			sql.append("SELECT * FROM users_circulations where returning = 1");
 			//sql.append("ORDER BY  DESC limit " + num);
 
 			ps = connection.prepareStatement(sql.toString());

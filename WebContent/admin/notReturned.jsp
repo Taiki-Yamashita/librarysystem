@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,10 +12,18 @@
 未返却リストだよ
 
 	<table>
+		<tr>
+			<th>ユーザー名</th>
+			<th>書籍名</th>
+			<th>最寄り図書館</th>
+			<th>オーバー期限</th>
+		</tr>
 		<c:forEach items="${notReturnedlists}" var="notReturnedlist">
-			<c:out value="${notReturnedlist.userName}" />
-			<c:out value="${notReturnedlist.bookName}" />
-			<c:out value="${notReturnedlist.libraryName}" />
+			<tr>
+				<td><c:out value="${notReturnedlist.userName}" /></td>
+				<td><c:out value="${notReturnedlist.bookName}" /></td>
+				<td><c:out value="${notReturnedlist.libraryName}" /></td>
+			</tr>
 		</c:forEach>
 	</table>
 </body>

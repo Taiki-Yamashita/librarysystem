@@ -12,12 +12,21 @@
 	<a href="manage">管理画面</a>
 
 	<table>
+		<tr>
+			<th>ユーザー名</th>
+			<th>書籍名</th>
+			<th>最寄り図書館</th>
+			<th>借りた日</th>
+			<th>貸した日</th>
+		</tr>
 		<c:forEach items = "${circulations}" var="circulation">
-			<c:out value = "${circulation.userName}" />
-			<c:out value = "${circulation.bookName}" />
-			<c:out value = "${circulation.libraryName}" />
-			<c:out value = "${circulation.lentDate}" />
-			<c:out value = "${circulation.limitedDate}" />
+			<tr>
+				<td><c:out value = "${circulation.userName}" /></td>
+				<td><c:out value = "${circulation.bookName}" /></td>
+				<td><c:out value = "${circulation.libraryName}" /></td>
+				<td><c:out value = "${circulation.lentDate}" /></td>
+				<td><c:out value = "${circulation.limitedDate}" /></td>
+			</tr>
 		</c:forEach>
 	</table>
 </body>
