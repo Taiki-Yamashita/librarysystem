@@ -286,6 +286,7 @@
 		<c:remove var="selectedBooks" scope="session"/>
 		<c:remove var="refinedBooks" scope="session"/>
 		<c:remove var="errorMessages" scope="session"/>
+		<c:remove var="checkNewBooks" scope="session"/>
 		<c:remove var="newBooksCheck" scope="session"/>
 		<c:remove var="checkBoxLibraryNumber" scope="session"/>
 		<c:remove var="checkLibrary" scope="session"/>
