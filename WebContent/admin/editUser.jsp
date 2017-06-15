@@ -38,11 +38,11 @@
 	<label for="point">ポイント</label><br>
 	<input name="point" id="point" value="${editUser.point }"/><br />
 
-	<label for="registerDate">登録日</label><br>
-	<input name="registerDate" id="registerDate" value="${editUser.registerDate }"/><br />
-
-		<label for="libraryId">図書館</label><br>
+	<label for="libraryId">図書館</label><br>
 	<input name="libraryId" id="libraryId" value="${editUser.libraryId }"/><br />
+
+		<label for="registerDate">登録日</label><br>
+	<input name="registerDate" id="registerDate" value="${editUser.registerDate }"/><br />
 
 	<label for="stopping">停止中</label><br>
 	<input name="stopping" id="stopping" value="${editUser.stopping }"/><br />

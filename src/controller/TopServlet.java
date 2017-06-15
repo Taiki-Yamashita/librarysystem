@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.Information;
-import service.InformationService;
+import beans.Notification;
+import service.NotificationService;
 
 @WebServlet(urlPatterns = { "/index.jsp" })
 public class TopServlet extends HttpServlet{
@@ -20,7 +20,7 @@ public class TopServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		List<Information> informations = new InformationService().selectAll();
+		List<Notification> informations = new NotificationService().selectAll();
 		request.setAttribute("informations", informations);
 
 		request.getRequestDispatcher("/top.jsp").forward(request, response);

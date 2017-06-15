@@ -10,7 +10,7 @@
 	<a href = "./">管理画面</a>
 
 
-<form action = "information"method = "post"><br />
+<form action = "notification"method = "post"><br />
 
 
 	<label for = "libraryId">図書館</label><br>
