@@ -33,11 +33,12 @@ public class LendingBookServlet extends HttpServlet {
 		circulation.setUserId(request.getParameter("userId"));
 		circulation.setBookId(request.getParameter("bookId"));
 		circulation.setLibraryId(request.getParameter("libraryId"));
-
+		System.out.println(circulation.getBookId());
+		System.out.println(request.getParameter("userId"));
 		new CirculationService().insert(circulation);
 
 
-		int lending = Integer.parseInt(request.getParameter("id"));
+		int lending = Integer.parseInt(request.getParameter("bookId"));
 		int num = Integer.parseInt(request.getParameter("num"));
 		new BookService().lendingBook(lending, num);
 
@@ -45,6 +46,5 @@ public class LendingBookServlet extends HttpServlet {
 
 
 		response.sendRedirect("./manageBook");
-
 	}
 }

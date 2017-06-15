@@ -29,7 +29,7 @@
 
 			<td>
 		   	 	<form action = "editBook" method = "get">
-		   	 		<input type = "hidden" name = "id" value = "${book.id }" >
+		   	 		<input type = "hidden" name = "id" value = "${book.id}" >
 		   	 		<input type = "submit" value = "編集" />
 		   	 	</form>
 	   	 	</td>
@@ -37,12 +37,15 @@
    	 		<td>
 
    	 			<form action = "lendingBook" method = "post">
-   	 				<input type = "hidden" name = "id" value = "${book.id }" >
+   	 				<input type = "hidden" id = "bookId" name = "bookId" value = "${book.id}" >
+   	 				<input type = "hidden" id = "libraryId" name = "libraryId" value = "${book.libraryId}" >
 					<c:if test = "${book.lending == 0 }">
+						<input id = "userId" name = "userId" value ="userId" >
 						<input type = "hidden" name = "num" value = 1 >
 						<input type = "submit" value = "貸出" />
 					</c:if>
 					<c:if test = "${book.lending == 1 }">
+						<input type = "hidden" name = "userId" value ="userId"  >
 						<input type = "hidden" name = "num" value = 0>
 						<input type = "submit" value = "返却" />
 					</c:if>
@@ -50,7 +53,8 @@
    	 		</td>
    	 		<td>
 				<form action = "reservingBook" method = "post">
-					<input type = "hidden" name = "id" value = "${book.id }" >
+					<input type = "hidden" name = "bookId" value = "${book.id}" >
+					<input type = "hidden" id = "libraryId" name = "libraryId" value = "${book.libraryId}" >
 					<c:if test="${book.reserving == 0 }">
 						<input type = "hidden" name = "num" value =1>
 						<input type = "submit" value = "予約" />

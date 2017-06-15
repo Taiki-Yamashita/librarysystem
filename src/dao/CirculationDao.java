@@ -68,7 +68,7 @@ public class CirculationDao {
 			ps.setString(3, circulation.getLibraryId());
 			//ps.setString(4, circulation.getLentDate());
 			ps.setString(4, String.valueOf(cal));//登録時刻から14日後
-			ps.setString(5, circulation.getReturning());
+			ps.setString(5, "0");
 
 			ps.executeUpdate();
 		} catch (SQLException e) {
