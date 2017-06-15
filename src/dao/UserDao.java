@@ -236,30 +236,52 @@ public class UserDao {
 	}
 
 
-public User selectUser(Connection connection, int user_id){
-	PreparedStatement ps = null;
-	try {
-		String sql = "SELECT * FROM users WHERE id = ? ";
+	public User selectUser(Connection connection, int user_id){
+		PreparedStatement ps = null;
+		try {
+			String sql = "SELECT * FROM users WHERE id = ? ";
 
-		ps = connection.prepareStatement(sql);
-		ps.setInt(1, user_id);
+			ps = connection.prepareStatement(sql);
+			ps.setInt(1, user_id);
 
-		ResultSet rs =ps.executeQuery();
-		List<User> userList = toUserList(rs);
-		if(userList.isEmpty() == true) {
-			return null;
-		} else if(2<= userList.size()) {
-			throw new IllegalStateException("2<= userList.size()");
-		} else {
-			return userList.get(0);
+			ResultSet rs =ps.executeQuery();
+			List<User> userList = toUserList(rs);
+			if(userList.isEmpty() == true) {
+				return null;
+			} else if(2<= userList.size()) {
+				throw new IllegalStateException("2<= userList.size()");
+			} else {
+				return userList.get(0);
 
+			}
+		}catch(SQLException e) {
+			throw new SQLRuntimeException(e);
+		}finally {
+			close(ps);
 		}
-	}catch(SQLException e) {
-		throw new SQLRuntimeException(e);
-	}finally {
-		close(ps);
 	}
+
+	public void stoppingUser(Connection connection, int stopping, int num){
+		PreparedStatement ps = null;
+		try {
+			StringBuilder sql = new StringBuilder();
+			sql.append("UPDATE users SET");
+			sql.append(" stopping = ?");
+
+			sql.append(" WHERE id=?");
+
+			ps = connection.prepareStatement(sql.toString());
+
+			ps.setInt(1, num);
+			ps.setInt(2, stopping);
+
+			ps.executeUpdate();
+			}catch(SQLException e){
+				throw new SQLRuntimeException(e);
+			}finally{
+				close(ps);
+			}
+		}
 }
 
 
-}

@@ -148,4 +148,24 @@ public class UserService {
 			close(connection);
 		}
 	}
+
+	public void stoppingUser(int stopping, int num) {
+
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			new UserDao().stoppingUser(connection, stopping, num);
+
+			commit(connection);
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
 }

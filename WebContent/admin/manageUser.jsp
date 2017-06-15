@@ -27,12 +27,26 @@
 
 
 
-					<td>
+			<td>
 	   	 	<form action="editUser" method="get">
 	   	 		<input type="hidden" name="id" value="${user.id }" >
 	   	 		<input type="submit" value="編集" />
 	   	 	</form>
-   	 	</td>
+
+	   	 	<td>
+
+   	 			<form action = "stopUser" method = "post">
+   	 				<input type = "hidden" name = "id" value = "${user.id }" >
+					<c:if test = "${user.stopping == 0 }">
+						<input type = "hidden" name = "num" value = 1 >
+						<input type = "submit" value = "停止" />
+					</c:if>
+					<c:if test = "${user.stopping == 1 }">
+						<input type = "hidden" name = "num" value = 0>
+						<input type = "submit" value = "復活" />
+					</c:if>
+   	 			</form>
+   	 		</td>
 			</tr>
 		</c:forEach>
 	</table>
