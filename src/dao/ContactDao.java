@@ -57,15 +57,15 @@ public class ContactDao {
 
 			sql.append(")");
 
-			Calendar cal = Calendar.getInstance();
-			cal.add(Calendar.DAY_OF_MONTH, 2);//2日加算
+			Calendar calendar = Calendar.getInstance();
+			calendar.add(Calendar.DAY_OF_MONTH, 2);//2日加算
 
 			ps = connection.prepareStatement(sql.toString());
 
 			ps.setString(1, contact.getUserId());
 			ps.setString(2, contact.getBookId());
 			ps.setString(3, contact.getContactDate());
-			ps.setString(4, String.valueOf(cal));//登録時刻から2日後
+			ps.setString(4, calendar.get(Calendar.YEAR)+"/"+(calendar.get(Calendar.MONTH)+1)+"/"+calendar.get(Calendar.DATE));//登録時刻から2日後
 			ps.setString(5, "0");
 
 			ps.executeUpdate();

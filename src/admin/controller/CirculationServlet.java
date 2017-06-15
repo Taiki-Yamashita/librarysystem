@@ -22,7 +22,6 @@ public class CirculationServlet extends HttpServlet {
 			HttpServletResponse response) throws IOException, ServletException {
 
 		List<Circulation> circulations = new CirculationService().selectAll();
-
 		request.setAttribute("circulations", circulations);
 
 		request.getRequestDispatcher("/admin/circulation.jsp").forward(request, response);

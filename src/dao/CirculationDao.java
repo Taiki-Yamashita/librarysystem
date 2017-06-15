@@ -23,6 +23,7 @@ public class CirculationDao {
 			String sql = "SELECT * FROM users_circulations";
 			ps = connection.prepareStatement(sql);
 
+
 			ResultSet rs = ps.executeQuery();
 			List<Circulation> circulationList = toCirculationList(rs);
 			if (circulationList.isEmpty()) {
@@ -60,14 +61,14 @@ public class CirculationDao {
 
 			ps = connection.prepareStatement(sql.toString());
 
-			Calendar cal = Calendar.getInstance();
-			cal.add(Calendar.DAY_OF_MONTH, 14);//14日加算
+			Calendar calendar = Calendar.getInstance();
+			calendar.add(Calendar.DAY_OF_MONTH, 14);//14日加算
 
+			System.out.println(calendar.get(Calendar.DAY_OF_MONTH));
 			ps.setString(1, circulation.getUserId());
 			ps.setString(2, circulation.getBookId());
 			ps.setString(3, circulation.getLibraryId());
-			//ps.setString(4, circulation.getLentDate());
-			ps.setString(4, String.valueOf(cal));//登録時刻から14日後
+			ps.setString(4, calendar.get(Calendar.YEAR)+"/"+(calendar.get(Calendar.MONTH)+1)+"/"+calendar.get(Calendar.DATE));//登録時刻から14日後
 			ps.setString(5, "0");
 
 			ps.executeUpdate();
@@ -120,7 +121,7 @@ public class CirculationDao {
 		List<Circulation> ret = new ArrayList<Circulation>();
 		try {
 			while (rs.next()) {
-				int id = rs.getInt("id");
+				//int id = rs.getInt("id");
 
 				String userId = rs.getString("user_id");
 				String userName = rs.getString("user_name");
@@ -130,10 +131,10 @@ public class CirculationDao {
 				String libraryName = rs.getString("library_name");
 				String lentDate = rs.getString("lent_date");
 				String limitedDate = rs.getString("limited_date");
-				String returning = rs.getString("returning");
+				//String returning = rs.getString("returning");
 
 				Circulation circulation = new Circulation();
-				circulation.setId(id);
+				//circulation.setId(id);
 				circulation.setUserId(userId);
 				circulation.setUserName(userName);
 				circulation.setBookId(bookId);
@@ -142,7 +143,7 @@ public class CirculationDao {
 				circulation.setLibraryName(libraryName);
 				circulation.setLentDate(lentDate);
 				circulation.setLimitedDate(limitedDate);
-				circulation.setReturning(returning);
+				//circulation.setReturning(returning);
 
 				ret.add(circulation);
 			}
