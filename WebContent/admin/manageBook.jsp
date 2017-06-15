@@ -35,6 +35,7 @@
 	   	 	</td>
 
    	 		<td>
+
    	 			<form action = "lendingBook" method = "post">
    	 				<input type = "hidden" name = "id" value = "${book.id }" >
 					<c:if test = "${book.lending == 0 }">

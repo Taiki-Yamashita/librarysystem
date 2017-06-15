@@ -27,4 +27,5 @@ public class CirculationServlet extends HttpServlet {
 
 		request.getRequestDispatcher("/admin/circulation.jsp").forward(request, response);
 	}
+
 }

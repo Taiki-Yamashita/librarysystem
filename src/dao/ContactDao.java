@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import beans.Contact;
@@ -48,21 +49,24 @@ public class ContactDao {
 			sql.append(", limited_date");
 			sql.append(", finishing");
 			sql.append(") VALUES (");
-			sql.append(" ?"); // loginId
-			sql.append(", ?"); // password
-			sql.append(", ?"); // name
-			sql.append(", ?"); // branchId
-			sql.append(", ?"); // departmentId
+			sql.append(" ?");
+			sql.append(", ?");
+			sql.append(", CURRENT_TIMESTAMP");
+			sql.append(", ?"); // 登録時刻から2日後
+			sql.append(", ?");
 
 			sql.append(")");
+
+			Calendar cal = Calendar.getInstance();
+			cal.add(Calendar.DAY_OF_MONTH, 2);//2日加算
 
 			ps = connection.prepareStatement(sql.toString());
 
 			ps.setString(1, contact.getUserId());
 			ps.setString(2, contact.getBookId());
 			ps.setString(3, contact.getContactDate());
-			ps.setString(4, contact.getLimitedDate());
-			ps.setString(5, contact.getFinishing());
+			ps.setString(4, String.valueOf(cal));//登録時刻から2日後
+			ps.setString(5, "0");
 
 			ps.executeUpdate();
 		} catch (SQLException e) {

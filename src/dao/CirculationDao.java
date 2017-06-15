@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import beans.Circulation;
@@ -52,20 +53,22 @@ public class CirculationDao {
 			sql.append(" ?");
 			sql.append(", ?");
 			sql.append(", ?");
-			sql.append(", ?");
+			sql.append(", CURRENT_TIMESTAMP");
 			sql.append(", ?");
 			sql.append(", ?");
 			sql.append(")");
 
 			ps = connection.prepareStatement(sql.toString());
 
+			Calendar cal = Calendar.getInstance();
+			cal.add(Calendar.DAY_OF_MONTH, 14);//14日加算
 
 			ps.setString(1, circulation.getUserId());
 			ps.setString(2, circulation.getBookId());
 			ps.setString(3, circulation.getLibraryId());
-			ps.setString(4, circulation.getLentDate());
-			ps.setString(5, circulation.getLimitedDate());
-			ps.setString(6, circulation.getReturning());
+			//ps.setString(4, circulation.getLentDate());
+			ps.setString(4, String.valueOf(cal));//登録時刻から14日後
+			ps.setString(5, circulation.getReturning());
 
 			ps.executeUpdate();
 		} catch (SQLException e) {
