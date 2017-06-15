@@ -44,7 +44,6 @@
 	<label for="publishedDate">出版日</label><br>
 	<input name="publishedDate" id="publishedDate" value="${editBook.publishedDate }"/><br />
 
-
 	<label for="keeping">保管中</label><br>
 	<input name="keeping" id="keeping"/><br />
 

@@ -20,7 +20,7 @@ public class LendingBookServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		request.getRequestDispatcher("bookInformation.jsp").forward(request, response);
+		request.getRequestDispatcher("manageBook.jsp").forward(request, response);
 	}
 
 		@Override
@@ -34,6 +34,6 @@ public class LendingBookServlet extends HttpServlet {
 
 		System.out.println(lending);
 
-			response.sendRedirect("./bookInformation");
+			response.sendRedirect("./manageBook");
 	}
 }
