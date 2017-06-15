@@ -11,11 +11,12 @@
 	<p>予約管理</p>
 	<p><a href="./manage">管理画面</a></p>
 	<table>
-		<tr><th>予約者</th><th>本</th><th>受取図書館</th><th>貸し出し予定日</th></tr>
+		<tr><th>予約者</th><th>本</th><th>本の名前</th><th>受取図書館</th><th>貸し出し予定日</th></tr>
 		<c:forEach items="${reservations}" var="reservation">
 			<tr>
 				<td>${reservation.userId}</td>
 				<td>${reservation.bookId}</td>
+				<td>${reservation.bookName }</td>
 				<td>${reservation.libraryId}</td>
 				<td>貸し出し予定日</td>
 			</tr>

@@ -8,6 +8,13 @@ public class Circulation {
 	private String userId;
 	private String userName;
 	private String bookId;
+	private String bookName;
+	public String getBookName() {
+		return bookName;
+	}
+	public void setBookName(String bookName) {
+		this.bookName = bookName;
+	}
 	private String libraryId;
 	private String libraryName;
 	private String returning;
