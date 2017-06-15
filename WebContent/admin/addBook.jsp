@@ -7,8 +7,8 @@
 <title>本登録</title>
 </head>
 <body>
-	<a href = "../">トップ</a>
-
+	<br>
+	<a href = "./manage">管理画面</a>
 
 <form action = "./addBook"method = "post"><br />
 	<label for = "name">名前</label><br>
