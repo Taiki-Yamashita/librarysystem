@@ -28,8 +28,8 @@ public class UserDao {
 				String tel = rs.getString("tel");
 				String mail = rs.getString("mail");
 				String point = rs.getString("point");
-				String registerDate = rs.getString("register_date");
 				String libraryId = rs.getString("library_id");
+				String registerDate = rs.getString("register_date");
 				String stopping = rs.getString("stopping");
 
 				User user = new User();
@@ -41,8 +41,8 @@ public class UserDao {
 				user.setTel(tel);
 				user.setMail(mail);
 				user.setPoint(point);
-				user.setRegisterDate(registerDate);
 				user.setLibraryId(libraryId);
+				user.setRegisterDate(registerDate);
 				user.setStopping(stopping);
 
 				ret.add(user);
@@ -67,8 +67,8 @@ public class UserDao {
 			sql.append(", tel");
 			sql.append(", mail");
 			sql.append(", point");
-			sql.append(", register_date");
 			sql.append(", library_id");
+			sql.append(", register_date");
 			sql.append(", stopping");
 
 			sql.append(")VALUES(");
@@ -79,8 +79,8 @@ public class UserDao {
 			sql.append(", ?");
 			sql.append(", ?");
 			sql.append(", ?");
-			sql.append(", CURRENT_TIMESTAMP");
 			sql.append(", ?");
+			sql.append(", CURRENT_TIMESTAMP");
 			sql.append(", ?)");
 
 			ps = connection.prepareStatement(sql.toString());

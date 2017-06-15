@@ -6,22 +6,22 @@ import static utils.DBUtil.*;
 import java.sql.Connection;
 import java.util.List;
 
-import beans.Information;
-import dao.InformationDao;
+import beans.Notification;
+import dao.NotificationDao;
 
-public class InformationService {
+public class NotificationService {
 
-	public List<Information> selectAll() {
+	public List<Notification> selectAll() {
 
 		Connection connection = null;
 		try {
 			connection = getConnection();
 
-			List<Information> informations = new InformationDao().selectAll(connection);
+			List<Notification> notifications = new NotificationDao().selectAll(connection);
 
 			commit(connection);
 
-			return informations;
+			return notifications;
 		} catch (RuntimeException e) {
 			rollback(connection);
 			throw e;
@@ -33,13 +33,13 @@ public class InformationService {
 		}
 	}
 
-	public void insert(Information information) {
+	public void insert(Notification notification) {
 
 		Connection connection = null;
 		try {
 			connection = getConnection();
 
-			new InformationDao().insert(connection, information);
+			new NotificationDao().insert(connection, notification);
 
 			commit(connection);
 		} catch (RuntimeException e) {

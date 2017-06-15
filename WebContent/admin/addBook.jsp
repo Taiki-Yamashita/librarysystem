@@ -26,9 +26,6 @@
 	<label for = "type">タイプ</label><br>
 	<input name = "type" id = "type" value = "type"/><br />
 
-	<label for = "publishedDate">出版日</label><br>
-	<input name = "publishedDate" id = "publishedDate"/><br />
-
 	<label for = "libraryId">図書館</label><br>
 	<input name = "libraryId" id = "libraryId" value = "libraryId"/><br />
 
@@ -37,6 +34,9 @@
 
 	<label for = "isbnId">ISBN番号</label><br>
 	<input name = "isbnId" id = "isbnId"/><br />
+
+	<label for = "publishedDate">出版日</label><br>
+	<input name = "publishedDate" id = "publishedDate"/><br />
 
 
 

@@ -9,24 +9,24 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import beans.Information;
+import beans.Notification;
 import exception.SQLRuntimeException;
 
-public class InformationDao {
+public class NotificationDao {
 
-	public List<Information> selectAll(Connection connection){
+	public List<Notification> selectAll(Connection connection){
 
 		PreparedStatement ps = null;
 		try {
-			String sql = "SELECT * FROM informations";
+			String sql = "SELECT * FROM notifications";
 			ps = connection.prepareStatement(sql);
 
 			ResultSet rs = ps.executeQuery();
-			List<Information> informationList = toInformationList(rs);
-			if (informationList.isEmpty()) {
+			List<Notification> notificationList = toNotificationList(rs);
+			if (notificationList.isEmpty()) {
 				return null;
 			}else {
-				return informationList;
+				return notificationList;
 			}
 		} catch (SQLException e) {
 			throw new SQLRuntimeException(e);
@@ -35,9 +35,9 @@ public class InformationDao {
 		}
 	}
 
-	private List<Information> toInformationList(ResultSet rs) throws SQLException {
+	private List<Notification> toNotificationList(ResultSet rs) throws SQLException {
 
-		List<Information> ret = new ArrayList<Information>();
+		List<Notification> ret = new ArrayList<Notification>();
 		try {
 			while (rs.next()) {
 				int id = rs.getInt("id");
@@ -45,14 +45,14 @@ public class InformationDao {
 				String registeredDate = rs.getString("registered_date");
 				String message = rs.getString("message");
 
-				Information information = new Information();
-				information.setId(id);
-				information.setLibraryId(libraryId);
-				information.setRegisteredDate(registeredDate);
-				information.setMessage(message);
+				Notification notification = new Notification();
+				notification.setId(id);
+				notification.setLibraryId(libraryId);
+				notification.setRegisteredDate(registeredDate);
+				notification.setMessage(message);
 
 
-				ret.add(information);
+				ret.add(notification);
 			}
 			return ret;
 		} finally {
@@ -63,7 +63,7 @@ public class InformationDao {
 
 
 
-	public void insert(Connection connection, Information information) {
+	public void insert(Connection connection, Notification notification) {
 
 		PreparedStatement ps = null;
 		try {
@@ -80,9 +80,9 @@ public class InformationDao {
 
 			ps = connection.prepareStatement(sql.toString());
 
-			ps.setString(1, information.getMessage());
-			ps.setString(2, information.getLibraryId());
-			ps.setString(3, information.getRegisteredDate());
+			ps.setString(1, notification.getMessage());
+			ps.setString(2, notification.getLibraryId());
+			ps.setString(3, notification.getRegisteredDate());
 
 			ps.executeUpdate();
 		} catch (SQLException e) {

@@ -32,17 +32,18 @@
 		<label for="type">種類</label><br>
 	<input name="type" id="type" value="${editBook.type }"/><br />
 
-	<label for="publishedDate">出版日</label><br>
-	<input name="publishedDate" id="publishedDate" value="${editBook.publishedDate }"/><br />
-
 	<label for="libraryId">図書館</label><br>
 	<input name="libraryId" id="libraryId"/><br />
 
 	<label for="shelfId">棚番号</label><br>
 	<input name="shelfId" id="shelfId"/><br />
 
-		<label for="isbnId">ISBN番号</label><br>
+	<label for="isbnId">ISBN番号</label><br>
 	<input name="isbnId" id="isbnId" value="${editBook.isbnId }"/><br />
+
+	<label for="publishedDate">出版日</label><br>
+	<input name="publishedDate" id="publishedDate" value="${editBook.publishedDate }"/><br />
+
 
 	<label for="keeping">保管中</label><br>
 	<input name="keeping" id="keeping"/><br />
