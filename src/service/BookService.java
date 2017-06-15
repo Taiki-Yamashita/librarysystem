@@ -99,9 +99,9 @@ public class BookService {
 		}
 	}
 
-	public List<Book> getSelectedBooks(int selectBox, String freeWord) {
+	public List<Book> getSelectedBooks(String selectBox, String freeWord) {
 
-		Map<Integer, String> columnMap = getMapData();
+		Map<String, String> columnMap = getMapData();
 		Connection connection = null;
 
 		try {
@@ -122,15 +122,28 @@ public class BookService {
 		}
 	}
 
-	public Map<Integer, String> getMapData(){
+	public Map<String, String> getMapData(){
 
-		Map<Integer, String> map = new HashMap<>();
-		map.put(1, "");
-		map.put(2, "name");
-		map.put(3, "author");
-		map.put(4, "publisher");
-		map.put(5, "category");
-		map.put(6, "isbn_id");
+		Map<String, String> map = new HashMap<>();
+		map.put("1", "");
+		map.put("2", "name");
+		map.put("3", "author");
+		map.put("4", "publisher");
+		map.put("5", "category");
+		map.put("6", "isbn_id");
+
+		return map;
+	}
+
+	public Map<String, String> getMapCategory(){
+
+		Map<String, String> map = new HashMap<>();
+		map.put("1", "全て");
+		map.put("2", "本");
+		map.put("3", "著者");
+		map.put("4", "出版社");
+		map.put("5", "カテゴリ");
+		map.put("6", "ISBN番号");
 
 		return map;
 	}
