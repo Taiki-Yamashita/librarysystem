@@ -300,6 +300,9 @@ public class BookDao {
 				ps.setInt(2, reserving);
 			}
 
+			System.out.println(ps);
+
+
 			ps.executeUpdate();
 		}catch(SQLException e){
 			throw new SQLRuntimeException(e);
