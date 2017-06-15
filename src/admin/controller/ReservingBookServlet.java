@@ -8,7 +8,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import beans.Book;
+import beans.Reservation;
+import beans.User;
 import service.BookService;
+import service.ReservationService;
+import service.UserService;
 
 
 @WebServlet(urlPatterns = { "/admin/reservingBook" })
@@ -27,9 +32,27 @@ public class ReservingBookServlet extends HttpServlet {
 		throws ServletException,IOException {
 
 
-		int reserving = Integer.parseInt(request.getParameter("id"));
+		int bookId = Integer.parseInt(request.getParameter("bookId"));
 		int num = Integer.parseInt(request.getParameter("num"));
-		new BookService().reservingBook(reserving, num);
+		new BookService().reservingBook(bookId, num);
+
+		if(num ==1){
+
+		Book reservingBook = new BookService().selectBook(bookId);
+
+		int userId = Integer.parseInt(request.getParameter("userId"));
+		Reservation addReservation = new Reservation();
+
+		User reservingUser = new UserService().selectUser((userId));
+
+		addReservation.setUserId(String.valueOf(reservingUser.getId()));
+		addReservation.setBookId(String.valueOf(reservingBook.getId()));
+		addReservation.setBookName(reservingBook.getName());
+		addReservation.setLibraryId(request.getParameter("libraryId"));
+
+
+		new ReservationService().insert(addReservation);
+		}
 
 		response.sendRedirect("./manageBook");
 	}

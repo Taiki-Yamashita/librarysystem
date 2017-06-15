@@ -8,7 +8,6 @@ public class Circulation {
 	private String userId;
 	private String userName;
 	private String bookId;
-	private String bookName;
 	private String libraryId;
 	private String libraryName;
 	private String returning;
@@ -20,12 +19,7 @@ public class Circulation {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	public String getBookName() {
-		return bookName;
-	}
-	public void setBookName(String bookName) {
-		this.bookName = bookName;
-	}
+
 	public String getLibraryName() {
 		return libraryName;
 	}

@@ -49,8 +49,14 @@ public class SearchRefineServlet extends HttpServlet{
 		cal.add(Calendar.DATE, -31);
 		String currentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(cal.getTime());
 
-		if(request.getParameter("newBooks") != null) newBooks.add(currentDate);
-		else newBooks.add("1500-01-01 00:00:00");
+		if(request.getParameter("newBooks") != null){
+			newBooks.add(currentDate);
+			request.getSession().setAttribute("checkNewBooks", "1");
+		}
+		else{
+			newBooks.add("1500-01-01 00:00:00");
+			request.getSession().setAttribute("checkNewBooks", "0");
+		}
 
 		return newBooks;
 	}
