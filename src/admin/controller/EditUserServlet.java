@@ -43,7 +43,7 @@ public class EditUserServlet extends HttpServlet{
 
 		new UserService().update(editUser);
 
-		response.sendRedirect("./usersInformation");
+		response.sendRedirect("./manageUser");
 
 	}
 
