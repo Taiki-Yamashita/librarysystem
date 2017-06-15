@@ -24,8 +24,6 @@ public class EditUserServlet extends HttpServlet{
 
 		String userId = request.getParameter("id");
 
-		System.out.println(userId);
-
 		User editUser = new UserService().selectUser(Integer.parseInt(userId));
 
 		request.setAttribute("editUser", editUser);

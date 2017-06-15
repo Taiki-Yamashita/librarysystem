@@ -339,7 +339,7 @@ public class BookDao {
 			close(ps);
 		}
 	}
-	public void reservingBook(Connection connection, int reserving, int num) {
+	public void reservingBook(Connection connection, int bookId, int num) {
 
 		PreparedStatement ps = null;
 		try {
@@ -361,9 +361,9 @@ public class BookDao {
 				ps.setString(2, "0");
 				ps.setString(3, "0");
 				ps.setString(4, "0");
-				ps.setInt(5, reserving);
+				ps.setInt(5, bookId);
 			} else {
-				ps.setInt(2, reserving);
+				ps.setInt(2, bookId);
 			}
 
 			System.out.println(ps);

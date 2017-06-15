@@ -61,8 +61,8 @@ public class ReservationDao {
 			ps.setString(1, reservation.getUserId());
 			ps.setString(2, reservation.getBookId());
 			ps.setString(3, reservation.getLibraryId());
-			ps.setString(4, reservation.getDelivering());
-			ps.setString(5, reservation.getCanceling());
+			ps.setString(4, "0");
+			ps.setString(5, "0");
 
 			ps.executeUpdate();
 		} catch (SQLException e) {
