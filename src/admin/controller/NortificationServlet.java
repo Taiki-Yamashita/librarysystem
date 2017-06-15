@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import beans.Notification;
 import service.NotificationService;
 
-@WebServlet(urlPatterns = { "/admin/nortification" })
+@WebServlet(urlPatterns = { "/admin/notification" })
 public class NortificationServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 
@@ -19,7 +19,7 @@ public class NortificationServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		request.getRequestDispatcher("/admin/nortification.jsp").forward(request, response);
+		request.getRequestDispatcher("/admin/notification.jsp").forward(request, response);
 	}
 
 	@Override
@@ -32,7 +32,6 @@ public class NortificationServlet extends HttpServlet{
 		nortification.setRegisteredDate(request.getParameter("RegisteredDate"));
 
 		new NotificationService().insert(nortification);
-
 
 		response.sendRedirect("./manage");
 	}

@@ -13,7 +13,7 @@
 <body>
 
 
-<form action="editBooks"method="post"><br />
+<form action="editBook"method="post"><br />
 
 	<input name="book_id" type="hidden" value="${editBook.id}"/>
 

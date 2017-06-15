@@ -7,7 +7,7 @@
 <title>お知らせフォーム</title>
 </head>
 <body>
-	<a href = "./">管理画面</a>
+	<a href = "./manage">管理画面</a>
 
 
 <form action = "notification"method = "post"><br />

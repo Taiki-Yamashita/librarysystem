@@ -13,8 +13,8 @@ import service.BookService;
 
 
 
-@WebServlet(urlPatterns = { "/admin/editBooks" })
-public class EditBooksServlet extends HttpServlet{
+@WebServlet(urlPatterns = { "/admin/editBook" })
+public class EditBookServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 
 	@Override
@@ -26,7 +26,7 @@ public class EditBooksServlet extends HttpServlet{
 		Book editBook = new BookService().selectBook(Integer.parseInt(bookId));
 
 		request.setAttribute("editBook", editBook);
-		request.getRequestDispatcher("editBooks.jsp").forward(request, response);
+		request.getRequestDispatcher("editBook.jsp").forward(request, response);
 
 	}
 
@@ -40,7 +40,7 @@ public class EditBooksServlet extends HttpServlet{
 
 		new BookService().update(editBook);
 
-		response.sendRedirect("./bookInformation");
+		response.sendRedirect("./manageBook");
 
 	}
 

@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import beans.Book;
 import service.BookService;
 
-@WebServlet(urlPatterns = {"/admin/bookInformation"})
-public class BookInformationServlet extends HttpServlet {
+@WebServlet(urlPatterns = {"/admin/manageBook"})
+public class ManageBookServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
@@ -25,7 +25,7 @@ public class BookInformationServlet extends HttpServlet {
 
 		request.setAttribute("books", books);
 
-		request.getRequestDispatcher("/admin/bookInformation.jsp").forward(request, response);
+		request.getRequestDispatcher("/admin/manageBook.jsp").forward(request, response);
 
 	}
 

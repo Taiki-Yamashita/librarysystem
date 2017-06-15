@@ -68,7 +68,7 @@ public class NotificationDao {
 		PreparedStatement ps = null;
 		try {
 			StringBuilder sql = new StringBuilder();
-			sql.append("INSERT INTO informations ( ");
+			sql.append("INSERT INTO notifications ( ");
 			sql.append("  message");
 			sql.append(", library_id");
 			sql.append(", registered_date");

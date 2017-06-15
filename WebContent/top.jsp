@@ -26,7 +26,7 @@
 
 			<div class="libraryId"><c:out value="${information.libraryId}" /></div>
 			<div class="registeredDate">投稿者:<c:out value="${information.registeredDate}" /></div>
-			<div class="message">カテゴリ:<c:out value="${information.message}" /></div>
+			<div class="message">投稿:<c:out value="${information.message}" /></div>
 
 		</c:forEach>
 

@@ -28,7 +28,7 @@
 				<td>${book.disposing}</td>
 
 					<td>
-	   	 	<form action="editBooks" method="get">
+	   	 	<form action="editBook" method="get">
 	   	 		<input type="hidden" name="id" value="${book.id }" >
 	   	 		<input type="submit" value="編集" />
 	   	 	</form>
