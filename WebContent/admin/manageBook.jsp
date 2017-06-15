@@ -27,28 +27,48 @@
 				<td>${book.reserving}</td>
 				<td>${book.disposing}</td>
 
-					<td>
-	   	 	<form action="editBook" method="get">
-	   	 		<input type="hidden" name="id" value="${book.id }" >
-	   	 		<input type="submit" value="編集" />
-	   	 	</form>
+			<td>
+		   	 	<form action = "editBook" method = "get">
+		   	 		<input type = "hidden" name = "id" value = "${book.id }" >
+		   	 		<input type = "submit" value = "編集" />
+		   	 	</form>
+	   	 	</td>
 
    	 		<td>
+<<<<<<< HEAD
    	 			<form action="lendingBook"  method="post">
    	 				<input type="hidden" name="id" value="${book.id }" >
 					<c:if test="${book.lending == 0 }">
 						<input type="hidden" name="num" value=1 >
 						<input type="submit" value="貸出" />
+=======
+   	 			<form action = "lendingBook" method = "post">
+   	 				<input type = "hidden" name = "id" value = "${book.id }" >
+					<c:if test = "${book.lending == 0 }">
+						<input type = "hidden" name = "num" value = 1 >
+						<input type = "submit" value = "貸出" />
+>>>>>>> 304dd99d79a46dd2208a21c4c9e16eec5d5770f4
 					</c:if>
-					<c:if test="${book.lending == 1 }">
-						<input type="hidden" name="num" value=0>
-						<input type="submit" value="返却" />
+					<c:if test = "${book.lending == 1 }">
+						<input type = "hidden" name = "num" value = 0>
+						<input type = "submit" value = "返却" />
 					</c:if>
    	 			</form>
    	 		</td>
-
-
+   	 		<td>
+				<form action = "reservingBook" method = "post">
+					<input type = "hidden" name = "id" value = "${book.id }" >
+					<c:if test="${book.reserving == 0 }">
+						<input type = "hidden" name = "num" value =1>
+						<input type = "submit" value = "予約" />
+					</c:if>
+					<c:if test="${book.reserving == 1 }">
+						<input type = "hidden" name = "num" value =0>
+						<input type = "submit" value = "取消" />
+					</c:if>
+			</form>
 			</tr>
+
 		</c:forEach>
 	</table>
 </body>

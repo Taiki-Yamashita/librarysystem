@@ -271,8 +271,69 @@ public class BookDao {
 			throw new SQLRuntimeException(e);
 		}finally{
 			close(ps);
-
+		}
 	}
+	public void reservingBook(Connection connection, int reserving, int num) {
 
+		PreparedStatement ps = null;
+		try {
+			StringBuilder sql = new StringBuilder();
+			sql.append("UPDATE books SET");
+			sql.append(" reserving = ?");
+			if(num ==1) {
+			sql.append(" keeping = ?");
+			sql.append(" lending = ?");
+			sql.append(" disposing = ?");}
+
+			sql.append(" WHERE");
+			sql.append(" id = ?");
+
+			ps = connection.prepareStatement(sql.toString());
+
+			ps.setInt(1, num);
+			if(num == 1) {
+			ps.setString(2, "0");
+			ps.setString(3, "0");
+			ps.setString(4, "0");
+			ps.setInt(5, reserving);
+			} else {
+				ps.setInt(2, reserving);
+			}
+
+			ps.executeUpdate();
+		}catch(SQLException e){
+			throw new SQLRuntimeException(e);
+		}finally{
+			close(ps);
+		}
+	}
+	public void resercingBook(Connection connection, int reserving, int num, int reset) {
+
+		PreparedStatement ps = null;
+		try {
+			StringBuilder sql = new StringBuilder();
+			sql.append("UPDATE books SET");
+			sql.append(" reserving = ?");
+			sql.append(" keeping = ?");
+			sql.append(" lending = ?");
+			sql.append(" disposing = ?");
+
+			sql.append(" WHERE");
+			sql.append(" id = ?");
+
+			ps = connection.prepareStatement(sql.toString());
+
+			ps.setInt(1, num);
+			ps.setInt(2, reset);
+			ps.setInt(3, reset);
+			ps.setInt(4, reset);
+			ps.setInt(5, reserving);
+
+			ps.executeUpdate();
+		}catch(SQLException e){
+			throw new SQLRuntimeException(e);
+		}finally{
+			close(ps);
+		}
 	}
 }

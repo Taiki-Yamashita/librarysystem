@@ -50,26 +50,22 @@ public class EditBookServlet extends HttpServlet{
 			int book_id = Integer.parseInt(bookId);
 			Book editBook = new BookService().selectBook(book_id);
 
-			System.out.println(editBook);
 
 			editBook.setName(request.getParameter("name"));
 			editBook.setAuthor(request.getParameter("author"));
 			editBook.setPublisher(request.getParameter("publisher"));
 			editBook.setCategory(request.getParameter("category"));
 			editBook.setType(request.getParameter("type"));
-			editBook.setPublishedDate(request.getParameter("published_date"));
 			editBook.setLibraryId(request.getParameter("libraryId"));
 			editBook.setShelfId(request.getParameter("shelfId"));
 			editBook.setIsbnId(request.getParameter("isbnId"));
+			editBook.setPublishedDate(request.getParameter("publishedDate"));
 			editBook.setKeeping(request.getParameter("keeping"));
 			editBook.setLending(request.getParameter("lending"));
 			editBook.setReserving(request.getParameter("reserving"));
 			editBook.setDisposing(request.getParameter("disposing"));
 
 
-
-
-		//	editBook.setDepartment_id(Integer.parseInt(request.getParameter("department")));
 
 			return editBook;
 		}

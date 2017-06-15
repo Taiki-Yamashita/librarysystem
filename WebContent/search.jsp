@@ -20,24 +20,22 @@
 
 		<hr width="1500px">
 
-		<!--
-			new books
-			clear button
-		-->
-
 		<p>◎フリーワード検索</p>
 
-		<form action="./search" method="POST">
+		<form action="./searchFreeWord" method="POST">
 			<table>
 				<tr>
 					<td>
 						<select name="selectBox">
-							<option value="1">全て</option>
-							<option value="2">名前</option>
-							<option value="3">著者</option>
-							<option value="4">出版社</option>
-							<option value="5">カテゴリ</option>
-							<option value="6">ISBN番号</option>
+							<c:if test="${not empty selectBox}">
+								<option value="${selectBoxId}">${selectBox}</option>
+							</c:if>
+							<c:if test="${selectBoxId != 1}"><option value="1">全て</option></c:if>
+							<c:if test="${selectBoxId != 2}"><option value="2">本</option></c:if>
+							<c:if test="${selectBoxId != 3}"><option value="3">著者</option></c:if>
+							<c:if test="${selectBoxId != 4}"><option value="4">出版社</option></c:if>
+							<c:if test="${selectBoxId != 5}"><option value="5">カテゴリ</option></c:if>
+							<c:if test="${selectBoxId != 6}"><option value="6">ISBN番号</option></c:if>
 						</select>
 					</td>
 					<td>
@@ -55,20 +53,52 @@
 		<hr width="1500px">
 
 		<p>◎絞込み検索</p>
-		<table>
-			<tr>
-				<td>
-					<input type="checkbox" name="refine" value="1">全て
-					<input type="checkbox" name="refine" value="2">名前
-					<input type="checkbox" name="refine" value="3">著者
-					<input type="checkbox" name="refine" value="4">出版社
-					<input type="checkbox" name="refine" value="5">カテゴリ
-				</td>
-				<td>
-					で<input type="submit" value="絞り込む">
-				</td>
-			</tr>
-		</table>
+
+		<form action="./searchRefine" method="POST">
+			<table>
+				<tr>
+					<td>
+						<input type="checkbox" name="new" value="1">新着本のみ
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="checkbox" name="library" value="1">【図書館名1】
+						<input type="checkbox" name="library" value="2">【図書館名2】
+						<input type="checkbox" name="library" value="3">【図書館名3】
+						<input type="checkbox" name="library" value="4">【図書館名4】
+						<input type="checkbox" name="library" value="5">【図書館名5】
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="checkbox" name="category" value="1">文学
+						<input type="checkbox" name="category" value="2">経済
+						<input type="checkbox" name="category" value="3">芸能
+						<input type="checkbox" name="category" value="4">歴史
+						<input type="checkbox" name="category" value="5">学問
+						<input type="checkbox" name="category" value="6">政治
+						<input type="checkbox" name="category" value="7">暮らし
+						<input type="checkbox" name="category" value="8">教育
+						<input type="checkbox" name="category" value="9">SF
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="checkbox" name="category" value="1">文庫
+						<input type="checkbox" name="category" value="2">新書
+						<input type="checkbox" name="category" value="3">雑誌
+						<input type="checkbox" name="category" value="4">コミックス
+					</td>
+				</tr>
+				<tr>
+					<td>
+						で<input type="submit" value="絞り込む">
+						<input type="submit" value="クリア">
+					</td>
+				</tr>
+			</table>
+		</form>
 
 		<hr width="1500px">
 
@@ -100,6 +130,8 @@
 			</form>
 		</c:if>
 
+		<c:remove var="selectBox" scope="session"/>
+		<c:remove var="selectBoxId" scope="session"/>
 		<c:remove var="freeWord" scope="session"/>
 		<c:remove var="booksCount" scope="session"/>
 		<c:remove var="selectedBooks" scope="session"/>

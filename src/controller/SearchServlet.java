@@ -37,20 +37,6 @@ public class SearchServlet extends HttpServlet{
 		request.getRequestDispatcher("/search.jsp").forward(request, response);
 	}
 
-	@Override
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws IOException, ServletException{
-
-		int selectBox = Integer.parseInt(request.getParameter("selectBox"));
-		String freeWord = request.getParameter("freeWord");
-
-		List<Book> selectedBooks = new BookService().getSelectedBooks(selectBox, freeWord);
-		request.getSession().setAttribute("freeWord", freeWord);
-		request.getSession().setAttribute("selectedBooks", selectedBooks);
-
-		response.sendRedirect("./search");
-	}
-
 	public boolean isValid(List<Book> selectedBooks, HttpServletRequest request){
 
 		List<String> errorMessages = new ArrayList<>();
@@ -58,9 +44,7 @@ public class SearchServlet extends HttpServlet{
 		if(selectedBooks.get(0).getId() == 0) errorMessages.add("検索結果が見つかりませんでした");
 
 		if(errorMessages.isEmpty()) return true;
-		else{
-			request.getSession().setAttribute("errorMessages", errorMessages);
-			return false;
-		}
+		else request.getSession().setAttribute("errorMessages", errorMessages);
+		return false;
 	}
 }
