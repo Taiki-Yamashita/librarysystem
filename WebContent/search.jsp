@@ -58,37 +58,37 @@
 			<table>
 				<tr>
 					<td>
-						<input type="checkbox" name="new" value="1">新着本のみ
+						<input type="checkbox" name="newBooks" value="1">新着本のみ
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<input type="checkbox" name="library" value="1">【図書館名1】
-						<input type="checkbox" name="library" value="2">【図書館名2】
-						<input type="checkbox" name="library" value="3">【図書館名3】
-						<input type="checkbox" name="library" value="4">【図書館名4】
-						<input type="checkbox" name="library" value="5">【図書館名5】
+						<input type="checkbox" name="library1" value="1">【図書館名1】
+						<input type="checkbox" name="library2" value="2">【図書館名2】
+						<input type="checkbox" name="library3" value="3">【図書館名3】
+						<input type="checkbox" name="library4" value="4">【図書館名4】
+						<input type="checkbox" name="library5" value="5">【図書館名5】
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<input type="checkbox" name="category" value="1">文学
-						<input type="checkbox" name="category" value="2">経済
-						<input type="checkbox" name="category" value="3">芸能
-						<input type="checkbox" name="category" value="4">歴史
-						<input type="checkbox" name="category" value="5">学問
-						<input type="checkbox" name="category" value="6">政治
-						<input type="checkbox" name="category" value="7">暮らし
-						<input type="checkbox" name="category" value="8">教育
-						<input type="checkbox" name="category" value="9">SF
+						<input type="checkbox" name="category1" value="文学">文学
+						<input type="checkbox" name="category2" value="経済">経済
+						<input type="checkbox" name="category3" value="芸能">芸能
+						<input type="checkbox" name="category4" value="歴史">歴史
+						<input type="checkbox" name="category5" value="学問">学問
+						<input type="checkbox" name="category6" value="政治">政治
+						<input type="checkbox" name="category7" value="暮らし">暮らし
+						<input type="checkbox" name="category8" value="教育">教育
+						<input type="checkbox" name="category9" value="SF">SF
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<input type="checkbox" name="category" value="1">文庫
-						<input type="checkbox" name="category" value="2">新書
-						<input type="checkbox" name="category" value="3">雑誌
-						<input type="checkbox" name="category" value="4">コミックス
+						<input type="checkbox" name="type1" value="文庫">文庫
+						<input type="checkbox" name="type2" value="新書">新書
+						<input type="checkbox" name="type3" value="雑誌">雑誌
+						<input type="checkbox" name="type4" value="コミックス">コミックス
 					</td>
 				</tr>
 				<tr>
