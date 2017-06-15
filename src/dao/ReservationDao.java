@@ -45,11 +45,13 @@ public class ReservationDao {
 			sql.append("INSERT INTO reservations ( ");
 			sql.append(" user_id");
 			sql.append(", book_id");
+			sql.append(", book_name");
 			sql.append(", library_id");
 			sql.append(", delivering");
 			sql.append(", canceling");
 			sql.append(") VALUES (");
 			sql.append(" ?");
+			sql.append(", ?");
 			sql.append(", ?");
 			sql.append(", ?");
 			sql.append(", ?");
@@ -60,9 +62,10 @@ public class ReservationDao {
 
 			ps.setString(1, reservation.getUserId());
 			ps.setString(2, reservation.getBookId());
-			ps.setString(3, reservation.getLibraryId());
-			ps.setString(4, "0");
+			ps.setString(3, reservation.getBookName());
+			ps.setString(4, reservation.getLibraryId());
 			ps.setString(5, "0");
+			ps.setString(6, "0");
 
 			ps.executeUpdate();
 		} catch (SQLException e) {
@@ -80,6 +83,7 @@ public class ReservationDao {
 			sql.append("UPDATE reservations SET");
 			sql.append("  user_id = ?");
 			sql.append(", book_id = ?");
+			sql.append(", book_name = ?");
 			sql.append(", library_id = ?");
 			sql.append(", delivering = ?");
 			sql.append(", canceling = ?");
@@ -90,9 +94,10 @@ public class ReservationDao {
 
 			ps.setString(1, reservation.getUserId());
 			ps.setString(2, reservation.getBookId());
-			ps.setString(3, reservation.getLibraryId());
-			ps.setString(4, reservation.getDelivering());
-			ps.setString(5, reservation.getCanceling());
+			ps.setString(3, reservation.getBookName());
+			ps.setString(4, reservation.getLibraryId());
+			ps.setString(5, reservation.getDelivering());
+			ps.setString(6, reservation.getCanceling());
 
 			int count = ps.executeUpdate();
 			if (count == 0) {
