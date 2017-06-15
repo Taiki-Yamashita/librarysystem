@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import beans.Circulation;
 import service.BookService;
+import service.CirculationService;
 
 
 
@@ -20,12 +22,19 @@ public class LendingBookServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		request.getRequestDispatcher("bookInformation.jsp").forward(request, response);
+		request.getRequestDispatcher("manageBook.jsp").forward(request, response);
 	}
 
-		@Override
-		protected void doPost(HttpServletRequest request,HttpServletResponse response)
-			throws ServletException,IOException {
+	@Override
+	protected void doPost(HttpServletRequest request,HttpServletResponse response)
+		throws ServletException,IOException {
+
+		Circulation circulation = new Circulation();
+		circulation.setUserId(request.getParameter("userId"));
+		circulation.setBookId(request.getParameter("bookId"));
+		circulation.setLibraryId(request.getParameter("libraryId"));
+
+		new CirculationService().insert(circulation);
 
 
 		int lending = Integer.parseInt(request.getParameter("id"));
@@ -34,6 +43,6 @@ public class LendingBookServlet extends HttpServlet {
 
 		System.out.println(lending);
 
-			response.sendRedirect("./bookInformation");
+		response.sendRedirect("./manageBook");
 	}
 }
