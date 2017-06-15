@@ -122,6 +122,29 @@ public class BookService {
 		}
 	}
 
+	public List<Book> getRefinedBooks(List<String> newBooks, List<String> libraries,
+			List<String> categories, List<String> types) {
+
+		Connection connection = null;
+
+		try {
+			connection = getConnection();
+			List<Book> books = new BookDao().getRefinedBooks(connection, newBooks, libraries, categories, types);
+			commit(connection);
+
+			if(books == null) return getDefaultValue();
+			else return books;
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
+
 	public Map<String, String> getMapData(){
 
 		Map<String, String> map = new HashMap<>();

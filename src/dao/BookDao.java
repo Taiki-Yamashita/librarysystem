@@ -205,6 +205,69 @@ public class BookDao {
 		}
 	}
 
+	public List<Book> getRefinedBooks(Connection connection, List<String> newBooks,
+			List<String> libraries, List<String> categories, List<String> types){
+
+		PreparedStatement ps = null;
+		try {
+
+			StringBuilder sql = new StringBuilder();
+
+			sql.append("SELECT * FROM books WHERE ");
+			sql.append("(published_date >= ?) AND (");
+			if(libraries != null){
+				for(int i = 0; i < libraries.size(); i++){
+					if(i == libraries.size()-1) sql.append("library_id = ? ) AND (");
+					else sql.append("library_id = ? or ");
+				}
+			}
+			if(categories != null){
+				for(int i = 0; i < categories.size(); i++){
+					if(i == categories.size()-1) sql.append("category = ? ) AND (");
+					else sql.append("category = ? or ");
+				}
+			}
+			if(types != null){
+				for(int i = 0; i < types.size(); i++){
+					if(i == types.size()-1) sql.append("type = ? )");
+					else sql.append("type = ? or ");
+				}
+			}
+
+			ps = connection.prepareStatement(sql.toString());
+			ps.setString(1, newBooks.get(0));
+			int cnt = 2;
+			if(libraries != null){
+				for(int i = 0; i < libraries.size(); i++){
+					ps.setString(cnt++, libraries.get(i));
+				}
+			}
+			if(categories != null){
+				for(int i = 0; i < categories.size(); i++){
+					ps.setString(cnt++, categories.get(i));
+				}
+			}
+			if(types != null){
+				for(int i = 0; i < types.size(); i++){
+					ps.setString(cnt++, types.get(i));
+				}
+			}
+
+			ResultSet rs = ps.executeQuery();
+
+			List<Book> bookList = toBookList(rs);
+			if (bookList.isEmpty()) {
+				return null;
+			}else {
+				return bookList;
+			}
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
+
 
 	private List<Book> toBookList(ResultSet rs) throws SQLException {
 
@@ -280,11 +343,11 @@ public class BookDao {
 			StringBuilder sql = new StringBuilder();
 			sql.append("UPDATE books SET");
 			sql.append(" reserving = ?");
-			if(num ==1) {
-			sql.append(" keeping = ?");
-			sql.append(" lending = ?");
-			sql.append(" disposing = ?");}
-
+			if(num ==1){
+				sql.append(" ,keeping = ?");
+				sql.append(" ,lending = ?");
+				sql.append(" ,disposing = ?");
+			}
 			sql.append(" WHERE");
 			sql.append(" id = ?");
 
@@ -292,10 +355,10 @@ public class BookDao {
 
 			ps.setInt(1, num);
 			if(num == 1) {
-			ps.setString(2, "0");
-			ps.setString(3, "0");
-			ps.setString(4, "0");
-			ps.setInt(5, reserving);
+				ps.setString(2, "0");
+				ps.setString(3, "0");
+				ps.setString(4, "0");
+				ps.setInt(5, reserving);
 			} else {
 				ps.setInt(2, reserving);
 			}
