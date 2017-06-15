@@ -30,7 +30,12 @@ public class SearchRefineServlet extends HttpServlet{
 		List<String> types = getTypes(request);
 
 		List<Book> books = new BookService().getRefinedBooks(newBooks, libraries, categories, types);
-		for(Book book : books) System.out.println(book.getName());
+
+		request.getSession().setAttribute("newBooks", newBooks);
+		request.getSession().setAttribute("libraries", libraries);
+		request.getSession().setAttribute("categories", categories);
+		request.getSession().setAttribute("types", types);
+		request.getSession().setAttribute("refinedBooks", books);
 
 		response.sendRedirect("./search");
 	}

@@ -214,22 +214,25 @@ public class BookDao {
 			StringBuilder sql = new StringBuilder();
 
 			sql.append("SELECT * FROM books WHERE ");
-			sql.append("(published_date >= ?) AND (");
-			if(libraries != null){
+			sql.append("(published_date >= ?) ");
+			if(!libraries.isEmpty()){
+				sql.append("AND (");
 				for(int i = 0; i < libraries.size(); i++){
-					if(i == libraries.size()-1) sql.append("library_id = ? ) AND (");
+					if(i == libraries.size()-1) sql.append("library_id = ?) ");
 					else sql.append("library_id = ? or ");
 				}
 			}
-			if(categories != null){
+			if(!categories.isEmpty()){
+				sql.append("AND (");
 				for(int i = 0; i < categories.size(); i++){
-					if(i == categories.size()-1) sql.append("category = ? ) AND (");
+					if(i == categories.size()-1) sql.append("category = ?) ");
 					else sql.append("category = ? or ");
 				}
 			}
-			if(types != null){
+			if(!types.isEmpty()){
+				sql.append("AND (");
 				for(int i = 0; i < types.size(); i++){
-					if(i == types.size()-1) sql.append("type = ? )");
+					if(i == types.size()-1) sql.append("type = ?)");
 					else sql.append("type = ? or ");
 				}
 			}
@@ -237,17 +240,17 @@ public class BookDao {
 			ps = connection.prepareStatement(sql.toString());
 			ps.setString(1, newBooks.get(0));
 			int cnt = 2;
-			if(libraries != null){
+			if(!libraries.isEmpty()){
 				for(int i = 0; i < libraries.size(); i++){
 					ps.setString(cnt++, libraries.get(i));
 				}
 			}
-			if(categories != null){
+			if(!categories.isEmpty()){
 				for(int i = 0; i < categories.size(); i++){
 					ps.setString(cnt++, categories.get(i));
 				}
 			}
-			if(types != null){
+			if(!types.isEmpty()){
 				for(int i = 0; i < types.size(); i++){
 					ps.setString(cnt++, types.get(i));
 				}

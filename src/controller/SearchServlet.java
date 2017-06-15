@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.Book;
-import service.BookService;
 
 @WebServlet(urlPatterns = { "/search" })
 public class SearchServlet extends HttpServlet{
@@ -22,26 +21,37 @@ public class SearchServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		List<Book> books = new BookService().selectAll();
 		List<Book> selectedBooks = (List<Book>)request.getSession().getAttribute("selectedBooks");
+		List<Book> refinedBooks = (List<Book>)request.getSession().getAttribute("refinedBooks");
 
-		request.setAttribute("books", books);
-		if(selectedBooks == null){
+		if(selectedBooks == null && refinedBooks == null){
 			request.getRequestDispatcher("/search.jsp").forward(request, response);
 			return;
+		}else{
+
+			if(selectedBooks != null){
+				if(isValid(selectedBooks, request)){
+					request.getSession().setAttribute("booksCount", selectedBooks.size());
+					request.getSession().setAttribute("books", selectedBooks);
+				}
+				else request.getSession().setAttribute("books", null);
+				request.getRequestDispatcher("/search.jsp").forward(request, response);
+			}
+			if(refinedBooks != null){
+				if(isValid(refinedBooks, request)){
+					request.getSession().setAttribute("booksCount", refinedBooks.size());
+					request.getSession().setAttribute("books", refinedBooks);
+				}
+				else request.getSession().setAttribute("books", null);
+				request.getRequestDispatcher("/search.jsp").forward(request, response);
+			}
 		}
-
-		if(isValid(selectedBooks, request)) request.getSession().setAttribute("booksCount", selectedBooks.size());
-		else request.getSession().setAttribute("selectedBooks", null);
-
-		request.getRequestDispatcher("/search.jsp").forward(request, response);
 	}
 
-	public boolean isValid(List<Book> selectedBooks, HttpServletRequest request){
+	public boolean isValid(List<Book> books, HttpServletRequest request){
 
 		List<String> errorMessages = new ArrayList<>();
-
-		if(selectedBooks.get(0).getId() == 0) errorMessages.add("検索結果が見つかりませんでした");
+		if(books.get(0).getId() == 0) errorMessages.add("検索結果が見つかりませんでした");
 
 		if(errorMessages.isEmpty()) return true;
 		else request.getSession().setAttribute("errorMessages", errorMessages);

@@ -63,11 +63,35 @@
 				</tr>
 				<tr>
 					<td>
-						<input type="checkbox" name="library1" value="1">【図書館名1】
-						<input type="checkbox" name="library2" value="2">【図書館名2】
-						<input type="checkbox" name="library3" value="3">【図書館名3】
-						<input type="checkbox" name="library4" value="4">【図書館名4】
-						<input type="checkbox" name="library5" value="5">【図書館名5】
+
+						<c:forEach items="${libraries}" var="library1">
+							<%session.setAttribute("count", false);%>
+							<c:forEach items="${libraries}" var="library2">
+								<c:if test="${library2 == 1}">
+									<%session.setAttribute("count",true);%>
+									<input type="checkbox" name="library1" value="1" checked="checked">【図書館名1】
+								</c:if>
+								<c:if test="${library2 == 2}">
+									<%session.setAttribute("count",true);%>
+									<input type="checkbox" name="library2" value="2" checked="checked">【図書館名2】
+								</c:if>
+								<c:if test="${library2 == 3}">
+									<%session.setAttribute("count",true);%>
+									<input type="checkbox" name="library3" value="3" checked="checked">【図書館名3】
+								</c:if>
+								<c:if test="${library2 == 4}">
+									<%session.setAttribute("count",true);%>
+									<input type="checkbox" name="library4" value="4" checked="checked">【図書館名4】
+								</c:if>
+								<c:if test="${library2 == 5}">
+									<%session.setAttribute("count",true);%>
+									<input type="checkbox" name="library5" value="5" checked="checked">【図書館名5】
+								</c:if>
+							</c:forEach>
+							<c:if test
+						</c:forEach>
+
+
 					</td>
 				</tr>
 				<tr>
@@ -114,11 +138,11 @@
 			</c:forEach>
 		</c:if>
 
-		<c:if test="${not empty selectedBooks}">
+		<c:if test="${not empty books}">
 			<form action="./search" method="POST">
 				<table>
 					<tr><th>本</th><th>予約</th></tr>
-					<c:forEach items="${selectedBooks}" var="book">
+					<c:forEach items="${books}" var="book">
 						<c:if test="${book.id != 0}">
 							<tr>
 								<td><c:out value="${book.name}"/></td>
@@ -133,8 +157,14 @@
 		<c:remove var="selectBox" scope="session"/>
 		<c:remove var="selectBoxId" scope="session"/>
 		<c:remove var="freeWord" scope="session"/>
+		<c:remove var="newBooks" scope="session"/>
+		<c:remove var="libraries" scope="session"/>
+		<c:remove var="categories" scope="session"/>
+		<c:remove var="types" scope="session"/>
 		<c:remove var="booksCount" scope="session"/>
+		<c:remove var="books" scope="session"/>
 		<c:remove var="selectedBooks" scope="session"/>
+		<c:remove var="refinedBooks" scope="session"/>
 		<c:remove var="errorMessages" scope="session"/>
 
 	</body>
