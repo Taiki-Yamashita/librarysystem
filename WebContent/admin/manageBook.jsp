@@ -35,19 +35,12 @@
 	   	 	</td>
 
    	 		<td>
-<<<<<<< HEAD
-   	 			<form action="lendingBook"  method="post">
-   	 				<input type="hidden" name="id" value="${book.id }" >
-					<c:if test="${book.lending == 0 }">
-						<input type="hidden" name="num" value=1 >
-						<input type="submit" value="貸出" />
-=======
+
    	 			<form action = "lendingBook" method = "post">
    	 				<input type = "hidden" name = "id" value = "${book.id }" >
 					<c:if test = "${book.lending == 0 }">
 						<input type = "hidden" name = "num" value = 1 >
 						<input type = "submit" value = "貸出" />
->>>>>>> 304dd99d79a46dd2208a21c4c9e16eec5d5770f4
 					</c:if>
 					<c:if test = "${book.lending == 1 }">
 						<input type = "hidden" name = "num" value = 0>
