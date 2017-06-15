@@ -114,6 +114,7 @@ public class ReservationDao {
 				int id = rs.getInt("id");
 				String userId = rs.getString("user_id");
 				String bookId = rs.getString("book_id");
+				String bookName = rs.getString("book_name");
 				String libraryId = rs.getString("library_id");
 				String delivering = rs.getString("delivering");
 				String canceling = rs.getString("canceling");
@@ -122,6 +123,7 @@ public class ReservationDao {
 				reservation.setId(id);
 				reservation.setUserId(userId);
 				reservation.setBookId(bookId);
+				reservation.setBookName(bookName);
 				reservation.setLibraryId(libraryId);
 				reservation.setDelivering(delivering);
 				reservation.setCanceling(canceling);

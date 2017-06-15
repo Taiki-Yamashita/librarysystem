@@ -16,7 +16,7 @@
 			<tr>
 				<td>${reservation.userId}</td>
 				<td>${reservation.bookId}</td>
-				<td>${reservation.bookName }</td>
+				<td>${reservation.bookName}</td>
 				<td>${reservation.libraryId}</td>
 				<td>貸し出し予定日</td>
 			</tr>

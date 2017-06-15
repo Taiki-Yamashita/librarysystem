@@ -50,6 +50,7 @@ public class ReservingBookServlet extends HttpServlet {
 		addReservation.setBookName(reservingBook.getName());
 		addReservation.setLibraryId(request.getParameter("libraryId"));
 
+		System.out.println(addReservation.getBookName());
 
 		new ReservationService().insert(addReservation);
 		}

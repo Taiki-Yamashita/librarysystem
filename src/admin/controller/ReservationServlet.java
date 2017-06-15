@@ -29,6 +29,8 @@ public class ReservationServlet extends HttpServlet {
 		List<User> users = new UserService().getSelectAllUser();
 		List<Library> libraries = new LibraryService().selectAll();
 
+		System.out.println(reservations.get(0).getBookName());
+
 		request.setAttribute("users", users);
 		request.setAttribute("reservations", reservations);
 		request.setAttribute("libraries", libraries);

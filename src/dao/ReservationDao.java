@@ -67,6 +67,8 @@ public class ReservationDao {
 			ps.setString(5, "0");
 			ps.setString(6, "0");
 
+			System.out.println(ps);
+
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			throw new SQLRuntimeException(e);

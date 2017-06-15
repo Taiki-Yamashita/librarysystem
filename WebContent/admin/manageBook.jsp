@@ -57,7 +57,7 @@
 					<input type = "hidden" name = "bookId" value = "${book.id}" >
 					<input type = "hidden" id = "libraryId" name = "libraryId" value = "${book.libraryId}" >
 					<c:if test="${book.reserving == 0 }">
-						<input id = "userId" name = "userId" value ="userId" >
+						<input id = "userId" name = "userId"  >
 						<input type = "hidden" name = "num" value =1>
 						<input type = "hidden" name = "reservation" value="${book.id}">
 						<input type = "submit" value = "予約" />
