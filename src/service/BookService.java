@@ -193,4 +193,24 @@ public class BookService {
 			close(connection);
 		}
 	}
+
+	public void reservingBook(int reserving, int num) {
+
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			new BookDao().reservingBook(connection, reserving, num);
+
+			commit(connection);
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
 }
