@@ -28,9 +28,10 @@ public class DeliveringBookServlet extends HttpServlet {
 		throws ServletException,IOException {
 
 		int delivering = Integer.parseInt(request.getParameter("bookId"));
-
 		int num = Integer.parseInt(request.getParameter("num"));
-		new BookService().deliveringBook(delivering, num);
+		String time = request.getParameter("time");
+
+		new BookService().deliveringBook(delivering, num, time);
 
 
 

@@ -1,7 +1,10 @@
 package controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -11,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.Book;
+import service.BookService;
 
 @WebServlet(urlPatterns = { "/search" })
 public class SearchServlet extends HttpServlet{
@@ -31,21 +35,69 @@ public class SearchServlet extends HttpServlet{
 
 			if(selectedBooks != null){
 				if(isValid(selectedBooks, request)){
-					request.getSession().setAttribute("booksCount", selectedBooks.size());
-					request.getSession().setAttribute("books", selectedBooks);
+					request.setAttribute("booksCount", selectedBooks.size());
+					request.setAttribute("books", selectedBooks);
 				}
-				else request.getSession().setAttribute("books", null);
+				else request.setAttribute("books", null);
 				request.getRequestDispatcher("/search.jsp").forward(request, response);
 			}
 			if(refinedBooks != null){
 				if(isValid(refinedBooks, request)){
-					request.getSession().setAttribute("booksCount", refinedBooks.size());
-					request.getSession().setAttribute("books", refinedBooks);
+					request.setAttribute("booksCount", refinedBooks.size());
+					request.setAttribute("books", refinedBooks);
 				}
-				else request.getSession().setAttribute("books", null);
+				else request.setAttribute("books", null);
 				request.getRequestDispatcher("/search.jsp").forward(request, response);
 			}
 		}
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String sort = "";
+		if(request.getParameter("sort") != null) sort = request.getParameter("sort");
+
+		/*searchFreeWords*/
+		if(request.getParameter("isPushFreeWord") != null || request.getParameter("throughFreeWord") != null){
+			String selectBox = request.getParameter("selectBox");
+			String freeWord = request.getParameter("freeWord");
+			String condition = request.getParameter("condition");
+
+			List<Book> selectedBooks = new BookService().getSelectedBooks(selectBox, freeWord, condition, sort);
+			request.getSession().setAttribute("selectBox", new BookService().getMapCategory().get(selectBox));
+			request.getSession().setAttribute("selectBoxId", selectBox);
+			request.getSession().setAttribute("freeWord", freeWord);
+			request.getSession().setAttribute("selectedBooks", selectedBooks);
+			request.getSession().setAttribute("condition", condition);
+			request.getSession().setAttribute("throughFreeWord", "1");
+
+			response.sendRedirect("./search");
+		}
+		/*searchFreeWords*/
+
+
+		/*searchRefine*/
+		if(request.getParameter("isPushRefine") != null || request.getParameter("throughRefine") != null){
+			List<String> newBooks = getNewBooks(request);
+			List<String> libraries = getLibraries(request);
+			List<String> categories = getCategories(request);
+			List<String> types = getTypes(request);
+
+			List<Book> books = new BookService().getRefinedBooks(newBooks, libraries, categories, types, sort);
+
+			request.getSession().setAttribute("newBooks", newBooks);
+			request.getSession().setAttribute("libraries", libraries);
+			request.getSession().setAttribute("categories", categories);
+			request.getSession().setAttribute("types", types);
+			request.getSession().setAttribute("refinedBooks", books);
+			request.getSession().setAttribute("throughRefine", "1");
+
+			response.sendRedirect("./search");
+		}
+		/*searchRefine*/
+
 	}
 
 	public boolean isValid(List<Book> books, HttpServletRequest request){
@@ -56,5 +108,65 @@ public class SearchServlet extends HttpServlet{
 		if(errorMessages.isEmpty()) return true;
 		else request.getSession().setAttribute("errorMessages", errorMessages);
 		return false;
+	}
+
+	public List<String> getNewBooks(HttpServletRequest request){
+
+		List<String> newBooks = new ArrayList<>();
+
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(new Date());
+		cal.add(Calendar.DATE, -31);
+		String currentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(cal.getTime());
+
+		if(request.getParameter("newBooks") != null){
+			newBooks.add(currentDate);
+			request.getSession().setAttribute("checkNewBooks", "1");
+		}
+		else{
+			newBooks.add("1500-01-01 00:00:00");
+			request.getSession().setAttribute("checkNewBooks", "0");
+		}
+
+		return newBooks;
+	}
+
+	public List<String> getLibraries(HttpServletRequest request){
+
+		List<String> libraries = new ArrayList<>();
+		if(request.getParameter("library1") != null) libraries.add(request.getParameter("library1"));
+		if(request.getParameter("library2") != null) libraries.add(request.getParameter("library2"));
+		if(request.getParameter("library3") != null) libraries.add(request.getParameter("library3"));
+		if(request.getParameter("library4") != null) libraries.add(request.getParameter("library4"));
+		if(request.getParameter("library5") != null) libraries.add(request.getParameter("library5"));
+
+		return libraries;
+	}
+
+	public List<String> getCategories(HttpServletRequest request){
+
+		List<String> categories = new ArrayList<>();
+		if(request.getParameter("category1") != null) categories.add(request.getParameter("category1"));
+		if(request.getParameter("category2") != null) categories.add(request.getParameter("category2"));
+		if(request.getParameter("category3") != null) categories.add(request.getParameter("category3"));
+		if(request.getParameter("category4") != null) categories.add(request.getParameter("category4"));
+		if(request.getParameter("category5") != null) categories.add(request.getParameter("category5"));
+		if(request.getParameter("category6") != null) categories.add(request.getParameter("category6"));
+		if(request.getParameter("category7") != null) categories.add(request.getParameter("category7"));
+		if(request.getParameter("category8") != null) categories.add(request.getParameter("category8"));
+		if(request.getParameter("category9") != null) categories.add(request.getParameter("category9"));
+
+		return categories;
+	}
+
+	public List<String> getTypes(HttpServletRequest request){
+
+		List<String> types = new ArrayList<>();
+		if(request.getParameter("type1") != null) types.add(request.getParameter("type1"));
+		if(request.getParameter("type2") != null) types.add(request.getParameter("type2"));
+		if(request.getParameter("type3") != null) types.add(request.getParameter("type3"));
+		if(request.getParameter("type4") != null) types.add(request.getParameter("type4"));
+
+		return types;
 	}
 }

@@ -26,7 +26,7 @@
 		<hr width="1500px">
 
 		<p>◎フリーワード検索</p>
-		<form action="./searchFreeWord" method="POST">
+		<form action="./search" method="POST">
 			<table>
 				<tr>
 					<td>
@@ -61,25 +61,19 @@
 							<c:if test="${condition != 'と一致する'}"><option value="と一致する">と一致する</option></c:if>
 						</select>条件で
 					</td>
-					<td><input type="submit" value="検索"></td>
+					<td>
+						<input type="hidden" name="isPushFreeWord" value="1">
+						<input type="submit" value="検索">
+					</td>
 				</tr>
 			</table>
 		</form>
+
 		<hr width="1500px">
 
 		<p>◎絞込み検索</p>
-		<form action="./searchRefine" method="POST">
+		<form action="./search" method="POST">
 			<table>
-				<!--<tr>
-					<td>
-						<c:if test="${checkNewBooks == 0 || empty checkNewBooks}">
-							<input type="checkbox" name="newBooks" value="1">新着本のみ
-						</c:if>
-						<c:if test="${checkNewBooks == 1}">
-							<input type="checkbox" name="newBooks" value="1" checked="checked">新着本のみ
-						</c:if>
-					</td>
-				</tr>-->
 				<tr>
 					<td>
 						<%
@@ -161,19 +155,19 @@
 								</c:if>
 								<c:if test="${category == '政治' && checkBoxCategoryNumber == 6}">
 									<%session.setAttribute("checkCategory",1);%>
-									<input type="checkbox" name="category5" value="政治" checked="checked">政治
+									<input type="checkbox" name="category6" value="政治" checked="checked">政治
 								</c:if>
 								<c:if test="${category == '暮らし' && checkBoxCategoryNumber == 7}">
 									<%session.setAttribute("checkCategory",1);%>
-									<input type="checkbox" name="category5" value="暮らし" checked="checked">暮らし
+									<input type="checkbox" name="category7" value="暮らし" checked="checked">暮らし
 								</c:if>
 								<c:if test="${category == '教育' && checkBoxCategoryNumber == 8}">
 									<%session.setAttribute("checkCategory",1);%>
-									<input type="checkbox" name="category5" value="教育" checked="checked">教育
+									<input type="checkbox" name="category8" value="教育" checked="checked">教育
 								</c:if>
 								<c:if test="${category == 'SF' && checkBoxCategoryNumber == 9}">
 									<%session.setAttribute("checkCategory",1);%>
-									<input type="checkbox" name="category5" value="SF" checked="checked">SF
+									<input type="checkbox" name="category9" value="SF" checked="checked">SF
 								</c:if>
 							</c:forEach>
 
@@ -251,7 +245,9 @@
 				</tr>
 				<tr>
 					<td>
-						で<input type="submit" value="絞り込む">
+						で
+						<input type="hidden" name="isPushRefine" value="1">
+						<input type="submit" value="絞り込む">
 						<input type="submit" value="クリア">
 					</td>
 				</tr>
@@ -261,7 +257,7 @@
 		<hr width="1500px">
 
 		<p>◎並び替え</p>
-		<form action="./sort" method="GET">
+		<form action="./search" method="POST">
 			<input type="radio" name="sort" value="新しい順" checked>新しい順
 			<input type="radio" name="sort" value="古い順">古い順
 			<input type="radio" name="sort" value="書名順">書名順
@@ -271,6 +267,13 @@
 			<input type="radio" name="sort" value="数字から">数字から
 			<input type="radio" name="sort" value="英語から">英語から
 			<input type="submit" value="並び替える">
+
+			<c:if test="${not empty throughFreeWord}">
+				<input type="hidden" name="throughFreeWord" value="1">
+			</c:if>
+			<c:if test="${not empty throughRefine}">
+				<input type="hidden" name="throughRefine" value="1">
+			</c:if>
 		</form>
 
 		<hr width="1500px">
@@ -304,27 +307,35 @@
 			</form>
 		</c:if>
 
+		<!-- エラーメッセージ -->
+		<c:remove var="errorMessages" scope="session"/>
+
+		<!-- 絞込み結果 -->
+		<c:remove var="selectedBooks" scope="session"/>
+		<c:remove var="refinedBooks" scope="session"/>
+
+		<!-- フリーワード検索 -->
 		<c:remove var="selectBox" scope="session"/>
 		<c:remove var="selectBoxId" scope="session"/>
 		<c:remove var="freeWord" scope="session"/>
+		<c:remove var="condition" scope="session"/>
+
+		<!-- 絞込み検索 -->
 		<c:remove var="newBooks" scope="session"/>
 		<c:remove var="libraries" scope="session"/>
 		<c:remove var="categories" scope="session"/>
 		<c:remove var="types" scope="session"/>
-		<c:remove var="booksCount" scope="session"/>
-		<c:remove var="books" scope="session"/>
-		<c:remove var="selectedBooks" scope="session"/>
-		<c:remove var="refinedBooks" scope="session"/>
-		<c:remove var="errorMessages" scope="session"/>
-		<c:remove var="checkNewBooks" scope="session"/>
-		<c:remove var="newBooksCheck" scope="session"/>
 		<c:remove var="checkBoxLibraryNumber" scope="session"/>
 		<c:remove var="checkLibrary" scope="session"/>
 		<c:remove var="checkBoxCategoryNumber" scope="session"/>
 		<c:remove var="checkCategory" scope="session"/>
 		<c:remove var="checkBoxTypeNumber" scope="session"/>
 		<c:remove var="checkType" scope="session"/>
-		<c:remove var="condition" scope="session"/>
+
+		<!-- 並び替え機能 -->
+		<c:remove var="throughFreeWord" scope="session"/>
+		<c:remove var="throughRefine" scope="session"/>
+
 
 	</body>
 </html>

@@ -177,7 +177,8 @@ public class BookDao {
 		}
 	}
 
-	public List<Book> getSelectedBooks(Connection connection, String selectBox, String freeWord, String condition){
+	public List<Book> getSelectedBooks(Connection connection, String selectBox,
+			String freeWord, String condition, String sort){
 
 		PreparedStatement ps = null;
 		try {
@@ -185,14 +186,48 @@ public class BookDao {
 			StringBuilder sql = new StringBuilder();
 			sql.append("SELECT * FROM books WHERE ");
 			if(!selectBox.isEmpty()) sql.append(selectBox + " LIKE ?");
-			else sql.append("CONCAT(name, author, publisher, category, isbn_id) LIKE ?");
+			else{
+				if(condition.equals("と一致する")) sql.append("name = ? or author = ? or publisher = ? or category = ? or isbn_id = ?");
+				else if(condition.equals("で終わる")) sql.append("name LIKE ? or author LIKE ? or publisher LIKE ? or category LIKE ? or isbn_id LIKE ?");
+				else sql.append("CONCAT(name, author, publisher, category, isbn_id) LIKE ?");
+			}
+
+			if(sort.equals("新しい順")) sql.append(" ORDER BY published_date DESC");
+			if(sort.equals("古い順")) sql.append(" ORDER BY published_date ASC");
+			if(sort.equals("書名順")) sql.append(" ORDER BY name ASC");
+			if(sort.equals("著者名順")) sql.append(" ORDER BY author");
+			if(sort.equals("カテゴリ順")) sql.append(" ORDER BY category");
+			if(sort.equals("出版社順")) sql.append(" ORDER BY publisher");
+			if(sort.equals("数字から"));
+			if(sort.equals("英語から"));
 
 			ps = connection.prepareStatement(sql.toString());
-			if(condition.equals("を含む")) ps.setString(1, "%" + freeWord + "%");
-			if(condition.equals("から始まる")) ps.setString(1, freeWord + "%");
-			if(condition.equals("で終わる")) ps.setString(1, "%" + freeWord);
-			if(condition.equals("と一致する")) ps.setString(1, freeWord);
-
+			if(!selectBox.isEmpty()){
+				if(condition.equals("を含む")) ps.setString(1, "%" + freeWord + "%");
+				if(condition.equals("から始まる")) ps.setString(1, freeWord + "%");
+				if(condition.equals("で終わる")) ps.setString(1, "%" + freeWord);
+				if(condition.equals("と一致する")) ps.setString(1, freeWord);
+			}
+			else{
+				if(condition.equals("と一致する")){
+					ps.setString(1, freeWord);
+					ps.setString(2, freeWord);
+					ps.setString(3, freeWord);
+					ps.setString(4, freeWord);
+					ps.setString(5, freeWord);
+				}
+				else if(condition.equals("で終わる")){
+					ps.setString(1, "%" + freeWord);
+					ps.setString(2, "%" + freeWord);
+					ps.setString(3, "%" + freeWord);
+					ps.setString(4, "%" + freeWord);
+					ps.setString(5, "%" + freeWord);
+				}
+				else{
+					if(condition.equals("を含む")) ps.setString(1, "%" + freeWord + "%");
+					if(condition.equals("から始まる")) ps.setString(1, freeWord + "%");
+				}
+			}
 			System.out.println(ps);
 
 			ResultSet rs = ps.executeQuery();
@@ -211,7 +246,7 @@ public class BookDao {
 	}
 
 	public List<Book> getRefinedBooks(Connection connection, List<String> newBooks,
-			List<String> libraries, List<String> categories, List<String> types){
+			List<String> libraries, List<String> categories, List<String> types, String sort){
 
 		PreparedStatement ps = null;
 		try {
@@ -241,6 +276,15 @@ public class BookDao {
 					else sql.append("type = ? or ");
 				}
 			}
+
+			if(sort.equals("新しい順")) sql.append(" ORDER BY published_date DESC");
+			if(sort.equals("古い順")) sql.append(" ORDER BY published_date ASC");
+			if(sort.equals("書名順")) sql.append(" ORDER BY name ASC");
+			if(sort.equals("著者名順")) sql.append(" ORDER BY author");
+			if(sort.equals("カテゴリ順")) sql.append(" ORDER BY category");
+			if(sort.equals("出版社順")) sql.append(" ORDER BY publisher");
+			if(sort.equals("数字から"));
+			if(sort.equals("英語から"));
 
 			ps = connection.prepareStatement(sql.toString());
 			ps.setString(1, newBooks.get(0));
@@ -382,30 +426,30 @@ public class BookDao {
 		}
 	}
 
-	public void deliveringBook(Connection connection, int bookId, int num) {
+	public void deliveringBook(Connection connection, int bookId, int num, String time) {
 
 		PreparedStatement ps = null;
 		try {
 			StringBuilder sql = new StringBuilder();
 			sql.append("UPDATE reservations SET");
-			sql.append(" delivering = ?");
+			sql.append(" reserved_date =?");
+			sql.append(", delivering = ?");
 			if(num ==1){
 				sql.append(" ,canceling = ?");
 			}
 			sql.append(" WHERE");
-			sql.append(" id = ?");
+			sql.append(" book_id = ?");
 
 			ps = connection.prepareStatement(sql.toString());
 
-			ps.setInt(1, num);
+			ps.setString(1, time);
+			ps.setInt(2, num);
 			if(num == 1) {
-				ps.setString(2, "0");
-				ps.setInt(3, bookId);
+				ps.setString(3, "0");
+				ps.setInt(4, bookId);
 			} else {
-				ps.setInt(2, bookId);
+				ps.setInt(3, bookId);
 			}
-
-			System.out.println(ps);
 
 
 			ps.executeUpdate();
@@ -415,30 +459,30 @@ public class BookDao {
 			close(ps);
 		}
 	}
-	public void cancelingBook(Connection connection, int bookId, int num) {
+	public void cancelingBook(Connection connection, int bookId, int num, String time) {
 
 		PreparedStatement ps = null;
 		try {
 			StringBuilder sql = new StringBuilder();
 			sql.append("UPDATE reservations SET");
-			sql.append(" canceling = ?");
+			sql.append(" reserved_date = ?");
+			sql.append(", canceling = ?");
 			if(num ==1){
 				sql.append(" ,delivering = ?");
 			}
 			sql.append(" WHERE");
-			sql.append(" id = ?");
+			sql.append(" book_id = ?");
 
 			ps = connection.prepareStatement(sql.toString());
 
-			ps.setInt(1, num);
+			ps.setString(1, time);
+			ps.setInt(2, num);
 			if(num == 1) {
-				ps.setString(2, "0");
-				ps.setInt(3, bookId);
+				ps.setString(3, "0");
+				ps.setInt(4, bookId);
 			} else {
-				ps.setInt(2, bookId);
+				ps.setInt(3, bookId);
 			}
-
-			System.out.println(ps);
 
 
 			ps.executeUpdate();
