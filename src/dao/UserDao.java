@@ -129,9 +129,9 @@ public class UserDao {
 			ps.setString(4, user.getAddress());
 			ps.setString(5, user.getTel());
 			ps.setString(6, user.getMail());
-			ps.setString(7, user.getLibraryId());
-			ps.setString(8, "0");
-			ps.setString(9, user.getStopping());
+			ps.setString(7, "0");
+			ps.setString(8, user.getLibraryId());
+			ps.setString(9, "0");
 
 			ps.executeUpdate();
 		} catch (SQLException e){

@@ -19,10 +19,10 @@
 				<td>${reservation.bookName}</td>
 				<td>${reservation.libraryId}</td>
 				<td>
-					<c:if test="${reservation.canceling == 0 }">
+					<c:if test="${reservation.canceling == 1 }">
 						キャンセル済み
 					</c:if>
-					<c:if test="${reservation.canceling == 1 }">
+					<c:if test="${reservation.canceling == 0 }">
 						<c:if test = "${reservation.delivering == 0 }">
 							未受取
 						</c:if>
