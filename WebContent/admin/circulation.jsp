@@ -16,8 +16,8 @@
 			<th>ユーザー名</th>
 			<th>書籍名</th>
 			<th>最寄り図書館</th>
-			<th>借りた日</th>
 			<th>貸した日</th>
+			<th>期限</th>
 		</tr>
 		<c:forEach items = "${circulations}" var="circulation">
 			<tr>

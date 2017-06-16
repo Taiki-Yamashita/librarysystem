@@ -4,6 +4,8 @@ import static utils.CloseableUtil.*;
 import static utils.DBUtil.*;
 
 import java.sql.Connection;
+import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 
 import beans.Circulation;
@@ -72,4 +74,46 @@ public class CirculationService {
 			close(connection);
 		}
 	}
+
+	public List<Circulation> select(Date date) throws ParseException {
+
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			List<Circulation> books = new CirculationDao().select(connection, date);
+
+			commit(connection);
+
+			return books;
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
+
+	public void update(Circulation circulation, String string) {
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			new CirculationDao().update(connection, circulation, string);
+
+			commit(connection);
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
+
 }
