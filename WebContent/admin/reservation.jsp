@@ -14,7 +14,7 @@
 		<tr><th>予約者</th>
 			<th>本の名前</th>
 			<th>受取図書館</th>
-			<th>貸し出し予定日</th
+			<th>予約日</th
 			><th>本の状態</th>
 		</tr>
 		<c:forEach items="${reservations}" var="reservation">
@@ -22,7 +22,7 @@
 				<td>${reservation.userId}</td>
 				<td>${reservation.bookName}</td>
 				<td>${reservation.libraryId}</td>
-				<td>貸し出し予定日</td>
+				<td>${reservation.reserved_date }</td>
 				<td>
 					<c:if test="${reservation.canceling == 1 }">
 						キャンセル済み
