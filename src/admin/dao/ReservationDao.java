@@ -19,7 +19,7 @@ public class ReservationDao {
 
 		PreparedStatement ps = null;
 		try {
-			String sql = "SELECT * FROM reservations";
+			String sql = "SELECT * FROM book_reservations";
 			ps = connection.prepareStatement(sql);
 
 			ResultSet rs = ps.executeQuery();
@@ -111,7 +111,6 @@ public class ReservationDao {
 		List<Reservation> ret = new ArrayList<Reservation>();
 		try {
 			while (rs.next()) {
-				int id = rs.getInt("id");
 				String userId = rs.getString("user_id");
 				String bookId = rs.getString("book_id");
 				String bookName = rs.getString("book_name");
@@ -120,7 +119,6 @@ public class ReservationDao {
 				String canceling = rs.getString("canceling");
 
 				Reservation reservation = new Reservation();
-				reservation.setId(id);
 				reservation.setUserId(userId);
 				reservation.setBookId(bookId);
 				reservation.setBookName(bookName);

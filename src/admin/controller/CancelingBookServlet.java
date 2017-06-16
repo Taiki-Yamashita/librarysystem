@@ -27,10 +27,12 @@ public class CancelingBookServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,HttpServletResponse response)
 		throws ServletException,IOException {
 
-		int canceling = Integer.parseInt(request.getParameter("bookId"));
+		int bookId = Integer.parseInt(request.getParameter("bookId"));
 
 		int num = Integer.parseInt(request.getParameter("num"));
-		new BookService().cancelingBook(canceling, num);
+
+		System.out.println(bookId);
+		new BookService().cancelingBook(bookId, num);
 
 
 

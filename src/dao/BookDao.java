@@ -393,7 +393,7 @@ public class BookDao {
 				sql.append(" ,canceling = ?");
 			}
 			sql.append(" WHERE");
-			sql.append(" id = ?");
+			sql.append(" book_id = ?");
 
 			ps = connection.prepareStatement(sql.toString());
 
@@ -426,7 +426,7 @@ public class BookDao {
 				sql.append(" ,delivering = ?");
 			}
 			sql.append(" WHERE");
-			sql.append(" id = ?");
+			sql.append(" book_id = ?");
 
 			ps = connection.prepareStatement(sql.toString());
 
@@ -439,7 +439,6 @@ public class BookDao {
 			}
 
 			System.out.println(ps);
-
 
 			ps.executeUpdate();
 		}catch(SQLException e){

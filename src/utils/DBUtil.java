@@ -25,9 +25,9 @@ public class DBUtil {
 
 	//private static final String PASSWORD = "Okada0121washo";
 
-	//private static final String PASSWORD = "9244Tatsuya";
-
 	private static final String PASSWORD = "9244Tatsuya";
+
+	//private static final String PASSWORD = "Okada0121washo";
 
 	//private static final String PASSWORD = "9244Tatsuya";
 
