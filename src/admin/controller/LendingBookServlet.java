@@ -30,19 +30,20 @@ public class LendingBookServlet extends HttpServlet {
 		throws ServletException,IOException {
 
 		Circulation circulation = new Circulation();
-		circulation.setUserId(request.getParameter("userId"));
-		circulation.setBookId(request.getParameter("bookId"));
-		circulation.setLibraryId(request.getParameter("libraryId"));
-		System.out.println(circulation.getBookId());
-		System.out.println(request.getParameter("userId"));
-		new CirculationService().insert(circulation);
-
+		if(!request.getParameter("userId").matches("userId")) {
+			circulation.setUserId(request.getParameter("userId"));
+			circulation.setBookId(request.getParameter("bookId"));
+			circulation.setLibraryId(request.getParameter("libraryId"));
+			new CirculationService().insert(circulation);
+		} else  {
+			circulation.setBookId(request.getParameter("bookId"));
+			circulation.setLibraryId(request.getParameter("libraryId"));
+			new CirculationService().update(circulation);
+		}
 
 		int lending = Integer.parseInt(request.getParameter("bookId"));
 		int num = Integer.parseInt(request.getParameter("num"));
 		new BookService().lendingBook(lending, num);
-
-		System.out.println(lending);
 
 
 		response.sendRedirect("./manageBook");

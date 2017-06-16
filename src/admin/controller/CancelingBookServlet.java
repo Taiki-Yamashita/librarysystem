@@ -1,6 +1,7 @@
 package admin.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,11 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import admin.beans.Reservation;
+import admin.service.ReservationService;
 import service.BookService;
 
 
 
-@WebServlet(urlPatterns = { "/admin/cancelingBook" })
+@WebServlet(urlPatterns = { "/cancelingBook" })
 public class CancelingBookServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -20,7 +23,10 @@ public class CancelingBookServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		request.getRequestDispatcher("reservation.jsp").forward(request, response);
+		List<Reservation> reservations = new ReservationService().selectAll();
+		request.setAttribute("reservations", reservations);
+
+		request.getRequestDispatcher("user.jsp").forward(request, response);
 	}
 
 	@Override
@@ -34,7 +40,6 @@ public class CancelingBookServlet extends HttpServlet {
 		new BookService().cancelingBook(bookId, num, time);
 
 
-
-		response.sendRedirect("./reservation");
+		response.sendRedirect("./cancelingBook");
 	}
 }
