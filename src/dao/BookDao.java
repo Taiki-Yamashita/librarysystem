@@ -193,6 +193,8 @@ public class BookDao {
 			if(condition.equals("で終わる")) ps.setString(1, "%" + freeWord);
 			if(condition.equals("と一致する")) ps.setString(1, freeWord);
 
+			System.out.println(ps);
+
 			ResultSet rs = ps.executeQuery();
 
 			List<Book> bookList = toBookList(rs);
