@@ -16,14 +16,14 @@ public class DBUtil {
 	private static final String URL = "jdbc:mysql://localhost:3306/library_system";
 	private static final String USER = "root";
 
-<<<<<<< HEAD
-	private static final String PASSWORD = "okada0121washo";
-=======
-	private static final String PASSWORD = "Okada0121washo";
->>>>>>> 429d9b854a3d41b3bc078e05e7ac13677fdc0514
+
+	//private static final String PASSWORD = "okada0121washo";
+
+	//private static final String PASSWORD = "Okada0121washo";
+
 	//private static final String PASSWORD = "9244Tatsuya";
 	//private static final String PASSWORD = "9244Tatsuya";
-	//private static final String PASSWORD = "H06-m10-d31";
+	private static final String PASSWORD = "H06-m10-d31";
 
 	static {
 
