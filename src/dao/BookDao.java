@@ -415,4 +415,37 @@ public class BookDao {
 			close(ps);
 		}
 	}
+	public void cancelingBook(Connection connection, int bookId, int num) {
+
+		PreparedStatement ps = null;
+		try {
+			StringBuilder sql = new StringBuilder();
+			sql.append("UPDATE reservations SET");
+			sql.append(" canceling = ?");
+			if(num ==1){
+				sql.append(" ,delivering = ?");
+			}
+			sql.append(" WHERE");
+			sql.append(" id = ?");
+
+			ps = connection.prepareStatement(sql.toString());
+
+			ps.setInt(1, num);
+			if(num == 1) {
+				ps.setString(2, "0");
+				ps.setInt(3, bookId);
+			} else {
+				ps.setInt(2, bookId);
+			}
+
+			System.out.println(ps);
+
+
+			ps.executeUpdate();
+		}catch(SQLException e){
+			throw new SQLRuntimeException(e);
+		}finally{
+			close(ps);
+		}
+	}
 }
