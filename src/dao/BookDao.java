@@ -376,27 +376,32 @@ public class BookDao {
 			close(ps);
 		}
 	}
-	public void resercingBook(Connection connection, int reserving, int num, int reset) {
+
+	public void deliveringBook(Connection connection, int bookId, int num) {
 
 		PreparedStatement ps = null;
 		try {
 			StringBuilder sql = new StringBuilder();
-			sql.append("UPDATE books SET");
-			sql.append(" reserving = ?");
-			sql.append(" keeping = ?");
-			sql.append(" lending = ?");
-			sql.append(" disposing = ?");
-
+			sql.append("UPDATE reservations SET");
+			sql.append(" delivering = ?");
+			if(num ==1){
+				sql.append(" ,canceling = ?");
+			}
 			sql.append(" WHERE");
 			sql.append(" id = ?");
 
 			ps = connection.prepareStatement(sql.toString());
 
 			ps.setInt(1, num);
-			ps.setInt(2, reset);
-			ps.setInt(3, reset);
-			ps.setInt(4, reset);
-			ps.setInt(5, reserving);
+			if(num == 1) {
+				ps.setString(2, "0");
+				ps.setInt(3, bookId);
+			} else {
+				ps.setInt(2, bookId);
+			}
+
+			System.out.println(ps);
+
 
 			ps.executeUpdate();
 		}catch(SQLException e){
