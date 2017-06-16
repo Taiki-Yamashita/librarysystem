@@ -22,12 +22,14 @@ public class SearchFreeWordServlet extends HttpServlet{
 
 		String selectBox = request.getParameter("selectBox");
 		String freeWord = request.getParameter("freeWord");
+		String condition = request.getParameter("condition");
 
-		List<Book> selectedBooks = new BookService().getSelectedBooks(selectBox, freeWord);
+		List<Book> selectedBooks = new BookService().getSelectedBooks(selectBox, freeWord, condition);
 		request.getSession().setAttribute("selectBox", new BookService().getMapCategory().get(selectBox));
 		request.getSession().setAttribute("selectBoxId", selectBox);
 		request.getSession().setAttribute("freeWord", freeWord);
 		request.getSession().setAttribute("selectedBooks", selectedBooks);
+		request.getSession().setAttribute("condition", condition);
 
 		response.sendRedirect("./search");
 	}

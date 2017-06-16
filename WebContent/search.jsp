@@ -12,6 +12,11 @@
 	<body>
 		<h2>検索</h2>
 
+		<!--
+			表示件数を選択し次のページへ
+			AND検索OR検索
+		 -->
+
 		<a href = "./">トップ</a>
 		<a href = "./favorite">お気に入り</a>
 		<a href = "./require">本のリクエスト</a>
@@ -21,7 +26,6 @@
 		<hr width="1500px">
 
 		<p>◎フリーワード検索</p>
-
 		<form action="./searchFreeWord" method="POST">
 			<table>
 				<tr>
@@ -36,15 +40,26 @@
 							<c:if test="${selectBoxId != 4}"><option value="4">出版社</option></c:if>
 							<c:if test="${selectBoxId != 5}"><option value="5">カテゴリ</option></c:if>
 							<c:if test="${selectBoxId != 6}"><option value="6">ISBN番号</option></c:if>
-						</select>
+						</select>が
 					</td>
 					<td>
 						<c:if test="${not empty freeWord}">
-							<input type="text" name="freeWord" value="${freeWord}"/>で
+							<input type="text" name="freeWord" value="${freeWord}"/>
 						</c:if>
 						<c:if test="${empty freeWord}">
-							<input type="text" name="freeWord" placeholder="未記入で全て検索"/>で
+							<input type="text" name="freeWord" placeholder="未記入で全て検索"/>
 						</c:if>
+					</td>
+					<td>
+						<select name="condition">
+							<c:if test="${not empty condition}">
+								<option value="${condition}">${condition}</option>
+							</c:if>
+							<c:if test="${condition != 'を含む'}"><option value="を含む">を含む</option></c:if>
+							<c:if test="${condition != 'から始まる'}"><option value="から始まる">から始まる</option></c:if>
+							<c:if test="${condition != 'で終わる'}"><option value="で終わる">で終わる</option></c:if>
+							<c:if test="${condition != 'で終わる'}"><option value="と一致する">と一致する</option></c:if>
+						</select>条件で
 					</td>
 					<td><input type="submit" value="検索"></td>
 				</tr>
@@ -53,10 +68,9 @@
 		<hr width="1500px">
 
 		<p>◎絞込み検索</p>
-
 		<form action="./searchRefine" method="POST">
 			<table>
-				<tr>
+				<!--<tr>
 					<td>
 						<c:if test="${checkNewBooks == 0 || empty checkNewBooks}">
 							<input type="checkbox" name="newBooks" value="1">新着本のみ
@@ -65,7 +79,7 @@
 							<input type="checkbox" name="newBooks" value="1" checked="checked">新着本のみ
 						</c:if>
 					</td>
-				</tr>
+				</tr>-->
 				<tr>
 					<td>
 						<%
@@ -246,17 +260,33 @@
 
 		<hr width="1500px">
 
-		<c:if test="${ empty errorMessages && not empty booksCount}">
-			検索結果は
-			<font color="#ff0000"><c:out value="${booksCount}件" /></font>
-			です
-		</c:if>
+		<p>◎並び替え</p>
+		<form action="./sort" method="GET">
+			<input type="radio" name="sort" value="新しい順" checked>新しい順
+			<input type="radio" name="sort" value="古い順">古い順
+			<input type="radio" name="sort" value="書名順">書名順
+			<input type="radio" name="sort" value="著者名順">著者名順
+			<input type="radio" name="sort" value="カテゴリ順">カテゴリ順
+			<input type="radio" name="sort" value="出版社順">出版社順
+			<input type="radio" name="sort" value="数字から">数字から
+			<input type="radio" name="sort" value="英語から">英語から
+			<input type="submit" value="並び替える">
+		</form>
+
+		<hr width="1500px">
 
 		<c:if test="${ not empty errorMessages }">
 			<c:forEach items="${errorMessages}" var="message">
 				<font color="#ff0000"><c:out value="${message}" /></font><br>
 			</c:forEach>
 		</c:if>
+
+		<c:if test="${ empty errorMessages && not empty booksCount}">
+			検索結果は
+			<font color="#ff0000"><c:out value="${booksCount}件" /></font>
+			です
+		</c:if>
+
 
 		<c:if test="${not empty books}">
 			<form action="./search" method="POST">
@@ -294,6 +324,7 @@
 		<c:remove var="checkCategory" scope="session"/>
 		<c:remove var="checkBoxTypeNumber" scope="session"/>
 		<c:remove var="checkType" scope="session"/>
+		<c:remove var="condition" scope="session"/>
 
 	</body>
 </html>

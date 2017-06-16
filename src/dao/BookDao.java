@@ -177,7 +177,7 @@ public class BookDao {
 		}
 	}
 
-	public List<Book> getSelectedBooks(Connection connection, String selectBox, String freeWord){
+	public List<Book> getSelectedBooks(Connection connection, String selectBox, String freeWord, String condition){
 
 		PreparedStatement ps = null;
 		try {
@@ -188,7 +188,10 @@ public class BookDao {
 			else sql.append("CONCAT(name, author, publisher, category, isbn_id) LIKE ?");
 
 			ps = connection.prepareStatement(sql.toString());
-			ps.setString(1, "%" + freeWord + "%");
+			if(condition.equals("を含む")) ps.setString(1, "%" + freeWord + "%");
+			if(condition.equals("から始まる")) ps.setString(1, freeWord + "%");
+			if(condition.equals("で終わる")) ps.setString(1, "%" + freeWord);
+			if(condition.equals("と一致する")) ps.setString(1, freeWord);
 
 			ResultSet rs = ps.executeQuery();
 

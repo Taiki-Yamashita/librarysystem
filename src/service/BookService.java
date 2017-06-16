@@ -99,14 +99,14 @@ public class BookService {
 		}
 	}
 
-	public List<Book> getSelectedBooks(String selectBox, String freeWord) {
+	public List<Book> getSelectedBooks(String selectBox, String freeWord, String condition) {
 
 		Map<String, String> columnMap = getMapData();
 		Connection connection = null;
 
 		try {
 			connection = getConnection();
-			List<Book> books = new BookDao().getSelectedBooks(connection, columnMap.get(selectBox), freeWord);
+			List<Book> books = new BookDao().getSelectedBooks(connection, columnMap.get(selectBox), freeWord, condition);
 			commit(connection);
 
 			if(books == null) return getDefaultValue();
