@@ -24,17 +24,13 @@
 				<td>${reservation.libraryId}</td>
 				<td>${reservation.reservedDate }</td>
 				<td>
-					<c:if test="${reservation.canceling == 1 }">
-						キャンセル済み
-					</c:if>
-					<c:if test="${reservation.canceling == 0 }">
+
 						<c:if test = "${reservation.delivering == 0 }">
 							未受取
 						</c:if>
 						<c:if test = "${reservation.delivering == 1 }">
 							受取済み
 						</c:if>
-					</c:if>
 				</td>
 
 				<td>
@@ -53,21 +49,7 @@
 				</form>
 				</td>
 
-				<td>
-				<form action = "cancelingBook" method = "post">
-					<input type = "hidden" name = "bookId" value = "${reservation.bookId}" >
-					<input type = "hidden" id = "libraryId" name = "libraryId" value = "${reservation.libraryId }" >
-								<input type = "hidden" name = "time" value = "${reservation.reservedDate }">
-					<c:if test="${reservation.canceling == 0 }">
-						<input type = "hidden" name = "num" value =1>
-						<input type = "submit" value = "キャンセル" />
-					</c:if>
-					<c:if test="${reservation.canceling == 1 }">
-						<input type = "hidden" name = "num" value =0>
-						<input type = "submit" value = "キャンセルを取り消し" />
-					</c:if>
-				</form>
-				</td>
+
 			</tr>
 		</c:forEach>
 	</table>
