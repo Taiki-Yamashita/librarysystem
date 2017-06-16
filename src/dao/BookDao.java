@@ -426,13 +426,14 @@ public class BookDao {
 		}
 	}
 
-	public void deliveringBook(Connection connection, int bookId, int num) {
+	public void deliveringBook(Connection connection, int bookId, int num, String time) {
 
 		PreparedStatement ps = null;
 		try {
 			StringBuilder sql = new StringBuilder();
 			sql.append("UPDATE reservations SET");
-			sql.append(" delivering = ?");
+			sql.append(" reserved_date =?");
+			sql.append(", delivering = ?");
 			if(num ==1){
 				sql.append(" ,canceling = ?");
 			}
@@ -441,15 +442,14 @@ public class BookDao {
 
 			ps = connection.prepareStatement(sql.toString());
 
-			ps.setInt(1, num);
+			ps.setString(1, time);
+			ps.setInt(2, num);
 			if(num == 1) {
-				ps.setString(2, "0");
-				ps.setInt(3, bookId);
+				ps.setString(3, "0");
+				ps.setInt(4, bookId);
 			} else {
-				ps.setInt(2, bookId);
+				ps.setInt(3, bookId);
 			}
-
-			System.out.println(ps);
 
 
 			ps.executeUpdate();
@@ -459,13 +459,14 @@ public class BookDao {
 			close(ps);
 		}
 	}
-	public void cancelingBook(Connection connection, int bookId, int num) {
+	public void cancelingBook(Connection connection, int bookId, int num, String time) {
 
 		PreparedStatement ps = null;
 		try {
 			StringBuilder sql = new StringBuilder();
 			sql.append("UPDATE reservations SET");
-			sql.append(" canceling = ?");
+			sql.append(" reserved_date = ?");
+			sql.append(", canceling = ?");
 			if(num ==1){
 				sql.append(" ,delivering = ?");
 			}
@@ -474,15 +475,15 @@ public class BookDao {
 
 			ps = connection.prepareStatement(sql.toString());
 
-			ps.setInt(1, num);
+			ps.setString(1, time);
+			ps.setInt(2, num);
 			if(num == 1) {
-				ps.setString(2, "0");
-				ps.setInt(3, bookId);
+				ps.setString(3, "0");
+				ps.setInt(4, bookId);
 			} else {
-				ps.setInt(2, bookId);
+				ps.setInt(3, bookId);
 			}
 
-			System.out.println(ps);
 
 			ps.executeUpdate();
 		}catch(SQLException e){

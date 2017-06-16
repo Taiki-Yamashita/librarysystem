@@ -22,7 +22,7 @@
 				<td>${reservation.userId}</td>
 				<td>${reservation.bookName}</td>
 				<td>${reservation.libraryId}</td>
-				<td>${reservation.reserved_date }</td>
+				<td>${reservation.reservedDate }</td>
 				<td>
 					<c:if test="${reservation.canceling == 1 }">
 						キャンセル済み
@@ -41,6 +41,7 @@
 				<form action = "deliveringBook" method = "post">
 					<input type = "hidden" name = "bookId" value = "${reservation.bookId}" >
 					<input type = "hidden" id = "libraryId" name = "libraryId" value = "${reservation.libraryId }" >
+					<input type = "hidden" name = "time" value = "${reservation.reservedDate }">
 					<c:if test="${reservation.delivering == 0 }">
 						<input type = "hidden" name = "num" value =1>
 						<input type = "submit" value = "受取" />
@@ -56,6 +57,7 @@
 				<form action = "cancelingBook" method = "post">
 					<input type = "hidden" name = "bookId" value = "${reservation.bookId}" >
 					<input type = "hidden" id = "libraryId" name = "libraryId" value = "${reservation.libraryId }" >
+								<input type = "hidden" name = "time" value = "${reservation.reservedDate }">
 					<c:if test="${reservation.canceling == 0 }">
 						<input type = "hidden" name = "num" value =1>
 						<input type = "submit" value = "キャンセル" />

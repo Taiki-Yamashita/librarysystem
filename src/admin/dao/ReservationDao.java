@@ -128,6 +128,7 @@ public class ReservationDao {
 				reservation.setDelivering(delivering);
 				reservation.setCanceling(canceling);
 
+
 				ret.add(reservation);
 			}
 			return ret;
