@@ -177,7 +177,8 @@ public class BookDao {
 		}
 	}
 
-	public List<Book> getSelectedBooks(Connection connection, String selectBox, String freeWord, String condition){
+	public List<Book> getSelectedBooks(Connection connection, String selectBox,
+			String freeWord, String condition, String sort){
 
 		PreparedStatement ps = null;
 		try {
@@ -190,6 +191,15 @@ public class BookDao {
 				else if(condition.equals("で終わる")) sql.append("name LIKE ? or author LIKE ? or publisher LIKE ? or category LIKE ? or isbn_id LIKE ?");
 				else sql.append("CONCAT(name, author, publisher, category, isbn_id) LIKE ?");
 			}
+
+			if(sort.equals("新しい順")) sql.append(" ORDER BY published_date DESC");
+			if(sort.equals("古い順")) sql.append(" ORDER BY published_date ASC");
+			if(sort.equals("書名順")) sql.append(" ORDER BY name ASC");
+			if(sort.equals("著者名順")) sql.append(" ORDER BY author");
+			if(sort.equals("カテゴリ順")) sql.append(" ORDER BY category");
+			if(sort.equals("出版社順")) sql.append(" ORDER BY publisher");
+			if(sort.equals("数字から"));
+			if(sort.equals("英語から"));
 
 			ps = connection.prepareStatement(sql.toString());
 			if(!selectBox.isEmpty()){
@@ -218,6 +228,7 @@ public class BookDao {
 					if(condition.equals("から始まる")) ps.setString(1, freeWord + "%");
 				}
 			}
+			System.out.println(ps);
 
 			ResultSet rs = ps.executeQuery();
 
@@ -235,7 +246,7 @@ public class BookDao {
 	}
 
 	public List<Book> getRefinedBooks(Connection connection, List<String> newBooks,
-			List<String> libraries, List<String> categories, List<String> types){
+			List<String> libraries, List<String> categories, List<String> types, String sort){
 
 		PreparedStatement ps = null;
 		try {
@@ -265,6 +276,15 @@ public class BookDao {
 					else sql.append("type = ? or ");
 				}
 			}
+
+			if(sort.equals("新しい順")) sql.append(" ORDER BY published_date DESC");
+			if(sort.equals("古い順")) sql.append(" ORDER BY published_date ASC");
+			if(sort.equals("書名順")) sql.append(" ORDER BY name ASC");
+			if(sort.equals("著者名順")) sql.append(" ORDER BY author");
+			if(sort.equals("カテゴリ順")) sql.append(" ORDER BY category");
+			if(sort.equals("出版社順")) sql.append(" ORDER BY publisher");
+			if(sort.equals("数字から"));
+			if(sort.equals("英語から"));
 
 			ps = connection.prepareStatement(sql.toString());
 			ps.setString(1, newBooks.get(0));

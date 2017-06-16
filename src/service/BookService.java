@@ -99,14 +99,14 @@ public class BookService {
 		}
 	}
 
-	public List<Book> getSelectedBooks(String selectBox, String freeWord, String condition) {
+	public List<Book> getSelectedBooks(String selectBox, String freeWord, String condition, String sort) {
 
 		Map<String, String> columnMap = getMapData();
 		Connection connection = null;
 
 		try {
 			connection = getConnection();
-			List<Book> books = new BookDao().getSelectedBooks(connection, columnMap.get(selectBox), freeWord, condition);
+			List<Book> books = new BookDao().getSelectedBooks(connection, columnMap.get(selectBox), freeWord, condition, sort);
 			commit(connection);
 
 			if(books == null) return getDefaultValue();
@@ -123,13 +123,13 @@ public class BookService {
 	}
 
 	public List<Book> getRefinedBooks(List<String> newBooks, List<String> libraries,
-			List<String> categories, List<String> types) {
+			List<String> categories, List<String> types, String sort) {
 
 		Connection connection = null;
 
 		try {
 			connection = getConnection();
-			List<Book> books = new BookDao().getRefinedBooks(connection, newBooks, libraries, categories, types);
+			List<Book> books = new BookDao().getRefinedBooks(connection, newBooks, libraries, categories, types, sort);
 			commit(connection);
 
 			if(books == null) return getDefaultValue();
