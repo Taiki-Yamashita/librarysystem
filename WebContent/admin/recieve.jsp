@@ -9,7 +9,7 @@
 <title>問い合わせ、リクエスト受信</title>
 </head>
 <body>
-	<a href = "./">トップ</a>
+	<a href = "manage">管理画面</a>
 	<table>
 		<c:forEach items="${recieves}" var="recieve">
 			<c:out value="${recieve.userName}" />

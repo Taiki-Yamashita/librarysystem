@@ -20,7 +20,7 @@ public class CirculationDao {
 
 		PreparedStatement ps = null;
 		try {
-			String sql = "SELECT * FROM users_circulations";
+			String sql = "SELECT * FROM users_circulations where returning = 0";
 			ps = connection.prepareStatement(sql);
 
 

@@ -7,8 +7,7 @@
 <title>リクエスト</title>
 </head>
 <body>
-	<a href = "./top">トップ</a>
-	<a href = "./">戻る</a>
+	<a href = "./">トップ</a>
 
 	<h1>本申請画面</h1>
 
@@ -19,8 +18,6 @@
 
 			<c:remove var="errorMessages" scope="session"/>
 		</c:if>
-
-		<a href = "./">トップ</a>
 
 		<form action="require" method="post">
 
