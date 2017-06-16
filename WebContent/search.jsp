@@ -270,9 +270,21 @@
 
 			<c:if test="${not empty throughFreeWord}">
 				<input type="hidden" name="throughFreeWord" value="1">
+				<input type="hidden" name="selectBoxForSort" value="${selectBoxId}">
+				<input type="hidden" name="freeWordForSort" value="${freeWord}">
+				<input type="hidden" name="conditionForSort" value="${condition}">
 			</c:if>
 			<c:if test="${not empty throughRefine}">
 				<input type="hidden" name="throughRefine" value="1">
+				<c:forEach items="${libraries}" var="library" varStatus="status">
+					<input type="hidden" name="library${status.index + 1}" value="${status.index + 1}">
+				</c:forEach>
+				<c:forEach items="${categories}" var="category" varStatus="status">
+					<input type="hidden" name="category${status.index + 1}" value="${status.index + 1}">
+				</c:forEach>
+				<c:forEach items="${types}" var="type" varStatus="status">
+					<input type="hidden" name="type${status.index + 1}" value="${status.index + 1}">
+				</c:forEach>
 			</c:if>
 		</form>
 

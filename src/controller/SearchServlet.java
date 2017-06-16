@@ -65,6 +65,12 @@ public class SearchServlet extends HttpServlet{
 			String freeWord = request.getParameter("freeWord");
 			String condition = request.getParameter("condition");
 
+			if(request.getParameter("throughFreeWord") != null){
+				selectBox = request.getParameter("selectBoxForSort");
+				freeWord = request.getParameter("freeWordForSort");
+				condition = request.getParameter("conditionForSort");
+			}
+
 			List<Book> selectedBooks = new BookService().getSelectedBooks(selectBox, freeWord, condition, sort);
 			request.getSession().setAttribute("selectBox", new BookService().getMapCategory().get(selectBox));
 			request.getSession().setAttribute("selectBoxId", selectBox);
@@ -86,13 +92,14 @@ public class SearchServlet extends HttpServlet{
 			List<String> types = getTypes(request);
 
 			List<Book> books = new BookService().getRefinedBooks(newBooks, libraries, categories, types, sort);
-
 			request.getSession().setAttribute("newBooks", newBooks);
 			request.getSession().setAttribute("libraries", libraries);
 			request.getSession().setAttribute("categories", categories);
 			request.getSession().setAttribute("types", types);
 			request.getSession().setAttribute("refinedBooks", books);
 			request.getSession().setAttribute("throughRefine", "1");
+
+			//受け取った値が数値なので，全て変換するようなメソッドを作成する
 
 			response.sendRedirect("./search");
 		}
@@ -140,6 +147,7 @@ public class SearchServlet extends HttpServlet{
 		if(request.getParameter("library4") != null) libraries.add(request.getParameter("library4"));
 		if(request.getParameter("library5") != null) libraries.add(request.getParameter("library5"));
 
+		System.out.println(libraries);
 		return libraries;
 	}
 
@@ -156,6 +164,7 @@ public class SearchServlet extends HttpServlet{
 		if(request.getParameter("category8") != null) categories.add(request.getParameter("category8"));
 		if(request.getParameter("category9") != null) categories.add(request.getParameter("category9"));
 
+		System.out.println(categories);
 		return categories;
 	}
 
@@ -167,6 +176,7 @@ public class SearchServlet extends HttpServlet{
 		if(request.getParameter("type3") != null) types.add(request.getParameter("type3"));
 		if(request.getParameter("type4") != null) types.add(request.getParameter("type4"));
 
+		System.out.println(types);
 		return types;
 	}
 }

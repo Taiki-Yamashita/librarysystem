@@ -180,6 +180,10 @@ public class BookDao {
 	public List<Book> getSelectedBooks(Connection connection, String selectBox,
 			String freeWord, String condition, String sort){
 
+		System.out.println(selectBox);
+		System.out.println(freeWord);
+		System.out.println(condition);
+
 		PreparedStatement ps = null;
 		try {
 
