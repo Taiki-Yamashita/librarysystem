@@ -256,4 +256,24 @@ public class BookService {
 			close(connection);
 		}
 	}
+
+	public void cancelingBook(int bookId, int num) {
+
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			new BookDao().cancelingBook(connection, bookId, num);
+
+			commit(connection);
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
 }
