@@ -31,18 +31,18 @@ public class SearchServlet extends HttpServlet{
 
 			if(selectedBooks != null){
 				if(isValid(selectedBooks, request)){
-					request.getSession().setAttribute("booksCount", selectedBooks.size());
-					request.getSession().setAttribute("books", selectedBooks);
+					request.setAttribute("booksCount", selectedBooks.size());
+					request.setAttribute("books", selectedBooks);
 				}
-				else request.getSession().setAttribute("books", null);
+				else request.setAttribute("books", null);
 				request.getRequestDispatcher("/search.jsp").forward(request, response);
 			}
 			if(refinedBooks != null){
 				if(isValid(refinedBooks, request)){
-					request.getSession().setAttribute("booksCount", refinedBooks.size());
-					request.getSession().setAttribute("books", refinedBooks);
+					request.setAttribute("booksCount", refinedBooks.size());
+					request.setAttribute("books", refinedBooks);
 				}
-				else request.getSession().setAttribute("books", null);
+				else request.setAttribute("books", null);
 				request.getRequestDispatcher("/search.jsp").forward(request, response);
 			}
 		}

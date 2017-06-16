@@ -185,15 +185,39 @@ public class BookDao {
 			StringBuilder sql = new StringBuilder();
 			sql.append("SELECT * FROM books WHERE ");
 			if(!selectBox.isEmpty()) sql.append(selectBox + " LIKE ?");
-			else sql.append("CONCAT(name, author, publisher, category, isbn_id) LIKE ?");
+			else{
+				if(condition.equals("と一致する")) sql.append("name = ? or author = ? or publisher = ? or category = ? or isbn_id = ?");
+				else if(condition.equals("で終わる")) sql.append("name LIKE ? or author LIKE ? or publisher LIKE ? or category LIKE ? or isbn_id LIKE ?");
+				else sql.append("CONCAT(name, author, publisher, category, isbn_id) LIKE ?");
+			}
 
 			ps = connection.prepareStatement(sql.toString());
-			if(condition.equals("を含む")) ps.setString(1, "%" + freeWord + "%");
-			if(condition.equals("から始まる")) ps.setString(1, freeWord + "%");
-			if(condition.equals("で終わる")) ps.setString(1, "%" + freeWord);
-			if(condition.equals("と一致する")) ps.setString(1, freeWord);
-
-			System.out.println(ps);
+			if(!selectBox.isEmpty()){
+				if(condition.equals("を含む")) ps.setString(1, "%" + freeWord + "%");
+				if(condition.equals("から始まる")) ps.setString(1, freeWord + "%");
+				if(condition.equals("で終わる")) ps.setString(1, "%" + freeWord);
+				if(condition.equals("と一致する")) ps.setString(1, freeWord);
+			}
+			else{
+				if(condition.equals("と一致する")){
+					ps.setString(1, freeWord);
+					ps.setString(2, freeWord);
+					ps.setString(3, freeWord);
+					ps.setString(4, freeWord);
+					ps.setString(5, freeWord);
+				}
+				else if(condition.equals("で終わる")){
+					ps.setString(1, "%" + freeWord);
+					ps.setString(2, "%" + freeWord);
+					ps.setString(3, "%" + freeWord);
+					ps.setString(4, "%" + freeWord);
+					ps.setString(5, "%" + freeWord);
+				}
+				else{
+					if(condition.equals("を含む")) ps.setString(1, "%" + freeWord + "%");
+					if(condition.equals("から始まる")) ps.setString(1, freeWord + "%");
+				}
+			}
 
 			ResultSet rs = ps.executeQuery();
 

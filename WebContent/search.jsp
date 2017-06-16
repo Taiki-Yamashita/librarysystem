@@ -70,16 +70,6 @@
 		<p>◎絞込み検索</p>
 		<form action="./searchRefine" method="POST">
 			<table>
-				<!--<tr>
-					<td>
-						<c:if test="${checkNewBooks == 0 || empty checkNewBooks}">
-							<input type="checkbox" name="newBooks" value="1">新着本のみ
-						</c:if>
-						<c:if test="${checkNewBooks == 1}">
-							<input type="checkbox" name="newBooks" value="1" checked="checked">新着本のみ
-						</c:if>
-					</td>
-				</tr>-->
 				<tr>
 					<td>
 						<%
@@ -260,21 +250,6 @@
 
 		<hr width="1500px">
 
-		<p>◎並び替え</p>
-		<form action="./sort" method="GET">
-			<input type="radio" name="sort" value="新しい順" checked>新しい順
-			<input type="radio" name="sort" value="古い順">古い順
-			<input type="radio" name="sort" value="書名順">書名順
-			<input type="radio" name="sort" value="著者名順">著者名順
-			<input type="radio" name="sort" value="カテゴリ順">カテゴリ順
-			<input type="radio" name="sort" value="出版社順">出版社順
-			<input type="radio" name="sort" value="数字から">数字から
-			<input type="radio" name="sort" value="英語から">英語から
-			<input type="submit" value="並び替える">
-		</form>
-
-		<hr width="1500px">
-
 		<c:if test="${ not empty errorMessages }">
 			<c:forEach items="${errorMessages}" var="message">
 				<font color="#ff0000"><c:out value="${message}" /></font><br>
@@ -304,27 +279,31 @@
 			</form>
 		</c:if>
 
+		<!-- エラーメッセージ -->
+		<c:remove var="errorMessages" scope="session"/>
+
+		<!-- 絞込み結果 -->
+		<c:remove var="selectedBooks" scope="session"/>
+		<c:remove var="refinedBooks" scope="session"/>
+
+		<!-- フリーワード検索 -->
 		<c:remove var="selectBox" scope="session"/>
 		<c:remove var="selectBoxId" scope="session"/>
 		<c:remove var="freeWord" scope="session"/>
+		<c:remove var="condition" scope="session"/>
+
+		<!-- 絞込み検索 -->
 		<c:remove var="newBooks" scope="session"/>
 		<c:remove var="libraries" scope="session"/>
 		<c:remove var="categories" scope="session"/>
 		<c:remove var="types" scope="session"/>
-		<c:remove var="booksCount" scope="session"/>
-		<c:remove var="books" scope="session"/>
-		<c:remove var="selectedBooks" scope="session"/>
-		<c:remove var="refinedBooks" scope="session"/>
-		<c:remove var="errorMessages" scope="session"/>
-		<c:remove var="checkNewBooks" scope="session"/>
-		<c:remove var="newBooksCheck" scope="session"/>
 		<c:remove var="checkBoxLibraryNumber" scope="session"/>
 		<c:remove var="checkLibrary" scope="session"/>
 		<c:remove var="checkBoxCategoryNumber" scope="session"/>
 		<c:remove var="checkCategory" scope="session"/>
 		<c:remove var="checkBoxTypeNumber" scope="session"/>
 		<c:remove var="checkType" scope="session"/>
-		<c:remove var="condition" scope="session"/>
+
 
 	</body>
 </html>
