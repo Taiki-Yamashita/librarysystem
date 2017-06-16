@@ -23,6 +23,8 @@ public class ReservationServlet extends HttpServlet {
 
 		List<Reservation> reservations = new ReservationService().selectAll();
 
+
+
 		request.setAttribute("reservations", reservations);
 		request.getRequestDispatcher("/admin/reservation.jsp").forward(request, response);
 	}

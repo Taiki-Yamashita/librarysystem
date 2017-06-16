@@ -237,13 +237,13 @@ public class BookService {
 		}
 	}
 
-	public void deliveringBook(int bookId, int num) {
+	public void deliveringBook(int bookId, int num, String time) {
 
 		Connection connection = null;
 		try {
 			connection = getConnection();
 
-			new BookDao().deliveringBook(connection, bookId, num);
+			new BookDao().deliveringBook(connection, bookId, num, time);
 
 			commit(connection);
 		} catch (RuntimeException e) {
@@ -257,13 +257,13 @@ public class BookService {
 		}
 	}
 
-	public void cancelingBook(int bookId, int num) {
+	public void cancelingBook(int bookId, int num, String time) {
 
 		Connection connection = null;
 		try {
 			connection = getConnection();
 
-			new BookDao().cancelingBook(connection, bookId, num);
+			new BookDao().cancelingBook(connection, bookId, num, time);
 
 			commit(connection);
 		} catch (RuntimeException e) {

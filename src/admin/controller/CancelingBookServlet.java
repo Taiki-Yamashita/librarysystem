@@ -28,11 +28,10 @@ public class CancelingBookServlet extends HttpServlet {
 		throws ServletException,IOException {
 
 		int bookId = Integer.parseInt(request.getParameter("bookId"));
-
 		int num = Integer.parseInt(request.getParameter("num"));
+		String time =request.getParameter("time");
 
-		System.out.println(bookId);
-		new BookService().cancelingBook(bookId, num);
+		new BookService().cancelingBook(bookId, num, time);
 
 
 
