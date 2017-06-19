@@ -13,7 +13,9 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 
+import beans.Library;
 import beans.User;
+import service.LibraryService;
 import service.UserService;
 
 @WebServlet(urlPatterns = {"/admin/addUser"})
@@ -24,6 +26,10 @@ public class AddUserServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
+
+		List<Library> libraries = new LibraryService().selectAll();
+		request.setAttribute("libraries", libraries);
+
 
 		request.getRequestDispatcher("/admin/addUser.jsp").forward(request, response);
 	}

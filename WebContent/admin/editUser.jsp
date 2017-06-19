@@ -44,8 +44,5 @@
 		<label for="registerDate">登録日</label><br>
 	<input name="registerDate" id="registerDate" value="${editUser.registerDate }"/><br />
 
-	<label for="stopping">停止中</label><br>
-	<input name="stopping" id="stopping" value="${editUser.stopping }"/><br />
-
 	<br><input type="submit" value="投稿">
 </form>

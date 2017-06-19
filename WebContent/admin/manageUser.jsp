@@ -29,7 +29,9 @@
 
 			<td>
 	   	 	<form action="editUser" method="get">
+
 	   	 		<input type="hidden" name="id" value="${user.id }" >
+	   	 		<input type = "hidden" name = "time" value = "${user.registerDate }">
 	   	 		<input type="submit" value="編集" />
 	   	 	</form>
 
@@ -37,6 +39,7 @@
 
    	 			<form action = "stopUser" method = "post">
    	 				<input type = "hidden" name = "id" value = "${user.id }" >
+   	 				<input type = "hidden" name = "time" value = "${user.registerDate }">
 					<c:if test = "${user.stopping == 0 }">
 						<input type = "hidden" name = "num" value = 1 >
 						<input type = "submit" value = "停止" />

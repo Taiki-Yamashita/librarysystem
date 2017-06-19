@@ -19,6 +19,7 @@
 			<tr><td><a href = "./require">本のリクエスト</a></td></tr>
 			<tr><td><a href = "./admin/manage">管理画面</a></td></tr>
 			<tr><td><a href = "./introduction">本の紹介</a></td></tr>
+			<tr><td><a href = "./user">マイページ</a></td></tr>
 		</table>
 
 	<h5>お知らせ</h5>

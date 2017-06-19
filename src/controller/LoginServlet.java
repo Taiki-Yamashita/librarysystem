@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import beans.User;
 import service.UserService;
@@ -32,6 +33,8 @@ public class LoginServlet extends HttpServlet{
 		User user = new UserService().getLoginUser(loginId, password);
 
 		if(user != null){
+			HttpSession session = request.getSession();
+			session.setAttribute("loginUser", user);
 			request.getSession().setAttribute("loginUser", user);
 			response.sendRedirect("./");
 		} else response.sendRedirect("./login");

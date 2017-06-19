@@ -61,7 +61,6 @@ public class EditUserServlet extends HttpServlet{
 			editUser.setPoint(request.getParameter("point"));
 			editUser.setRegisterDate(request.getParameter("registerDate"));
 			editUser.setLibraryId(request.getParameter("libraryId"));
-			editUser.setStopping(request.getParameter("stopping"));
 
 
 
