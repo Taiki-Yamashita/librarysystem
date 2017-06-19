@@ -10,7 +10,7 @@
 </head>
 <body>
 未返却リストだよ
-
+<a href = "manage">管理画面</a>
 	<table>
 		<tr>
 			<th>ユーザー名</th>
