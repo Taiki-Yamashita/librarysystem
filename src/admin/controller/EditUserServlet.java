@@ -24,7 +24,7 @@ public class EditUserServlet extends HttpServlet{
 
 		String userId = request.getParameter("id");
 
-		User editUser = new UserService().selectUser(Integer.parseInt(userId));
+		User editUser = new UserService().selectUser(userId);
 
 		request.setAttribute("editUser", editUser);
 		request.getRequestDispatcher("editUser.jsp").forward(request, response);
@@ -48,8 +48,8 @@ public class EditUserServlet extends HttpServlet{
 		private User getEditUser(HttpServletRequest request) {
 
 			String userId = request.getParameter("id");
-			int user_id = Integer.parseInt(userId);
-			User editUser = new UserService().selectUser(user_id);
+			//int user_id = Integer.parseInt(userId);
+			User editUser = new UserService().selectUser(userId);
 
 
 			editUser.setLoginId(request.getParameter("loginId"));

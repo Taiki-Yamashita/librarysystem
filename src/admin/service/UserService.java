@@ -56,7 +56,7 @@ public class UserService {
 		}
 	}
 
-	public User selectUser(int user_id) {
+	public User selectUser(String user_id) {
 
 		Connection connection = null;
 		try {

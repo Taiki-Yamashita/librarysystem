@@ -40,10 +40,10 @@ public class ReservingBookServlet extends HttpServlet {
 
 		Book reservingBook = new BookService().selectBook(bookId);
 
-		int userId = Integer.parseInt(request.getParameter("userId"));
+		String userId = (request.getParameter("userId"));
 		Reservation addReservation = new Reservation();
 
-		User reservingUser = new UserService().selectUser((userId));
+		User reservingUser = new UserService().selectUser(userId);
 
 		addReservation.setUserId(String.valueOf(reservingUser.getId()));
 		addReservation.setBookId(String.valueOf(reservingBook.getId()));
