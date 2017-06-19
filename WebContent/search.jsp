@@ -15,6 +15,7 @@
 		<!--
 			表示件数を選択し次のページへ
 			AND検索OR検索
+			借りられるリスト
 		 -->
 
 		<a href = "./">トップ</a>
@@ -258,14 +259,26 @@
 
 		<p>◎並び替え</p>
 		<form action="./search" method="POST">
-			<input type="radio" name="sort" value="新しい順" checked>新しい順
-			<input type="radio" name="sort" value="古い順">古い順
-			<input type="radio" name="sort" value="書名順">書名順
-			<input type="radio" name="sort" value="著者名順">著者名順
-			<input type="radio" name="sort" value="カテゴリ順">カテゴリ順
-			<input type="radio" name="sort" value="出版社順">出版社順
-			<input type="radio" name="sort" value="数字から">数字から
-			<input type="radio" name="sort" value="英語から">英語から
+
+
+			<c:if test="${sort == '新しい順'}"><input type="radio" name="sort" value="新しい順" checked>新しい順</c:if>
+			<c:if test="${sort != '新しい順'}"><input type="radio" name="sort" value="新しい順">新しい順</c:if>
+
+			<c:if test="${sort == '古い順'}"><input type="radio" name="sort" value="古い順" checked>古い順</c:if>
+			<c:if test="${sort != '古い順'}"><input type="radio" name="sort" value="古い順">古い順</c:if>
+
+			<c:if test="${sort == '書名順'}"><input type="radio" name="sort" value="書名順" checked>書名順</c:if>
+			<c:if test="${sort != '書名順'}"><input type="radio" name="sort" value="書名順">書名順</c:if>
+
+			<c:if test="${sort == '著者順'}"><input type="radio" name="sort" value="著者順" checked>著者順</c:if>
+			<c:if test="${sort != '著者順'}"><input type="radio" name="sort" value="著者順">著者順</c:if>
+
+			<c:if test="${sort == 'カテゴリ順'}"><input type="radio" name="sort" value="カテゴリ順" checked>カテゴリ順</c:if>
+			<c:if test="${sort != 'カテゴリ順'}"><input type="radio" name="sort" value="カテゴリ順">カテゴリ順</c:if>
+
+			<c:if test="${sort == '出版社順'}"><input type="radio" name="sort" value="出版社順" checked>出版社順</c:if>
+			<c:if test="${sort != '出版社順'}"><input type="radio" name="sort" value="出版社順">出版社順</c:if>
+
 			<input type="submit" value="並び替える">
 
 			<c:if test="${not empty throughFreeWord}">
@@ -347,6 +360,7 @@
 		<!-- 並び替え機能 -->
 		<c:remove var="throughFreeWord" scope="session"/>
 		<c:remove var="throughRefine" scope="session"/>
+		<c:remove var="sort" scope="session"/>
 
 
 	</body>

@@ -78,6 +78,7 @@ public class SearchServlet extends HttpServlet{
 			request.getSession().setAttribute("selectedBooks", selectedBooks);
 			request.getSession().setAttribute("condition", condition);
 			request.getSession().setAttribute("throughFreeWord", "1");
+			request.getSession().setAttribute("sort", sort);
 
 			response.sendRedirect("./search");
 		}
@@ -98,8 +99,7 @@ public class SearchServlet extends HttpServlet{
 			request.getSession().setAttribute("types", types);
 			request.getSession().setAttribute("refinedBooks", books);
 			request.getSession().setAttribute("throughRefine", "1");
-
-			//受け取った値が数値なので，全て変換するようなメソッドを作成する
+			request.getSession().setAttribute("sort", sort);
 
 			response.sendRedirect("./search");
 		}
@@ -147,7 +147,6 @@ public class SearchServlet extends HttpServlet{
 		if(request.getParameter("library4") != null) libraries.add(request.getParameter("library4"));
 		if(request.getParameter("library5") != null) libraries.add(request.getParameter("library5"));
 
-		System.out.println(libraries);
 		return libraries;
 	}
 
@@ -165,7 +164,6 @@ public class SearchServlet extends HttpServlet{
 		if(request.getParameter("category8") != null) categories.add("教育");
 		if(request.getParameter("category9") != null) categories.add("SF");
 
-		System.out.println(categories);
 		return categories;
 	}
 
@@ -178,7 +176,6 @@ public class SearchServlet extends HttpServlet{
 		if(request.getParameter("type3") != null) types.add("雑誌");
 		if(request.getParameter("type4") != null) types.add("コミックス");
 
-		System.out.println(types);
 		return types;
 	}
 }
