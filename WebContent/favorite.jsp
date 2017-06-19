@@ -17,8 +17,13 @@
 	<a href = "./introduction">本の紹介</a>
 
 	<table>
+		<tr>
+			<th>ユーザー名</th>
+			<th>書籍名</th>
+			<th>著者</th>
+		</tr>
 		<c:forEach items="${favorites}" var="favorite">
-			<c:if test = "${user.id == favorite.user_id }">
+			<c:if test = "${user.id != favorite.userId }">
 				<tr>
 					<td><c:out value="${favorite.userName}" /></td>
 					<td><c:out value="${favorite.bookName}" /></td>

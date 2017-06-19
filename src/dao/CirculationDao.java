@@ -97,7 +97,7 @@ public class CirculationDao {
 			ps.setString(2, circulation.getBookId());
 			ps.setString(3, circulation.getLibraryId());
 			ps.setString(4, calendar.get(Calendar.YEAR)+"/"+(calendar.get(Calendar.MONTH)+1)+"/"+calendar.get(Calendar.DATE));//登録時刻から14日後
-			ps.setString(5, "1");
+			ps.setString(5, "0");
 			ps.setString(6, "0");
 
 			ps.executeUpdate();

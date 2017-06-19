@@ -25,7 +25,7 @@ public class FavoriteServlet extends HttpServlet{
 //		if(String.valueOf(user.getId()) != null){
 //			user.getId();
 //		}
-
+//
 		request.setAttribute("user", user);
 
 		List<Favorite> favorites = new FavoriteService().selectAll();

@@ -29,7 +29,7 @@ public class LendingBookServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		request.getRequestDispatcher("manageBook.jsp").forward(request, response);
+		request.getRequestDispatcher("test.jsp").forward(request, response);
 	}
 
 	@Override
@@ -62,7 +62,7 @@ public class LendingBookServlet extends HttpServlet {
 			new CirculationService().update(circulation);
 			new BookService().lendingBook(lending, num);
 		}
-		response.sendRedirect("./manageBook");
+		response.sendRedirect("/LibrarySystem/test");
 	}
 
 	private boolean isValid(HttpServletRequest request, List<String> messages, User users) {

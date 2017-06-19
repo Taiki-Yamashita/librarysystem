@@ -96,20 +96,21 @@ public class FavoriteDao {
 		List<Favorite> ret = new ArrayList<Favorite>();
 		try {
 			while (rs.next()) {
-				int id = rs.getInt("id");
-				String userId = rs.getString("user_id");
+				//int id = rs.getInt("id");
+
 				String userName = rs.getString("user_name");
-				String bookId = rs.getString("book_id");
+				String userId = rs.getString("user_id");
 				String bookName = rs.getString("book_name");
-				String author = rs.getString("author");
+				String bookId = rs.getString("book_id");
+				String author = rs.getString("book_author");
 
 
 				Favorite favorite = new Favorite();
-				favorite.setId(id);
-				favorite.setUserId(userId);
+				//favorite.setId(id);
 				favorite.setUserName(userName);
-				favorite.setBookId(bookId);
+				favorite.setUserId(userId);
 				favorite.setBookName(bookName);
+				favorite.setBookId(bookId);
 				favorite.setAuthor(author);
 
 				ret.add(favorite);
