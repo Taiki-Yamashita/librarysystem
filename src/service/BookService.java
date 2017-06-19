@@ -197,7 +197,7 @@ public class BookService {
 	}
 
 
-	public void lendingBook(int lending, int num) {
+	public void lendingBook(String lending, String num) {
 
 		Connection connection = null;
 		try {

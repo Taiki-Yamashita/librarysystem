@@ -362,7 +362,7 @@ public class BookDao {
 		}
 	}
 
-	public void lendingBook(Connection connection, int lending, int num) {
+	public void lendingBook(Connection connection, String lending, String num) {
 
 		PreparedStatement ps = null;
 		try {
@@ -375,8 +375,8 @@ public class BookDao {
 
 			ps = connection.prepareStatement(sql.toString());
 
-			ps.setInt(1, num);
-			ps.setInt(2, lending);
+			ps.setString(1, num);
+			ps.setString(2, lending);
 
 			ps.executeUpdate();
 		}catch(SQLException e){
