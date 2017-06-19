@@ -47,7 +47,7 @@ public class CirculationDao {
 		PreparedStatement ps = null;
 
 		try {
-			String sql = "SELECT * FROM users_circulations where returning = 1";
+			String sql = "SELECT * FROM users_circulations where returning = 0";
 			ps = connection.prepareStatement(sql);
 
 			ResultSet rs = ps.executeQuery();
@@ -217,13 +217,10 @@ public class CirculationDao {
 		        int diff = date.compareTo(formatDate);
 
 		        if (diff == 0) {
-		            System.out.println("日時1と日時2は同じです");
 		        } else if (diff > 0) {
 		        	Circulation circulation = new Circulation();
 		        	new CirculationService().update(circulation, limitedDate);
-		            System.out.println("日時1は日時2より未来の日時です");
 		        } else {
-		            System.out.println("日時1は日時2より過去の日時です");
 		        }
 				Circulation circulation = new Circulation();
 
