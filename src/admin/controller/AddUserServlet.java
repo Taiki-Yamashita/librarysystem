@@ -59,6 +59,9 @@ public class AddUserServlet extends HttpServlet {
 		} else {
 			session.setAttribute("errorMessages", messages);
 
+			List<Library> libraries = new LibraryService().selectAll();
+			request.setAttribute("libraries", libraries);
+
 			User newUser = getNewUser(request);
 			request.setAttribute("newUser", newUser);
 			request.getRequestDispatcher("/admin/addUser.jsp").forward(request, response);
