@@ -16,7 +16,7 @@
 //import javax.servlet.http.HttpSession;
 //
 //import beans.User;
-//@WebFilter(urlPatterns = {"/useredit","/usermanage","/signup/*"})
+//@WebFilter(urlPatterns = {"./admin/."})
 //public class ManageFilter implements Filter {
 //
 //		public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -27,7 +27,7 @@
 //			HttpSession session =((HttpServletRequest)request).getSession();
 //
 //			User user = (User)session.getAttribute("loginUser");
-//			if (Integer.parseInt(user.getDepartment_id()) != 1){
+//			if (user.getId() != 1){
 //				/* まだ認証されていない */
 //
 //					List<String> messages = new ArrayList<String>();

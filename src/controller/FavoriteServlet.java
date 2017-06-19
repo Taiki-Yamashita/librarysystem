@@ -35,4 +35,15 @@ public class FavoriteServlet extends HttpServlet{
 		request.getRequestDispatcher("/favorite.jsp").forward(request, response);
 
 	}
+
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		Favorite favorite = new Favorite();
+
+		favorite.setUserId(request.getParameter("userId"));
+		favorite.setBookId(request.getParameter("bookId"));
+
+		new FavoriteService().insert(favorite);
+	}
 }

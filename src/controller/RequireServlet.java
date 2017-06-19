@@ -59,15 +59,25 @@ public class RequireServlet extends HttpServlet {
 	private boolean isValid(HttpServletRequest request, List<String> messages) {
 		String userName = request.getParameter("userName");
 		String bookName = request.getParameter("bookName");
+		String author = request.getParameter("author");
+
 		if (StringUtils.isEmpty(userName)) {
 			messages.add("名前を入力してください");
-			return false;
 		}
+
 		if (StringUtils.isEmpty(bookName)) {
-			messages.add("名前を入力してください");
+			messages.add("書籍名を入力してください");
+		}
+
+		if (StringUtils.isEmpty(author)) {
+			messages.add("著者を入力してください");
+		}
+
+		if (messages.size() == 0) {
+			return true;
+		} else {
 			return false;
 		}
-		return true;
 	}
 
 	private Require getNewRequire(HttpServletRequest request) {

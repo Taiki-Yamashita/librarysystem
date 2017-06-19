@@ -16,6 +16,7 @@ public class DBUtil {
 	private static final String URL = "jdbc:mysql://localhost:3306/library_system";
 	private static final String USER = "root";
 	private static final String PASSWORD = "Okada0121washo";
+	//private static final String PASSWORD = "H06-m10-d31";
 
 
 	static {

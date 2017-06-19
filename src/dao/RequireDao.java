@@ -36,8 +36,6 @@ public class RequireDao {
 			ps.setString(3, require.getAuthor());
 			ps.setString(4, require.getPublisher());
 
-			System.out.println(ps.toString());
-
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			throw new SQLRuntimeException(e);
