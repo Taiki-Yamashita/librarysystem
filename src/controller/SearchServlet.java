@@ -68,14 +68,16 @@ public class SearchServlet extends HttpServlet{
 			String selectBox = request.getParameter("selectBox");
 			String freeWord = request.getParameter("freeWord");
 			String condition = request.getParameter("condition");
+			String bookStatus = request.getParameter("bookStatus");
 
 			if(request.getParameter("throughFreeWord") != null){
 				selectBox = request.getParameter("selectBoxForSort");
 				freeWord = request.getParameter("freeWordForSort");
 				condition = request.getParameter("conditionForSort");
+				bookStatus = request.getParameter("bookStatus");
 			}
 
-			List<Book> selectedBooks = new BookService().getSelectedBooks(selectBox, freeWord, condition, sort);
+			List<Book> selectedBooks = new BookService().getSelectedBooks(selectBox, freeWord, condition, sort, bookStatus);
 			request.getSession().setAttribute("selectBox", new BookService().getMapCategory().get(selectBox));
 			request.getSession().setAttribute("selectBoxId", selectBox);
 			request.getSession().setAttribute("freeWord", freeWord);
@@ -83,6 +85,7 @@ public class SearchServlet extends HttpServlet{
 			request.getSession().setAttribute("condition", condition);
 			request.getSession().setAttribute("throughFreeWord", "1");
 			request.getSession().setAttribute("sort", sort);
+			request.getSession().setAttribute("bookStatus", bookStatus);
 
 			if(request.getParameter("pageNumber") == null) response.sendRedirect("./search?pageNumber=1");
 			else response.sendRedirect("./search?pageNumber=" + request.getParameter("pageNumber"));
@@ -96,8 +99,9 @@ public class SearchServlet extends HttpServlet{
 			List<String> libraries = getLibraries(request);
 			List<String> categories = getCategories(request);
 			List<String> types = getTypes(request);
+			String bookStatus = request.getParameter("bookStatus");
 
-			List<Book> books = new BookService().getRefinedBooks(newBooks, libraries, categories, types, sort);
+			List<Book> books = new BookService().getRefinedBooks(newBooks, libraries, categories, types, sort, bookStatus);
 			request.getSession().setAttribute("newBooks", newBooks);
 			request.getSession().setAttribute("libraries", libraries);
 			request.getSession().setAttribute("categories", categories);
@@ -105,6 +109,7 @@ public class SearchServlet extends HttpServlet{
 			request.getSession().setAttribute("refinedBooks", books);
 			request.getSession().setAttribute("throughRefine", "1");
 			request.getSession().setAttribute("sort", sort);
+			request.getSession().setAttribute("bookStatus", bookStatus);
 
 			if(request.getParameter("pageNumber") == null) response.sendRedirect("./search?pageNumber=1");
 			else response.sendRedirect("./search?pageNumber=" + request.getParameter("pageNumber"));

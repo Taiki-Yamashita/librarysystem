@@ -178,13 +178,17 @@ public class BookDao {
 	}
 
 	public List<Book> getSelectedBooks(Connection connection, String selectBox,
-			String freeWord, String condition, String sort){
+			String freeWord, String condition, String sort, String bookStatus){
 
 		PreparedStatement ps = null;
 		try {
 
 			StringBuilder sql = new StringBuilder();
 			sql.append("SELECT * FROM books WHERE ");
+
+			if(bookStatus.equals("貸出可")) sql.append("lending = ? AND ");
+			if(bookStatus.equals("貸出中")) sql.append("lending = ? AND ");
+
 			if(!selectBox.isEmpty()) sql.append(selectBox + " LIKE ?");
 			else{
 				if(condition.equals("と一致する")) sql.append("name = ? or author = ? or publisher = ? or category = ? or isbn_id = ?");
@@ -201,30 +205,63 @@ public class BookDao {
 			if(sort.equals("")) sql.append(" ORDER BY published_date DESC");
 
 			ps = connection.prepareStatement(sql.toString());
-			if(!selectBox.isEmpty()){
-				if(condition.equals("を含む")) ps.setString(1, "%" + freeWord + "%");
-				if(condition.equals("から始まる")) ps.setString(1, freeWord + "%");
-				if(condition.equals("で終わる")) ps.setString(1, "%" + freeWord);
-				if(condition.equals("と一致する")) ps.setString(1, freeWord);
-			}
-			else{
-				if(condition.equals("と一致する")){
-					ps.setString(1, freeWord);
-					ps.setString(2, freeWord);
-					ps.setString(3, freeWord);
-					ps.setString(4, freeWord);
-					ps.setString(5, freeWord);
-				}
-				else if(condition.equals("で終わる")){
-					ps.setString(1, "%" + freeWord);
-					ps.setString(2, "%" + freeWord);
-					ps.setString(3, "%" + freeWord);
-					ps.setString(4, "%" + freeWord);
-					ps.setString(5, "%" + freeWord);
+			if(!bookStatus.equals("全て")){
+				if(bookStatus.equals("貸出可")) ps.setString(1, "0");
+				if(bookStatus.equals("貸出中")) ps.setString(1, "1");
+
+				if(!selectBox.isEmpty()){
+					if(condition.equals("を含む")) ps.setString(2, "%" + freeWord + "%");
+					if(condition.equals("から始まる")) ps.setString(2, freeWord + "%");
+					if(condition.equals("で終わる")) ps.setString(2, "%" + freeWord);
+					if(condition.equals("と一致する")) ps.setString(2, freeWord);
 				}
 				else{
+					if(condition.equals("と一致する")){
+						ps.setString(2, freeWord);
+						ps.setString(3, freeWord);
+						ps.setString(4, freeWord);
+						ps.setString(5, freeWord);
+						ps.setString(6, freeWord);
+					}
+					else if(condition.equals("で終わる")){
+						ps.setString(2, "%" + freeWord);
+						ps.setString(3, "%" + freeWord);
+						ps.setString(4, "%" + freeWord);
+						ps.setString(5, "%" + freeWord);
+						ps.setString(6, "%" + freeWord);
+					}
+					else{
+						if(condition.equals("を含む")) ps.setString(2, "%" + freeWord + "%");
+						if(condition.equals("から始まる")) ps.setString(2, freeWord + "%");
+					}
+				}
+			}
+			else {
+				if(!selectBox.isEmpty()){
 					if(condition.equals("を含む")) ps.setString(1, "%" + freeWord + "%");
 					if(condition.equals("から始まる")) ps.setString(1, freeWord + "%");
+					if(condition.equals("で終わる")) ps.setString(1, "%" + freeWord);
+					if(condition.equals("と一致する")) ps.setString(1, freeWord);
+				}
+				else{
+					if(condition.equals("と一致する")){
+						ps.setString(1, freeWord);
+						ps.setString(2, freeWord);
+						ps.setString(3, freeWord);
+						ps.setString(4, freeWord);
+						ps.setString(5, freeWord);
+					}
+					else if(condition.equals("で終わる")){
+						ps.setString(1, "%" + freeWord);
+						ps.setString(2, "%" + freeWord);
+						ps.setString(3, "%" + freeWord);
+						ps.setString(4, "%" + freeWord);
+						ps.setString(5, "%" + freeWord);
+					}
+					else{
+						if(condition.equals("を含む")) ps.setString(1, "%" + freeWord + "%");
+						if(condition.equals("から始まる")) ps.setString(1, freeWord + "%");
+					}
 				}
 			}
 
@@ -244,7 +281,7 @@ public class BookDao {
 	}
 
 	public List<Book> getRefinedBooks(Connection connection, List<String> newBooks,
-			List<String> libraries, List<String> categories, List<String> types, String sort){
+			List<String> libraries, List<String> categories, List<String> types, String sort, String bookStatus){
 
 		PreparedStatement ps = null;
 		try {
@@ -253,6 +290,10 @@ public class BookDao {
 
 			sql.append("SELECT * FROM books WHERE ");
 			sql.append("(published_date >= ?) ");
+
+			if(bookStatus.equals("貸出可")) sql.append("AND lending = ? ");
+			if(bookStatus.equals("貸出中")) sql.append("AND lending = ? ");
+
 			if(!libraries.isEmpty()){
 				sql.append("AND (");
 				for(int i = 0; i < libraries.size(); i++){
@@ -283,9 +324,15 @@ public class BookDao {
 			if(sort.equals("出版社順")) sql.append(" ORDER BY publisher");
 			if(sort.equals("")) sql.append(" ORDER BY published_date DESC");
 
+			int cnt = 2;
 			ps = connection.prepareStatement(sql.toString());
 			ps.setString(1, newBooks.get(0));
-			int cnt = 2;
+			if(!bookStatus.equals("全て")){
+				if(bookStatus.equals("貸出可")) ps.setString(2, "0");
+				if(bookStatus.equals("貸出中")) ps.setString(2, "1");
+				cnt = 3;
+			}
+
 			if(!libraries.isEmpty()){
 				for(int i = 0; i < libraries.size(); i++){
 					ps.setString(cnt++, libraries.get(i));
