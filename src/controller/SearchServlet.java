@@ -36,6 +36,7 @@ public class SearchServlet extends HttpServlet{
 			if(selectedBooks != null){
 				if(isValid(selectedBooks, request)){
 					request.setAttribute("booksCount", selectedBooks.size());
+					request.setAttribute("pageCountList", getPageCount(selectedBooks.size()));
 					request.setAttribute("books", selectedBooks);
 				}
 				else request.setAttribute("books", null);
@@ -44,6 +45,7 @@ public class SearchServlet extends HttpServlet{
 			if(refinedBooks != null){
 				if(isValid(refinedBooks, request)){
 					request.setAttribute("booksCount", refinedBooks.size());
+					request.setAttribute("pageCountList", getPageCount(refinedBooks.size()));
 					request.setAttribute("books", refinedBooks);
 				}
 				else request.setAttribute("books", null);
@@ -177,5 +179,17 @@ public class SearchServlet extends HttpServlet{
 		if(request.getParameter("type4") != null) types.add("コミックス");
 
 		return types;
+	}
+
+	public List<String> getPageCount(int booksCount){
+
+		List<String> pageCountList = new ArrayList<>();
+		int pageCount = booksCount / 50 + 1;
+
+		for(int i = 1; i <= pageCount; i++){
+			pageCountList.add(String.valueOf(i));
+		}
+
+		return pageCountList;
 	}
 }

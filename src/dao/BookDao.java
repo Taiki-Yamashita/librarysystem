@@ -198,6 +198,7 @@ public class BookDao {
 			if(sort.equals("著者名順")) sql.append(" ORDER BY author");
 			if(sort.equals("カテゴリ順")) sql.append(" ORDER BY category");
 			if(sort.equals("出版社順")) sql.append(" ORDER BY publisher");
+			if(sort.equals("")) sql.append(" ORDER BY published_date DESC");
 
 			ps = connection.prepareStatement(sql.toString());
 			if(!selectBox.isEmpty()){
@@ -280,8 +281,7 @@ public class BookDao {
 			if(sort.equals("著者名順")) sql.append(" ORDER BY author");
 			if(sort.equals("カテゴリ順")) sql.append(" ORDER BY category");
 			if(sort.equals("出版社順")) sql.append(" ORDER BY publisher");
-			if(sort.equals("数字から"));
-			if(sort.equals("英語から"));
+			if(sort.equals("")) sql.append(" ORDER BY published_date DESC");
 
 			ps = connection.prepareStatement(sql.toString());
 			ps.setString(1, newBooks.get(0));
