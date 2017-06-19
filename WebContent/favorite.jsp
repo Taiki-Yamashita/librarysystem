@@ -19,9 +19,11 @@
 	<table>
 		<c:forEach items="${favorites}" var="favorite">
 			<c:if test = "${user.id == favorite.user_id }">
-				<c:out value="${favorite.userName}" />
-				<c:out value="${favorite.bookName}" />
-				<c:out value="${favorite.author}" />
+				<tr>
+					<td><c:out value="${favorite.userName}" /></td>
+					<td><c:out value="${favorite.bookName}" /></td>
+					<td><c:out value="${favorite.author}" /></td>
+				</tr>
 			</c:if>
 		</c:forEach>
 	</table>

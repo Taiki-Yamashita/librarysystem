@@ -11,13 +11,23 @@
 <body>
 	<a href = "manage">管理画面</a>
 	<table>
+		<tr>
+			<th>ユーザー名</th>
+			<th>書籍名</th>
+			<th>著者</th>
+			<th>出版社</th>
+			<th>リクエスト日</th>
+		</tr>
 		<c:forEach items="${recieves}" var="recieve">
-			<c:out value="${recieve.userName}" />
-			<c:out value="${recieve.bookName}" />
-			<c:out value="${recieve.author}" />
-			<c:out value="${recieve.publisher}" />
-			<c:out value="${recieve.requiredDate}" />
+			<tr>
+				<td><c:out value="${recieve.userName}" /></td>
+				<td><c:out value="${recieve.bookName}" /></td>
+				<td><c:out value="${recieve.author}" /></td>
+				<td><c:out value="${recieve.publisher}" /></td>
+				<td><c:out value="${recieve.requiredDate}" /></td>
+			</tr>
 		</c:forEach>
+
 	</table>
 </body>
 </html>

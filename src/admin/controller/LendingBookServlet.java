@@ -28,21 +28,22 @@ public class LendingBookServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request,HttpServletResponse response)
 		throws ServletException,IOException {
-
+		int lending = Integer.parseInt(request.getParameter("bookId"));
+		int num = Integer.parseInt(request.getParameter("num"));
 		Circulation circulation = new Circulation();
-		if(!request.getParameter("userId").matches("userId")) {
+
+		if(num == 0) {
 			circulation.setUserId(request.getParameter("userId"));
 			circulation.setBookId(request.getParameter("bookId"));
 			circulation.setLibraryId(request.getParameter("libraryId"));
 			new CirculationService().insert(circulation);
-		} else  {
+		} else if(num == 1)  {
 			circulation.setBookId(request.getParameter("bookId"));
 			circulation.setLibraryId(request.getParameter("libraryId"));
 			new CirculationService().update(circulation);
 		}
 
-		int lending = Integer.parseInt(request.getParameter("bookId"));
-		int num = Integer.parseInt(request.getParameter("num"));
+
 		new BookService().lendingBook(lending, num);
 
 
