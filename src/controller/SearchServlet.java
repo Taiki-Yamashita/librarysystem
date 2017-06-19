@@ -37,6 +37,7 @@ public class SearchServlet extends HttpServlet{
 				if(isValid(selectedBooks, request)){
 					request.setAttribute("booksCount", selectedBooks.size());
 					request.setAttribute("pageCountList", getPageCount(selectedBooks.size()));
+					request.setAttribute("pageNumber", request.getParameter("pageNumber"));
 					request.setAttribute("books", selectedBooks);
 				}
 				else request.setAttribute("books", null);
@@ -46,6 +47,7 @@ public class SearchServlet extends HttpServlet{
 				if(isValid(refinedBooks, request)){
 					request.setAttribute("booksCount", refinedBooks.size());
 					request.setAttribute("pageCountList", getPageCount(refinedBooks.size()));
+					request.setAttribute("pageNumber", request.getParameter("pageNumber"));
 					request.setAttribute("books", refinedBooks);
 				}
 				else request.setAttribute("books", null);
@@ -82,7 +84,8 @@ public class SearchServlet extends HttpServlet{
 			request.getSession().setAttribute("throughFreeWord", "1");
 			request.getSession().setAttribute("sort", sort);
 
-			response.sendRedirect("./search");
+			if(request.getParameter("pageNumber") == null) response.sendRedirect("./search?pageNumber=1");
+			else response.sendRedirect("./search?pageNumber=" + request.getParameter("pageNumber"));
 		}
 		/*searchFreeWords*/
 
@@ -103,7 +106,8 @@ public class SearchServlet extends HttpServlet{
 			request.getSession().setAttribute("throughRefine", "1");
 			request.getSession().setAttribute("sort", sort);
 
-			response.sendRedirect("./search");
+			if(request.getParameter("pageNumber") == null) response.sendRedirect("./search?pageNumber=1");
+			else response.sendRedirect("./search?pageNumber=" + request.getParameter("pageNumber"));
 		}
 		/*searchRefine*/
 
@@ -184,7 +188,8 @@ public class SearchServlet extends HttpServlet{
 	public List<String> getPageCount(int booksCount){
 
 		List<String> pageCountList = new ArrayList<>();
-		int pageCount = booksCount / 50 + 1;
+		int pageCount = booksCount / 3 + 1;
+		if(booksCount % 3 == 0) pageCount--;
 
 		for(int i = 1; i <= pageCount; i++){
 			pageCountList.add(String.valueOf(i));

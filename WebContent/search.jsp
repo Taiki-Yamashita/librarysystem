@@ -8,12 +8,12 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>検索</title>
+		<link href="./css/style.css" rel="stylesheet" type="text/css">
 	</head>
 	<body>
 		<h2>検索</h2>
 
 		<!--
-			表示件数を選択し次のページへ
 			AND検索OR検索
 			借りられるリスト
 		 -->
@@ -324,22 +324,52 @@
 			<form action="./search" method="POST">
 				<table>
 					<tr><th>本</th><th>予約</th></tr>
-					<c:forEach items="${books}" var="book">
+					<c:forEach items="${books}" var="book" varStatus="status">
 						<c:if test="${book.id != 0}">
-							<tr>
-								<td><c:out value="${book.name}"/></td>
-								<td><c:out value="${book.publishedDate}"/></td>
-								<td><input type="submit"  value="予約" /></td>
-							</tr>
+							<c:if test="${status.index >= (pageNumber-1)*3 && status.index <= (pageNumber*3)-1}">
+								<tr>
+									<td><c:out value="${book.name}"/></td>
+									<td><c:out value="${book.publishedDate}"/></td>
+									<td><input type="submit"  value="予約" /></td>
+								</tr>
+							</c:if>
 						</c:if>
 					</c:forEach>
 				</table>
 			</form>
-		</c:if>
 
-		<c:forEach items="${pageCountList}" var="pageCount">
-			<c:out value="${pageCount}"/>
-		</c:forEach>
+			<table>
+				<tr>
+					<c:forEach items="${pageCountList}" var="pageCount">
+						<form action="./search" method="POST">
+							<td>
+								<input type="submit" value="${pageCount}"/>
+								<input type="hidden" name="pageNumber" value="${pageCount}">
+							</td>
+							<c:if test="${not empty throughFreeWord}">
+								<input type="hidden" name="throughFreeWord" value="1">
+								<input type="hidden" name="selectBoxForSort" value="${selectBoxId}">
+								<input type="hidden" name="freeWordForSort" value="${freeWord}">
+								<input type="hidden" name="conditionForSort" value="${condition}">
+							</c:if>
+							<c:if test="${not empty throughRefine}">
+								<input type="hidden" name="throughRefine" value="1">
+								<c:forEach items="${libraries}" var="library" varStatus="status">
+									<input type="hidden" name="library${status.index + 1}" value="${status.index + 1}">
+								</c:forEach>
+								<c:forEach items="${categories}" var="category" varStatus="status">
+									<input type="hidden" name="category${status.index + 1}" value="${status.index + 1}">
+								</c:forEach>
+								<c:forEach items="${types}" var="type" varStatus="status">
+									<input type="hidden" name="type${status.index + 1}" value="${status.index + 1}">
+								</c:forEach>
+							</c:if>
+							<input type="hidden" name="sort" value="${sort}">
+						</form>
+					</c:forEach>
+				</tr>
+			</table>
+		</c:if>
 
 		<!-- エラーメッセージ -->
 		<c:remove var="errorMessages" scope="session"/>
