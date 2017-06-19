@@ -44,7 +44,18 @@
 			<input name="mail"  value="${newUser.mail}"  id="mail"/><br/>
 
 			<label for="libraryId">最寄り図書館</label><br>
-			<input name="libraryId"  value="${newUser.libraryId}"  id="libraryId"/><br/>
+			<select name="libraryId" >
+				<option value="0">選択してください</option>
+				<c:forEach items="${libraries}" var="library">
+					<c:if test="${newUser.library_id == library.id }">
+						<option selected value="${library.id}">${library.name } </option>
+					</c:if>
+					<c:if test="${newUser.library_id != library.id }">
+						<option  value="${library.id}">${library.name } </option>
+					</c:if>
+				</c:forEach>
+			</select>
+
 
 			<input type="submit" value="登録" />
 		</form>

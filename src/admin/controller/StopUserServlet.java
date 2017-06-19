@@ -28,7 +28,9 @@ public class StopUserServlet extends HttpServlet {
 
 		int stopping = Integer.parseInt(request.getParameter("id"));
 		int num = Integer.parseInt(request.getParameter("num"));
-		new UserService().stoppingUser(stopping, num);
+		String time = request.getParameter("time");
+
+		new UserService().stoppingUser(stopping, num, time);
 
 		response.sendRedirect("./manageUser");
 

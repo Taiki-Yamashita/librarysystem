@@ -172,7 +172,7 @@ public class UserDao {
 			ps.setString(7, user.getPoint());
 			ps.setString(8, user.getLibraryId());
 			ps.setString(9, user.getRegisterDate());
-			ps.setString(10, user.getStopping());
+			ps.setString(10, "0");
 			ps.setInt(11, user.getId());
 
 			int count = ps.executeUpdate();
@@ -261,19 +261,21 @@ public class UserDao {
 		}
 	}
 
-	public void stoppingUser(Connection connection, int stopping, int num){
+	public void stoppingUser(Connection connection, int stopping, int num, String time){
 		PreparedStatement ps = null;
 		try {
 			StringBuilder sql = new StringBuilder();
 			sql.append("UPDATE users SET");
 			sql.append(" stopping = ?");
+			sql.append(", register_date =?");
 
 			sql.append(" WHERE id=?");
 
 			ps = connection.prepareStatement(sql.toString());
 
 			ps.setInt(1, num);
-			ps.setInt(2, stopping);
+			ps.setString(2, time);
+			ps.setInt(3, stopping);
 
 			ps.executeUpdate();
 			}catch(SQLException e){

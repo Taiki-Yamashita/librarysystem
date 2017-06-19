@@ -149,13 +149,13 @@ public class UserService {
 		}
 	}
 
-	public void stoppingUser(int stopping, int num) {
+	public void stoppingUser(int stopping, int num, String time) {
 
 		Connection connection = null;
 		try {
 			connection = getConnection();
 
-			new UserDao().stoppingUser(connection, stopping, num);
+			new UserDao().stoppingUser(connection, stopping, num, time);
 
 			commit(connection);
 		} catch (RuntimeException e) {

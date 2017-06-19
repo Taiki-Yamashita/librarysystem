@@ -23,27 +23,27 @@
 			<th>本の名前</th>
 			<th>受取図書館</th>
 			<th>予約日</th>
+			<th>キャンセル</th>
 		</tr>
 		<c:forEach items="${reservations}" var="reservation">
-			<c:if test="${reservation.userId ==1}">
-			<tr>
-				<td>${reservation.bookName}</td>
-				<td>${reservation.libraryId}</td>
-				<td>${reservation.reservedDate }</td>
+			<c:if test="${reservation.userId == loginUser.id && reservation.canceling ==0}">
+				<tr>
+					<td>${reservation.bookName}</td>
+					<td>${reservation.libraryId}</td>
+					<td>${reservation.reservedDate }</td>
+					<td>
+						<form action = "cancelingBook" method = "post">
+							<input type = "hidden" name = "bookId" value = "${reservation.bookId}" >
+							<input type = "hidden" id = "libraryId" name = "libraryId" value = "${reservation.libraryId }" >
+										<input type = "hidden" name = "time" value = "${reservation.reservedDate }">
+							<c:if test="${reservation.canceling == 0 }">
+								<input type = "hidden" name = "num" value =1>
+								<input type = "submit" value = "キャンセル" />
+							</c:if>
 
-				<td>
-				<form action = "cancelingBook" method = "post">
-					<input type = "hidden" name = "bookId" value = "${reservation.bookId}" >
-					<input type = "hidden" id = "libraryId" name = "libraryId" value = "${reservation.libraryId }" >
-								<input type = "hidden" name = "time" value = "${reservation.reservedDate }">
-					<c:if test="${reservation.canceling == 0 }">
-						<input type = "hidden" name = "num" value =1>
-						<input type = "submit" value = "キャンセル" />
-					</c:if>
-
-				</form>
-				</td>
-			</tr>
+						</form>
+					</td>
+				</tr>
 			</c:if>
 		</c:forEach>
 	</table>
