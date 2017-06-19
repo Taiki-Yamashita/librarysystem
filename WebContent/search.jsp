@@ -321,23 +321,40 @@
 
 
 		<c:if test="${not empty books}">
-			<form action="./search" method="POST">
+
 				<table>
-					<tr><th>本</th><th>予約</th></tr>
+					<tr><th>本</th><th>出版日</th><th>予約</th><th>お気に入り</th></tr>
 					<c:forEach items="${books}" var="book" varStatus="status">
 						<c:if test="${book.id != 0}">
 							<c:if test="${status.index >= (pageNumber-1)*3 && status.index <= (pageNumber*3)-1}">
 								<tr>
 									<td><c:out value="${book.name}"/></td>
 									<td><c:out value="${book.publishedDate}"/></td>
-									<td><input type="submit"  value="予約" /></td>
+
+												<td>
+													<form action="./reservation" method="POST">
+														<input type="hidden" value="${book.id}" name="bookId">
+														<input type="submit" value="予約" />
+													</form>
+												</td>
+
+										<c:forEach items="${favorites}" var="favorite" >
+	<!-- ログインユーザーのID -->			<c:if test="${favorite.userId != user.id && book.id != favorite.bookId}">
+													<td>
+														<form action="./favorite" method="POST">
+	<!-- ログインユーザーのID -->							<input type="hidden" value="${user.id}" name="userId">
+															<input type="hidden" value="${book.id}" name="bookId">
+															<input type="submit"  value="お気に入り" />
+														</form>
+													</td>
+
+											</c:if>
+										</c:forEach>
 								</tr>
 							</c:if>
 						</c:if>
 					</c:forEach>
 				</table>
-			</form>
-
 			<table>
 				<tr>
 					<c:forEach items="${pageCountList}" var="pageCount">

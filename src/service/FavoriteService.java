@@ -72,4 +72,23 @@ public class FavoriteService {
 			close(connection);
 		}
 	}
+
+	public void delete(Favorite favorite, String userId, String bookId) {
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			new FavoriteDao().delete(connection, favorite, userId, bookId);
+
+			commit(connection);
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
 }
