@@ -17,7 +17,7 @@
 //
 //import beans.User;
 //
-//@WebFilter("/*")
+//@WebFilter(urlPatterns = {"/favorite", "/require", "/user/*"})
 //public class LoginCheckFilter implements Filter {
 //
 //	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -31,7 +31,7 @@
 //
 //		if (!isLogined((HttpServletRequest)request)){
 //			/* まだ認証されていない */
-//				if(!target.equals("/BoardSystem/login") && !target.matches(".*css$")){
+//				if(!target.equals("/LibrarySystem/login") && !target.matches(".*css$")){
 //					System.out.println(target);
 //					List<String> messages = new ArrayList<String>();
 //					messages.add("ログインしてください");
