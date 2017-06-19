@@ -180,10 +180,6 @@ public class BookDao {
 	public List<Book> getSelectedBooks(Connection connection, String selectBox,
 			String freeWord, String condition, String sort){
 
-		System.out.println(selectBox);
-		System.out.println(freeWord);
-		System.out.println(condition);
-
 		PreparedStatement ps = null;
 		try {
 
@@ -202,8 +198,6 @@ public class BookDao {
 			if(sort.equals("著者名順")) sql.append(" ORDER BY author");
 			if(sort.equals("カテゴリ順")) sql.append(" ORDER BY category");
 			if(sort.equals("出版社順")) sql.append(" ORDER BY publisher");
-			if(sort.equals("数字から"));
-			if(sort.equals("英語から"));
 
 			ps = connection.prepareStatement(sql.toString());
 			if(!selectBox.isEmpty()){
@@ -232,7 +226,6 @@ public class BookDao {
 					if(condition.equals("から始まる")) ps.setString(1, freeWord + "%");
 				}
 			}
-			System.out.println(ps);
 
 			ResultSet rs = ps.executeQuery();
 

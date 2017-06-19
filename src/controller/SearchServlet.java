@@ -78,6 +78,7 @@ public class SearchServlet extends HttpServlet{
 			request.getSession().setAttribute("selectedBooks", selectedBooks);
 			request.getSession().setAttribute("condition", condition);
 			request.getSession().setAttribute("throughFreeWord", "1");
+			request.getSession().setAttribute("sort", sort);
 
 			response.sendRedirect("./search");
 		}
@@ -98,8 +99,7 @@ public class SearchServlet extends HttpServlet{
 			request.getSession().setAttribute("types", types);
 			request.getSession().setAttribute("refinedBooks", books);
 			request.getSession().setAttribute("throughRefine", "1");
-
-			//受け取った値が数値なので，全て変換するようなメソッドを作成する
+			request.getSession().setAttribute("sort", sort);
 
 			response.sendRedirect("./search");
 		}
@@ -147,36 +147,35 @@ public class SearchServlet extends HttpServlet{
 		if(request.getParameter("library4") != null) libraries.add(request.getParameter("library4"));
 		if(request.getParameter("library5") != null) libraries.add(request.getParameter("library5"));
 
-		System.out.println(libraries);
 		return libraries;
 	}
 
 	public List<String> getCategories(HttpServletRequest request){
 
 		List<String> categories = new ArrayList<>();
-		if(request.getParameter("category1") != null) categories.add(request.getParameter("category1"));
-		if(request.getParameter("category2") != null) categories.add(request.getParameter("category2"));
-		if(request.getParameter("category3") != null) categories.add(request.getParameter("category3"));
-		if(request.getParameter("category4") != null) categories.add(request.getParameter("category4"));
-		if(request.getParameter("category5") != null) categories.add(request.getParameter("category5"));
-		if(request.getParameter("category6") != null) categories.add(request.getParameter("category6"));
-		if(request.getParameter("category7") != null) categories.add(request.getParameter("category7"));
-		if(request.getParameter("category8") != null) categories.add(request.getParameter("category8"));
-		if(request.getParameter("category9") != null) categories.add(request.getParameter("category9"));
 
-		System.out.println(categories);
+		if(request.getParameter("category1") != null) categories.add("文学");
+		if(request.getParameter("category2") != null) categories.add("経済");
+		if(request.getParameter("category3") != null) categories.add("芸能");
+		if(request.getParameter("category4") != null) categories.add("歴史");
+		if(request.getParameter("category5") != null) categories.add("学問");
+		if(request.getParameter("category6") != null) categories.add("政治");
+		if(request.getParameter("category7") != null) categories.add("暮らし");
+		if(request.getParameter("category8") != null) categories.add("教育");
+		if(request.getParameter("category9") != null) categories.add("SF");
+
 		return categories;
 	}
 
 	public List<String> getTypes(HttpServletRequest request){
 
 		List<String> types = new ArrayList<>();
-		if(request.getParameter("type1") != null) types.add(request.getParameter("type1"));
-		if(request.getParameter("type2") != null) types.add(request.getParameter("type2"));
-		if(request.getParameter("type3") != null) types.add(request.getParameter("type3"));
-		if(request.getParameter("type4") != null) types.add(request.getParameter("type4"));
 
-		System.out.println(types);
+		if(request.getParameter("type1") != null) types.add("文庫");
+		if(request.getParameter("type2") != null) types.add("新書");
+		if(request.getParameter("type3") != null) types.add("雑誌");
+		if(request.getParameter("type4") != null) types.add("コミックス");
+
 		return types;
 	}
 }
