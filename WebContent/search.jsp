@@ -343,8 +343,11 @@
 					<c:forEach items="${pageCountList}" var="pageCount">
 						<form action="./search" method="POST">
 							<td>
-								<input type="submit" value="${pageCount}"/>
-								<input type="hidden" name="pageNumber" value="${pageCount}">
+								<c:if test="${pageNumber == pageCount}"><c:out value="${pageCount}"></c:out></c:if>
+								<c:if test="${pageNumber != pageCount}">
+									<input type="submit" value="${pageCount}"/>
+									<input type="hidden" name="pageNumber" value="${pageCount}">
+								</c:if>
 							</td>
 							<c:if test="${not empty throughFreeWord}">
 								<input type="hidden" name="throughFreeWord" value="1">
