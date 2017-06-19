@@ -1,6 +1,7 @@
 package admin.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,7 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import beans.Library;
 import beans.User;
+import service.LibraryService;
 import service.UserService;
 
 
@@ -21,6 +24,9 @@ public class EditUserServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+		List<Library> libraries = new LibraryService().selectAll();
+		request.setAttribute("libraries", libraries);
 
 		String userId = request.getParameter("id");
 
