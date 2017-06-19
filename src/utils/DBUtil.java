@@ -17,6 +17,7 @@ public class DBUtil {
 	private static final String USER = "root";
 	private static final String PASSWORD = "Okada0121washo";
 
+
 	static {
 
 		try {

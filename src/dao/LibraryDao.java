@@ -93,11 +93,11 @@ public class LibraryDao {
 		try {
 			while (rs.next()) {
 				int id = rs.getInt("id");
-				String userId = rs.getString("name");
+				String name = rs.getString("name");
 
 				Library library = new Library();
 				library.setId(id);
-				library.setName(userId);
+				library.setName(name);
 
 				ret.add(library);
 			}

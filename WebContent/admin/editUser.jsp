@@ -38,8 +38,20 @@
 	<label for="point">ポイント</label><br>
 	<input name="point" id="point" value="${editUser.point }"/><br />
 
-	<label for="libraryId">図書館</label><br>
-	<input name="libraryId" id="libraryId" value="${editUser.libraryId }"/><br />
+
+		<label for="libraryId">図書館</label><br>
+		<select name="libraryId">
+				<c:forEach items="${libraries}" var="library">
+					<c:if test="${editUser.libraryId == library.id }">
+						<option selected value="${library.id}">${library.name } </option>
+					</c:if>
+					<c:if test="${editUser.libraryId != library.id }">
+						<option  value="${library.id}">${library.name } </option>
+					</c:if>
+				</c:forEach>
+		</select>
+
+		<br>
 
 		<label for="registerDate">登録日</label><br>
 	<input name="registerDate" id="registerDate" value="${editUser.registerDate }"/><br />

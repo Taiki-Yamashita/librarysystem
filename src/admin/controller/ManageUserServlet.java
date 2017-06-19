@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import beans.Library;
 import beans.User;
+import service.LibraryService;
 import service.UserService;
 
 
@@ -23,8 +25,11 @@ public class ManageUserServlet extends HttpServlet {
 			HttpServletResponse response) throws IOException, ServletException {
 
 		List<User> users = new UserService().selectAll();
+		List<Library> libraries = new LibraryService().selectAll();
+
 
 		request.setAttribute("users", users);
+		request.setAttribute("libraries", libraries);
 
 		request.getRequestDispatcher("/admin/manageUser.jsp").forward(request, response);
 

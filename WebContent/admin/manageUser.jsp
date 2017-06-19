@@ -23,7 +23,13 @@
 				<td>${user.mail}</td>
 				<td>${user.point}</td>
 				<td>${user.registerDate}</td>
-				<td>${user.libraryId}</td>
+				<td>
+					<c:forEach items="${libraries}" var="library">
+						<c:if test="${user.libraryId ==library.id}">
+							<option value="${library.id}">${library.name}</option>
+						</c:if>
+					</c:forEach>
+					</td>
 
 
 
