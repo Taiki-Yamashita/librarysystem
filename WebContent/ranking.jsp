@@ -33,7 +33,7 @@
 <c:forEach  begin="0" end="20" step="1" varStatus="status" items="${reservations}" var="reservation">
 	<c:out value="${status.count}"/>位<c:out value="${reservation.bookName }"></c:out>
 		<form action = "reservingBook" method = "post">
-			<input type = "hidden" name = "bookId" value = "${circulation.bookId}" >
+			<input type = "hidden" name = "bookId" value = "${reservation.bookId}" >
 			<input type = "hidden" id = "libraryId" name = "libraryId" value = "${book.libraryId}" >
 			<input type = "hidden" id = "${loginUser.id}" name = "userId" value = "${loginUser.id}"  >
 			<input type = "hidden" name = "num" value =1>
