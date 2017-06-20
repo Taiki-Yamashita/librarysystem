@@ -32,10 +32,10 @@ public class SearchServlet extends HttpServlet{
 		List<Book> refinedBooks = (List<Book>)request.getSession().getAttribute("refinedBooks");
 
 		User user = (User) request.getSession().getAttribute("loginUser");
-//		if(String.valueOf(user.getId()) != null){
-//			user.getId();
-//		}
-//
+		if(String.valueOf(user.getId()) != null){
+			user.getId();
+		}
+
 		request.setAttribute("user", user);
 
 		List<Favorite> favorites = new FavoriteService().selectAll();
