@@ -11,20 +11,28 @@
 <body>
 未返却リストだよ
 <a href = "manage">管理画面</a>
-	<table>
-		<tr>
-			<th>ユーザー名</th>
-			<th>書籍名</th>
-			<th>最寄り図書館</th>
-			<th>オーバー期限</th>
-		</tr>
-		<c:forEach items="${notReturnedlists}" var="notReturnedlist">
+	<form action="notreturn" method="post">
+		<table>
 			<tr>
-				<td><c:out value="${notReturnedlist.userName}" /></td>
-				<td><c:out value="${notReturnedlist.bookName}" /></td>
-				<td><c:out value="${notReturnedlist.libraryName}" /></td>
+				<th>ユーザー名</th>
+				<th>書籍名</th>
+				<th>最寄り図書館</th>
+				<th>オーバー期限</th>
+				<th>返却</th>
 			</tr>
-		</c:forEach>
-	</table>
+			<c:forEach items="${notReturnedlists}" var="notReturnedlist">
+				<tr>
+					<td><c:out value="${notReturnedlist.userName}" /></td>
+					<td><c:out value="${notReturnedlist.bookName}" /></td>
+					<td><c:out value="${notReturnedlist.libraryName}" /></td>
+					<td><c:out value="${notReturnedlist.limitedDate}" /></td>
+					<td>
+					<input type="hidden" name="lending" value="${notReturned.id}"/>
+					<input type="button" value="返却"/>>
+					</td>
+				</tr>
+			</c:forEach>
+		</table>
+	</form>
 </body>
 </html>

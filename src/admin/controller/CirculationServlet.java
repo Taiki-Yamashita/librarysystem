@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.Circulation;
+import service.BookService;
 import service.CirculationService;
 
 @WebServlet(urlPatterns = {"/admin/circulation"})
@@ -25,6 +26,18 @@ public class CirculationServlet extends HttpServlet {
 		request.setAttribute("circulations", circulations);
 
 		request.getRequestDispatcher("/admin/circulation.jsp").forward(request, response);
+	}
+
+
+	@Override
+	protected void doPost(HttpServletRequest request,HttpServletResponse response)
+		throws ServletException,IOException {
+
+		String lending =request.getParameter("lending");
+		String num = "0";
+
+		new BookService().lendingBook(lending, num);
+		response.sendRedirect("./circulation");
 	}
 
 }

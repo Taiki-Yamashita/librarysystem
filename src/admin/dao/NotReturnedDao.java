@@ -19,7 +19,6 @@ public class NotReturnedDao {
 		try {
 			StringBuilder sql = new StringBuilder();
 			sql.append("SELECT * FROM users_circulations where returning = 1");
-			//sql.append("ORDER BY  DESC limit " + num);
 
 			ps = connection.prepareStatement(sql.toString());
 
@@ -39,15 +38,18 @@ public class NotReturnedDao {
 		List<NotReturned> ret = new ArrayList<NotReturned>();
 		try {
 			while (rs.next()) {
+				int id = rs.getInt("id");
 				String userName = rs.getString("user_name");
 				String bookName = rs.getString("book_name");
 				String libraryName = rs.getString("library_name");
+				String limitedDate = rs.getString("limited_date");
 
 				NotReturned notReturned = new NotReturned();
-
+				notReturned.setId(id);
 				notReturned.setUserName(userName);
 				notReturned.setBookName(bookName);
 				notReturned.setLibraryName(libraryName);
+				notReturned.setLimitedDate(limitedDate);
 
 				ret.add(notReturned);
 			}

@@ -21,7 +21,8 @@ public class DeleteServlet extends HttpServlet {
 				throws IOException, ServletException{
 		Favorite favorite = new Favorite();
 		new FavoriteService().delete(favorite, request.getParameter("userId"), request.getParameter("bookId"));
-		request.getRequestDispatcher("/favorite.jsp").forward(request, response);
+
+		response.sendRedirect("./favorite");
 	}
 
 }

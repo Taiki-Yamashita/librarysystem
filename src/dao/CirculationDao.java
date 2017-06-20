@@ -172,7 +172,7 @@ public class CirculationDao {
 		List<Circulation> ret = new ArrayList<Circulation>();
 		try {
 			while (rs.next()) {
-				//int id = rs.getInt("id");
+				int id = rs.getInt("id");
 
 				String userId = rs.getString("user_id");
 				String userName = rs.getString("user_name");
@@ -185,7 +185,7 @@ public class CirculationDao {
 				//String returning = rs.getString("returning");
 
 				Circulation circulation = new Circulation();
-				//circulation.setId(id);
+				circulation.setId(id);
 				circulation.setUserId(userId);
 				circulation.setUserName(userName);
 				circulation.setBookId(bookId);

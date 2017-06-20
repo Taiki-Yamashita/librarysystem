@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import admin.beans.NotReturned;
 import admin.service.NotReturnedService;
 import beans.Circulation;
+import service.BookService;
 import service.CirculationService;
 
 @WebServlet(urlPatterns = {"/admin/notReturned"})
@@ -33,13 +34,22 @@ public class NotReturnedServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 
-
 		request.setAttribute("circulations", circulations);
 		List<NotReturned> notReturnedlists = new NotReturnedService().select();
 
 		request.setAttribute("notReturnedlists", notReturnedlists);
 
-
 		request.getRequestDispatcher("/admin/notReturned.jsp").forward(request, response);
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest request,HttpServletResponse response)
+		throws ServletException,IOException {
+
+		String lending =request.getParameter("lending");
+		String num = "0";
+
+		new BookService().lendingBook(lending, num);
+		response.sendRedirect("./notreturn");
 	}
 }
