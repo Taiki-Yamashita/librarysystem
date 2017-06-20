@@ -39,9 +39,7 @@ public class ReservingBookServlet extends HttpServlet {
 		if(num ==1){
 
 		Book reservingBook = new BookService().selectBook(bookId);
-
-		int userId = Integer.parseInt(request.getParameter("userId"));
-		User reservingUser = new UserService().selectUser(userId);
+		User reservingUser = new UserService().selectUser("userId");
 
 		Reservation addReservation = new Reservation();
 		addReservation.setUserId(String.valueOf(reservingUser.getId()));

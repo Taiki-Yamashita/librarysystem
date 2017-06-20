@@ -78,7 +78,7 @@ public class UserService {
 //		}
 //	}
 
-	public User selectUser(int userId) {
+	public User selectUser(String userId) {
 
 		Connection connection = null;
 		try {
