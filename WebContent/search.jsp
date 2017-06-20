@@ -79,7 +79,7 @@
 							<c:if test="${condition != 'から始まる'}"><option value="から始まる">から始まる</option></c:if>
 							<c:if test="${condition != 'で終わる'}"><option value="で終わる">で終わる</option></c:if>
 							<c:if test="${condition != 'と一致する'}"><option value="と一致する">と一致する</option></c:if>
-						</select>条件で
+						</select>
 					</td>
 				</tr>
 			</table>
