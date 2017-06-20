@@ -14,7 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.Book;
+import beans.Favorite;
+import beans.User;
 import service.BookService;
+import service.FavoriteService;
 
 @WebServlet(urlPatterns = { "/search" })
 public class SearchServlet extends HttpServlet{
@@ -25,6 +28,8 @@ public class SearchServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		List<Favorite> favorites = new FavoriteService().selectAll();
+		User loginUser = (User) request.getSession().getAttribute("loginUser");
 		List<Book> selectedBooks = (List<Book>)request.getSession().getAttribute("selectedBooks");
 
 		if(selectedBooks == null){
@@ -37,6 +42,8 @@ public class SearchServlet extends HttpServlet{
 				request.setAttribute("pageCountList", getPageCount(selectedBooks.size()));
 				request.setAttribute("pageNumber", request.getParameter("pageNumber"));
 				request.setAttribute("books", selectedBooks);
+				request.setAttribute("loginUser", loginUser);
+				request.setAttribute("favorites", favorites);
 			}
 			else request.setAttribute("books", null);
 			request.getRequestDispatcher("/search.jsp").forward(request, response);
