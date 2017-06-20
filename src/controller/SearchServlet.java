@@ -23,62 +23,13 @@ import service.FavoriteService;
 public class SearchServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		User loginUser = (User) request.getSession().getAttribute("loginUser");
 		List<Favorite> favorites = new FavoriteService().selectAll();
-		List<Book> selectedBooks = null;
-		String bookStatus = request.getParameter("bookStatus");
-		String sort = "";
-		if(request.getParameter("sort") != null) sort = request.getParameter("sort");
-
-		/*search*/
-		if(request.getParameter("isSearching") != null){
-
-			/*freeWord*/
-			String selectBox = request.getParameter("selectBox");
-			String freeWord = request.getParameter("freeWord");
-			String condition = request.getParameter("condition");
-
-			/*refine*/
-			List<String> newBooks = getNewBooks(request);
-			List<String> libraries = getLibraries(request);
-			List<String> categories = getCategories(request);
-			List<String> types = getTypes(request);
-
-			/*freeWord*/
-			if(request.getParameter("throughSearching") != null){
-				selectBox = request.getParameter("selectBoxForSort");
-				freeWord = request.getParameter("freeWordForSort");
-				condition = request.getParameter("conditionForSort");
-				bookStatus = request.getParameter("bookStatus");
-			}
-
-			selectedBooks = new BookService().getSelectedBooks(selectBox, freeWord, condition, sort, bookStatus,
-					newBooks, libraries, categories, types);
-
-			/*freeWord*/
-			request.getSession().setAttribute("selectBox", new BookService().getMapCategory().get(selectBox));
-			request.getSession().setAttribute("selectBoxId", selectBox);
-			request.getSession().setAttribute("freeWord", freeWord);
-			request.getSession().setAttribute("condition", condition);
-
-			/*refine*/
-			request.getSession().setAttribute("newBooks", newBooks);
-			request.getSession().setAttribute("libraries", libraries);
-			request.getSession().setAttribute("categories", categories);
-			request.getSession().setAttribute("types", types);
-
-			request.getSession().setAttribute("selectedBooks", selectedBooks);
-			request.getSession().setAttribute("sort", sort);
-			request.getSession().setAttribute("bookStatus", bookStatus);
-			request.getSession().setAttribute("throughSearching", "1");
-
-			if(request.getParameter("pageNumber") == null) response.sendRedirect("./search?pageNumber=1");
-			else response.sendRedirect("./search?pageNumber=" + request.getParameter("pageNumber"));
-		}
+		User loginUser = (User) request.getSession().getAttribute("loginUser");
+		List<Book> selectedBooks = (List<Book>)request.getSession().getAttribute("selectedBooks");
 
 		if(selectedBooks == null){
 			request.getRequestDispatcher("/search.jsp").forward(request, response);
@@ -102,7 +53,55 @@ public class SearchServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		String sort = "";
+		if(request.getParameter("sort") != null) sort = request.getParameter("sort");
+		String bookStatus = request.getParameter("bookStatus");
 
+		/*search*/
+		if(request.getParameter("isSearching") != null){
+
+			/*freeWord*/
+			String selectBox = request.getParameter("selectBox");
+			String freeWord = request.getParameter("freeWord");
+			String condition = request.getParameter("condition");
+
+			/*refine*/
+			List<String> newBooks = getNewBooks(request);
+			List<String> libraries = getLibraries(request);
+			List<String> categories = getCategories(request);
+			List<String> types = getTypes(request);
+
+			/*freeWord*/
+			if(request.getParameter("throughSearching") != null){
+				selectBox = request.getParameter("selectBoxForSort");
+				freeWord = request.getParameter("freeWordForSort");
+				condition = request.getParameter("conditionForSort");
+				bookStatus = request.getParameter("bookStatus");
+			}
+
+			List<Book> selectedBooks = new BookService().getSelectedBooks(selectBox, freeWord, condition, sort, bookStatus,
+					newBooks, libraries, categories, types);
+
+			/*freeWord*/
+			request.getSession().setAttribute("selectBox", new BookService().getMapCategory().get(selectBox));
+			request.getSession().setAttribute("selectBoxId", selectBox);
+			request.getSession().setAttribute("freeWord", freeWord);
+			request.getSession().setAttribute("condition", condition);
+
+			/*refine*/
+			request.getSession().setAttribute("newBooks", newBooks);
+			request.getSession().setAttribute("libraries", libraries);
+			request.getSession().setAttribute("categories", categories);
+			request.getSession().setAttribute("types", types);
+
+			request.getSession().setAttribute("selectedBooks", selectedBooks);
+			request.getSession().setAttribute("sort", sort);
+			request.getSession().setAttribute("bookStatus", bookStatus);
+			request.getSession().setAttribute("throughSearching", "1");
+
+			if(request.getParameter("pageNumber") == null) response.sendRedirect("./search?pageNumber=1");
+			else response.sendRedirect("./search?pageNumber=" + request.getParameter("pageNumber"));
+		}
 	}
 
 	public boolean isValid(List<Book> books, HttpServletRequest request){

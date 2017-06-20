@@ -26,7 +26,7 @@
 		<hr width="1500px">
 
 		<p>◎検索</p>
-		<form action="./search" method="GET">
+		<form action="./search" method="POST">
 			<table>
 				<tr>
 					<td>【状態】</td>
@@ -268,7 +268,7 @@
 
 		<c:if test="${not empty throughSearching}">
 			<p>◎並び替え</p>
-			<form action="./search" method="GET">
+			<form action="./search" method="POST">
 				<c:if test="${sort == '新しい順'}"><input type="radio" name="sort" value="新しい順" checked>新しい順</c:if>
 				<c:if test="${sort != '新しい順'}">
 					<c:if test="${sort == ''}"><input type="radio" name="sort" value="新しい順" checked>新しい順</c:if>
@@ -459,7 +459,7 @@
 			<table>
 				<tr>
 					<c:forEach items="${pageCountList}" var="pageCount">
-						<form action="./search" method="GET">
+						<form action="./search" method="POST">
 							<td>
 								<c:if test="${pageNumber == pageCount}"><c:out value="${pageCount}"></c:out></c:if>
 								<c:if test="${pageNumber != pageCount}">
