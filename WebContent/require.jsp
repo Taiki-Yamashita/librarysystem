@@ -12,7 +12,7 @@
 <body>
 	<a href = "./">トップ</a>
 
-	<h1>本申請画面</h1>
+	<h1>本のリクエスト</h1>
 
 		<c:if test="${ not empty errorMessages }">
 			<c:forEach items="${errorMessages}" var="message">
@@ -25,16 +25,17 @@
 		<form action="require" method="post">
 
 			<label for="userName">申請者</label>
-			<input name="userName" value="${newRequire.userName}" id="userName"/><br/>
+			<c:out value="${loginUser.name}"></c:out><br/>
+			<input type="hidden" name="userName" value="${loginUser.name}">
 
 			<label for="bookName">書名</label>
-			<input name="bookName" value="${newRequire.bookName}" id="bookName"/><br/>
+			<input name="bookName" value="${newRequire.bookName}"/><br/>
 
 			<label for="author">著者</label>
-			<input name="author" value="${newRequire.author}" id="author"/><br/>
+			<input name="author" value="${newRequire.author}"/><br/>
 
 			<label for="publisher">出版社</label>
-			<input name="publisher"  value="${newRequire.publisher}"  id="publisher"/><br/>
+			<input name="publisher"  value="${newRequire.publisher}"/><br/>
 
 			<input type="submit" value="登録" />
 		</form>
