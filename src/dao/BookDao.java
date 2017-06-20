@@ -178,133 +178,35 @@ public class BookDao {
 	}
 
 	public List<Book> getSelectedBooks(Connection connection, String selectBox,
-			String freeWord, String condition, String sort, String bookStatus){
+			String freeWord, String condition, String sort, String bookStatus,
+			List<String> newBooks, List<String> libraries, List<String> categories, List<String> types){
 
 		PreparedStatement ps = null;
 		try {
 
 			StringBuilder sql = new StringBuilder();
-			sql.append("SELECT * FROM books WHERE ");
 
+			sql.append("SELECT * FROM books WHERE ");
 			if(bookStatus.equals("貸出可")) sql.append("lending = ? AND ");
 			if(bookStatus.equals("貸出中")) sql.append("lending = ? AND ");
-
 			if(!selectBox.isEmpty()) sql.append(selectBox + " LIKE ?");
 			else{
 				if(condition.equals("と一致する")) sql.append("name = ? or author = ? or publisher = ? or category = ? or isbn_id = ?");
 				else if(condition.equals("で終わる")) sql.append("name LIKE ? or author LIKE ? or publisher LIKE ? or category LIKE ? or isbn_id LIKE ?");
 				else sql.append("CONCAT(name, author, publisher, category, isbn_id) LIKE ?");
 			}
-
-			if(sort.equals("新しい順")) sql.append(" ORDER BY published_date DESC");
-			if(sort.equals("古い順")) sql.append(" ORDER BY published_date ASC");
-			if(sort.equals("書名順")) sql.append(" ORDER BY name ASC");
-			if(sort.equals("著者名順")) sql.append(" ORDER BY author");
-			if(sort.equals("カテゴリ順")) sql.append(" ORDER BY category");
-			if(sort.equals("出版社順")) sql.append(" ORDER BY publisher");
-			if(sort.equals("")) sql.append(" ORDER BY published_date DESC");
-
-			ps = connection.prepareStatement(sql.toString());
-			if(!bookStatus.equals("全て")){
-				if(bookStatus.equals("貸出可")) ps.setString(1, "0");
-				if(bookStatus.equals("貸出中")) ps.setString(1, "1");
-
-				if(!selectBox.isEmpty()){
-					if(condition.equals("を含む")) ps.setString(2, "%" + freeWord + "%");
-					if(condition.equals("から始まる")) ps.setString(2, freeWord + "%");
-					if(condition.equals("で終わる")) ps.setString(2, "%" + freeWord);
-					if(condition.equals("と一致する")) ps.setString(2, freeWord);
-				}
-				else{
-					if(condition.equals("と一致する")){
-						ps.setString(2, freeWord);
-						ps.setString(3, freeWord);
-						ps.setString(4, freeWord);
-						ps.setString(5, freeWord);
-						ps.setString(6, freeWord);
-					}
-					else if(condition.equals("で終わる")){
-						ps.setString(2, "%" + freeWord);
-						ps.setString(3, "%" + freeWord);
-						ps.setString(4, "%" + freeWord);
-						ps.setString(5, "%" + freeWord);
-						ps.setString(6, "%" + freeWord);
-					}
-					else{
-						if(condition.equals("を含む")) ps.setString(2, "%" + freeWord + "%");
-						if(condition.equals("から始まる")) ps.setString(2, freeWord + "%");
-					}
-				}
-			}
-			else {
-				if(!selectBox.isEmpty()){
-					if(condition.equals("を含む")) ps.setString(1, "%" + freeWord + "%");
-					if(condition.equals("から始まる")) ps.setString(1, freeWord + "%");
-					if(condition.equals("で終わる")) ps.setString(1, "%" + freeWord);
-					if(condition.equals("と一致する")) ps.setString(1, freeWord);
-				}
-				else{
-					if(condition.equals("と一致する")){
-						ps.setString(1, freeWord);
-						ps.setString(2, freeWord);
-						ps.setString(3, freeWord);
-						ps.setString(4, freeWord);
-						ps.setString(5, freeWord);
-					}
-					else if(condition.equals("で終わる")){
-						ps.setString(1, "%" + freeWord);
-						ps.setString(2, "%" + freeWord);
-						ps.setString(3, "%" + freeWord);
-						ps.setString(4, "%" + freeWord);
-						ps.setString(5, "%" + freeWord);
-					}
-					else{
-						if(condition.equals("を含む")) ps.setString(1, "%" + freeWord + "%");
-						if(condition.equals("から始まる")) ps.setString(1, freeWord + "%");
-					}
-				}
-			}
-
-			ResultSet rs = ps.executeQuery();
-
-			List<Book> bookList = toBookList(rs);
-			if (bookList.isEmpty()) {
-				return null;
-			}else {
-				return bookList;
-			}
-		} catch (SQLException e) {
-			throw new SQLRuntimeException(e);
-		} finally {
-			close(ps);
-		}
-	}
-
-	public List<Book> getRefinedBooks(Connection connection, List<String> newBooks,
-			List<String> libraries, List<String> categories, List<String> types, String sort, String bookStatus){
-
-		PreparedStatement ps = null;
-		try {
-
-			StringBuilder sql = new StringBuilder();
-
-			sql.append("SELECT * FROM books WHERE ");
-			sql.append("(published_date >= ?) ");
-
-			if(bookStatus.equals("貸出可")) sql.append("AND lending = ? ");
-			if(bookStatus.equals("貸出中")) sql.append("AND lending = ? ");
-
+			sql.append(" AND published_date >= ? "); //change
 			if(!libraries.isEmpty()){
 				sql.append("AND (");
 				for(int i = 0; i < libraries.size(); i++){
-					if(i == libraries.size()-1) sql.append("library_id = ?) ");
+					if(i == libraries.size()-1) sql.append("library_id = ?)");
 					else sql.append("library_id = ? or ");
 				}
 			}
 			if(!categories.isEmpty()){
 				sql.append("AND (");
 				for(int i = 0; i < categories.size(); i++){
-					if(i == categories.size()-1) sql.append("category = ?) ");
+					if(i == categories.size()-1) sql.append("category = ?)");
 					else sql.append("category = ? or ");
 				}
 			}
@@ -324,31 +226,208 @@ public class BookDao {
 			if(sort.equals("出版社順")) sql.append(" ORDER BY publisher");
 			if(sort.equals("")) sql.append(" ORDER BY published_date DESC");
 
-			int cnt = 2;
+			int cnt = 0;
 			ps = connection.prepareStatement(sql.toString());
-			ps.setString(1, newBooks.get(0));
 			if(!bookStatus.equals("全て")){
-				if(bookStatus.equals("貸出可")) ps.setString(2, "0");
-				if(bookStatus.equals("貸出中")) ps.setString(2, "1");
-				cnt = 3;
-			}
+				if(bookStatus.equals("貸出可")) ps.setString(1, "0");
+				if(bookStatus.equals("貸出中")) ps.setString(1, "1");
 
-			if(!libraries.isEmpty()){
-				for(int i = 0; i < libraries.size(); i++){
-					ps.setString(cnt++, libraries.get(i));
-				}
-			}
-			if(!categories.isEmpty()){
-				for(int i = 0; i < categories.size(); i++){
-					ps.setString(cnt++, categories.get(i));
-				}
-			}
-			if(!types.isEmpty()){
-				for(int i = 0; i < types.size(); i++){
-					ps.setString(cnt++, types.get(i));
-				}
-			}
+				if(!selectBox.isEmpty()){
+					if(condition.equals("を含む")) ps.setString(2, "%" + freeWord + "%");
+					if(condition.equals("から始まる")) ps.setString(2, freeWord + "%");
+					if(condition.equals("で終わる")) ps.setString(2, "%" + freeWord);
+					if(condition.equals("と一致する")) ps.setString(2, freeWord);
+					ps.setString(3, newBooks.get(0));
 
+					cnt = 4;
+					if(!libraries.isEmpty()){
+						for(int i = 0; i < libraries.size(); i++){
+							ps.setString(cnt++, libraries.get(i));
+						}
+					}
+					if(!categories.isEmpty()){
+						for(int i = 0; i < categories.size(); i++){
+							ps.setString(cnt++, categories.get(i));
+						}
+					}
+					if(!types.isEmpty()){
+						for(int i = 0; i < types.size(); i++){
+							ps.setString(cnt++, types.get(i));
+						}
+					}
+				}
+				else{
+					if(condition.equals("と一致する")){
+						ps.setString(2, freeWord);
+						ps.setString(3, freeWord);
+						ps.setString(4, freeWord);
+						ps.setString(5, freeWord);
+						ps.setString(6, freeWord);
+						ps.setString(7, newBooks.get(0));
+
+						cnt = 8;
+						if(!libraries.isEmpty()){
+							for(int i = 0; i < libraries.size(); i++){
+								ps.setString(cnt++, libraries.get(i));
+							}
+						}
+						if(!categories.isEmpty()){
+							for(int i = 0; i < categories.size(); i++){
+								ps.setString(cnt++, categories.get(i));
+							}
+						}
+						if(!types.isEmpty()){
+							for(int i = 0; i < types.size(); i++){
+								ps.setString(cnt++, types.get(i));
+							}
+						}
+					}
+					else if(condition.equals("で終わる")){
+						ps.setString(2, "%" + freeWord);
+						ps.setString(3, "%" + freeWord);
+						ps.setString(4, "%" + freeWord);
+						ps.setString(5, "%" + freeWord);
+						ps.setString(6, "%" + freeWord);
+						ps.setString(7, newBooks.get(0));
+
+						cnt = 8;
+						if(!libraries.isEmpty()){
+							for(int i = 0; i < libraries.size(); i++){
+								ps.setString(cnt++, libraries.get(i));
+							}
+						}
+						if(!categories.isEmpty()){
+							for(int i = 0; i < categories.size(); i++){
+								ps.setString(cnt++, categories.get(i));
+							}
+						}
+						if(!types.isEmpty()){
+							for(int i = 0; i < types.size(); i++){
+								ps.setString(cnt++, types.get(i));
+							}
+						}
+					}
+					else{
+						if(condition.equals("を含む")) ps.setString(2, "%" + freeWord + "%");
+						if(condition.equals("から始まる")) ps.setString(2, freeWord + "%");
+						ps.setString(3, newBooks.get(0));
+
+						cnt = 4;
+						if(!libraries.isEmpty()){
+							for(int i = 0; i < libraries.size(); i++){
+								ps.setString(cnt++, libraries.get(i));
+							}
+						}
+						if(!categories.isEmpty()){
+							for(int i = 0; i < categories.size(); i++){
+								ps.setString(cnt++, categories.get(i));
+							}
+						}
+						if(!types.isEmpty()){
+							for(int i = 0; i < types.size(); i++){
+								ps.setString(cnt++, types.get(i));
+							}
+						}
+					}
+				}
+			}
+			else {
+				if(!selectBox.isEmpty()){
+					if(condition.equals("を含む")) ps.setString(1, "%" + freeWord + "%");
+					if(condition.equals("から始まる")) ps.setString(1, freeWord + "%");
+					if(condition.equals("で終わる")) ps.setString(1, "%" + freeWord);
+					if(condition.equals("と一致する")) ps.setString(1, freeWord);
+					ps.setString(2, newBooks.get(0));
+
+					cnt = 3;
+					if(!libraries.isEmpty()){
+						for(int i = 0; i < libraries.size(); i++){
+							ps.setString(cnt++, libraries.get(i));
+						}
+					}
+					if(!categories.isEmpty()){
+						for(int i = 0; i < categories.size(); i++){
+							ps.setString(cnt++, categories.get(i));
+						}
+					}
+					if(!types.isEmpty()){
+						for(int i = 0; i < types.size(); i++){
+							ps.setString(cnt++, types.get(i));
+						}
+					}
+				}
+				else{
+					if(condition.equals("と一致する")){
+						ps.setString(1, freeWord);
+						ps.setString(2, freeWord);
+						ps.setString(3, freeWord);
+						ps.setString(4, freeWord);
+						ps.setString(5, freeWord);
+						ps.setString(6, newBooks.get(0));
+						cnt = 7;
+						if(!libraries.isEmpty()){
+							for(int i = 0; i < libraries.size(); i++){
+								ps.setString(cnt++, libraries.get(i));
+							}
+						}
+						if(!categories.isEmpty()){
+							for(int i = 0; i < categories.size(); i++){
+								ps.setString(cnt++, categories.get(i));
+							}
+						}
+						if(!types.isEmpty()){
+							for(int i = 0; i < types.size(); i++){
+								ps.setString(cnt++, types.get(i));
+							}
+						}
+					}
+					else if(condition.equals("で終わる")){
+						ps.setString(1, "%" + freeWord);
+						ps.setString(2, "%" + freeWord);
+						ps.setString(3, "%" + freeWord);
+						ps.setString(4, "%" + freeWord);
+						ps.setString(5, "%" + freeWord);
+						ps.setString(6, newBooks.get(0));
+						cnt = 7;
+						if(!libraries.isEmpty()){
+							for(int i = 0; i < libraries.size(); i++){
+								ps.setString(cnt++, libraries.get(i));
+							}
+						}
+						if(!categories.isEmpty()){
+							for(int i = 0; i < categories.size(); i++){
+								ps.setString(cnt++, categories.get(i));
+							}
+						}
+						if(!types.isEmpty()){
+							for(int i = 0; i < types.size(); i++){
+								ps.setString(cnt++, types.get(i));
+							}
+						}
+					}
+					else{
+						if(condition.equals("を含む")) ps.setString(1, "%" + freeWord + "%");
+						if(condition.equals("から始まる")) ps.setString(1, freeWord + "%");
+						ps.setString(2, newBooks.get(0));
+						cnt = 3;
+						if(!libraries.isEmpty()){
+							for(int i = 0; i < libraries.size(); i++){
+								ps.setString(cnt++, libraries.get(i));
+							}
+						}
+						if(!categories.isEmpty()){
+							for(int i = 0; i < categories.size(); i++){
+								ps.setString(cnt++, categories.get(i));
+							}
+						}
+						if(!types.isEmpty()){
+							for(int i = 0; i < types.size(); i++){
+								ps.setString(cnt++, types.get(i));
+							}
+						}
+					}
+				}
+			}
 			ResultSet rs = ps.executeQuery();
 
 			List<Book> bookList = toBookList(rs);
@@ -363,7 +442,6 @@ public class BookDao {
 			close(ps);
 		}
 	}
-
 
 	private List<Book> toBookList(ResultSet rs) throws SQLException {
 

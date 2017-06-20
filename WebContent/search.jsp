@@ -25,7 +25,7 @@
 
 		<hr width="1500px">
 
-		<p>◎絞込み検索</p>
+		<p>◎検索</p>
 		<form action="./search" method="POST">
 			<table>
 				<tr>
@@ -80,9 +80,6 @@
 							<c:if test="${condition != 'で終わる'}"><option value="で終わる">で終わる</option></c:if>
 							<c:if test="${condition != 'と一致する'}"><option value="と一致する">と一致する</option></c:if>
 						</select>条件で
-					</td>
-					<td>
-						<input type="hidden" name="isPushFreeWord" value="1">
 					</td>
 				</tr>
 			</table>
@@ -260,7 +257,7 @@
 				<tr>
 					<td>
 						で
-						<input type="hidden" name="isPushRefine" value="1">
+						<input type="hidden" name="isSearching" value="1">
 						<input type="submit" value="絞り込む">
 					</td>
 				</tr>
@@ -269,7 +266,7 @@
 
 		<hr width="1500px">
 
-		<c:if test="${not empty throughFreeWord || not empty throughRefine}">
+		<c:if test="${not empty throughSearching}">
 			<p>◎並び替え</p>
 			<form action="./search" method="POST">
 				<c:if test="${sort == '新しい順'}"><input type="radio" name="sort" value="新しい順" checked>新しい順</c:if>
@@ -293,27 +290,27 @@
 				<c:if test="${sort == '出版社順'}"><input type="radio" name="sort" value="出版社順" checked>出版社順</c:if>
 				<c:if test="${sort != '出版社順'}"><input type="radio" name="sort" value="出版社順">出版社順</c:if>
 
-				<input type="submit" value="並び替える">
+				<!-- freeWord -->
+				<input type="hidden" name="selectBoxForSort" value="${selectBoxId}">
+				<input type="hidden" name="freeWordForSort" value="${freeWord}">
+				<input type="hidden" name="conditionForSort" value="${condition}">
 
-				<c:if test="${not empty throughFreeWord}">
-					<input type="hidden" name="throughFreeWord" value="1">
-					<input type="hidden" name="selectBoxForSort" value="${selectBoxId}">
-					<input type="hidden" name="freeWordForSort" value="${freeWord}">
-					<input type="hidden" name="conditionForSort" value="${condition}">
-				</c:if>
-				<c:if test="${not empty throughRefine}">
-					<input type="hidden" name="throughRefine" value="1">
-					<c:forEach items="${libraries}" var="library" varStatus="status">
-						<input type="hidden" name="library${status.index + 1}" value="${status.index + 1}">
-					</c:forEach>
-					<c:forEach items="${categories}" var="category" varStatus="status">
-						<input type="hidden" name="category${status.index + 1}" value="${status.index + 1}">
-					</c:forEach>
-					<c:forEach items="${types}" var="type" varStatus="status">
-						<input type="hidden" name="type${status.index + 1}" value="${status.index + 1}">
-					</c:forEach>
-				</c:if>
+				<!-- refine -->
+				<c:forEach items="${libraries}" var="library" varStatus="status">
+					<input type="hidden" name="library${status.index + 1}" value="${status.index + 1}">
+				</c:forEach>
+				<c:forEach items="${categories}" var="category" varStatus="status">
+					<input type="hidden" name="category${status.index + 1}" value="${status.index + 1}">
+				</c:forEach>
+				<c:forEach items="${types}" var="type" varStatus="status">
+					<input type="hidden" name="type${status.index + 1}" value="${status.index + 1}">
+				</c:forEach>
+
+				<input type="hidden" name="throughSearching" value="1">
+				<input type="hidden" name="isSearching" value="1">
 				<input type="hidden" name="bookStatus" value="${bookStatus}">
+
+				<input type="submit" value="並び替える">
 			</form>
 			<hr width="1500px">
 		</c:if>
@@ -333,42 +330,37 @@
 			です
 		</c:if>
 
-
 		<c:if test="${not empty books}">
-
-				<table>
-					<tr><th>本</th><th>出版日</th><th>予約</th><th>お気に入り</th></tr>
-					<c:forEach items="${books}" var="book" varStatus="status">
-						<c:if test="${book.id != 0}">
-							<c:if test="${status.index >= (pageNumber-1)*3 && status.index <= (pageNumber*3)-1}">
-								<tr>
-									<td><c:out value="${book.name}"/></td>
-									<td><c:out value="${book.publishedDate}"/></td>
-
-												<td>
-													<form action="./reservation" method="POST">
-														<input type="hidden" value="${book.id}" name="bookId">
-														<input type="submit" value="予約" />
-													</form>
-												</td>
-
-										<c:forEach items="${favorites}" var="favorite" >
-	<!-- ログインユーザーのID -->			<c:if test="${favorite.userId != user.id && book.id != favorite.bookId}">
-													<td>
-														<form action="./favorite" method="POST">
-	<!-- ログインユーザーのID -->							<input type="hidden" value="${user.id}" name="userId">
-															<input type="hidden" value="${book.id}" name="bookId">
-															<input type="submit"  value="お気に入り" />
-														</form>
-													</td>
-
-											</c:if>
-										</c:forEach>
-								</tr>
-							</c:if>
+			<table>
+				<tr><th>本</th><th>出版日</th><th>予約</th><th>お気に入り</th></tr>
+				<c:forEach items="${books}" var="book" varStatus="status">
+					<c:if test="${book.id != 0}">
+						<c:if test="${status.index >= (pageNumber-1)*3 && status.index <= (pageNumber*3)-1}">
+							<tr>
+								<td><c:out value="${book.name}"/></td>
+								<td><c:out value="${book.publishedDate}"/></td>
+								<td>
+									<form action="./reservation" method="POST">
+										<input type="hidden" value="${book.id}" name="bookId">
+										<input type="submit" value="予約" />
+									</form>
+								</td>
+								<c:forEach items="${favorites}" var="favorite" >
+<!-- ログインユーザーのID -->		<c:if test="${favorite.userId != user.id && book.id != favorite.bookId}">
+										<td>
+											<form action="./favorite" method="POST">
+<!-- ログインユーザーのID -->					<input type="hidden" value="${user.id}" name="userId">
+												<input type="hidden" value="${book.id}" name="bookId">
+												<input type="submit"  value="お気に入り" />
+											</form>
+										</td>
+									</c:if>
+								</c:forEach>
+							</tr>
 						</c:if>
-					</c:forEach>
-				</table>
+					</c:if>
+				</c:forEach>
+			</table>
 			<table>
 				<tr>
 					<c:forEach items="${pageCountList}" var="pageCount">
@@ -380,14 +372,14 @@
 									<input type="hidden" name="pageNumber" value="${pageCount}">
 								</c:if>
 							</td>
-							<c:if test="${not empty throughFreeWord}">
-								<input type="hidden" name="throughFreeWord" value="1">
+							<c:if test="${not empty throughSearching}">
+								<input type="hidden" name="throughSearching" value="1">
+								<input type="hidden" name="isSearching" value="1">
+
 								<input type="hidden" name="selectBoxForSort" value="${selectBoxId}">
 								<input type="hidden" name="freeWordForSort" value="${freeWord}">
 								<input type="hidden" name="conditionForSort" value="${condition}">
-							</c:if>
-							<c:if test="${not empty throughRefine}">
-								<input type="hidden" name="throughRefine" value="1">
+
 								<c:forEach items="${libraries}" var="library" varStatus="status">
 									<input type="hidden" name="library${status.index + 1}" value="${status.index + 1}">
 								</c:forEach>
@@ -397,6 +389,7 @@
 								<c:forEach items="${types}" var="type" varStatus="status">
 									<input type="hidden" name="type${status.index + 1}" value="${status.index + 1}">
 								</c:forEach>
+
 							</c:if>
 							<input type="hidden" name="sort" value="${sort}">
 							<input type="hidden" name="bookStatus" value="${bookStatus}">
@@ -411,7 +404,6 @@
 
 		<!-- 絞込み結果 -->
 		<c:remove var="selectedBooks" scope="session"/>
-		<c:remove var="refinedBooks" scope="session"/>
 
 		<!-- フリーワード検索 -->
 		<c:remove var="selectBox" scope="session"/>
@@ -432,8 +424,7 @@
 		<c:remove var="checkType" scope="session"/>
 
 		<!-- 並び替え機能 -->
-		<c:remove var="throughFreeWord" scope="session"/>
-		<c:remove var="throughRefine" scope="session"/>
+		<c:remove var="throughSearching" scope="session"/>
 		<c:remove var="sort" scope="session"/>
 
 		<!-- 貸出中/貸出可機能 -->
