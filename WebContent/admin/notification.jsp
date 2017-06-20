@@ -34,8 +34,9 @@
 				</c:if>
 		</c:forEach>
 	</select><br>
-	投稿<br />
-	<textarea name="message" id="message" cols="100" rows="5" ></textarea><br>
+
+	投稿<br>
+	<textarea name="message" id="message" cols="100" rows="5" ><c:out value="${newNotification.message }"></c:out></textarea><br>
 
 	<input type="submit" value="登録" />
 
