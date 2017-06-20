@@ -12,6 +12,21 @@
 	<br>
 	<a href = "./manage">管理画面</a>
 
+
+<c:if test="${ not empty errorMessages }">
+	<div class="errorMessages">
+		<ul>
+			<c:forEach items="${errorMessages}" var="message">
+				<li><c:out value="${message}" />
+				</c:forEach>
+				</ul>
+	</div>
+	<c:remove var="errorMessages" scope="session"/>
+</c:if>
+
+
+
+
 <form action = "./addBook"method = "post"><br />
 	<label for = "name">名前</label><br>
 	<input name = "name" id = "name" value = "${newBook.name }"/><br />
