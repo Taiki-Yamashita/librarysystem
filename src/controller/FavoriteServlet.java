@@ -43,7 +43,7 @@ public class FavoriteServlet extends HttpServlet{
 
 		favorite.setUserId(request.getParameter("userId"));
 		favorite.setBookId(request.getParameter("bookId"));
-
 		new FavoriteService().insert(favorite);
+		request.getRequestDispatcher("/search.jsp").forward(request, response);
 	}
 }
