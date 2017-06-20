@@ -21,7 +21,7 @@
 			<tr><td><a href = "./introduction">本の紹介</a></td></tr>
 			<tr><td><a href = "./user">マイページ</a></td></tr>
 			<tr><td><a href = "./ranking">ランキング</a></td></tr>
-			<tr><td><a href = "./login">ログアウト</a></td></tr>
+			<tr><td><a href = "./logout">ログアウト</a></td></tr>
 		</table>
 
 	<h5>お知らせ</h5>
