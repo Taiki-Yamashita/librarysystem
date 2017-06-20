@@ -49,16 +49,10 @@
 				<form action = "reservingBook" method = "post">
 					<input type = "hidden" name = "bookId" value = "${book.id}" >
 					<input type = "hidden" id = "libraryId" name = "libraryId" value = "${book.libraryId}" >
-					<c:if test="${book.reserving == 0 }">
-						<input id = "userId" name = "userId"  >
-						<input type = "hidden" name = "num" value =1>
-						<input type = "hidden" name = "reservation" value="${book.id}">
-						<input type = "submit" value = "予約" />
-					</c:if>
-					<c:if test="${book.reserving == 1 }">
-						<input type = "hidden" name = "num" value =0>
-						<input type = "submit" value = "取消" />
-					</c:if>
+					<input id = "userId" name = "userId"  >
+					<input type = "hidden" name = "num" value =1>
+					<input type = "hidden" name = "reservation" value="${book.id}">
+					<input type = "submit" value = "予約" />
 			</form>
 			</tr>
 

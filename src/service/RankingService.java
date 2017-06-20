@@ -32,17 +32,17 @@ public class RankingService {
 		}
 	}
 
-	public List<Ranking> countAll() {
+	public List<Ranking> circulationAll() {
 
 		Connection connection = null;
 		try {
 			connection = getConnection();
 
-			List<Ranking> countList = new RankingDao().countAll(connection);
+			List<Ranking> circulations = new RankingDao().circulationAll(connection);
 
 			commit(connection);
 
-			return countList;
+			return circulations;
 		} catch (RuntimeException e) {
 			rollback(connection);
 			throw e;
@@ -53,5 +53,28 @@ public class RankingService {
 			close(connection);
 		}
 	}
+
+	public List<Ranking> reservationAll() {
+
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			List<Ranking> reservations = new RankingDao().reservationAll(connection);
+
+			commit(connection);
+
+			return reservations;
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
+
 
 }

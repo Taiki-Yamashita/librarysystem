@@ -8,8 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import beans.Ranking;
+import beans.User;
 import service.RankingService;
 
 @WebServlet(urlPatterns = { "/ranking" })
@@ -20,9 +22,16 @@ public class RankingServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
 
-		List<Ranking> countLists = new RankingService().countAll();
+		HttpSession session = request.getSession();
 
-		request.setAttribute("countLists", countLists);
+		User loginUser = (User) session.getAttribute("loginUser");
+
+		List<Ranking> circulations = new RankingService().circulationAll();
+		List<Ranking> reservations = new RankingService().reservationAll();
+
+		request.setAttribute("loginUser", loginUser);
+		request.setAttribute("circulations", circulations);
+		request.setAttribute("reservations", reservations);
 
 		request.getRequestDispatcher("/ranking.jsp").forward(request, response);
 	}

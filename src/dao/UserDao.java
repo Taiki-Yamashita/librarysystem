@@ -236,13 +236,13 @@ public class UserDao {
 	}
 
 
-	public User selectUser(Connection connection, String string){
+	public User selectUser(Connection connection, int userId){
 		PreparedStatement ps = null;
 		try {
 			String sql = "SELECT * FROM users WHERE id = ? ";
 
 			ps = connection.prepareStatement(sql);
-			ps.setString(1, string);
+			ps.setInt(1, userId);
 
 			ResultSet rs =ps.executeQuery();
 			List<User> userList = toUserList(rs);
