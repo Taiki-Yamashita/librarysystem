@@ -23,40 +23,16 @@ import service.FavoriteService;
 public class SearchServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 
-	@SuppressWarnings("unchecked")
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		List<Favorite> favorites = new FavoriteService().selectAll();
 		User loginUser = (User) request.getSession().getAttribute("loginUser");
-		List<Book> selectedBooks = (List<Book>)request.getSession().getAttribute("selectedBooks");
-
-		if(selectedBooks == null){
-			request.getRequestDispatcher("/search.jsp").forward(request, response);
-			return;
-		}
-		else{
-			if(isValid(selectedBooks, request)){
-				request.setAttribute("booksCount", selectedBooks.size());
-				request.setAttribute("pageCountList", getPageCount(selectedBooks.size()));
-				request.setAttribute("pageNumber", request.getParameter("pageNumber"));
-				request.setAttribute("books", selectedBooks);
-				request.setAttribute("loginUser", loginUser);
-				request.setAttribute("isFavorites", isFavorite(favorites, loginUser, selectedBooks));
-			}
-			else request.setAttribute("books", null);
-			request.getRequestDispatcher("/search.jsp").forward(request, response);
-		}
-	}
-
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
+		List<Favorite> favorites = new FavoriteService().selectAll();
+		List<Book> selectedBooks = null;
+		String bookStatus = request.getParameter("bookStatus");
 		String sort = "";
 		if(request.getParameter("sort") != null) sort = request.getParameter("sort");
-		String bookStatus = request.getParameter("bookStatus");
 
 		/*search*/
 		if(request.getParameter("isSearching") != null){
@@ -80,7 +56,7 @@ public class SearchServlet extends HttpServlet{
 				bookStatus = request.getParameter("bookStatus");
 			}
 
-			List<Book> selectedBooks = new BookService().getSelectedBooks(selectBox, freeWord, condition, sort, bookStatus,
+			selectedBooks = new BookService().getSelectedBooks(selectBox, freeWord, condition, sort, bookStatus,
 					newBooks, libraries, categories, types);
 
 			/*freeWord*/
@@ -103,6 +79,30 @@ public class SearchServlet extends HttpServlet{
 			if(request.getParameter("pageNumber") == null) response.sendRedirect("./search?pageNumber=1");
 			else response.sendRedirect("./search?pageNumber=" + request.getParameter("pageNumber"));
 		}
+
+		if(selectedBooks == null){
+			request.getRequestDispatcher("/search.jsp").forward(request, response);
+			return;
+		}
+		else{
+			if(isValid(selectedBooks, request)){
+				request.setAttribute("booksCount", selectedBooks.size());
+				request.setAttribute("pageCountList", getPageCount(selectedBooks.size()));
+				request.setAttribute("pageNumber", request.getParameter("pageNumber"));
+				request.setAttribute("books", selectedBooks);
+				request.setAttribute("loginUser", loginUser);
+				request.setAttribute("isFavorites", isFavorite(favorites, loginUser, selectedBooks));
+			}
+			else request.setAttribute("books", null);
+			request.getRequestDispatcher("/search.jsp").forward(request, response);
+		}
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+
 	}
 
 	public boolean isValid(List<Book> books, HttpServletRequest request){
@@ -193,19 +193,22 @@ public class SearchServlet extends HttpServlet{
 	public List<Integer> isFavorite(List<Favorite> favorites, User loginUser, List<Book> books){
 
 		List<Integer> isFavorite = new ArrayList<>();
-		int cnt = 0;
-		for(Book book : books){
-			boolean favoriteFlag = false;
-			for(Favorite favorite : favorites){
-				if(favorite.getBookId().equals(String.valueOf(book.getId())) && favorite.getUserId().equals(String.valueOf(loginUser.getId()))){
-					favoriteFlag = true;
+		if(favorites != null && loginUser != null){
+			int cnt = 0;
+			for(Book book : books){
+				boolean favoriteFlag = false;
+				for(Favorite favorite : favorites){
+					if(favorite.getBookId().equals(String.valueOf(book.getId())) && favorite.getUserId().equals(String.valueOf(loginUser.getId()))){
+						favoriteFlag = true;
+					}
 				}
+				if(favoriteFlag == true) isFavorite.add(-1);
+				else isFavorite.add(cnt);
+				cnt++;
 			}
-			if(favoriteFlag == true) isFavorite.add(-1);
-			else isFavorite.add(cnt);
-			cnt++;
-		}
 
-		return isFavorite;
+			return isFavorite;
+		}
+		return null;
 	}
 }
