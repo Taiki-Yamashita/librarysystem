@@ -10,17 +10,38 @@ import java.util.ArrayList;
 import java.util.List;
 
 import beans.Require;
+import exception.NoRowsUpdatedRuntimeException;
 import exception.SQLRuntimeException;
 
 public class RecieveDao {
+
+	public List<Require> getSelectAllRecieve(Connection connection, int num) {
+
+		PreparedStatement ps = null;
+		try {
+			StringBuilder sql = new StringBuilder();
+			sql.append("SELECT * FROM requires where showing = ?");
+			//sql.append("ORDER BY  DESC limit " + num);
+
+			ps = connection.prepareStatement(sql.toString());
+
+			ps.setInt(1, num);
+			ResultSet rs = ps.executeQuery();
+			List<Require> ret = toRecieveList(rs);
+			return ret;
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
 
 	public List<Require> getSelectAllRecieve(Connection connection) {
 
 		PreparedStatement ps = null;
 		try {
 			StringBuilder sql = new StringBuilder();
-			sql.append("SELECT * FROM requires");
-			//sql.append("ORDER BY  DESC limit " + num);
+			sql.append("SELECT * FROM requires ");
 
 			ps = connection.prepareStatement(sql.toString());
 
@@ -61,6 +82,31 @@ public class RecieveDao {
 			return ret;
 		} finally {
 			close(rs);
+		}
+	}
+
+	public void update(Connection connection, int flag, int id) {
+		PreparedStatement ps = null;
+		try {
+			StringBuilder sql = new StringBuilder();
+			sql.append("UPDATE requires SET");
+			sql.append(" showing = ?");
+			sql.append(" WHERE");
+			sql.append(" id = ?");
+
+			ps = connection.prepareStatement(sql.toString());
+
+			ps.setInt(1, flag);
+			ps.setInt(2, id);
+
+			int count = ps.executeUpdate();
+			if (count == 0) {
+				throw new NoRowsUpdatedRuntimeException();
+			}
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
 		}
 	}
 

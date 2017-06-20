@@ -48,7 +48,6 @@ public class AddUserServlet extends HttpServlet {
 			user.setName(request.getParameter("name"));
 			user.setLoginId(request.getParameter("loginId"));
 			user.setPassword(request.getParameter("password"));
-			//user.setPassword(request.getParameter("checkPassword"));
 			user.setAddress(request.getParameter("address"));
 			user.setTel(request.getParameter("tel"));
 			user.setMail(request.getParameter("mail"));
@@ -75,7 +74,6 @@ public class AddUserServlet extends HttpServlet {
 		newUser.setName(request.getParameter("name"));
 		newUser.setLoginId(request.getParameter("loginId"));
 		newUser.setPassword(request.getParameter("password"));
-		//newUser.setPassword(request.getParameter("checkPassword"));
 		newUser.setAddress(request.getParameter("address"));
 		newUser.setTel(request.getParameter("tel"));
 		newUser.setMail(request.getParameter("mail"));
@@ -87,12 +85,45 @@ public class AddUserServlet extends HttpServlet {
 
 	private boolean isValid(HttpServletRequest request, List<String> messages) {
 		String name = request.getParameter("name");
+		String loginId = request.getParameter("loginId");
+		String password = request.getParameter("password");
+		String address = request.getParameter("address");
+		String tel = request.getParameter("tel");
+		String mail = request.getParameter("mail");
+		String libraryId = request.getParameter("libraryId");
+
+
+
 		if (StringUtils.isEmpty(name) == true) {
 			messages.add("名前を入力してください");
-			return false;
+		}
+		if (StringUtils.isEmpty(loginId) == true) {
+			messages.add("ログインIDを入力してください");
+		}else if (loginId.matches("\\w{6,20}") != true){
+			messages.add("ログインIDは半角英数字6～20文字で入力してください");
 		}
 
-		return true;
-
+		if (StringUtils.isEmpty(password) == true) {
+			messages.add("パスワードを入力してください");
+		}else if (password.matches("\\w{6,20}") !=true) {
+			messages.add("パスワードは半角英数字6～20文字で入力してください");
+		}
+		if (StringUtils.isEmpty(address) == true) {
+			messages.add("住所を入力してください");
+		}
+		if(tel.matches("\\d") !=true) {
+			messages.add("電話番号は数字のみで入力してください");
+		}
+		if(mail.matches("\\w") !=true) {
+			messages.add("メールアドレスは半角英数字で入力してください");
+		}
+		if (libraryId.matches("0") != true) {
+			messages.add("図書館を選択してください");
+		}
+		if(messages.size() ==0) {
+			return true;
+			}else {
+				return false;
+		}
 	}
 }
