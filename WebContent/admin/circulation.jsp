@@ -27,8 +27,8 @@
 					<td><c:out value = "${circulation.lentDate}" /></td>
 					<td><c:out value = "${circulation.limitedDate}" /></td>
 					<td>
-					<input type="hidden" name="lending" value="${circulation.id}"/>
-					<input type="button" value="返却"/>
+					<input type="hidden" name="bookId" value="${circulation.bookId}"/>
+					<input type="submit" value="返却"/>
 					</td>
 				</tr>
 			</c:forEach>

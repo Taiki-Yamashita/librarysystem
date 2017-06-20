@@ -33,10 +33,14 @@ public class CirculationServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,HttpServletResponse response)
 		throws ServletException,IOException {
 
-		String lending =request.getParameter("lending");
+		String lending =request.getParameter("bookId");
 		String num = "0";
 
 		new BookService().lendingBook(lending, num);
+		Circulation circulation = new Circulation();
+		circulation.setBookId(request.getParameter("bookId"));
+
+		new CirculationService().update(circulation);
 		response.sendRedirect("./circulation");
 	}
 
