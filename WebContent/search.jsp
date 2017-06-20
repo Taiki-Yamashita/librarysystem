@@ -25,7 +25,7 @@
 
 		<hr width="1500px">
 
-		<p>◎フリーワード検索</p>
+		<p>◎絞込み検索</p>
 		<form action="./search" method="POST">
 			<table>
 				<tr>
@@ -83,36 +83,10 @@
 					</td>
 					<td>
 						<input type="hidden" name="isPushFreeWord" value="1">
-						<input type="submit" value="検索">
 					</td>
 				</tr>
 			</table>
-		</form>
 
-		<hr width="1500px">
-
-		<p>◎絞込み検索</p>
-		<form action="./search" method="POST">
-			<table>
-				<tr>
-					<td>【状態】</td>
-					<td>
-						<c:if test="${empty bookStatus}">
-							<input type="radio" name="bookStatus" value="全て" checked>全て
-							<input type="radio" name="bookStatus" value="貸出可">貸出可
-							<input type="radio" name="bookStatus" value="貸出中">貸出中
-						</c:if>
-						<c:if test="${not empty bookStatus}">
-							<c:if test="${bookStatus == '全て'}"><input type="radio" name="bookStatus" value="全て" checked>全て</c:if>
-							<c:if test="${bookStatus != '全て'}"><input type="radio" name="bookStatus" value="全て">全て</c:if>
-							<c:if test="${bookStatus == '貸出可'}"><input type="radio" name="bookStatus" value="貸出可" checked>貸出可</c:if>
-							<c:if test="${bookStatus != '貸出可'}"><input type="radio" name="bookStatus" value="貸出可">貸出可</c:if>
-							<c:if test="${bookStatus == '貸出中'}"><input type="radio" name="bookStatus" value="貸出中" checked>貸出中</c:if>
-							<c:if test="${bookStatus != '貸出中'}"><input type="radio" name="bookStatus" value="貸出中">貸出中</c:if>
-						</c:if>
-					</td>
-				</tr>
-			</table>
 			<table>
 				<tr>
 					<td>
