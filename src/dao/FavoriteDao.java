@@ -124,7 +124,7 @@ public class FavoriteDao {
 	public void delete(Connection connection, Favorite favorite, String userId, String bookId) {
 		PreparedStatement ps = null;
 		try {
-			String sql = "DELETE FROM  LibrarySystem.favorites where user_id = ? and book_id = ? ";
+			String sql = "DELETE FROM favorites where user_id = ? and book_id = ? ";
 
 			ps = connection.prepareStatement(sql.toString());
 
