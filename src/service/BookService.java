@@ -99,37 +99,16 @@ public class BookService {
 		}
 	}
 
-	public List<Book> getSelectedBooks(String selectBox, String freeWord, String condition, String sort, String bookStatus) {
+	public List<Book> getSelectedBooks(String selectBox, String freeWord, String condition, String sort, String bookStatus,
+			List<String> newBooks, List<String> libraries, List<String> categories, List<String> types) {
 
 		Map<String, String> columnMap = getMapData();
 		Connection connection = null;
 
 		try {
 			connection = getConnection();
-			List<Book> books = new BookDao().getSelectedBooks(connection, columnMap.get(selectBox), freeWord, condition, sort, bookStatus);
-			commit(connection);
-
-			if(books == null) return getDefaultValue();
-			else return books;
-		} catch (RuntimeException e) {
-			rollback(connection);
-			throw e;
-		} catch (Error e) {
-			rollback(connection);
-			throw e;
-		} finally {
-			close(connection);
-		}
-	}
-
-	public List<Book> getRefinedBooks(List<String> newBooks, List<String> libraries,
-			List<String> categories, List<String> types, String sort, String bookStatus) {
-
-		Connection connection = null;
-
-		try {
-			connection = getConnection();
-			List<Book> books = new BookDao().getRefinedBooks(connection, newBooks, libraries, categories, types, sort, bookStatus);
+			List<Book> books = new BookDao().getSelectedBooks(connection, columnMap.get(selectBox), freeWord, condition, sort, bookStatus,
+					newBooks, libraries, categories, types);
 			commit(connection);
 
 			if(books == null) return getDefaultValue();
