@@ -79,7 +79,7 @@
 							<c:if test="${condition != 'から始まる'}"><option value="から始まる">から始まる</option></c:if>
 							<c:if test="${condition != 'で終わる'}"><option value="で終わる">で終わる</option></c:if>
 							<c:if test="${condition != 'と一致する'}"><option value="と一致する">と一致する</option></c:if>
-						</select>条件で
+						</select>
 					</td>
 				</tr>
 			</table>
@@ -361,11 +361,15 @@
 									</form>
 								</td>
 								<td>
-									<form action="./favorite" method="POST">
-										<input type="hidden" value="${loginUser.id}" name="userId">
-										<input type="hidden" value="${book.id}" name="bookId">
-										<input type="submit"  value="お気に入り" />
-									</form>
+									<c:forEach items="${favorites}" var="favorite">
+										<c:if test="${favorite.userId != loginUser.id}">
+											<form action="./favorite" method="POST">
+												<input type="hidden" value="${loginUser.id}" name="userId">
+												<input type="hidden" value="${book.id}" name="bookId">
+												<input type="submit"  value="お気に入り" />
+											</form>
+										</c:if>
+									</c:forEach>
 								</td>
 							</tr>
 						</c:if>

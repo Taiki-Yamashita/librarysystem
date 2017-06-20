@@ -21,12 +21,9 @@ public class FavoriteServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		User user = (User) request.getSession().getAttribute("loginUser");
-//		if(String.valueOf(user.getId()) != null){
-//			user.getId();
-//		}
-//
-		request.setAttribute("user", user);
+		User loginUser = (User) request.getSession().getAttribute("loginUser");
+
+		request.setAttribute("loginUser", loginUser);
 
 		List<Favorite> favorites = new FavoriteService().selectAll();
 
