@@ -560,7 +560,7 @@ public class BookDao {
 				sql.append(" ,canceling = ?");
 			}
 			sql.append(" WHERE");
-			sql.append(" book_id = ?");
+			sql.append(" id = ?");
 
 			ps = connection.prepareStatement(sql.toString());
 
