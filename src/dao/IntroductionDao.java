@@ -19,7 +19,7 @@ public class IntroductionDao {
 
 		PreparedStatement ps = null;
 		try {
-			String sql = "SELECT * FROM introductions";
+			String sql = "SELECT * FROM users_introductions";
 			ps = connection.prepareStatement(sql);
 
 			ResultSet rs = ps.executeQuery();
@@ -36,7 +36,7 @@ public class IntroductionDao {
 		}
 	}
 
-	public void insert(Connection connection, Introduction favorite) {
+	public void insert(Connection connection, Introduction introduction) {
 
 		PreparedStatement ps = null;
 		try {
@@ -53,8 +53,8 @@ public class IntroductionDao {
 
 			ps = connection.prepareStatement(sql.toString());
 
-			ps.setString(1, favorite.getUserId());
-			ps.setString(2, favorite.getBookId());
+			ps.setString(1, introduction.getUserId());
+			ps.setString(2, introduction.getBookId());
 
 			ps.executeUpdate();
 		} catch (SQLException e) {
@@ -99,14 +99,20 @@ public class IntroductionDao {
 			while (rs.next()) {
 				int id = rs.getInt("id");
 				String userId = rs.getString("user_id");
+				String userName = rs.getString("user_name");
 				String bookId = rs.getString("book_id");
-				String registeredDate = rs.getString("registered_date");
+				String bookName = rs.getString("book_name");
+				String author = rs.getString("book_author");
+				String publisher = rs.getString("book_publisher");
 
 				Introduction introduction = new Introduction();
 				introduction.setId(id);
 				introduction.setUserId(userId);
+				introduction.setUserName(userName);
 				introduction.setBookId(bookId);
-				introduction.setRegisteredDate(registeredDate);
+				introduction.setBookName(bookName);
+				introduction.setAuthor(author);
+				introduction.setPublisher(publisher);
 
 				ret.add(introduction);
 			}

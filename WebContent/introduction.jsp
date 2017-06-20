@@ -12,12 +12,20 @@
 	<a href = "./">トップ</a>
 
 	<table>
-		<tr><th>書籍名</th><th>推薦者</th><th>予約</th></tr>
+		<tr><th>書籍名</th><th>推薦者</th><th>著者</th><th>出版社</th><th>予約</th></tr>
 		<c:forEach items="${introductions}" var="introduction">
 			<tr>
-				<td>${introduction.bookId}</td>
-				<td>${introduction.userId}</td>
-				<td>予約ボタン</td>
+				<td>${introduction.bookName}</td>
+				<td>${introduction.userName}</td>
+				<td>${introduction.author}</td>
+				<td>${introduction.publisher}</td>
+				<td>
+					<form action="reservingBook" method="post">
+						<input type="hidden" name="${introduction.bookId}" id="${introduction.bookId}">
+						<input type="hidden" name="${introduction.userId}" id="${introduction.userId}">
+						<input type="submit" value="予約">
+					</form>
+				</td>
 			</tr>
 		</c:forEach>
 	</table>

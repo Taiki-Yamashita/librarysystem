@@ -22,21 +22,14 @@
 			<c:remove var="errorMessages" scope="session"/>
 		</c:if>
 
-		<form action="addIntroduction" method="post">
+		<form action="suggestion" method="post">
+			<label for="userId">利用者番号（ユーザーID）</label>
+			<input type = "text" name = "userId" id = "userId">
 
-			<label for="bookName">書籍名</label>
-			<input name="bookName" value="${newRequire.bookName}" id="bookName"/><br/>
+			<label for="bookId">本のID</label>
+			<input type = "text" name = "bookId" id = "bookId">
 
-			<label for="userName">申請者</label>
-			<input name="userName" value="${newRequire.userName}" id="userName"/><br/>
-
-			<label for="author">著者</label>
-			<input name="author" value="${newRequire.author}" id="author"/><br/>
-
-			<label for="publisher">出版社</label>
-			<input name="publisher"  value="${newRequire.publisher}"  id="publisher"/><br/>
-
-			<input type="submit" value="登録" />
+			<input type = "submit" value = "登録" />
 		</form>
 </body>
 </html>
