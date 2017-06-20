@@ -361,11 +361,13 @@
 									</form>
 								</td>
 								<td>
-									<form action="./favorite" method="POST">
-										<input type="hidden" value="${loginUser.id}" name="userId">
-										<input type="hidden" value="${book.id}" name="bookId">
-										<input type="submit"  value="お気に入り" />
-									</form>
+									<c:if test="">
+										<form action="./favorite" method="POST">
+											<input type="hidden" value="${loginUser.id}" name="userId">
+											<input type="hidden" value="${book.id}" name="bookId">
+											<input type="submit"  value="お気に入り" />
+										</form>
+									</c:if>
 								</td>
 							</tr>
 						</c:if>

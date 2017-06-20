@@ -20,7 +20,7 @@
 				<td>${introduction.author}</td>
 				<td>${introduction.publisher}</td>
 				<td>
-					<form action="admin/reservingBook" method="post">
+					<form action="./reservingBook" method="post">
 						<input type="hidden" name="num" id="1" value="1">
 						<input type="hidden" name="bookId" id="${introduction.bookId}" value="${introduction.bookId}">
 						<input type="hidden" name="userId" id="${introduction.userId}" value="${introduction.bookId}">

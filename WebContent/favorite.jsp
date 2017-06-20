@@ -23,7 +23,7 @@
 			<th>著者</th>
 		</tr>
 		<c:forEach items="${favorites}" var="favorite">
-			<c:if test = "${user.id != favorite.userId }">
+			<c:if test = "${loginUser.id == favorite.userId}">
 				<tr>
 					<td><c:out value="${favorite.userName}" /></td>
 					<td><c:out value="${favorite.bookName}" /></td>

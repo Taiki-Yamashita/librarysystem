@@ -22,10 +22,7 @@ public class FavoriteServlet extends HttpServlet{
 			throws ServletException, IOException {
 
 		User loginUser = (User) request.getSession().getAttribute("loginUser");
-//		if(String.valueOf(user.getId()) != null){
-//			user.getId();
-//		}
-//
+
 		request.setAttribute("loginUser", loginUser);
 
 		List<Favorite> favorites = new FavoriteService().selectAll();
