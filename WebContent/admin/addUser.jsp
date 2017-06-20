@@ -12,15 +12,19 @@
 	<body>
 		<h1>ユーザー登録画面</h1>
 
-		<c:if test="${ not empty errorMessages }">
+		<a href = "./manage">管理画面</a><br>
+
+<c:if test="${ not empty errorMessages }">
+	<div class="errorMessages">
+		<ul>
 			<c:forEach items="${errorMessages}" var="message">
-				<c:out value="${message}"/>
-			</c:forEach>
+				<li><c:out value="${message}" />
+				</c:forEach>
+				</ul>
+	</div>
+	<c:remove var="errorMessages" scope="session"/>
+</c:if>
 
-			<c:remove var="errorMessages" scope="session"/>
-		</c:if>
-
-		<a href = "./manage">管理画面</a>
 
 		<form action="addUser" method="post">
 
@@ -32,9 +36,6 @@
 
 			<label for="password">パスワード</label><br>
 			<input name="password" value="${newUser.password}" id="password"/><br/>
-
-			<label for="checkPassword">パスワード（確認）</label><br>
-			<input name="checkPassword" value="${newUser.checkPassword}" id="checkPassword"/><br/>
 
 			<label for="address">住所</label><br>
 			<input name="address" value="${newUser.address}" id="address"/><br/>
@@ -49,10 +50,10 @@
 			<select name="libraryId" >
 				<option value="0">選択してください</option>
 				<c:forEach items="${libraries}" var="library">
-					<c:if test="${newUser.library_id == library.id }">
+					<c:if test="${newUser.libraryId == library.id }">
 						<option selected value="${library.id}">${library.name } </option>
 					</c:if>
-					<c:if test="${newUser.library_id != library.id }">
+					<c:if test="${newUser.libraryId != library.id }">
 						<option  value="${library.id}">${library.name } </option>
 					</c:if>
 				</c:forEach>

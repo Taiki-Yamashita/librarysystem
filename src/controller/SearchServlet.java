@@ -43,7 +43,7 @@ public class SearchServlet extends HttpServlet{
 				request.setAttribute("pageNumber", request.getParameter("pageNumber"));
 				request.setAttribute("books", selectedBooks);
 				request.setAttribute("loginUser", loginUser);
-				request.setAttribute("favorites", favorites);
+				request.setAttribute("isFavorites", isFavorite(favorites, loginUser, selectedBooks));
 			}
 			else request.setAttribute("books", null);
 			request.getRequestDispatcher("/search.jsp").forward(request, response);
@@ -188,5 +188,24 @@ public class SearchServlet extends HttpServlet{
 		}
 
 		return pageCountList;
+	}
+
+	public List<Integer> isFavorite(List<Favorite> favorites, User loginUser, List<Book> books){
+
+		List<Integer> isFavorite = new ArrayList<>();
+		int cnt = 0;
+		for(Book book : books){
+			boolean favoriteFlag = false;
+			for(Favorite favorite : favorites){
+				if(favorite.getBookId().equals(String.valueOf(book.getId())) && favorite.getUserId().equals(String.valueOf(loginUser.getId()))){
+					favoriteFlag = true;
+				}
+			}
+			if(favoriteFlag == true) isFavorite.add(-1);
+			else isFavorite.add(cnt);
+			cnt++;
+		}
+
+		return isFavorite;
 	}
 }

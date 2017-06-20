@@ -361,8 +361,8 @@
 									</form>
 								</td>
 								<td>
-									<c:forEach items="${favorites}" var="favorite">
-										<c:if test="${favorite.userId != loginUser.id}">
+									<c:forEach items="${isFavorites}" var="favorite">
+										<c:if test="${favorite == status.index}">
 											<form action="./favorite" method="POST">
 												<input type="hidden" value="${loginUser.id}" name="userId">
 												<input type="hidden" value="${book.id}" name="bookId">
