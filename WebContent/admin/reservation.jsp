@@ -35,7 +35,7 @@
 
 				<td>
 				<form action = "deliveringBook" method = "post">
-					<input type = "hidden" name = "bookId" value = "${reservation.bookId}" >
+					<input type = "hidden" name = "bookId" value = "${reservation.id}" >
 					<input type = "hidden" id = "libraryId" name = "libraryId" value = "${reservation.libraryId }" >
 					<input type = "hidden" name = "time" value = "${reservation.reservedDate }">
 					<c:if test="${reservation.delivering == 0 }">
