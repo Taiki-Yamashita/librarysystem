@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import admin.beans.Reservation;
 import admin.service.ReservationService;
+import beans.Library;
+import service.LibraryService;
 
 @WebServlet(urlPatterns = {"/admin/reservation"})
 public class ReservationServlet extends HttpServlet {
@@ -22,8 +24,10 @@ public class ReservationServlet extends HttpServlet {
 			HttpServletResponse response) throws IOException, ServletException {
 
 		List<Reservation> reservations = new ReservationService().selectAll();
+		List<Library> libraries = new LibraryService().selectAll();
 
 		request.setAttribute("reservations", reservations);
+		request.setAttribute("libraries", libraries);
 		request.getRequestDispatcher("/admin/reservation.jsp").forward(request, response);
 	}
 }

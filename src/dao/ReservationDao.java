@@ -205,7 +205,6 @@ public class ReservationDao {
 			ps.setInt(1, bookId);
 			ps.setString(2, userId);
 
-			System.out.println(ps);
 
 			ResultSet rs = ps.executeQuery();
 			List<Reservation> reservationList = toBookReservationList(rs);

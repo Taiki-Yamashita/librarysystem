@@ -15,13 +15,25 @@
 
 <h2>人気ランキング</h2>
 
+<c:if test="${ not empty errorMessages }">
+	<div class="errorMessages">
+		<ul>
+			<c:forEach items="${errorMessages}" var="message">
+				<li><c:out value="${message}" />
+				</c:forEach>
+				</ul>
+	</div>
+	<c:remove var="errorMessages" scope="session"/>
+</c:if>
+
+
 
 貸出件数ランキング<br>
 <c:forEach  begin="1" end="20" step="1" varStatus="status" items="${circulations}" var="circulation">
 	<c:out value="${status.index}"/>位<c:out value="${circulation.bookName }"></c:out>
 		<form action = "reservingBook" method = "post">
 			<input type = "hidden" name = "bookId" value = "${circulation.bookId}" >
-			<input type = "hidden" id = "libraryId" name = "libraryId" value = "${book.libraryId}" >
+			<input type = "hidden" id =  "${loginUser.libraryId}" name = "libraryId" value = "${loginUser.libraryId}" >
 			<input type = "hidden" id = "${loginUser.id}" name = "userId" value = "${loginUser.id}"  >
 			<input type = "hidden" name = "num" value =1>
 			<input type = "hidden" name = "reservation" value="${book.id}">

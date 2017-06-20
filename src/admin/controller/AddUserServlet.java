@@ -111,13 +111,11 @@ public class AddUserServlet extends HttpServlet {
 		if (StringUtils.isEmpty(address) == true) {
 			messages.add("住所を入力してください");
 		}
-		if(tel.matches("\\d") !=true) {
+		if(tel.matches("\\d") ==true) {
 			messages.add("電話番号は数字のみで入力してください");
 		}
-		if(mail.matches("\\w") !=true) {
-			messages.add("メールアドレスは半角英数字で入力してください");
-		}
-		if (libraryId.matches("0") != true) {
+
+		if (libraryId.matches("0") == true) {
 			messages.add("図書館を選択してください");
 		}
 		if(messages.size() ==0) {
