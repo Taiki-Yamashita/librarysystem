@@ -56,10 +56,26 @@ public class NortificationServlet extends HttpServlet{
 			List<Library> libraries = new LibraryService().selectAll();
 			request.setAttribute("libraries", libraries);
 
+			Notification newNotification = getNewNotification(request);
+			request.setAttribute("newNotification", newNotification);
+
+
 			session.setAttribute("errorMessages", messages);
 			request.getRequestDispatcher("/admin/notification.jsp").forward(request, response);
 		}
 	}
+	private Notification getNewNotification (HttpServletRequest request)
+			throws IOException, ServletException {
+
+		Notification newNotification = new Notification();
+
+		newNotification.setMessage(request.getParameter("message"));
+		newNotification.setLibraryId(request.getParameter("libraryId"));
+
+		return newNotification;
+
+	}
+
 	private boolean isValid(HttpServletRequest request, List<String> messages){
 		String message = request.getParameter("message");
 

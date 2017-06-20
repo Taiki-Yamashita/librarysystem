@@ -26,7 +26,12 @@
 	<select name="libraryId">
 		<option value="0">選択してください</option>
 			<c:forEach items="${libraries}" var="library">
-					<option value="${library.id}">${library.name } </option>
+			<c:if test="${newNotification.libraryId == library.id }">
+					<option selected value="${library.id}">${library.name } </option>
+				</c:if>
+				<c:if test="${newNotification.libraryId != library.id }">
+					<option  value="${library.id}">${library.name } </option>
+				</c:if>
 		</c:forEach>
 	</select><br>
 	投稿<br />
