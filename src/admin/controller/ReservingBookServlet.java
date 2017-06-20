@@ -16,7 +16,7 @@ import service.ReservationService;
 import service.UserService;
 
 
-@WebServlet(urlPatterns = { "/admin/reservingBook" })
+@WebServlet(urlPatterns = { "/reservingBook" })
 public class ReservingBookServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -24,13 +24,13 @@ public class ReservingBookServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		request.getRequestDispatcher("manageBook.jsp").forward(request, response);
+
+		request.getRequestDispatcher("ranking.jsp").forward(request, response);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest request,HttpServletResponse response)
 		throws ServletException,IOException {
-
 
 		int bookId = Integer.parseInt(request.getParameter("bookId"));
 		int num = Integer.parseInt(request.getParameter("num"));
@@ -40,11 +40,10 @@ public class ReservingBookServlet extends HttpServlet {
 
 		Book reservingBook = new BookService().selectBook(bookId);
 
-		String userId = (request.getParameter("userId"));
-		Reservation addReservation = new Reservation();
-
+		int userId = Integer.parseInt(request.getParameter("userId"));
 		User reservingUser = new UserService().selectUser(userId);
 
+		Reservation addReservation = new Reservation();
 		addReservation.setUserId(String.valueOf(reservingUser.getId()));
 		addReservation.setBookId(String.valueOf(reservingBook.getId()));
 		addReservation.setBookName(reservingBook.getName());
@@ -54,6 +53,6 @@ public class ReservingBookServlet extends HttpServlet {
 		new ReservationService().insert(addReservation);
 		}
 
-		response.sendRedirect("./manageBook");
+		response.sendRedirect("./ranking");
 	}
 }

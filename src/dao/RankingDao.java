@@ -57,20 +57,20 @@ public class RankingDao {
 			close(rs);
 		}
 	}
-	public List<Ranking> countAll(Connection connection){
+	public List<Ranking> circulationAll(Connection connection){
 
 		PreparedStatement ps = null;
 		try {
-			String sql = "SELECT *, COUNT(*) as count FROM library_system.book_rankings group by book_id; ";
+			String sql = "SELECT *, COUNT(*) as count FROM library_system.book_rankings GROUP BY book_id ORDER BY count(*) DESC; ";
 			ps = connection.prepareStatement(sql);
 
 
 			ResultSet rs = ps.executeQuery();
-			List<Ranking> countList = toCountList(rs);
-			if (countList.isEmpty()) {
+			List<Ranking> circulations = toCirculations(rs);
+			if (circulations.isEmpty()) {
 				return null;
 			}else {
-				return countList;
+				return circulations;
 			}
 		} catch (SQLException e) {
 			throw new SQLRuntimeException(e);
@@ -78,7 +78,7 @@ public class RankingDao {
 			close(ps);
 		}
 	}
-	private List<Ranking> toCountList(ResultSet rs) throws SQLException {
+	private List<Ranking> toCirculations(ResultSet rs) throws SQLException {
 
 		List<Ranking> ret = new ArrayList<Ranking>();
 		try {
@@ -88,13 +88,58 @@ public class RankingDao {
 				String bookId = rs.getString("book_id");
 				String count = rs.getString("count");
 
-				Ranking countList = new Ranking();
-				countList.setBookName(bookName);
-				countList.setBookId(bookId);
-				countList.setCount(count);
+				Ranking circulations = new Ranking();
+				circulations.setBookName(bookName);
+				circulations.setBookId(bookId);
+				circulations.setCount(count);
 
 
-				ret.add(countList);
+				ret.add(circulations);
+			}
+			return ret;
+		} finally {
+			close(rs);
+		}
+	}
+
+	public List<Ranking> reservationAll(Connection connection){
+
+		PreparedStatement ps = null;
+		try {
+			String sql = "SELECT *, COUNT(*) as count FROM library_system.book_reservations GROUP BY book_id ORDER BY count(*) DESC; ";
+			ps = connection.prepareStatement(sql);
+
+
+			ResultSet rs = ps.executeQuery();
+			List<Ranking> reservations = toReservations(rs);
+			if (reservations.isEmpty()) {
+				return null;
+			}else {
+				return reservations;
+			}
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
+	private List<Ranking> toReservations(ResultSet rs) throws SQLException {
+
+		List<Ranking> ret = new ArrayList<Ranking>();
+		try {
+			while (rs.next()) {
+
+				String bookName = rs.getString("book_name");
+				String bookId = rs.getString("book_id");
+				String count = rs.getString("count");
+
+				Ranking reservations = new Ranking();
+				reservations.setBookName(bookName);
+				reservations.setBookId(bookId);
+				reservations.setCount(count);
+
+
+				ret.add(reservations);
 			}
 			return ret;
 		} finally {

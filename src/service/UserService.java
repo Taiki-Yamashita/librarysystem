@@ -78,14 +78,14 @@ public class UserService {
 //		}
 //	}
 
-	public User selectUser(String string) {
+	public User selectUser(int userId) {
 
 		Connection connection = null;
 		try {
 			connection = getConnection();
 
 			UserDao userDao = new UserDao();
-			User user = userDao.selectUser(connection, string);
+			User user = userDao.selectUser(connection, userId);
 
 			commit(connection);
 
