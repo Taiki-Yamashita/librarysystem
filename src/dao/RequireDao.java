@@ -21,12 +21,14 @@ public class RequireDao {
 			sql.append(", author");
 			sql.append(", publisher");
 			sql.append(", required_date");
+			sql.append(", showing");
 			sql.append(") VALUES (");
 			sql.append(" ?");
 			sql.append(", ?");
 			sql.append(", ?");
 			sql.append(", ?");
 			sql.append(", CURRENT_TIMESTAMP");
+			sql.append(", ?");
 			sql.append(")");
 
 			ps = connection.prepareStatement(sql.toString());
@@ -35,6 +37,7 @@ public class RequireDao {
 			ps.setString(2, require.getBookName());
 			ps.setString(3, require.getAuthor());
 			ps.setString(4, require.getPublisher());
+			ps.setString(5, "0");
 
 			ps.executeUpdate();
 		} catch (SQLException e) {
