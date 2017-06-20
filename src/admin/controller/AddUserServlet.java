@@ -99,14 +99,25 @@ public class AddUserServlet extends HttpServlet {
 		}
 		if (StringUtils.isEmpty(loginId) == true) {
 			messages.add("ログインIDを入力してください");
+		}else if (loginId.matches("\\w{6,20}") != true){
+			messages.add("ログインIDは半角英数字6～20文字で入力してください");
 		}
+
 		if (StringUtils.isEmpty(password) == true) {
 			messages.add("パスワードを入力してください");
+		}else if (password.matches("\\w{6,20}") !=true) {
+			messages.add("パスワードは半角英数字6～20文字で入力してください");
 		}
 		if (StringUtils.isEmpty(address) == true) {
 			messages.add("住所を入力してください");
 		}
-		if (StringUtils.isEmpty(libraryId) == true) {
+		if(tel.matches("\\d") !=true) {
+			messages.add("電話番号は数字のみで入力してください");
+		}
+		if(mail.matches("\\w") !=true) {
+			messages.add("メールアドレスは半角英数字で入力してください");
+		}
+		if (libraryId.matches("0") != true) {
 			messages.add("図書館を選択してください");
 		}
 		if(messages.size() ==0) {

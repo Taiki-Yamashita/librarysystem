@@ -27,7 +27,6 @@ public class SearchServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		List<Favorite> favorites = new FavoriteService().selectAll();
 		User loginUser = (User) request.getSession().getAttribute("loginUser");
 		List<Book> selectedBooks = (List<Book>)request.getSession().getAttribute("selectedBooks");
@@ -193,19 +192,22 @@ public class SearchServlet extends HttpServlet{
 	public List<Integer> isFavorite(List<Favorite> favorites, User loginUser, List<Book> books){
 
 		List<Integer> isFavorite = new ArrayList<>();
-		int cnt = 0;
-		for(Book book : books){
-			boolean favoriteFlag = false;
-			for(Favorite favorite : favorites){
-				if(favorite.getBookId().equals(String.valueOf(book.getId())) && favorite.getUserId().equals(String.valueOf(loginUser.getId()))){
-					favoriteFlag = true;
+		if(favorites != null && loginUser != null){
+			int cnt = 0;
+			for(Book book : books){
+				boolean favoriteFlag = false;
+				for(Favorite favorite : favorites){
+					if(favorite.getBookId().equals(String.valueOf(book.getId())) && favorite.getUserId().equals(String.valueOf(loginUser.getId()))){
+						favoriteFlag = true;
+					}
 				}
+				if(favoriteFlag == true) isFavorite.add(-1);
+				else isFavorite.add(cnt);
+				cnt++;
 			}
-			if(favoriteFlag == true) isFavorite.add(-1);
-			else isFavorite.add(cnt);
-			cnt++;
-		}
 
-		return isFavorite;
+			return isFavorite;
+		}
+		return null;
 	}
 }
