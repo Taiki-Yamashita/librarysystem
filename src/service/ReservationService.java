@@ -91,4 +91,25 @@ public class ReservationService {
 			close(connection);
 		}
 	}
+	public List<Reservation> reservingCheck(int bookId, String userId) {
+
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			List<Reservation> contacts = new ReservationDao().reservingCheck(connection, bookId, userId);
+
+			commit(connection);
+
+			return contacts;
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
 }

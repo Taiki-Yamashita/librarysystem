@@ -191,5 +191,33 @@ public class ReservationDao {
 			close(rs);
 		}
 	}
+	public List<Reservation> reservingCheck(Connection connection, int bookId, String userId){
 
+		PreparedStatement ps = null;
+		try {
+			StringBuilder sql = new StringBuilder();
+			sql.append("SELECT * FROM reservations WHERE");
+			sql.append(" book_id = ? AND");
+			sql.append(" user_id = ?");
+
+			ps = connection.prepareStatement(sql.toString());
+
+			ps.setInt(1, bookId);
+			ps.setString(2, userId);
+
+			System.out.println(ps);
+
+			ResultSet rs = ps.executeQuery();
+			List<Reservation> reservationList = toBookReservationList(rs);
+			if (reservationList.isEmpty()) {
+				return null;
+			}else {
+				return reservationList;
+			}
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
 }
