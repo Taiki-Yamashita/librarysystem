@@ -209,8 +209,8 @@ public class BookDao {
 			if(bookStatus.equals("3")) sql.append("lending = ? AND ");
 			if(!selectBox.isEmpty()) sql.append(selectBox + " LIKE ?");
 			else{
-				if(condition.equals("と一致する")) sql.append("name = ? or author = ? or publisher = ? or category = ? or isbn_id = ?");
-				else if(condition.equals("で終わる")) sql.append("name LIKE ? or author LIKE ? or publisher LIKE ? or category LIKE ? or isbn_id LIKE ?");
+				if(condition.equals("4")) sql.append("name = ? or author = ? or publisher = ? or category = ? or isbn_id = ?");
+				else if(condition.equals("3")) sql.append("name LIKE ? or author LIKE ? or publisher LIKE ? or category LIKE ? or isbn_id LIKE ?");
 				else sql.append("CONCAT(name, author, publisher, category, isbn_id) LIKE ?");
 			}
 			sql.append(" AND published_date >= ? "); //change
@@ -251,10 +251,10 @@ public class BookDao {
 				if(bookStatus.equals("3")) ps.setString(1, "1");
 
 				if(!selectBox.isEmpty()){
-					if(condition.equals("を含む")) ps.setString(2, "%" + freeWord + "%");
-					if(condition.equals("から始まる")) ps.setString(2, freeWord + "%");
-					if(condition.equals("で終わる")) ps.setString(2, "%" + freeWord);
-					if(condition.equals("と一致する")) ps.setString(2, freeWord);
+					if(condition.equals("1")) ps.setString(2, "%" + freeWord + "%");
+					if(condition.equals("2")) ps.setString(2, freeWord + "%");
+					if(condition.equals("3")) ps.setString(2, "%" + freeWord);
+					if(condition.equals("4")) ps.setString(2, freeWord);
 					ps.setString(3, newBooks.get(0));
 
 					cnt = 4;
@@ -275,7 +275,7 @@ public class BookDao {
 					}
 				}
 				else{
-					if(condition.equals("と一致する")){
+					if(condition.equals("4")){
 						ps.setString(2, freeWord);
 						ps.setString(3, freeWord);
 						ps.setString(4, freeWord);
@@ -300,7 +300,7 @@ public class BookDao {
 							}
 						}
 					}
-					else if(condition.equals("で終わる")){
+					else if(condition.equals("3")){
 						ps.setString(2, "%" + freeWord);
 						ps.setString(3, "%" + freeWord);
 						ps.setString(4, "%" + freeWord);
@@ -326,8 +326,8 @@ public class BookDao {
 						}
 					}
 					else{
-						if(condition.equals("を含む")) ps.setString(2, "%" + freeWord + "%");
-						if(condition.equals("から始まる")) ps.setString(2, freeWord + "%");
+						if(condition.equals("1")) ps.setString(2, "%" + freeWord + "%");
+						if(condition.equals("2")) ps.setString(2, freeWord + "%");
 						ps.setString(3, newBooks.get(0));
 
 						cnt = 4;
@@ -375,7 +375,7 @@ public class BookDao {
 					}
 				}
 				else{
-					if(condition.equals("と一致する")){
+					if(condition.equals("4")){
 						ps.setString(1, freeWord);
 						ps.setString(2, freeWord);
 						ps.setString(3, freeWord);
@@ -399,7 +399,7 @@ public class BookDao {
 							}
 						}
 					}
-					else if(condition.equals("で終わる")){
+					else if(condition.equals("3")){
 						ps.setString(1, "%" + freeWord);
 						ps.setString(2, "%" + freeWord);
 						ps.setString(3, "%" + freeWord);
@@ -424,8 +424,8 @@ public class BookDao {
 						}
 					}
 					else{
-						if(condition.equals("を含む")) ps.setString(1, "%" + freeWord + "%");
-						if(condition.equals("から始まる")) ps.setString(1, freeWord + "%");
+						if(condition.equals("1")) ps.setString(1, "%" + freeWord + "%");
+						if(condition.equals("2")) ps.setString(1, freeWord + "%");
 						ps.setString(2, newBooks.get(0));
 						cnt = 3;
 						if(!libraries.isEmpty()){

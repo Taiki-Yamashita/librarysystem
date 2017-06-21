@@ -26,7 +26,7 @@
 		<hr width="1500px">
 
 		<p>◎検索</p>
-		<form action="./search" method="POST">
+		<form action="./search" method="GET">
 			<table>
 				<tr>
 					<td>【状態】</td>
@@ -73,12 +73,16 @@
 					<td>
 						<select name="condition">
 							<c:if test="${not empty condition}">
-								<option value="${condition}">${condition}</option>
+								<c:if test="${condition == 1}"><option value="1">を含む</option></c:if>
+								<c:if test="${condition == 2}"><option value="2">から始まる</option></c:if>
+								<c:if test="${condition == 3}"><option value="3">で終わる</option></c:if>
+								<c:if test="${condition == 4}"><option value="4">と一致する</option></c:if>
+
 							</c:if>
-							<c:if test="${condition != 'を含む'}"><option value="を含む">を含む</option></c:if>
-							<c:if test="${condition != 'から始まる'}"><option value="から始まる">から始まる</option></c:if>
-							<c:if test="${condition != 'で終わる'}"><option value="で終わる">で終わる</option></c:if>
-							<c:if test="${condition != 'と一致する'}"><option value="と一致する">と一致する</option></c:if>
+							<c:if test="${condition != 1}"><option value="1">を含む</option></c:if>
+							<c:if test="${condition != 2}"><option value="2">から始まる</option></c:if>
+							<c:if test="${condition != 3}"><option value="3">で終わる</option></c:if>
+							<c:if test="${condition != 4}"><option value="4">と一致する</option></c:if>
 						</select>
 					</td>
 				</tr>
@@ -266,9 +270,9 @@
 
 		<hr width="1500px">
 
-		<c:if test="${not empty throughSearching}">
+		<c:if test="${not empty isSearching}">
 			<p>◎並び替え</p>
-			<form action="./search" method="POST">
+			<form action="./search" method="GET">
 				<c:if test="${sort == '新しい順'}"><input type="radio" name="sort" value="新しい順" checked>新しい順</c:if>
 				<c:if test="${sort != '新しい順'}">
 					<c:if test="${sort == ''}"><input type="radio" name="sort" value="新しい順" checked>新しい順</c:if>
@@ -291,9 +295,9 @@
 				<c:if test="${sort != '出版社順'}"><input type="radio" name="sort" value="出版社順">出版社順</c:if>
 
 				<!-- freeWord -->
-				<input type="hidden" name="selectBoxForSort" value="${selectBoxId}">
-				<input type="hidden" name="freeWordForSort" value="${freeWord}">
-				<input type="hidden" name="conditionForSort" value="${condition}">
+				<input type="hidden" name="selectBox" value="${selectBoxId}">
+				<input type="hidden" name="freeWord" value="${freeWord}">
+				<input type="hidden" name="condition" value="${condition}">
 
 				<!-- refine -->
 				<c:forEach items="${libraries}" var="library" varStatus="status">
@@ -321,7 +325,6 @@
 					<c:if test="${type == 'コミックス'}"><input type="hidden" name="type4" value="4"></c:if>
 				</c:forEach>
 
-				<input type="hidden" name="throughSearching" value="1">
 				<input type="hidden" name="isSearching" value="1">
 				<input type="hidden" name="bookStatus" value="${bookStatus}">
 
@@ -394,7 +397,6 @@
 													<c:if test="${type == 'コミックス'}"><input type="hidden" name="type4" value="4"></c:if>
 												</c:forEach>
 
-												<input type="hidden" name="throughSearching" value="1">
 												<input type="hidden" name="isSearching" value="1">
 												<input type="hidden" name="bookStatus" value="${bookStatus}">
 
@@ -439,7 +441,6 @@
 													<c:if test="${type == 'コミックス'}"><input type="hidden" name="type4" value="4"></c:if>
 												</c:forEach>
 
-												<input type="hidden" name="throughSearching" value="1">
 												<input type="hidden" name="isSearching" value="1">
 												<input type="hidden" name="bookStatus" value="${bookStatus}">
 
@@ -459,7 +460,7 @@
 			<table>
 				<tr>
 					<c:forEach items="${pageCountList}" var="pageCount">
-						<form action="./search" method="POST">
+						<form action="./search" method="GET">
 							<td>
 								<c:if test="${pageNumber == pageCount}"><c:out value="${pageCount}"></c:out></c:if>
 								<c:if test="${pageNumber != pageCount}">
@@ -467,8 +468,7 @@
 									<input type="hidden" name="pageNumber" value="${pageCount}">
 								</c:if>
 							</td>
-							<c:if test="${not empty throughSearching}">
-								<input type="hidden" name="throughSearching" value="1">
+							<c:if test="${not empty isSearching}">
 								<input type="hidden" name="isSearching" value="1">
 
 								<input type="hidden" name="selectBoxForSort" value="${selectBoxId}">
@@ -513,9 +513,6 @@
 		<!-- エラーメッセージ -->
 		<c:remove var="errorMessages" scope="session"/>
 
-		<!-- 絞込み結果 -->
-		<c:remove var="selectedBooks" scope="session"/>
-
 		<!-- フリーワード検索 -->
 		<c:remove var="selectBox" scope="session"/>
 		<c:remove var="selectBoxId" scope="session"/>
@@ -535,7 +532,6 @@
 		<c:remove var="checkType" scope="session"/>
 
 		<!-- 並び替え機能 -->
-		<c:remove var="throughSearching" scope="session"/>
 		<c:remove var="sort" scope="session"/>
 
 		<!-- 貸出中/貸出可機能 -->
