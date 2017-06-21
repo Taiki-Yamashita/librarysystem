@@ -219,4 +219,54 @@ public class ReservationDao {
 			close(ps);
 		}
 	}
+
+	public List<Reservation> select(Connection connection, int bookId){
+
+		PreparedStatement ps = null;
+		try {
+			String sql = "SELECT * FROM reservations where book_id = ?";
+			ps = connection.prepareStatement(sql);
+			ps.setInt(1, bookId);
+
+			ResultSet rs = ps.executeQuery();
+			List<Reservation> reservationList = toSelectList(rs);
+			if (reservationList.isEmpty()) {
+				return null;
+			}else {
+				return reservationList;
+			}
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
+	private List<Reservation> toSelectList(ResultSet rs) throws SQLException {
+
+		List<Reservation> ret = new ArrayList<Reservation>();
+		try {
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String userId = rs.getString("user_id");
+				String bookId = rs.getString("book_id");
+				String libraryId = rs.getString("library_id");
+				String delivering = rs.getString("delivering");
+				String canceling = rs.getString("canceling");
+
+				Reservation reservation = new Reservation();
+				reservation.setId(id);
+				reservation.setUserId(userId);
+				reservation.setBookId(bookId);
+				reservation.setLibraryId(libraryId);
+				reservation.setDelivering(delivering);
+				reservation.setCanceling(canceling);
+
+				ret.add(reservation);
+			}
+			return ret;
+		} finally {
+			close(rs);
+		}
+	}
+
 }
