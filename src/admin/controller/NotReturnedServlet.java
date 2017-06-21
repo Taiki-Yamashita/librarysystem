@@ -35,7 +35,11 @@ public class NotReturnedServlet extends HttpServlet {
 		}
 
 		request.setAttribute("circulations", circulations);
-		List<NotReturned> notReturnedlists = new NotReturnedService().select();
+
+		String bookId = request.getParameter("id");
+		List<NotReturned> notReturnedlists = new NotReturnedService().select(Integer.parseInt(bookId));
+
+
 
 		request.setAttribute("notReturnedlists", notReturnedlists);
 

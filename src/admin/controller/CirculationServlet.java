@@ -22,7 +22,9 @@ public class CirculationServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
 
-		List<Circulation> circulations = new CirculationService().selectAll();
+		String bookId = request.getParameter("id");
+		List<Circulation> circulations = new CirculationService().selectC(Integer.parseInt(bookId));
+
 		request.setAttribute("circulations", circulations);
 
 		request.getRequestDispatcher("/admin/circulation.jsp").forward(request, response);

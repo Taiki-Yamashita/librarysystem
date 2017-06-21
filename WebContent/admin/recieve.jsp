@@ -11,12 +11,26 @@
 <body>
 	<a href = "manage">管理画面</a>
 	<form action="recieve" method = "post">
-		<label for = "num">未読表示</label>
-		<input type="checkbox" name="num" value="0">
-
-		<label for = "num">既読表示</label>
-		<input type="checkbox" name="num" value="1">
-
+		<c:if test="${empty num}">
+			<input type="radio" name="num" value="2" checked><label for = "num" >全て</label>
+			<input type="radio" name="num" value="0"><label for = "num">未読表示</label>
+			<input type="radio" name="num" value="1"><label for = "num">既読表示</label>
+		</c:if>
+		<c:if test="${not empty num}">
+			<input type="radio" name="num" value="2"><label for = "num">全て</label>
+			<c:if test="${num == 0}">
+				<input type="radio" name="num" value="0" checked><label for = "num">未読表示</label>
+			</c:if>
+			<c:if test="${num != 0}">
+				<input type="radio" name="num" value="0"><label for = "num">未読表示</label>
+			</c:if>
+			<c:if test="${num == 1}">
+				<input type="radio" name="num" value="1" checked><label for = "num">既読表示</label>
+			</c:if>
+			<c:if test="${num != 1}">
+				<input type="radio" name="num" value="1"><label for = "num">既読表示</label>
+			</c:if>
+		</c:if>
 		<input type="submit" value="絞込み" />
 	</form>
 
@@ -41,12 +55,16 @@
 					<td><c:out value="${recieve.publisher}" /></td>
 					<td><c:out value="${recieve.requiredDate}" /></td>
 					<td>
-					<input type="checkbox" name="flag" value="1">
-					<input type="hidden" name="id" value="${recieve.id}">
+						<c:if test="${recieve.showing == 0 }">
+							<input type="hidden" name="flag" id="flag" value="1">
+							<input type="checkbox" name="recieveId" id="recieveId" value="${recieve.id}">
+						</c:if>
+						<c:if test="${recieve.showing != 0 }">
+							<c:out value="既読"></c:out>
+						</c:if>
 					</td>
 				</tr>
 			</c:forEach>
-
 
 		</table>
 		<input type="submit" value="送信" />

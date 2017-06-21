@@ -233,4 +233,62 @@ public class CirculationDao {
 		}
 	}
 
+	public List<Circulation> selectC(Connection connection, int bookId){
+
+		PreparedStatement ps = null;
+		try {
+			String sql = "SELECT * FROM users_circulations where book_id =?";
+			ps = connection.prepareStatement(sql);
+
+			ps.setInt(1, bookId);
+
+			ResultSet rs = ps.executeQuery();
+			List<Circulation> reservationList = toSelectCList(rs);
+			if (reservationList.isEmpty()) {
+				return null;
+			}else {
+				return reservationList;
+			}
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
+	private List<Circulation> toSelectCList(ResultSet rs) throws SQLException {
+
+		List<Circulation> ret = new ArrayList<Circulation>();
+		try {
+			while (rs.next()) {
+				int id = rs.getInt("id");
+
+				String userId = rs.getString("user_id");
+				String userName = rs.getString("user_name");
+				String bookId = rs.getString("book_id");
+				String bookName = rs.getString("book_name");
+				String libraryId = rs.getString("library_id");
+				String libraryName = rs.getString("library_name");
+				String lentDate = rs.getString("lent_date");
+				String limitedDate = rs.getString("limited_date");
+				//String returning = rs.getString("returning");
+
+				Circulation circulation = new Circulation();
+				circulation.setId(id);
+				circulation.setUserId(userId);
+				circulation.setUserName(userName);
+				circulation.setBookId(bookId);
+				circulation.setBookName(bookName);
+				circulation.setLibraryId(libraryId);
+				circulation.setLibraryName(libraryName);
+				circulation.setLentDate(lentDate);
+				circulation.setLimitedDate(limitedDate);
+				//circulation.setReturning(returning);
+
+				ret.add(circulation);
+			}
+			return ret;
+		} finally {
+			close(rs);
+		}
+	}
 }

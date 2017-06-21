@@ -13,14 +13,16 @@ import admin.beans.NotReturned;
 import exception.SQLRuntimeException;
 
 public class NotReturnedDao {
-	public List<NotReturned> getSelectAllNotReturned(Connection connection) {
+	public List<NotReturned> getSelectAllNotReturned(Connection connection, int bookId) {
 
 		PreparedStatement ps = null;
 		try {
 			StringBuilder sql = new StringBuilder();
-			sql.append("SELECT * FROM users_circulations where returning = 1");
+			sql.append("SELECT * FROM users_circulations where returning = 1 AND book_id = ?");
 
 			ps = connection.prepareStatement(sql.toString());
+
+			ps.setInt(1, bookId);
 
 			ResultSet rs = ps.executeQuery();
 			List<NotReturned> ret = toNotReturnedList(rs);

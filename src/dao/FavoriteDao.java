@@ -103,6 +103,18 @@ public class FavoriteDao {
 				String bookName = rs.getString("book_name");
 				String bookId = rs.getString("book_id");
 				String author = rs.getString("book_author");
+				String publisher = rs.getString("book_publisher");
+				String category = rs.getString("book_category");
+				String type = rs.getString("book_type");
+				String libraryId = rs.getString("library_id");
+				String libraryName = rs.getString("library_name");
+				//String shelfId = rs.getString("shelf_id");
+				String isbnId = rs.getString("book_isbnId");
+				//String publishedDate = rs.getString("published_date");
+				String keeping = rs.getString("book_keeping");
+				String lending = rs.getString("book_lending");
+				String reserving = rs.getString("book_reserving");
+				String disposing = rs.getString("book_disposing");
 
 
 				Favorite favorite = new Favorite();
@@ -112,6 +124,19 @@ public class FavoriteDao {
 				favorite.setBookName(bookName);
 				favorite.setBookId(bookId);
 				favorite.setAuthor(author);
+				favorite.setPublisher(publisher);
+				favorite.setCategory(category);
+				favorite.setType(type);
+				favorite.setLibraryId(libraryId);
+				favorite.setLibraryName(libraryName);
+				//favorite.setShelfId(shelfId);
+				favorite.setIsbnId(isbnId);
+				//favorite.setPublishedDate(publishedDate);
+				favorite.setKeeping(keeping);
+				favorite.setLending(lending);
+				favorite.setReserving(reserving);
+				favorite.setDisposing(disposing);
+
 
 				ret.add(favorite);
 			}

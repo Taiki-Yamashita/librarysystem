@@ -20,10 +20,13 @@
 </c:if>
 	<p>本の編集</p>
 	<p><a href="./manage">管理画面</a></p>
+	<form action="addBook" method ="get">
+	<input type = "submit" value = "本の追加" />
+	</form>
+
 	<table>
-		<tr><th>ID</th><th>名前</th><th>著者</th><th>出版社</th><th>カテゴリ</th><th>種類</th><th>図書館</th><th>棚番号</th><th>出版日</th><th>保管中<th>貸出中</th><th>予約中</th><th>整理中</th>
-<th>ユーザー名</th><th>ユーザーID</th><th>予約日</th><th>受取</th><th>キャンセル</th><th>貸出日</th><th>期限</th><th>返却</th></tr>
-		<c:forEach items="${books}" var="book">
+		<tr><th>ID</th><th>名前</th><th>著者</th><th>出版社</th><th>カテゴリ</th><th>種類</th><th>図書館</th><th>棚番号</th><th>出版日</th><th>本の状態</th><th>予約数</th><th>延滞</th></tr>
+		<c:forEach items="${books}" var="book" varStatus="statusBook">
 			<tr>
 				<td>${book.id }</td>
 				<td>${book.name}</td>
@@ -31,27 +34,71 @@
 				<td>${book.publisher}</td>
 				<td>${book.category}</td>
 				<td>${book.type}</td>
-				<td>${book.libraryId}</td>
+				<td>
+					<c:forEach items="${libraries}" var="library">
+						<c:if test="${book.libraryId ==library.id}">
+							<option value="${library.id}">${library.name}</option>
+						</c:if>
+					</c:forEach>
+				</td>
 				<td>${book.shelfId}</td>
 				<td>${book.publishedDate}</td>
-				<td>${book.keeping}</td>
-				<td>${book.lending}</td>
-				<td>${book.reserving}</td>
-				<td>${book.disposing}</td>
-				<td>${book.userName}</td>
-				<td>${book.userId}</td>
-				<td>${book.reservedDate}</td>
-				<td>${book.delivering}</td>
-				<td>${book.canceling}</td>
-				<td>${book.lentDate}</td>
-				<td>${book.limitedDate}</td>
-				<td>${book.returning}</td>
+				<td>
+				<c:if test="${book.keeping ==1}">保管中</c:if>
+				<c:if test="${book.lending ==1}">貸出中</c:if>
+				<c:if test="${book.disposing ==1}">整理中</c:if>
+				<td>
+					<c:forEach items="${reservationCounts}" var="count" varStatus="statusCount">
+						<c:if test="${statusBook.index == statusCount.index}">
+							<c:if test="${count !=-1}">
+							<option value="${count}">${count}</option>
+							</c:if>
+							<c:if test="${count ==-1}">
+							0
+							</c:if>
+						</c:if>
+					</c:forEach>
+				</td>
+								<td>
+					<c:forEach items="${notReturnedCounts}" var="count" varStatus="statusCount">
+						<c:if test="${statusBook.index == statusCount.index}">
+							<c:if test="${count ==1}">
+							<option value="${count}">延滞発生</option>
+							</c:if>
+							<c:if test="${count !=1}">
+							異常なし
+							</c:if>
+						</c:if>
+					</c:forEach>
+				</td>
 
 
 			<td>
 		   	 	<form action = "editBook" method = "get">
 		   	 		<input type = "hidden" name = "id" value = "${book.id}" >
 		   	 		<input type = "submit" value = "編集" />
+		   	 	</form>
+	   	 	</td>
+
+	   	 	<td>
+		   	 	<form action = "circulation" method = "get">
+		   	 		<input type = "hidden" name = "id" value = "${book.id}" >
+		   	 		<input type = "submit" value = "貸出一覧" />
+		   	 	</form>
+	   	 	</td>
+
+
+	   	 	<td>
+		   	 	<form action = "reservation" method = "get">
+		   	 		<input type = "hidden" name = "id" value = "${book.id}" >
+		   	 		<input type = "submit" value = "予約一覧" />
+		   	 	</form>
+	   	 	</td>
+
+	   	 	<td>
+		   	 	<form action = "notReturned" method = "get">
+		   	 		<input type = "hidden" name = "id" value = "${book.id}" >
+		   	 		<input type = "submit" value = "未返却リスト" />
 		   	 	</form>
 	   	 	</td>
 

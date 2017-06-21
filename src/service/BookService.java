@@ -255,4 +255,25 @@ public class BookService {
 			close(connection);
 		}
 	}
+	public List<Book> selectAdmin() {
+
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			List<Book> books = new BookDao().selectAdmin(connection);
+
+			commit(connection);
+
+			return books;
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
 }

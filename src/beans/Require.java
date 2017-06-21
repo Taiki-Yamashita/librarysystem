@@ -8,6 +8,14 @@ public class Require {
 	private String author;
 	private String publisher;;
 	private String requiredDate;
+	private String showing;
+
+	public String getShowing() {
+		return showing;
+	}
+	public void setShowing(String showing) {
+		this.showing = showing;
+	}
 	public int getId() {
 		return id;
 	}

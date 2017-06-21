@@ -116,4 +116,25 @@ public class CirculationService {
 		}
 	}
 
+	public List<Circulation> selectC(int bookId) {
+
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			List<Circulation> circulations = new CirculationDao().selectC(connection, bookId);
+
+			commit(connection);
+
+			return circulations;
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
 }
