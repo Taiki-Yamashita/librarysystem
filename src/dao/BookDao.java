@@ -88,7 +88,7 @@ public class BookDao {
 			ps.setString(7, book.getShelfId());
 			ps.setString(8, book.getIsbnId());
 			ps.setString(9, book.getPublishedDate());
-			ps.setString(10, "0");
+			ps.setString(10, "1");
 			ps.setString(11, "0");
 			ps.setString(12, "0");
 			ps.setString(13, "0");
