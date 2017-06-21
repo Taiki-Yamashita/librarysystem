@@ -21,10 +21,11 @@
 	<p>本の編集</p>
 	<p><a href="./manage">管理画面</a></p>
 	<table>
-		<tr><th>名前</th><th>著者</th><th>出版社</th><th>カテゴリ</th><th>種類</th><th>図書館</th><th>棚番号</th><th>出版日</th><th>保管中<th>貸出中</th><th>予約中</th><th>整理中</th>
+		<tr><th>ID</th><th>名前</th><th>著者</th><th>出版社</th><th>カテゴリ</th><th>種類</th><th>図書館</th><th>棚番号</th><th>出版日</th><th>保管中<th>貸出中</th><th>予約中</th><th>整理中</th>
 <th>ユーザー名</th><th>ユーザーID</th><th>予約日</th><th>受取</th><th>キャンセル</th><th>貸出日</th><th>期限</th><th>返却</th></tr>
 		<c:forEach items="${books}" var="book">
 			<tr>
+				<td>${book.id }</td>
 				<td>${book.name}</td>
 				<td>${book.author}</td>
 				<td>${book.publisher}</td>
@@ -41,7 +42,7 @@
 				<td>${book.userId}</td>
 				<td>${book.reservedDate}</td>
 				<td>${book.delivering}</td>
-				<td>${book.cancelling}</td>
+				<td>${book.canceling}</td>
 				<td>${book.lentDate}</td>
 				<td>${book.limitedDate}</td>
 				<td>${book.returning}</td>

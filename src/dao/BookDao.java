@@ -48,12 +48,12 @@ public class BookDao {
 		try {
 			StringBuilder sql = new StringBuilder();
 			sql.append("INSERT INTO books ( ");
-			sql.append(" book_name");
-			sql.append(", book_author");
-			sql.append(", book_publisher");
-			sql.append(", book_category");
-			sql.append(", book_type");
-			sql.append(", book_libraryId");
+			sql.append(" name");
+			sql.append(", author");
+			sql.append(", publisher");
+			sql.append(", category");
+			sql.append(", type");
+			sql.append(", library_id");
 			sql.append(", shelf_id");
 			sql.append(", isbn_id");
 			sql.append(", published_date");
@@ -61,20 +61,8 @@ public class BookDao {
 			sql.append(", lending");
 			sql.append(", reserving");
 			sql.append(", disposing");
-			sql.append(", user_name");
-			sql.append(", user_id");
-			sql.append(", reserved_date");
-			sql.append(", limited_date");
-			sql.append(", returning");
-			sql.append(", book_id");
 			sql.append(") VALUES (");
 			sql.append(" ?");
-			sql.append(", ?");
-			sql.append(", ?");
-			sql.append(", ?");
-			sql.append(", ?");
-			sql.append(", ?");
-			sql.append(", ?");
 			sql.append(", ?");
 			sql.append(", ?");
 			sql.append(", ?");
@@ -104,12 +92,8 @@ public class BookDao {
 			ps.setString(11, "0");
 			ps.setString(12, "0");
 			ps.setString(13, "0");
-			ps.setString(14, book.getUserName());
-			ps.setInt(15, book.getUserId());
-			ps.setString(16, book.getReserved_date());
-			ps.setString(17, book.getLimited_date());
-			ps.setString(18,"0");
-			ps.setInt(19, book.getId());
+
+
 
 			ps.executeUpdate();
 		} catch (SQLException e) {
@@ -466,13 +450,13 @@ public class BookDao {
 		List<Book> ret = new ArrayList<Book>();
 		try {
 			while (rs.next()) {
-				int id = rs.getInt("id");
-				String name = rs.getString("name");
-				String author = rs.getString("author");
-				String publisher = rs.getString("publisher");
-				String category = rs.getString("category");
-				String type = rs.getString("type");
-				String libraryId = rs.getString("library_id");
+				int id = rs.getInt("book_id");
+				String name = rs.getString("book_name");
+				String author = rs.getString("book_author");
+				String publisher = rs.getString("book_publisher");
+				String category = rs.getString("book_category");
+				String type = rs.getString("book_type");
+				String libraryId = rs.getString("book_libraryId");
 				String shelfId = rs.getString("shelf_id");
 				String isbnId = rs.getString("isbn_id");
 				String publishedDate = rs.getString("published_date");
@@ -480,6 +464,12 @@ public class BookDao {
 				String lending = rs.getString("lending");
 				String reserving = rs.getString("reserving");
 				String disposing = rs.getString("disposing");
+				String userName = rs.getString("user_name");
+				int userId = rs.getInt("user_id");
+				String reservedDate = rs.getString("reserved_date");
+				String limitedDate = rs.getString("limited_date");
+				String returning = rs.getString("returning");
+
 
 				Book book = new Book();
 				book.setId(id);
@@ -496,6 +486,12 @@ public class BookDao {
 				book.setLending(lending);
 				book.setReserving(reserving);
 				book.setDisposing(disposing);
+				book.setUserName(userName);
+				book.setUserId(userId);
+				book.setReservedDate(reservedDate);
+				book.setLimitedDate(limitedDate);
+				book.setReturning(returning);
+
 
 				ret.add(book);
 			}
