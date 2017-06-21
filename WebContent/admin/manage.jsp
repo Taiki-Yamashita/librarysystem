@@ -10,13 +10,10 @@
 
 	<p><a href = "../">トップ画面</a></p>
 	<table border="1">
-		<tr><td><a href = "./reservation">予約管理</a></td></tr>
-		<tr><td><a href = "./circulation">貸出管理</a></td></tr>
 		<tr><td><a href = "./manageUser">ユーザー情報管理</a></td></tr>
 		<tr><td><a href = "./manageBook">本の情報管理</a></td></tr>
 		<tr><td><a href = "./notReturned">未返却リスト</a></td></tr>
 		<tr><td><a href = "./recieve">問い合わせ受取</a></td></tr>
-		<tr><td><a href = "./addBook">本の追加</a></td></tr>
 		<tr><td><a href = "./addUser">ユーザーの追加</a></td></tr>
 		<tr><td><a href = "./notification">お知らせ投稿</a></td></tr>
 	</table>

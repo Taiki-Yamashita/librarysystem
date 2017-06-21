@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import admin.beans.NotReturned;
+import admin.service.NotReturnedService;
 import beans.Book;
 import beans.Library;
 import beans.Reservation;
@@ -27,6 +29,8 @@ public class ManageBookServlet extends HttpServlet {
 			HttpServletResponse response) throws IOException, ServletException {
 
 		List<Integer> reservationCounts = new ArrayList<>();
+		List<Integer> notReturnedCounts = new ArrayList<>();
+		List<String> notReturedUser = new ArrayList<>();
 
 		List<Book> books = new BookService().selectAll();
 		List<Library> libraries = new LibraryService().selectAll();
@@ -40,9 +44,20 @@ public class ManageBookServlet extends HttpServlet {
 			}
 		}
 
+		for(Book book : books){
+			List<NotReturned> notReturnedList = new NotReturnedService().select(book.getId());
+			if(notReturnedList == null){
+			notReturnedCounts.add(-1);
+			}else{
+				notReturnedCounts.add(notReturnedList.size());
+				notReturedUser.add(book.getUserName());
+			}
+		}
+
 
 		request.setAttribute("reservationCounts", reservationCounts);
-
+		request.setAttribute("notReturnedCounts", notReturnedCounts);
+		request.setAttribute("notReturedUser", notReturedUser);
 	//	List<Reservation> reservations = new ReservationService().select(Integer.parseInt(bookId));
 	//	System.out.println(reservations.size());
 

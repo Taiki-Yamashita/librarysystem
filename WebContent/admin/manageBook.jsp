@@ -20,8 +20,12 @@
 </c:if>
 	<p>本の編集</p>
 	<p><a href="./manage">管理画面</a></p>
+	<form action="addBook" method ="get">
+	<input type = "submit" value = "本の追加" />
+	</form>
+
 	<table>
-		<tr><th>ID</th><th>名前</th><th>著者</th><th>出版社</th><th>カテゴリ</th><th>種類</th><th>図書館</th><th>棚番号</th><th>出版日</th><th>本の状態</th><th>予約数</th></tr>
+		<tr><th>ID</th><th>名前</th><th>著者</th><th>出版社</th><th>カテゴリ</th><th>種類</th><th>図書館</th><th>棚番号</th><th>出版日</th><th>本の状態</th><th>予約数</th><th>延滞</th></tr>
 		<c:forEach items="${books}" var="book" varStatus="statusBook">
 			<tr>
 				<td>${book.id }</td>
@@ -55,6 +59,18 @@
 						</c:if>
 					</c:forEach>
 				</td>
+								<td>
+					<c:forEach items="${notReturnedCounts}" var="count" varStatus="statusCount">
+						<c:if test="${statusBook.index == statusCount.index}">
+							<c:if test="${count ==1}">
+							<option value="${count}">延滞発生</option>
+							</c:if>
+							<c:if test="${count !=1}">
+							異常なし
+							</c:if>
+						</c:if>
+					</c:forEach>
+				</td>
 
 
 			<td>
@@ -76,6 +92,13 @@
 		   	 	<form action = "reservation" method = "get">
 		   	 		<input type = "hidden" name = "id" value = "${book.id}" >
 		   	 		<input type = "submit" value = "予約一覧" />
+		   	 	</form>
+	   	 	</td>
+
+	   	 	<td>
+		   	 	<form action = "notReturned" method = "get">
+		   	 		<input type = "hidden" name = "id" value = "${book.id}" >
+		   	 		<input type = "submit" value = "未返却リスト" />
 		   	 	</form>
 	   	 	</td>
 
