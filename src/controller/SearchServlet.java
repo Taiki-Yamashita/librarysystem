@@ -60,18 +60,25 @@ public class SearchServlet extends HttpServlet{
 			request.setAttribute("categories", categories);
 			request.setAttribute("types", types);
 			request.setAttribute("sort", sort);
+			request.setAttribute("isSearching", request.getParameter("isSearching"));
 
 			if(isValid(selectedBooks, request)){
 
 				List<Favorite> favorites = new FavoriteService().selectAll();
 				User loginUser = (User) request.getSession().getAttribute("loginUser");
 
-				request.setAttribute("booksCount", selectedBooks.size());
-				request.setAttribute("pageCountList", getPageCount(selectedBooks.size()));
-				request.setAttribute("pageNumber", request.getParameter("pageNumber"));
-				request.setAttribute("books", selectedBooks);
+				/*お気に入り・ログイン情報*/
 				request.setAttribute("loginUser", loginUser);
 				request.setAttribute("isFavorites", isFavorite(favorites, loginUser, selectedBooks));
+
+				/*ページ遷移管理*/
+				request.setAttribute("pageCountList", getPageCount(selectedBooks.size()));
+				if(request.getParameter("pageNumber") == null) request.setAttribute("pageNumber", "1");
+				else request.setAttribute("pageNumber", request.getParameter("pageNumber"));
+
+				/*本の情報*/
+				request.setAttribute("books", selectedBooks);
+				request.setAttribute("booksCount", selectedBooks.size());
 			}
 			else request.setAttribute("books", null);
 

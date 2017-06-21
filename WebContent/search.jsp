@@ -262,6 +262,7 @@
 					<td>
 						で
 						<input type="hidden" name="isSearching" value="1">
+						<input type="hidden" name="sort" value="">
 						<input type="submit" value="絞り込む">
 					</td>
 				</tr>
@@ -273,26 +274,26 @@
 		<c:if test="${not empty isSearching}">
 			<p>◎並び替え</p>
 			<form action="./search" method="GET">
-				<c:if test="${sort == '新しい順'}"><input type="radio" name="sort" value="新しい順" checked>新しい順</c:if>
-				<c:if test="${sort != '新しい順'}">
-					<c:if test="${sort == ''}"><input type="radio" name="sort" value="新しい順" checked>新しい順</c:if>
-					<c:if test="${sort != ''}"><input type="radio" name="sort" value="新しい順">新しい順</c:if>
+				<c:if test="${sort == 1}"><input type="radio" name="sort" value="1" checked>新しい順</c:if>
+				<c:if test="${sort != 1}">
+					<c:if test="${sort == ''}"><input type="radio" name="sort" value="1" checked>新しい順</c:if>
+					<c:if test="${sort != ''}"><input type="radio" name="sort" value="1">新しい順</c:if>
 				</c:if>
 
-				<c:if test="${sort == '古い順'}"><input type="radio" name="sort" value="古い順" checked>古い順</c:if>
-				<c:if test="${sort != '古い順'}"><input type="radio" name="sort" value="古い順">古い順</c:if>
+				<c:if test="${sort == 2}"><input type="radio" name="sort" value="2" checked>古い順</c:if>
+				<c:if test="${sort != 2}"><input type="radio" name="sort" value="2">古い順</c:if>
 
-				<c:if test="${sort == '書名順'}"><input type="radio" name="sort" value="書名順" checked>書名順</c:if>
-				<c:if test="${sort != '書名順'}"><input type="radio" name="sort" value="書名順">書名順</c:if>
+				<c:if test="${sort == 3}"><input type="radio" name="sort" value="3" checked>書名順</c:if>
+				<c:if test="${sort != 3}"><input type="radio" name="sort" value="3">書名順</c:if>
 
-				<c:if test="${sort == '著者順'}"><input type="radio" name="sort" value="著者順" checked>著者順</c:if>
-				<c:if test="${sort != '著者順'}"><input type="radio" name="sort" value="著者順">著者順</c:if>
+				<c:if test="${sort == 4}"><input type="radio" name="sort" value="4" checked>著者順</c:if>
+				<c:if test="${sort != 4}"><input type="radio" name="sort" value="4">著者順</c:if>
 
-				<c:if test="${sort == 'カテゴリ順'}"><input type="radio" name="sort" value="カテゴリ順" checked>カテゴリ順</c:if>
-				<c:if test="${sort != 'カテゴリ順'}"><input type="radio" name="sort" value="カテゴリ順">カテゴリ順</c:if>
+				<c:if test="${sort == 5}"><input type="radio" name="sort" value="5" checked>カテゴリ順</c:if>
+				<c:if test="${sort != 5}"><input type="radio" name="sort" value="5">カテゴリ順</c:if>
 
-				<c:if test="${sort == '出版社順'}"><input type="radio" name="sort" value="出版社順" checked>出版社順</c:if>
-				<c:if test="${sort != '出版社順'}"><input type="radio" name="sort" value="出版社順">出版社順</c:if>
+				<c:if test="${sort == 6}"><input type="radio" name="sort" value="6" checked>出版社順</c:if>
+				<c:if test="${sort != 6}"><input type="radio" name="sort" value="6">出版社順</c:if>
 
 				<!-- freeWord -->
 				<input type="hidden" name="selectBox" value="${selectBoxId}">
@@ -513,30 +514,13 @@
 		<!-- エラーメッセージ -->
 		<c:remove var="errorMessages" scope="session"/>
 
-		<!-- フリーワード検索 -->
-		<c:remove var="selectBox" scope="session"/>
-		<c:remove var="selectBoxId" scope="session"/>
-		<c:remove var="freeWord" scope="session"/>
-		<c:remove var="condition" scope="session"/>
-
 		<!-- 絞込み検索 -->
-		<c:remove var="newBooks" scope="session"/>
-		<c:remove var="libraries" scope="session"/>
-		<c:remove var="categories" scope="session"/>
-		<c:remove var="types" scope="session"/>
 		<c:remove var="checkBoxLibraryNumber" scope="session"/>
 		<c:remove var="checkLibrary" scope="session"/>
 		<c:remove var="checkBoxCategoryNumber" scope="session"/>
 		<c:remove var="checkCategory" scope="session"/>
 		<c:remove var="checkBoxTypeNumber" scope="session"/>
 		<c:remove var="checkType" scope="session"/>
-
-		<!-- 並び替え機能 -->
-		<c:remove var="sort" scope="session"/>
-
-		<!-- 貸出中/貸出可機能 -->
-		<c:remove var="bookStatus" scope="session"/>
-
 
 	</body>
 </html>
