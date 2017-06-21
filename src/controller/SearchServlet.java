@@ -28,6 +28,7 @@ public class SearchServlet extends HttpServlet{
 			throws ServletException, IOException {
 
 		if(request.getParameter("isSearching") != null){
+
 			/*本の状態(貸出可・貸出中)*/
 			String bookStatus = request.getParameter("bookStatus");
 
@@ -68,7 +69,6 @@ public class SearchServlet extends HttpServlet{
 				User loginUser = (User) request.getSession().getAttribute("loginUser");
 
 				/*お気に入り・ログイン情報*/
-				request.setAttribute("loginUser", loginUser);
 				request.setAttribute("isFavorites", isFavorite(favorites, loginUser, selectedBooks));
 
 				/*ページ遷移管理*/
@@ -190,6 +190,8 @@ public class SearchServlet extends HttpServlet{
 
 			return isFavorite;
 		}
-		return null;
+
+		isFavorite.add(-10);
+		return isFavorite;
 	}
 }

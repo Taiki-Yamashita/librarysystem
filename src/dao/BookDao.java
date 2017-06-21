@@ -226,7 +226,7 @@ public class BookDao {
 			if(sort.equals("4")) sql.append(" ORDER BY author");
 			if(sort.equals("5")) sql.append(" ORDER BY category");
 			if(sort.equals("6")) sql.append(" ORDER BY publisher");
-			if(sort.equals("")) sql.append(" ORDER BY published_date DESC");
+			if(sort.equals("0")) sql.append(" ORDER BY published_date DESC");
 
 			int cnt = 0;
 			ps = connection.prepareStatement(sql.toString());
