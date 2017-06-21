@@ -10,6 +10,8 @@
 <body>
 	<p>ユーザー編集</p>
 	<p><a href="./manage">管理画面</a></p>
+
+	<a href = "./addUser">ユーザーの追加</a><br>
 	<table>
 		<tr><th>ID</th><th>ログインID</th><th>パスワード</th><th>名前</th><th>住所</th><th>TEL</th><th>メールアドレス</th><th>ポイント<th>登録日</th><th>図書館</th><th>停止</th></tr>
 		<c:forEach items="${users}" var="user">

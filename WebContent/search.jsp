@@ -55,7 +55,7 @@
 								<option value="${selectBoxId}">${selectBox}</option>
 							</c:if>
 							<c:if test="${selectBoxId != 1}"><option value="1">全て</option></c:if>
-							<c:if test="${selectBoxId != 2}"><option value="2">本</option></c:if>
+							<c:if test="${selectBoxId != 2}"><option value="2">書籍</option></c:if>
 							<c:if test="${selectBoxId != 3}"><option value="3">著者</option></c:if>
 							<c:if test="${selectBoxId != 4}"><option value="4">出版社</option></c:if>
 							<c:if test="${selectBoxId != 5}"><option value="5">カテゴリ</option></c:if>
@@ -283,8 +283,8 @@
 				<c:if test="${sort == 2}"><input type="radio" name="sort" value="2" checked>古い順</c:if>
 				<c:if test="${sort != 2}"><input type="radio" name="sort" value="2">古い順</c:if>
 
-				<c:if test="${sort == 3}"><input type="radio" name="sort" value="3" checked>書名順</c:if>
-				<c:if test="${sort != 3}"><input type="radio" name="sort" value="3">書名順</c:if>
+				<c:if test="${sort == 3}"><input type="radio" name="sort" value="3" checked>書籍順</c:if>
+				<c:if test="${sort != 3}"><input type="radio" name="sort" value="3">書籍順</c:if>
 
 				<c:if test="${sort == 4}"><input type="radio" name="sort" value="4" checked>著者順</c:if>
 				<c:if test="${sort != 4}"><input type="radio" name="sort" value="4">著者順</c:if>
@@ -351,13 +351,25 @@
 
 		<c:if test="${not empty books}">
 			<table>
-				<tr><th>本</th><th>出版日</th><th>予約</th><th>お気に入り</th></tr>
+				<tr>
+					<th>書籍</th><th>著者</th><th>出版日</th><th>カテゴリ</th><th>種類</th>
+					<th>図書館</th><th>状態</th><th>ISBN番号</th><th>予約</th><th>お気に入り</th>
+				</tr>
 				<c:forEach items="${books}" var="book" varStatus="status">
 					<c:if test="${book.id != 0}">
 						<c:if test="${status.index >= (pageNumber-1)*3 && status.index <= (pageNumber*3)-1}">
 							<tr>
 								<td><c:out value="${book.name}"/></td>
-								<td><c:out value="${book.publishedDate}"/></td>
+								<td><c:out value="${book.author}"/></td>
+								<td>
+									<fmt:parseDate var="date" value="${book.publishedDate}" pattern="yyyy-MM-dd HH:mm:ss.S" />
+									<fmt:formatDate pattern = "yyyy年MM月dd日" value = "${date}" />
+								</td>
+								<td><c:out value="${book.category}"/></td>
+								<td><c:out value="${book.type}"/></td>
+								<td><c:out value="${book.libraryId}"/></td>
+								<td><c:out value="${book.lending}"/></td>
+								<td><c:out value="${book.isbnId}"/></td>
 								<td>
 									<form action="./reservation" method="POST">
 										<input type="hidden" value="${book.id}" name="bookId">
@@ -368,52 +380,54 @@
 									<c:if test="${empty loginUser}">
 										<input type="button" onclick="location.href='./login'"value="お気に入り">
 									</c:if>
-									<c:forEach items="${isFavorites}" var="favorite">
-										<c:if test="${favorite == status.index || favorite == -10}">
-											<form action="./favorite" method="POST">
+									<c:if test="${not empty loginUser}">
+										<c:forEach items="${isFavorites}" var="favorite">
+											<c:if test="${favorite == status.index || favorite == -10}">
+												<form action="./favorite" method="POST">
 
-												<!-- freeWord -->
-												<input type="hidden" name="selectBox" value="${selectBoxId}">
-												<input type="hidden" name="freeWord" value="${freeWord}">
-												<input type="hidden" name="condition" value="${condition}">
+													<!-- freeWord -->
+													<input type="hidden" name="selectBox" value="${selectBoxId}">
+													<input type="hidden" name="freeWord" value="${freeWord}">
+													<input type="hidden" name="condition" value="${condition}">
 
-												<!-- refine -->
-												<c:forEach items="${libraries}" var="library" varStatus="status">
-													<c:if test="${library == 1}"><input type="hidden" name="library1" value="1"></c:if>
-													<c:if test="${library == 2}"><input type="hidden" name="library2" value="2"></c:if>
-													<c:if test="${library == 3}"><input type="hidden" name="library3" value="3"></c:if>
-													<c:if test="${library == 4}"><input type="hidden" name="library4" value="4"></c:if>
-													<c:if test="${library == 5}"><input type="hidden" name="library5" value="5"></c:if>
-												</c:forEach>
-												<c:forEach items="${categories}" var="category" varStatus="status">
-													<c:if test="${category == '文学'}"><input type="hidden" name="category1" value="1"></c:if>
-													<c:if test="${category == '経済'}"><input type="hidden" name="category2" value="2"></c:if>
-													<c:if test="${category == '芸能'}"><input type="hidden" name="category3" value="3"></c:if>
-													<c:if test="${category == '歴史'}"><input type="hidden" name="category4" value="4"></c:if>
-													<c:if test="${category == '学問'}"><input type="hidden" name="category5" value="5"></c:if>
-													<c:if test="${category == '政治'}"><input type="hidden" name="category6" value="6"></c:if>
-													<c:if test="${category == '暮らし'}"><input type="hidden" name="category7" value="7"></c:if>
-													<c:if test="${category == '教育'}"><input type="hidden" name="category8" value="8"></c:if>
-													<c:if test="${category == 'SF'}"><input type="hidden" name="category9" value="9"></c:if>
-												</c:forEach>
-												<c:forEach items="${types}" var="type" varStatus="status">
-													<c:if test="${type == '文庫'}"><input type="hidden" name="type1" value="1"></c:if>
-													<c:if test="${type == '新書'}"><input type="hidden" name="type2" value="2"></c:if>
-													<c:if test="${type == '雑誌'}"><input type="hidden" name="type3" value="3"></c:if>
-													<c:if test="${type == 'コミックス'}"><input type="hidden" name="type4" value="4"></c:if>
-												</c:forEach>
+													<!-- refine -->
+													<c:forEach items="${libraries}" var="library" varStatus="status">
+														<c:if test="${library == 1}"><input type="hidden" name="library1" value="1"></c:if>
+														<c:if test="${library == 2}"><input type="hidden" name="library2" value="2"></c:if>
+														<c:if test="${library == 3}"><input type="hidden" name="library3" value="3"></c:if>
+														<c:if test="${library == 4}"><input type="hidden" name="library4" value="4"></c:if>
+														<c:if test="${library == 5}"><input type="hidden" name="library5" value="5"></c:if>
+													</c:forEach>
+													<c:forEach items="${categories}" var="category" varStatus="status">
+														<c:if test="${category == '文学'}"><input type="hidden" name="category1" value="1"></c:if>
+														<c:if test="${category == '経済'}"><input type="hidden" name="category2" value="2"></c:if>
+														<c:if test="${category == '芸能'}"><input type="hidden" name="category3" value="3"></c:if>
+														<c:if test="${category == '歴史'}"><input type="hidden" name="category4" value="4"></c:if>
+														<c:if test="${category == '学問'}"><input type="hidden" name="category5" value="5"></c:if>
+														<c:if test="${category == '政治'}"><input type="hidden" name="category6" value="6"></c:if>
+														<c:if test="${category == '暮らし'}"><input type="hidden" name="category7" value="7"></c:if>
+														<c:if test="${category == '教育'}"><input type="hidden" name="category8" value="8"></c:if>
+														<c:if test="${category == 'SF'}"><input type="hidden" name="category9" value="9"></c:if>
+													</c:forEach>
+													<c:forEach items="${types}" var="type" varStatus="status">
+														<c:if test="${type == '文庫'}"><input type="hidden" name="type1" value="1"></c:if>
+														<c:if test="${type == '新書'}"><input type="hidden" name="type2" value="2"></c:if>
+														<c:if test="${type == '雑誌'}"><input type="hidden" name="type3" value="3"></c:if>
+														<c:if test="${type == 'コミックス'}"><input type="hidden" name="type4" value="4"></c:if>
+													</c:forEach>
 
-												<input type="hidden" name="isSearching" value="1">
-												<input type="hidden" name="bookStatus" value="${bookStatus}">
-												<input type="hidden" name="sort" value="${sort}" >
+													<input type="hidden" name="isSearching" value="1">
+													<input type="hidden" name="bookStatus" value="${bookStatus}">
+													<input type="hidden" name="sort" value="${sort}" >
 
-												<input type="hidden" value="${loginUser.id}" name="userId">
-												<input type="hidden" value="${book.id}" name="bookId">
-												<input type="hidden" value="${pageNumber}" name="pageNumber">
-												<input type="submit"  value="お気に入り" />
-											</form>
-										</c:if>
-									</c:forEach>
+													<input type="hidden" value="${loginUser.id}" name="userId">
+													<input type="hidden" value="${book.id}" name="bookId">
+													<input type="hidden" value="${pageNumber}" name="pageNumber">
+													<input type="submit"  value="お気に入り" />
+												</form>
+											</c:if>
+										</c:forEach>
+									</c:if>
 								</td>
 							</tr>
 						</c:if>
