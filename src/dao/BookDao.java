@@ -23,7 +23,7 @@ public class BookDao {
 
 		PreparedStatement ps = null;
 		try {
-			String sql = "SELECT * FROM book_admin";
+			String sql = "SELECT * FROM books";
 			ps = connection.prepareStatement(sql);
 
 			ResultSet rs = ps.executeQuery();
@@ -450,13 +450,13 @@ public class BookDao {
 		List<Book> ret = new ArrayList<Book>();
 		try {
 			while (rs.next()) {
-				int id = rs.getInt("book_id");
-				String name = rs.getString("book_name");
-				String author = rs.getString("book_author");
-				String publisher = rs.getString("book_publisher");
-				String category = rs.getString("book_category");
-				String type = rs.getString("book_type");
-				String libraryId = rs.getString("book_libraryId");
+				int id = rs.getInt("id");
+				String name = rs.getString("name");
+				String author = rs.getString("author");
+				String publisher = rs.getString("publisher");
+				String category = rs.getString("category");
+				String type = rs.getString("type");
+				String libraryId = rs.getString("library_id");
 				String shelfId = rs.getString("shelf_id");
 				String isbnId = rs.getString("isbn_id");
 				String publishedDate = rs.getString("published_date");
@@ -464,11 +464,7 @@ public class BookDao {
 				String lending = rs.getString("lending");
 				String reserving = rs.getString("reserving");
 				String disposing = rs.getString("disposing");
-				String userName = rs.getString("user_name");
-				int userId = rs.getInt("user_id");
-				String reservedDate = rs.getString("reserved_date");
-				String limitedDate = rs.getString("limited_date");
-				String returning = rs.getString("returning");
+
 
 
 				Book book = new Book();
@@ -486,11 +482,7 @@ public class BookDao {
 				book.setLending(lending);
 				book.setReserving(reserving);
 				book.setDisposing(disposing);
-				book.setUserName(userName);
-				book.setUserId(userId);
-				book.setReservedDate(reservedDate);
-				book.setLimitedDate(limitedDate);
-				book.setReturning(returning);
+
 
 
 				ret.add(book);
@@ -626,4 +618,57 @@ public class BookDao {
 			close(ps);
 		}
 	}
+//	List<Book> ret = new ArrayList<Book>();
+//	try {
+//		while (rs.next()) {
+//			int id = rs.getInt("book_id");
+//			String name = rs.getString("book_name");
+//			String author = rs.getString("book_author");
+//			String publisher = rs.getString("book_publisher");
+//			String category = rs.getString("book_category");
+//			String type = rs.getString("book_type");
+//			String libraryId = rs.getString("book_libraryId");
+//			String shelfId = rs.getString("shelf_id");
+//			String isbnId = rs.getString("isbn_id");
+//			String publishedDate = rs.getString("published_date");
+//			String keeping = rs.getString("keeping");
+//			String lending = rs.getString("lending");
+//			String reserving = rs.getString("reserving");
+//			String disposing = rs.getString("disposing");
+//			String userName = rs.getString("user_name");
+//			int userId = rs.getInt("user_id");
+//			String reservedDate = rs.getString("reserved_date");
+//			String limitedDate = rs.getString("limited_date");
+//			String returning = rs.getString("returning");
+//
+//
+//			Book book = new Book();
+//			book.setId(id);
+//			book.setName(name);
+//			book.setAuthor(author);
+//			book.setPublisher(publisher);
+//			book.setCategory(category);
+//			book.setType(type);
+//			book.setLibraryId(libraryId);
+//			book.setShelfId(shelfId);
+//			book.setIsbnId(isbnId);
+//			book.setPublishedDate(publishedDate);
+//			book.setKeeping(keeping);
+//			book.setLending(lending);
+//			book.setReserving(reserving);
+//			book.setDisposing(disposing);
+//			book.setUserName(userName);
+//			book.setUserId(userId);
+//			book.setReservedDate(reservedDate);
+//			book.setLimitedDate(limitedDate);
+//			book.setReturning(returning);
+//
+//
+//			ret.add(book);
+//		}
+//		return ret;
+//	} finally {
+//		close(rs);
+//	}
+//}
 }
