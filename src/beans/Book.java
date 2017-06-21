@@ -16,6 +16,14 @@ public class Book {
 	private String lending;
 	private String reserving;
 	private String disposing;
+	private String userName;
+	private int userId;
+	private String reservedDate;
+	private String delivering;
+	private String canceling;
+	private String lentDate;
+	private String limitedDate;
+	private String returning;
 
 	public int getId() {
 		return id;
@@ -100,6 +108,54 @@ public class Book {
 	}
 	public void setDisposing(String disposing) {
 		this.disposing = disposing;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+	public String getReservedDate() {
+		return reservedDate;
+	}
+	public void setReservedDate(String reservedDate) {
+		this.reservedDate = reservedDate;
+	}
+	public String getDelivering() {
+		return delivering;
+	}
+	public void setDelivering(String delivering) {
+		this.delivering = delivering;
+	}
+	public String getCanceling() {
+		return canceling;
+	}
+	public void setCanceling(String canceling) {
+		this.canceling = canceling;
+	}
+	public String getLentDate() {
+		return lentDate;
+	}
+	public void setLentDate(String lentDate) {
+		this.lentDate = lentDate;
+	}
+	public String getLimitedDate() {
+		return limitedDate;
+	}
+	public void setLimitedDate(String limitedDate) {
+		this.limitedDate = limitedDate;
+	}
+	public String getReturning() {
+		return returning;
+	}
+	public void setReturning(String returning) {
+		this.returning = returning;
 	}
 
 }

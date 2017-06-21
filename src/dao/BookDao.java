@@ -93,6 +93,8 @@ public class BookDao {
 			ps.setString(12, "0");
 			ps.setString(13, "0");
 
+
+
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			throw new SQLRuntimeException(e);
@@ -191,8 +193,8 @@ public class BookDao {
 			if(bookStatus.equals("3")) sql.append("lending = ? AND ");
 			if(!selectBox.isEmpty()) sql.append(selectBox + " LIKE ?");
 			else{
-				if(condition.equals("と一致する")) sql.append("name = ? or author = ? or publisher = ? or category = ? or isbn_id = ?");
-				else if(condition.equals("で終わる")) sql.append("name LIKE ? or author LIKE ? or publisher LIKE ? or category LIKE ? or isbn_id LIKE ?");
+				if(condition.equals("4")) sql.append("name = ? or author = ? or publisher = ? or category = ? or isbn_id = ?");
+				else if(condition.equals("3")) sql.append("name LIKE ? or author LIKE ? or publisher LIKE ? or category LIKE ? or isbn_id LIKE ?");
 				else sql.append("CONCAT(name, author, publisher, category, isbn_id) LIKE ?");
 			}
 			sql.append(" AND published_date >= ? "); //change
@@ -218,13 +220,13 @@ public class BookDao {
 				}
 			}
 
-			if(sort.equals("新しい順")) sql.append(" ORDER BY published_date DESC");
-			if(sort.equals("古い順")) sql.append(" ORDER BY published_date ASC");
-			if(sort.equals("書名順")) sql.append(" ORDER BY name ASC");
-			if(sort.equals("著者名順")) sql.append(" ORDER BY author");
-			if(sort.equals("カテゴリ順")) sql.append(" ORDER BY category");
-			if(sort.equals("出版社順")) sql.append(" ORDER BY publisher");
-			if(sort.equals("")) sql.append(" ORDER BY published_date DESC");
+			if(sort.equals("1")) sql.append(" ORDER BY published_date DESC");
+			if(sort.equals("2")) sql.append(" ORDER BY published_date ASC");
+			if(sort.equals("3")) sql.append(" ORDER BY name ASC");
+			if(sort.equals("4")) sql.append(" ORDER BY author");
+			if(sort.equals("5")) sql.append(" ORDER BY category");
+			if(sort.equals("6")) sql.append(" ORDER BY publisher");
+			if(sort.equals("0")) sql.append(" ORDER BY published_date DESC");
 
 			int cnt = 0;
 			ps = connection.prepareStatement(sql.toString());
@@ -233,10 +235,10 @@ public class BookDao {
 				if(bookStatus.equals("3")) ps.setString(1, "1");
 
 				if(!selectBox.isEmpty()){
-					if(condition.equals("を含む")) ps.setString(2, "%" + freeWord + "%");
-					if(condition.equals("から始まる")) ps.setString(2, freeWord + "%");
-					if(condition.equals("で終わる")) ps.setString(2, "%" + freeWord);
-					if(condition.equals("と一致する")) ps.setString(2, freeWord);
+					if(condition.equals("1")) ps.setString(2, "%" + freeWord + "%");
+					if(condition.equals("2")) ps.setString(2, freeWord + "%");
+					if(condition.equals("3")) ps.setString(2, "%" + freeWord);
+					if(condition.equals("4")) ps.setString(2, freeWord);
 					ps.setString(3, newBooks.get(0));
 
 					cnt = 4;
@@ -257,7 +259,7 @@ public class BookDao {
 					}
 				}
 				else{
-					if(condition.equals("と一致する")){
+					if(condition.equals("4")){
 						ps.setString(2, freeWord);
 						ps.setString(3, freeWord);
 						ps.setString(4, freeWord);
@@ -282,7 +284,7 @@ public class BookDao {
 							}
 						}
 					}
-					else if(condition.equals("で終わる")){
+					else if(condition.equals("3")){
 						ps.setString(2, "%" + freeWord);
 						ps.setString(3, "%" + freeWord);
 						ps.setString(4, "%" + freeWord);
@@ -308,8 +310,8 @@ public class BookDao {
 						}
 					}
 					else{
-						if(condition.equals("を含む")) ps.setString(2, "%" + freeWord + "%");
-						if(condition.equals("から始まる")) ps.setString(2, freeWord + "%");
+						if(condition.equals("1")) ps.setString(2, "%" + freeWord + "%");
+						if(condition.equals("2")) ps.setString(2, freeWord + "%");
 						ps.setString(3, newBooks.get(0));
 
 						cnt = 4;
@@ -357,7 +359,7 @@ public class BookDao {
 					}
 				}
 				else{
-					if(condition.equals("と一致する")){
+					if(condition.equals("4")){
 						ps.setString(1, freeWord);
 						ps.setString(2, freeWord);
 						ps.setString(3, freeWord);
@@ -381,7 +383,7 @@ public class BookDao {
 							}
 						}
 					}
-					else if(condition.equals("で終わる")){
+					else if(condition.equals("3")){
 						ps.setString(1, "%" + freeWord);
 						ps.setString(2, "%" + freeWord);
 						ps.setString(3, "%" + freeWord);
@@ -406,8 +408,8 @@ public class BookDao {
 						}
 					}
 					else{
-						if(condition.equals("を含む")) ps.setString(1, "%" + freeWord + "%");
-						if(condition.equals("から始まる")) ps.setString(1, freeWord + "%");
+						if(condition.equals("1")) ps.setString(1, "%" + freeWord + "%");
+						if(condition.equals("2")) ps.setString(1, freeWord + "%");
 						ps.setString(2, newBooks.get(0));
 						cnt = 3;
 						if(!libraries.isEmpty()){
@@ -463,6 +465,8 @@ public class BookDao {
 				String reserving = rs.getString("reserving");
 				String disposing = rs.getString("disposing");
 
+
+
 				Book book = new Book();
 				book.setId(id);
 				book.setName(name);
@@ -478,6 +482,8 @@ public class BookDao {
 				book.setLending(lending);
 				book.setReserving(reserving);
 				book.setDisposing(disposing);
+
+
 
 				ret.add(book);
 			}
@@ -612,4 +618,57 @@ public class BookDao {
 			close(ps);
 		}
 	}
+//	List<Book> ret = new ArrayList<Book>();
+//	try {
+//		while (rs.next()) {
+//			int id = rs.getInt("book_id");
+//			String name = rs.getString("book_name");
+//			String author = rs.getString("book_author");
+//			String publisher = rs.getString("book_publisher");
+//			String category = rs.getString("book_category");
+//			String type = rs.getString("book_type");
+//			String libraryId = rs.getString("book_libraryId");
+//			String shelfId = rs.getString("shelf_id");
+//			String isbnId = rs.getString("isbn_id");
+//			String publishedDate = rs.getString("published_date");
+//			String keeping = rs.getString("keeping");
+//			String lending = rs.getString("lending");
+//			String reserving = rs.getString("reserving");
+//			String disposing = rs.getString("disposing");
+//			String userName = rs.getString("user_name");
+//			int userId = rs.getInt("user_id");
+//			String reservedDate = rs.getString("reserved_date");
+//			String limitedDate = rs.getString("limited_date");
+//			String returning = rs.getString("returning");
+//
+//
+//			Book book = new Book();
+//			book.setId(id);
+//			book.setName(name);
+//			book.setAuthor(author);
+//			book.setPublisher(publisher);
+//			book.setCategory(category);
+//			book.setType(type);
+//			book.setLibraryId(libraryId);
+//			book.setShelfId(shelfId);
+//			book.setIsbnId(isbnId);
+//			book.setPublishedDate(publishedDate);
+//			book.setKeeping(keeping);
+//			book.setLending(lending);
+//			book.setReserving(reserving);
+//			book.setDisposing(disposing);
+//			book.setUserName(userName);
+//			book.setUserId(userId);
+//			book.setReservedDate(reservedDate);
+//			book.setLimitedDate(limitedDate);
+//			book.setReturning(returning);
+//
+//
+//			ret.add(book);
+//		}
+//		return ret;
+//	} finally {
+//		close(rs);
+//	}
+//}
 }
