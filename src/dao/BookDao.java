@@ -23,7 +23,7 @@ public class BookDao {
 
 		PreparedStatement ps = null;
 		try {
-			String sql = "SELECT * FROM books";
+			String sql = "SELECT * FROM book_admin";
 			ps = connection.prepareStatement(sql);
 
 			ResultSet rs = ps.executeQuery();
@@ -48,12 +48,12 @@ public class BookDao {
 		try {
 			StringBuilder sql = new StringBuilder();
 			sql.append("INSERT INTO books ( ");
-			sql.append(" name");
-			sql.append(", author");
-			sql.append(", publisher");
-			sql.append(", category");
-			sql.append(", type");
-			sql.append(", library_id");
+			sql.append(" book_name");
+			sql.append(", book_author");
+			sql.append(", book_publisher");
+			sql.append(", book_category");
+			sql.append(", book_type");
+			sql.append(", book_libraryId");
 			sql.append(", shelf_id");
 			sql.append(", isbn_id");
 			sql.append(", published_date");
@@ -61,8 +61,20 @@ public class BookDao {
 			sql.append(", lending");
 			sql.append(", reserving");
 			sql.append(", disposing");
+			sql.append(", user_name");
+			sql.append(", user_id");
+			sql.append(", reserved_date");
+			sql.append(", limited_date");
+			sql.append(", returning");
+			sql.append(", book_id");
 			sql.append(") VALUES (");
 			sql.append(" ?");
+			sql.append(", ?");
+			sql.append(", ?");
+			sql.append(", ?");
+			sql.append(", ?");
+			sql.append(", ?");
+			sql.append(", ?");
 			sql.append(", ?");
 			sql.append(", ?");
 			sql.append(", ?");
@@ -92,6 +104,12 @@ public class BookDao {
 			ps.setString(11, "0");
 			ps.setString(12, "0");
 			ps.setString(13, "0");
+			ps.setString(14, book.getUserName());
+			ps.setInt(15, book.getUserId());
+			ps.setString(16, book.getReserved_date());
+			ps.setString(17, book.getLimited_date());
+			ps.setString(18,"0");
+			ps.setInt(19, book.getId());
 
 			ps.executeUpdate();
 		} catch (SQLException e) {
