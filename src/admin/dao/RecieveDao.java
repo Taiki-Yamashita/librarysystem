@@ -41,7 +41,7 @@ public class RecieveDao {
 		PreparedStatement ps = null;
 		try {
 			StringBuilder sql = new StringBuilder();
-			sql.append("SELECT * FROM requires ");
+			sql.append("SELECT * FROM requires");
 
 			ps = connection.prepareStatement(sql.toString());
 
@@ -67,6 +67,7 @@ public class RecieveDao {
 				String author = rs.getString("author");
 				String publisher = rs.getString("publisher");
 				String requiredDate = rs.getString("required_date");
+				String showing = rs.getString("showing");
 
 				Require recieve = new Require();
 
@@ -76,6 +77,7 @@ public class RecieveDao {
 				recieve.setAuthor(author);
 				recieve.setPublisher(publisher);
 				recieve.setRequiredDate(requiredDate);
+				recieve.setShowing(showing);
 
 				ret.add(recieve);
 			}

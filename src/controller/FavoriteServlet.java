@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import beans.Book;
 import beans.Favorite;
 import beans.User;
-import service.BookService;
 import service.FavoriteService;
 
 @WebServlet(urlPatterns = { "/favorite" })
@@ -27,12 +26,7 @@ public class FavoriteServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		User loginUser = (User) request.getSession().getAttribute("loginUser");
-
-		request.setAttribute("loginUser", loginUser);
-
 		List<Favorite> favorites = new FavoriteService().selectAll();
-
 		request.setAttribute("favorites", favorites);
 
 		request.getRequestDispatcher("/favorite.jsp").forward(request, response);
@@ -43,61 +37,14 @@ public class FavoriteServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		/*お気に入り登録*/
 		Favorite favorite = new Favorite();
-
 		favorite.setUserId(request.getParameter("userId"));
 		favorite.setBookId(request.getParameter("bookId"));
 		new FavoriteService().insert(favorite);
 
-		String sort = "";
-		if(request.getParameter("sort") != null) sort = request.getParameter("sort");
-		String bookStatus = request.getParameter("bookStatus");
-
-		/*search*/
-		if(request.getParameter("isSearching") != null){
-
-			/*freeWord*/
-			String selectBox = request.getParameter("selectBox");
-			String freeWord = request.getParameter("freeWord");
-			String condition = request.getParameter("condition");
-
-			/*refine*/
-			List<String> newBooks = getNewBooks(request);
-			List<String> libraries = getLibraries(request);
-			List<String> categories = getCategories(request);
-			List<String> types = getTypes(request);
-
-			/*freeWord*/
-			if(request.getParameter("throughSearching") != null){
-				selectBox = request.getParameter("selectBoxForSort");
-				freeWord = request.getParameter("freeWordForSort");
-				condition = request.getParameter("conditionForSort");
-				bookStatus = request.getParameter("bookStatus");
-			}
-
-			List<Book> selectedBooks = new BookService().getSelectedBooks(selectBox, freeWord, condition, sort, bookStatus,
-					newBooks, libraries, categories, types);
-
-			/*freeWord*/
-			request.getSession().setAttribute("selectBox", new BookService().getMapCategory().get(selectBox));
-			request.getSession().setAttribute("selectBoxId", selectBox);
-			request.getSession().setAttribute("freeWord", freeWord);
-			request.getSession().setAttribute("condition", condition);
-
-			/*refine*/
-			request.getSession().setAttribute("newBooks", newBooks);
-			request.getSession().setAttribute("libraries", libraries);
-			request.getSession().setAttribute("categories", categories);
-			request.getSession().setAttribute("types", types);
-
-			request.getSession().setAttribute("selectedBooks", selectedBooks);
-			request.getSession().setAttribute("sort", sort);
-			request.getSession().setAttribute("bookStatus", bookStatus);
-			request.getSession().setAttribute("throughSearching", "1");
-
-			if(request.getParameter("pageNumber") == null) response.sendRedirect("./search?pageNumber=1");
-			else response.sendRedirect("./search?pageNumber=" + request.getParameter("pageNumber"));
-		}
+		String parameter = getParameter(request);
+		response.sendRedirect("./search?" + parameter);
 	}
 
 	public List<String> getNewBooks(HttpServletRequest request){
@@ -192,5 +139,52 @@ public class FavoriteServlet extends HttpServlet{
 		}
 
 		return isFavorite;
+	}
+
+	public String getParameter(HttpServletRequest request){
+
+		/*本の状態(貸出可・貸出中)*/
+		String bookStatus = request.getParameter("bookStatus");
+
+		/*フリーワード検索*/
+		String selectBox = request.getParameter("selectBox");
+		String freeWord = request.getParameter("freeWord");
+		String condition = request.getParameter("condition");
+
+		/*絞込み検索*/
+		List<String> libraries = getLibraries(request);
+		List<String> categories = getCategories(request);
+		List<String> types = getTypes(request);
+
+		/*並び替え*/
+		String sort = request.getParameter("sort");
+
+		/*ページ番号*/
+		String pageNumber = request.getParameter("pageNumber");
+
+		/*検索情報*/
+		String isSearching = request.getParameter("isSearching");
+
+		String libraryParameter = "";
+		String categoryParameter = "";
+		String typeParameter = "";
+
+		for(String library : libraries){
+			libraryParameter += "&library" + library + "=" + library;
+		}
+
+		for(String category : categories){
+			categoryParameter += "&category" + category + "=" + category;
+		}
+
+		for(String type : types){
+			typeParameter += "&type" + type + "=" + type;
+		}
+
+		String parameter = "bookStatus=" + bookStatus + "&selectBox=" + selectBox + "&freeWord=" + freeWord
+				+ "&condition=" + condition + libraryParameter + categoryParameter + typeParameter + "&sort=" + sort
+				+ "&pageNumber=" + pageNumber + "&isSearching=" + isSearching;
+
+		return parameter;
 	}
 }

@@ -24,8 +24,8 @@ public class RecieveServlet extends HttpServlet {
 		List<Require> recieves = new RecieveService().select();
 		//List<Require> recieves = new RecieveService().select(Integer.parseInt(request.getParameter("num")));
 
-		request.setAttribute("recieves", recieves);
 
+		request.setAttribute("recieves", recieves);
 		request.getRequestDispatcher("./recieve.jsp").forward(request, response);
 	}
 
@@ -33,23 +33,31 @@ public class RecieveServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,HttpServletResponse response)
 		throws ServletException,IOException {
 
-		if(request.getParameter("num") != null) {
-			List<Require> recieves = new RecieveService().select(Integer.parseInt(request.getParameter("num")));
+		if(request.getParameter("num").matches("2")) {
+			List<Require> recieves = new RecieveService().select();
 			request.setAttribute("recieves", recieves);
 			request.getRequestDispatcher("./recieve.jsp").forward(request, response);
-
-		} else if(request.getParameter("num") != null &&
-				(request.getParameter("num") != null || request.getParameter("id") != null)) {
-			int flag = Integer.parseInt(request.getParameter("flag"));
-			int id = Integer.parseInt(request.getParameter("id"));
-			new RecieveService().update(flag, id);
+		}
+		else if(request.getParameter("num") != null) {
+			List<Require> recieves = new RecieveService().select(Integer.parseInt(request.getParameter("num")));
+			request.setAttribute("recieves", recieves);
+			request.setAttribute("num", request.getParameter("num"));
 			request.getRequestDispatcher("./recieve.jsp").forward(request, response);
+
+		} else if(request.getParameter("num") == null &&
+				(request.getParameter("recieveId") != null)) {
+
+			int flag = Integer.parseInt(request.getParameter("flag"));
+			String[] idList = request.getParameterValues("recieveId");
+
+			for(String id: idList) {
+				new RecieveService().update(flag, Integer.parseInt(id));
+			}
+			response.sendRedirect("./recieve");
 
 		} else {
 			response.sendRedirect("./recieve");
 		}
-
-
 
 	}
 }
