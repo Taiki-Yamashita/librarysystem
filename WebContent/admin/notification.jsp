@@ -34,7 +34,8 @@
 				</c:if>
 		</c:forEach>
 	</select><br>
-
+	タイトル<br>
+	<textarea name="title" id="title" cols="100" rows="1" ><c:out value="${newNotification.title }"></c:out></textarea><br>
 	投稿<br>
 	<textarea name="message" id="message" cols="100" rows="5" ><c:out value="${newNotification.message }"></c:out></textarea><br>
 

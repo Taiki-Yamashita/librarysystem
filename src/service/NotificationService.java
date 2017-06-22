@@ -33,6 +33,28 @@ public class NotificationService {
 		}
 	}
 
+	public Notification select(int id) {
+
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			Notification information = new NotificationDao().select(connection, id);
+
+			commit(connection);
+
+			return information;
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
+
 	public void insert(Notification notification) {
 
 		Connection connection = null;
