@@ -295,7 +295,7 @@ public class CirculationDao {
 
 		PreparedStatement ps = null;
 		try {
-			String sql = "SELECT * FROM circulations";
+			String sql = "SELECT * FROM circulations ";
 			ps = connection.prepareStatement(sql);
 
 			ResultSet rs = ps.executeQuery();
