@@ -163,13 +163,13 @@
 						図書館
 					</td>
 					<td>
-						<c:forEach items="${books}" var="book">
-				<td>
-				<c:if test="${book.keeping ==1}">保管中</c:if>
-				<c:if test="${book.lending ==1}">貸出中</c:if>
-				<c:if test="${book.disposing ==1}">整理中</c:if>
-				<td>
-						</c:forEach>
+					<c:forEach items="${books}" var="book">
+					<c:if test="${book.id == reservation.bookId }">
+					<c:if test="${book.keeping ==1}">保管中</c:if>
+					<c:if test="${book.lending ==1}">貸出中</c:if>
+					<c:if test="${book.disposing ==1}">整理中</c:if>
+					</c:if>
+					</c:forEach>
 					</td>
 					<td>
 						<c:forEach items="${books}" var="book">
