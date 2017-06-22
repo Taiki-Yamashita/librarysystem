@@ -28,7 +28,10 @@
 	<h5>お知らせ</h5>
 		<c:forEach items="${informations}" var="information">
 			<a href="information?id=${information.id }"name="id"><c:out value="${information.title}"/></a>
-			<div class="registeredDate">投稿日時:<c:out value="${information.registeredDate}" /></div>
+			<div class="registeredDate">投稿日時:
+			<fmt:parseDate var="date" value="${information.registeredDate}" pattern="yyyy-MM-dd HH:mm:ss" />
+			<fmt:formatDate pattern = "yyyy年MM月dd日" value = "${date}" />
+			</div>
 			<div class="libraryId">
 			<c:forEach items="${libraries}" var="library">
 				<c:if test = "${library.id == information.libraryId}">
