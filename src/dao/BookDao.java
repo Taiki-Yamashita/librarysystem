@@ -44,6 +44,7 @@ public class BookDao {
 
 	public void insert(Connection connection, Book book) {
 
+		//System.out.println(category);
 		PreparedStatement ps = null;
 		try {
 			StringBuilder sql = new StringBuilder();
@@ -92,7 +93,6 @@ public class BookDao {
 			ps.setString(11, "0");
 			ps.setString(12, "0");
 			ps.setString(13, "0");
-
 
 
 			ps.executeUpdate();

@@ -37,11 +37,127 @@
 	<label for = "publisher">出版社</label><br>
 	<input name = "publisher" id = "publisher" value = "${newBook.publisher }"/><br />
 
+
 	<label for = "category">カテゴリ</label><br>
-	<input name = "category" id = "category" value = "${newBook.category }"/><br />
+						<%
+							String[] checkBoxCategoryNumbers = {"1","2","3","4","5","6","7","8","9"};
+							session.setAttribute("checkBoxCategoryNumbers", checkBoxCategoryNumbers);
+						%>
+						<c:forEach items="${checkBoxCategoryNumbers}" var="checkBoxCategoryNumber">
+							<%session.setAttribute("checkCategory", 0);%>
+							<c:forEach items="${categories}" var="category">
+								<c:if test="${category == '文学' && checkBoxCategoryNumber == 1}">
+									<%session.setAttribute("checkCategory",1);%>
+									<input type="radio" name="category" value="1"  >文学
+								</c:if>
+								<c:if test="${category == '経済' && checkBoxCategoryNumber == 2}">
+									<%session.setAttribute("checkCategory",1);%>
+									<input type="radio" name="category" value="2" >経済
+								</c:if>
+								<c:if test="${category == '芸能' && checkBoxCategoryNumber == 3}">
+									<%session.setAttribute("checkCategory",1);%>
+									<input type="radio" name="category" value="3" >芸能
+								</c:if>
+								<c:if test="${category == '歴史' && checkBoxCategoryNumber == 4}">
+									<%session.setAttribute("checkCategory",1);%>
+									<input type="radio" name="category" value="4" >歴史
+								</c:if>
+								<c:if test="${category == '学問' && checkBoxCategoryNumber == 5}">
+									<%session.setAttribute("checkCategory",1);%>
+									<input type="radio" name="category" value="5" >学問
+								</c:if>
+								<c:if test="${category == '政治' && checkBoxCategoryNumber == 6}">
+									<%session.setAttribute("checkCategory",1);%>
+									<input type="radio" name="category" value="6" >政治
+								</c:if>
+								<c:if test="${category == '暮らし' && checkBoxCategoryNumber == 7}">
+									<%session.setAttribute("checkCategory",1);%>
+									<input type="radio" name="category" value="7" >暮らし
+								</c:if>
+								<c:if test="${category == '教育' && checkBoxCategoryNumber == 8}">
+									<%session.setAttribute("checkCategory",1);%>
+									<input type="radio" name="category" value="8" >教育
+								</c:if>
+								<c:if test="${category == 'SF' && checkBoxCategoryNumber == 9}">
+									<%session.setAttribute("checkCategory",1);%>
+									<input type="radio" name="category" value="9" >SF
+								</c:if>
+							</c:forEach>
+
+							<c:if test="${checkCategory == 0 && checkBoxCategoryNumber == 1}">
+								<input type="radio" name="category" value="1" >文学
+							</c:if>
+							<c:if test="${checkCategory == 0 && checkBoxCategoryNumber == 2}">
+								<input type="radio" name="category" value="2">経済
+							</c:if>
+							<c:if test="${checkCategory == 0 && checkBoxCategoryNumber == 3}">
+								<input type="radio" name="category" value="3">芸能
+							</c:if>
+							<c:if test="${checkCategory == 0 && checkBoxCategoryNumber == 4}">
+								<input type="radio" name="category" value="4">歴史
+							</c:if>
+							<c:if test="${checkCategory == 0 && checkBoxCategoryNumber == 5}">
+								<input type="radio" name="category" value="5">学問
+							</c:if>
+							<c:if test="${checkCategory == 0 && checkBoxCategoryNumber == 6}">
+								<input type="radio" name="category" value="6">政治
+							</c:if>
+							<c:if test="${checkCategory == 0 && checkBoxCategoryNumber == 7}">
+								<input type="radio" name="category" value="7">暮らし
+							</c:if>
+							<c:if test="${checkCategory == 0 && checkBoxCategoryNumber == 8}">
+								<input type="radio" name="category" value="8">教育
+							</c:if>
+							<c:if test="${checkCategory == 0 && checkBoxCategoryNumber == 9}">
+								<input type="radio" name="category" value="9">SF
+							</c:if>
+						</c:forEach><br>
+
+
+
 
 	<label for = "type">タイプ</label><br>
-	<input name = "type" id = "type" value = "${newBook.type }"/><br />
+				<%
+					String[] checkBoxTypeNumbers = {"1","2","3","4"};
+					session.setAttribute("checkBoxTypeNumbers", checkBoxTypeNumbers);
+				%>
+						<c:forEach items="${checkBoxTypeNumbers}" var="checkBoxTypeNumber">
+							<%session.setAttribute("checkType", 0);%>
+							<c:forEach items="${types}" var="type">
+								<c:if test="${type == '文庫' && checkBoxTypeNumber == 1}">
+									<%session.setAttribute("checkType",1);%>
+									<input type="radio" name="type" value="1">文庫
+								</c:if>
+								<c:if test="${type == '新書' && checkBoxTypeNumber == 2}">
+									<%session.setAttribute("checkType",1);%>
+									<input type="radio" name="type" value="2">新書
+								</c:if>
+								<c:if test="${type == '雑誌' && checkBoxTypeNumber == 3}">
+									<%session.setAttribute("checkType",1);%>
+									<input type="radio" name="type" value="3" >雑誌
+								</c:if>
+								<c:if test="${type == 'コミックス' && checkBoxTypeNumber == 4}">
+									<%session.setAttribute("checkType",1);%>
+									<input type="radio" name="type" value="4">コミックス
+								</c:if>
+							</c:forEach>
+
+							<c:if test="${checkType == 0 && checkBoxTypeNumber == 1}">
+								<input type="radio" name="type" value="1">文庫
+							</c:if>
+							<c:if test="${checkType == 0 && checkBoxTypeNumber == 2}">
+								<input type="radio" name="type" value="2">新書
+							</c:if>
+							<c:if test="${checkType == 0 && checkBoxTypeNumber == 3}">
+								<input type="radio" name="type" value="3">雑誌
+							</c:if>
+							<c:if test="${checkType == 0 && checkBoxTypeNumber == 4}">
+								<input type="radio" name="type" value="4">コミックス
+							</c:if>
+						</c:forEach><br>
+
+
+
 
 	<label for = "library">図書館</label><br>
 	<select name="libraryId">

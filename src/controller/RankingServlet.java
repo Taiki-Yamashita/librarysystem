@@ -8,10 +8,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
+import beans.Book;
+import beans.Library;
 import beans.Ranking;
-import beans.User;
+import service.BookService;
+import service.LibraryService;
 import service.RankingService;
 
 @WebServlet(urlPatterns = { "/ranking" })
@@ -22,16 +24,15 @@ public class RankingServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
 
-		HttpSession session = request.getSession();
-
-		User loginUser = (User) session.getAttribute("loginUser");
-
 		List<Ranking> circulations = new RankingService().circulationAll();
 		List<Ranking> reservations = new RankingService().reservationAll();
+		List<Book> books = new BookService().selectAll();
+		List<Library> libraries = new LibraryService().selectAll();
 
-		request.setAttribute("loginUser", loginUser);
 		request.setAttribute("circulations", circulations);
 		request.setAttribute("reservations", reservations);
+		request.setAttribute("books", books);
+		request.setAttribute("libraries", libraries);
 
 		request.getRequestDispatcher("/ranking.jsp").forward(request, response);
 	}
