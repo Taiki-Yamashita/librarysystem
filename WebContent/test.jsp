@@ -20,6 +20,7 @@
    	 				<input type = "hidden" id = "libraryId" name = "libraryId" value = "${book.libraryId}" >
 						<input id = "userId" name = "userId"  >
 						<input type = "hidden" name = "num" value = 1 >
+						<input type = "hidden" name = "resetNum" value=1>
 						<input type = "submit" value = "貸出" />
 
    	 			</form>

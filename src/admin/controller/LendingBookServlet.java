@@ -37,7 +37,7 @@ public class LendingBookServlet extends HttpServlet {
 		throws ServletException,IOException {
 		HttpSession session = request.getSession();
 
-		String lending = request.getParameter("bookId");
+		String bookId = request.getParameter("bookId");
 		String num = request.getParameter("num");
 		List<String> messages = new ArrayList<String>();
 		Circulation circulation = new Circulation();
@@ -50,18 +50,14 @@ public class LendingBookServlet extends HttpServlet {
 			circulation.setBookId(request.getParameter("bookId"));
 			circulation.setLibraryId(request.getParameter("libraryId"));
 			new CirculationService().insert(circulation);
-			new BookService().lendingBook(lending, num);
+			new CirculationService().flag(num,bookId);
+			new BookService().lendingBook(bookId, num);
 		} else {
 			session.setAttribute("errorMessages", messages);
 			session.setAttribute("userId", request.getParameter("userId"));
 		}
 
-		if(num.matches("0")) {
-			circulation.setBookId(request.getParameter("bookId"));
-			circulation.setLibraryId(request.getParameter("libraryId"));
-			new CirculationService().update(circulation);
-			new BookService().lendingBook(lending, num);
-		}
+
 		response.sendRedirect("/LibrarySystem/test");
 	}
 

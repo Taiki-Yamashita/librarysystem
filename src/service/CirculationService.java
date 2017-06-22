@@ -159,4 +159,23 @@ public class CirculationService {
 			close(connection);
 		}
 	}
+	public void flag(String num, String id) {
+
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			new CirculationDao().flag(connection, num, id);
+
+			commit(connection);
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
 }
