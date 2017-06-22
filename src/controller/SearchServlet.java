@@ -216,7 +216,7 @@ public class SearchServlet extends HttpServlet{
 				boolean reservationFlag = false;
 				for(Reservation reservation : reservations){
 					if(reservation.getBookId().equals(String.valueOf(book.getId())) && reservation.getUserId().equals(String.valueOf(loginUser.getId()))){
-						reservationFlag = true;
+						if(reservation.getCanceling().equals("1") || reservation.getDelivering().equals("1")) reservationFlag = true;
 					}
 				}
 				if(reservationFlag == true) isReserving.add(-10);
