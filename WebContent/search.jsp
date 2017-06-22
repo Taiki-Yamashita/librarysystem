@@ -362,7 +362,7 @@
 								<td><c:out value="${book.name}"/></td>
 								<td><c:out value="${book.author}"/></td>
 								<td>
-									<fmt:parseDate var="date" value="${book.publishedDate}" pattern="yyyy-MM-dd HH:mm:ss.S" />
+									<fmt:parseDate var="date" value="${book.publishedDate}" pattern="yyyy-MM-dd HH:mm:ss" />
 									<fmt:formatDate pattern = "yyyy年MM月dd日" value = "${date}" />
 								</td>
 								<td><c:out value="${book.category}"/></td>
