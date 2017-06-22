@@ -8,10 +8,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
+import beans.Book;
+import beans.Library;
 import beans.Reservation;
-import beans.User;
+import service.BookService;
+import service.LibraryService;
 import service.ReservationService;
 
 @WebServlet(urlPatterns = { "/user" })
@@ -22,15 +24,15 @@ public class UserServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		HttpSession session = request.getSession();
+		List<Reservation> reservations = new ReservationService().selectAll();
+		List<Book> books = new BookService().selectAll();
+		List<Library> libraries = new LibraryService().selectAll();
 
-		List<Reservation> reservations = new ReservationService().selectAllView();
+		System.out.println(reservations);
+
 		request.setAttribute("reservations", reservations);
-
-		User loginUser = (User) session.getAttribute("loginUser");
-
-		request.setAttribute("loginUser", loginUser);
-
+		request.setAttribute("books", books);
+		request.setAttribute("libraries", libraries);
 
 		request.getRequestDispatcher("/user.jsp").forward(request, response);
 	}

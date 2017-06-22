@@ -18,6 +18,7 @@
 	<a href = "./admin/manage">管理画面</a>
 	<a href = "./introduction">本の紹介</a>
 
+	<p>予約一覧</p>
 	<table>
 		<tr>
 			<th>本の名前</th>
@@ -26,21 +27,28 @@
 			<th>キャンセル</th>
 		</tr>
 		<c:forEach items="${reservations}" var="reservation">
-			<c:if test="${reservation.userId == loginUser.id && reservation.canceling ==0}">
+			<c:if test="${reservation.userId == loginUser.id && reservation.canceling == 0}">
 				<tr>
-					<td>${reservation.bookName}</td>
-					<td>${reservation.libraryId}</td>
-					<td>${reservation.reservedDate }</td>
+					<td>
+						<c:forEach items="books" var="book">
+							<c:if test="${book.id == reservation.bookId}">${book.name}</c:if>
+						</c:forEach>
+					</td>
+					<td>
+						<c:forEach items="libraries" var="library">
+							<c:if test="${library.id == reservation.libraryId}">${library.name}</c:if>
+						</c:forEach>
+					</td>
+					<td>${reservation.reservedDate}</td>
 					<td>
 						<form action = "cancelingBook" method = "post">
 							<input type = "hidden" name = "bookId" value = "${reservation.bookId}" >
 							<input type = "hidden" id = "libraryId" name = "libraryId" value = "${reservation.libraryId }" >
-										<input type = "hidden" name = "time" value = "${reservation.reservedDate }">
+							<input type = "hidden" name = "time" value = "${reservation.reservedDate }">
 							<c:if test="${reservation.canceling == 0 }">
 								<input type = "hidden" name = "num" value =1>
 								<input type = "submit" value = "キャンセル" />
 							</c:if>
-
 						</form>
 					</td>
 				</tr>
