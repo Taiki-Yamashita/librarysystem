@@ -47,11 +47,13 @@ public class FavoriteServlet extends HttpServlet{
 		}
 
 		String parameter = getParameter(request);
-		if(request.getParameter("num").matches("1")) {
-			response.sendRedirect("./ranking");
-			return;
+
+		if(request.getParameter("num") == null) {
+			response.sendRedirect("./search?" + parameter);
 		}
-		response.sendRedirect("./search?" + parameter);
+		else if(request.getParameter("num").matches("1")) {
+			response.sendRedirect("./ranking");
+		}
 	}
 
 	public List<String> getNewBooks(HttpServletRequest request){

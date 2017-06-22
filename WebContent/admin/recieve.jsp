@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+ <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+ <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -53,7 +54,10 @@
 					<td><c:out value="${recieve.bookName}" /></td>
 					<td><c:out value="${recieve.author}" /></td>
 					<td><c:out value="${recieve.publisher}" /></td>
-					<td><c:out value="${recieve.requiredDate}" /></td>
+					<td>
+						<fmt:parseDate var="date" value="${recieve.requiredDate}" pattern="yyyy-MM-dd HH:mm:ss" />
+						<fmt:formatDate pattern = "yyyy年MM月dd日" value = "${date}" />
+					</td>
 					<td>
 						<c:if test="${recieve.showing == 0 }">
 							<input type="hidden" name="flag" id="flag" value="1">
