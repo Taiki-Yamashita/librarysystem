@@ -10,9 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.Book;
+import beans.Favorite;
 import beans.Library;
 import beans.Ranking;
+import beans.User;
 import service.BookService;
+import service.FavoriteService;
 import service.LibraryService;
 import service.RankingService;
 
@@ -29,10 +32,15 @@ public class RankingServlet extends HttpServlet {
 		List<Book> books = new BookService().selectAll();
 		List<Library> libraries = new LibraryService().selectAll();
 
+		List<Favorite> favorites = new FavoriteService().selectAll();
+		User loginUser = (User) request.getSession().getAttribute("loginUser");
+
 		request.setAttribute("circulations", circulations);
 		request.setAttribute("reservations", reservations);
 		request.setAttribute("books", books);
 		request.setAttribute("libraries", libraries);
+		request.setAttribute("loginUser", loginUser);
+		request.setAttribute("isFavorites", favorites);
 
 		request.getRequestDispatcher("/ranking.jsp").forward(request, response);
 	}
