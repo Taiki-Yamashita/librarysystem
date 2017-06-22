@@ -9,6 +9,8 @@ public class Circulation {
 	private String userName;
 	private String bookId;
 	private String bookName;
+	private String lending;
+
 	public String getBookName() {
 		return bookName;
 	}
@@ -74,5 +76,11 @@ public class Circulation {
 	}
 	public void setReturning(String returning) {
 		this.returning = returning;
+	}
+	public String getLending() {
+		return lending;
+	}
+	public void setLending(String lending) {
+		this.lending = lending;
 	}
 }

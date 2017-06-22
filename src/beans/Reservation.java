@@ -5,11 +5,14 @@ public class Reservation {
 	private int id;
 	private String reservedDate;
 	private String userId;
+	private String userName;
 	private String bookId;
 	private String bookName;
 	private String libraryId;
 	private String delivering;
 	private String canceling;
+	private String point;
+
 
 	public int getId() {
 		return id;
@@ -29,6 +32,12 @@ public class Reservation {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 	public String getBookId() {
 		return bookId;
 	}
@@ -46,6 +55,12 @@ public class Reservation {
 	}
 	public void setLibraryId(String libraryId) {
 		this.libraryId = libraryId;
+	}
+	public String getPoint() {
+		return point;
+	}
+	public void setPoint(String point) {
+		this.point = point;
 	}
 	public String getDelivering() {
 		return delivering;

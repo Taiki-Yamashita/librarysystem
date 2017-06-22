@@ -18,6 +18,79 @@
 	<a href = "./admin/manage">管理画面</a>
 	<a href = "./introduction">本の紹介</a>
 
+<p>ユーザー情報</p>
+
+
+	<table>
+		<tr>
+			<th>ユーザー</th>
+			<th>ユーザーID</th>
+			<th>登録図書館</th>
+			<th>ポイント</th>
+		</tr>
+
+
+	<c:forEach items="${users}" var="user">
+		<c:if test="${user.id == loginUser.id }">
+			<tr>
+				<td>${user.name }</td>
+				<td>${user.id }</td>
+				<td>
+					<c:forEach items="${ libraries}" var="library">
+						<c:if test="${library.id == user.libraryId}">${library.name}</c:if>
+					</c:forEach>
+				</td>
+				<td>${user.point }</td>
+			</tr>
+		</c:if>
+	</c:forEach>
+
+	</table>
+
+	<!-- 貸出 -->
+	<p>貸出一覧</p>
+	<table>
+		<tr>
+			<th>本の名前</th>
+			<th>貸出日</th>
+			<th>期限</th>
+			<th>貸出図書館</th>
+
+		</tr>
+		<c:forEach items="${circulations}" var="circulation">
+
+			<c:if test="${circulation.userId == loginUser.id && circulation.returning == 0 && circulation.lending ==1}">
+				<tr>
+					<td>
+						<c:forEach items="${books}" var="book">
+							<c:if test="${book.id == circulation.bookId}">${book.name}</c:if>
+						</c:forEach>
+					</td>
+					<td>
+						<c:out value="${circulation.lentDate }"></c:out>
+					</td>
+					<td>
+						<c:out value="${circulation.limitedDate }"></c:out>
+					</td>
+
+					<td>
+						<c:forEach items="${ libraries}" var="library">
+							<c:if test="${library.id == circulation.libraryId}">${library.name}</c:if>
+						</c:forEach>
+					</td>
+
+				</tr>
+			</c:if>
+		</c:forEach>
+	</table>
+
+
+
+
+
+
+
+
 	<p>予約一覧</p>
 	<table>
 		<tr>
@@ -27,15 +100,16 @@
 			<th>キャンセル</th>
 		</tr>
 		<c:forEach items="${reservations}" var="reservation">
+
 			<c:if test="${reservation.userId == loginUser.id && reservation.canceling == 0}">
 				<tr>
 					<td>
-						<c:forEach items="books" var="book">
-							<c:if test="${book.id == reservation.bookId}">${book.name}</c:if>
+						<c:forEach items="${books}" var="book">
+							<c:if test="${book.id == reservation.bookId}">${reservation.bookName}</c:if>
 						</c:forEach>
 					</td>
 					<td>
-						<c:forEach items="libraries" var="library">
+						<c:forEach items="${ libraries}" var="library">
 							<c:if test="${library.id == reservation.libraryId}">${library.name}</c:if>
 						</c:forEach>
 					</td>

@@ -137,4 +137,26 @@ public class CirculationService {
 			close(connection);
 		}
 	}
+
+	public List<Circulation> selectMypage() {
+
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			List<Circulation> contacts = new CirculationDao().selectMypage(connection);
+
+			commit(connection);
+
+			return contacts;
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
 }

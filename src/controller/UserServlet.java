@@ -10,11 +10,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.Book;
+import beans.Circulation;
 import beans.Library;
 import beans.Reservation;
+import beans.User;
 import service.BookService;
+import service.CirculationService;
 import service.LibraryService;
 import service.ReservationService;
+import service.UserService;
 
 @WebServlet(urlPatterns = { "/user" })
 public class UserServlet extends HttpServlet{
@@ -24,13 +28,16 @@ public class UserServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		List<Reservation> reservations = new ReservationService().selectAll();
+		List<User> users = new UserService().selectAll();
 		List<Book> books = new BookService().selectAll();
 		List<Library> libraries = new LibraryService().selectAll();
+		List<Circulation> circulations = new CirculationService().selectMypage();
+		List<Reservation> reservations = new ReservationService().selectMypage();
 
-		System.out.println(reservations);
 
+		request.setAttribute("users", users);
 		request.setAttribute("reservations", reservations);
+		request.setAttribute("circulations", circulations);
 		request.setAttribute("books", books);
 		request.setAttribute("libraries", libraries);
 
