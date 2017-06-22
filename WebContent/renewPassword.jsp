@@ -23,11 +23,12 @@
 	</c:if>
 
 	<form action="renewPassword" method="post">
+		<input type="hidden" value="${loginUser.id}" id="id" name="id"/>
 		<label for="password">パスワード</label><br>
-		<input name="password" value="${loginUser.password}" id="password"/><br/>
+		<input name="password" value="${editUser.password}" id="password"/><br/>
 
 		<label for="confirmedPassword">パスワード（確認用）</label><br>
-		<input name="confirmedPassword" value="${loginUser.password}" id="confirmedPassword"/><br/>
+		<input name="confirmedPassword" value="${editUser.password}" id="confirmedPassword"/><br/>
 
 		<input type="submit" value="更新" />
 	</form>

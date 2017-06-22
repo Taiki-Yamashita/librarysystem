@@ -27,7 +27,6 @@ public class RenewPasswordServlet extends HttpServlet {
 		User editUser = new UserService().selectUser(String.valueOf(loginUser.getId()));
 
 		request.setAttribute("editUser", editUser);
-
 		request.getRequestDispatcher("renewPassword.jsp").forward(request, response);
 	}
 
@@ -40,23 +39,22 @@ public class RenewPasswordServlet extends HttpServlet {
 		User editUser = getEditUser(request);
 
 		if (isValid(request, messages)) {
-			editUser.setPassword(request.getParameter("password"));
+			//editUser.setPassword(request.getParameter("password"));
 			new UserService().update(editUser);
 			response.sendRedirect("./");
-		} else {
-			session.setAttribute("errorMessages", messages);
-
-			request.setAttribute("editUser", editUser);
-			request.getRequestDispatcher("renewPassword.jsp").forward(request, response);
+			return;
 		}
+		session.setAttribute("errorMessages", messages);
+		request.setAttribute("editUser", editUser);
+		request.getRequestDispatcher("renewPassword.jsp").forward(request, response);
+		//response.sendRedirect("./renewPassword");
 	}
 
 	private User getEditUser(HttpServletRequest request)
 			throws IOException, ServletException {
-		User editUser = new User();;
+		User editUser = new User();
 		editUser.setId(Integer.parseInt(request.getParameter("id")));
 		editUser.setPassword(request.getParameter("password"));
-
 		return editUser;
 	}
 
@@ -66,8 +64,8 @@ public class RenewPasswordServlet extends HttpServlet {
 			String confirmedpassword = request.getParameter("confirmedPassword");
 			if (StringUtils.isBlank(password) == true) {
 				messages.add("パスワードを入力してください");
-			} else if ( !password.matches("\\w{6,255}$") ) {
-				messages.add("パスワードは半角数字6文字以上255文字以下で入力してください");
+//			} else if ( !password.matches("\\w{6,255}$") ) {
+//				messages.add("パスワードは半角数字6文字以上255文字以下で入力してください");
 			}
 			if (!password.matches(confirmedpassword)) {
 				messages.add("パスワードとパスワード確認が不一致です");

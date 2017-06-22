@@ -93,6 +93,29 @@
 							<input type = "submit" value = "予約" />
 						</form>
 					</td>
+					<td>
+						<form action = "favorite" method = "post">
+							<c:if test="${empty loginUser}">
+								<input type="button" onclick="location.href='./login'"value="お気に入り">
+							</c:if>
+							<c:if test="${not empty loginUser}">
+								<c:forEach items="${isFavorites}" var="favorite">
+									<c:if test="${favorite.userId == loginUser.id && favorite.bookId
+										== circulation.bookId }">
+										<c:set var="data" value="0" />
+									</c:if>
+								</c:forEach>
+								<c:if test="${data == 0}">お気に入り済み</c:if>
+								<c:if test="${data != 0}">
+									<input type="hidden" value="${loginUser.id}" name="userId">
+									<input type="hidden" value="${circulation.bookId}" name="bookId">
+									<input type="submit"  value="お気に入り" />
+								</c:if>
+								<c:remove var="data" />
+							</c:if>
+							<input type="hidden" value="1" name="num">
+						</form>
+					</td>
 				</tr>
 			</c:forEach>
 		</table>
@@ -164,6 +187,29 @@
 							<input type = "hidden" name = "reservation" value="${book.id}">
 							<input type = "hidden" name = "fromRanking" value = "1" >
 							<input type = "submit" value = "予約" />
+						</form>
+					</td>
+					<td>
+						<form action = "favorite" method = "post">
+							<c:if test="${empty loginUser}">
+								<input type="button" onclick="location.href='./login'"value="お気に入り">
+							</c:if>
+							<c:if test="${not empty loginUser}">
+								<c:forEach items="${isFavorites}" var="favorite">
+									<c:if test="${favorite.userId == loginUser.id && favorite.bookId
+										== reservation.bookId }">
+										<c:set var="data" value="0" />
+									</c:if>
+								</c:forEach>
+								<c:if test="${data == 0}">お気に入り済み</c:if>
+								<c:if test="${data != 0}">
+									<input type="hidden" value="${loginUser.id}" name="userId">
+									<input type="hidden" value="${reservation.bookId}" name="bookId">
+									<input type="submit"  value="お気に入り" />
+								</c:if>
+								<c:remove var="data" />
+							</c:if>
+							<input type="hidden" value="1" name="num">
 						</form>
 					</td>
 				</tr>

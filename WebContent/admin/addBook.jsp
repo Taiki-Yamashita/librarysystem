@@ -160,17 +160,52 @@
 
 
 	<label for = "library">図書館</label><br>
-	<select name="libraryId">
-		<option value="0">選択してください</option>
-			<c:forEach items="${libraries}" var="library">
-			<c:if test="${newBook.libraryId == library.id }">
-					<option selected value="${library.id}">${library.name } </option>
-				</c:if>
-				<c:if test="${newBook.libraryId != library.id }">
-					<option  value="${library.id}">${library.name } </option>
-				</c:if>
-		</c:forEach>
-	</select><br>
+				<%
+					String[] checkBoxLibraryNumbers = {"1","2","3","4","5"};
+					session.setAttribute("checkBoxLibraryNumbers", checkBoxLibraryNumbers);
+				%>
+						<c:forEach items="${checkBoxLibraryNumbers}" var="checkBoxLibraryNumber">
+							<%session.setAttribute("checkLibrary", 0);%>
+							<c:forEach items="${libraries}" var="library">
+								<c:if test="${library == '西馬込' && checkBoxLibraryNumber == 1}">
+									<%session.setAttribute("checkLibrary",1);%>
+									<input type="radio" name="libraryId" value="1">西馬込
+								</c:if>
+								<c:if test="${library == '馬込' && checkBoxLibraryNumber == 2}">
+									<%session.setAttribute("checkLibrary",1);%>
+									<input type="radio" name="libraryId" value="2">馬込
+								</c:if>
+								<c:if test="${library == '中延' && checkBoxLibraryNumber == 3}">
+									<%session.setAttribute("checkLibrary",1);%>
+									<input type="radio" name="libraryId" value="3" >中延
+								</c:if>
+								<c:if test="${library == '戸越' && checkBoxLibraryNumber == 4}">
+									<%session.setAttribute("checkLibrary",1);%>
+									<input type="radio" name="libraryId" value="4" >戸越
+								</c:if>
+								<c:if test="${library == '五反田' && checkBoxLibraryNumber == 5}">
+									<%session.setAttribute("checkLibraryId",1);%>
+								<input type="radio" name="library" value="5" >五反田
+								</c:if>
+
+							</c:forEach>
+
+							<c:if test="${checkLibrary == 0 && checkBoxLibraryNumber == 1}">
+								<input type="radio" name="libraryId" value="1">西馬込
+							</c:if>
+							<c:if test="${checkLibrary == 0 && checkBoxLibraryNumber == 2}">
+								<input type="radio" name="libraryId" value="2">馬込
+							</c:if>
+							<c:if test="${checkLibrary == 0 && checkBoxLibraryNumber == 3}">
+								<input type="radio" name="libraryId" value="3">中延
+							</c:if>
+							<c:if test="${checkLibrary == 0 && checkBoxLibraryNumber == 4}">
+								<input type="radio" name="libraryId" value="4">戸越
+							</c:if>
+							<c:if test="${checkLibrary == 0 && checkBoxLibraryNumber == 5}">
+								<input type="radio" name="libraryId" value="5">五反田
+							</c:if>
+						</c:forEach><br>
 
 	<label for="shelfId">棚番号</label><br>
 	<input name = "shelfId" id = "shelfId" value = "${newBook.shelfId }"/><br />

@@ -344,4 +344,36 @@ public class CirculationDao {
 			close(rs);
 		}
 	}
+
+	public void flag(Connection connection, String num, String id) {
+
+		PreparedStatement ps = null;
+		try {
+			StringBuilder sql = new StringBuilder();
+			sql.append("UPDATE books SET");
+			sql.append(" lending = ?");
+			sql.append(" ,keeping = ?");
+			sql.append(" ,disposing = ?");
+			sql.append(" WHERE");
+			sql.append(" id = ?");
+
+			ps = connection.prepareStatement(sql.toString());
+
+			ps.setString(1, num);
+			ps.setString(2, "0");
+			ps.setString(3, "0");
+			ps.setString(4, id);
+
+
+			int count = ps.executeUpdate();
+			if (count == 0) {
+				throw new NoRowsUpdatedRuntimeException();
+			}
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+
+	}
 }

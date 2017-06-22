@@ -124,7 +124,7 @@ public class AddBookServlet extends HttpServlet {
 		if(StringUtils.isBlank(publishedDate) == true) {
 			messages.add("出版日を入力してください");
 		}
-		if(libraryId.matches("0") == true) {
+		if(StringUtils.isBlank(libraryId) == true) {
 			messages.add("図書館名を選択してください");
 		}
 		if(StringUtils.isBlank(shelfId) == true) {
