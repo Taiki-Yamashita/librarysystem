@@ -17,7 +17,9 @@
 		図書館:<c:out value="${library.name}" /></br>
 	</c:if>
 </c:forEach>
-投稿日時:<c:out value="${information.registeredDate}" />
+投稿日時:
+<fmt:parseDate var="date" value="${information.registeredDate}" pattern="yyyy-MM-dd HH:mm:ss" />
+<fmt:formatDate pattern = "yyyy年MM月dd日" value = "${date}" />
 
 </body>
 </html>
