@@ -143,7 +143,7 @@ public class ReservationDao {
 
 		PreparedStatement ps = null;
 		try {
-			String sql = "SELECT * FROM reservations where book_id =?";
+			String sql = "SELECT *  FROM reservations where book_id =? AND canceling=0";
 			ps = connection.prepareStatement(sql);
 
 			ps.setInt(1, bookId);
@@ -152,9 +152,9 @@ public class ReservationDao {
 			List<Reservation> reservationList = toSelectList(rs);
 			if (reservationList.isEmpty()) {
 				return null;
-			}else {
-				return reservationList;
 			}
+
+			return reservationList;
 		} catch (SQLException e) {
 			throw new SQLRuntimeException(e);
 		} finally {

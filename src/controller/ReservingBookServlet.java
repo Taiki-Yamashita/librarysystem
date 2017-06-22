@@ -43,7 +43,7 @@ public class ReservingBookServlet extends HttpServlet {
 
 		if(reservingCheck == null){
 			int num = Integer.parseInt(request.getParameter("num"));
-			new BookService().reservingBook(bookId, num);
+
 
 			if(num ==1){
 				Book reservingBook = new BookService().selectBook(bookId);
@@ -77,7 +77,6 @@ public class ReservingBookServlet extends HttpServlet {
 		}
 
 		int num = Integer.parseInt(request.getParameter("num"));
-		new BookService().reservingBook(bookId, num);
 
 		if(num ==1){
 
