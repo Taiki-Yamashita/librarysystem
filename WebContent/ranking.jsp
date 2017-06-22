@@ -37,6 +37,7 @@
 			<input type = "hidden" id = "${loginUser.id}" name = "userId" value = "${loginUser.id}"  >
 			<input type = "hidden" name = "num" value =1>
 			<input type = "hidden" name = "reservation" value="${book.id}">
+			<input type = "hidden" name = "fromRanking" value = "1" >
 			<input type = "submit" value = "予約" />
 		</form>
 </c:forEach>
@@ -50,6 +51,7 @@
 			<input type = "hidden" id = "${loginUser.id}" name = "userId" value = "${loginUser.id}"  >
 			<input type = "hidden" name = "num" value =1>
 			<input type = "hidden" name = "reservation" value="${book.id}">
+			<input type = "hidden" name = "fromRanking" value = "1" >
 			<input type = "submit" value = "予約" />
 		</form>
 </c:forEach>
