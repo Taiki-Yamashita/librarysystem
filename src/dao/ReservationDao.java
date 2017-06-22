@@ -223,7 +223,7 @@ public class ReservationDao {
 
 		PreparedStatement ps = null;
 		try {
-			String sql = "SELECT * FROM reservations where book_id = ?";
+			String sql = "SELECT * FROM reservations where book_id = ? and canceling=0";
 			ps = connection.prepareStatement(sql);
 			ps.setInt(1, bookId);
 
@@ -231,9 +231,8 @@ public class ReservationDao {
 			List<Reservation> reservationList = toSelectList(rs);
 			if (reservationList.isEmpty()) {
 				return null;
-			}else {
-				return reservationList;
 			}
+				return reservationList;
 		} catch (SQLException e) {
 			throw new SQLRuntimeException(e);
 		} finally {
@@ -257,6 +256,64 @@ public class ReservationDao {
 				reservation.setUserId(userId);
 				reservation.setBookId(bookId);
 				reservation.setLibraryId(libraryId);
+				reservation.setDelivering(delivering);
+				reservation.setCanceling(canceling);
+
+				ret.add(reservation);
+			}
+			return ret;
+		} finally {
+			close(rs);
+		}
+	}
+
+
+	public List<Reservation> selectMypage(Connection connection){
+
+		PreparedStatement ps = null;
+		try {
+			String sql = "SELECT * FROM book_reservations";
+			ps = connection.prepareStatement(sql);
+
+			ResultSet rs = ps.executeQuery();
+			List<Reservation> reservationList = toMypageList(rs);
+			if (reservationList.isEmpty()) {
+				return null;
+			}else {
+				return reservationList;
+			}
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
+
+
+	private List<Reservation> toMypageList(ResultSet rs) throws SQLException {
+
+		List<Reservation> ret = new ArrayList<Reservation>();
+		try {
+			while (rs.next()) {
+				String bookName = rs.getString("book_name");
+				String bookId = rs.getString("book_id");
+				String libraryId = rs.getString("library_id");
+				String userId = rs.getString("user_id");
+				String userName = rs.getString("user_name");
+				String point = rs.getString("point");
+				String reservedDate = rs.getString("reserved_date");
+				String delivering = rs.getString("delivering");
+				String canceling = rs.getString("canceling");
+
+				Reservation reservation = new Reservation();
+				reservation.setBookName(bookName);
+				reservation.setBookId(bookId);
+				reservation.setLibraryId(libraryId);
+				reservation.setUserId(userId);
+				reservation.setUserName(userName);
+				reservation.setPoint(point);
+				reservation.setReservedDate(reservedDate);
+
 				reservation.setDelivering(delivering);
 				reservation.setCanceling(canceling);
 

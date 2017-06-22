@@ -26,8 +26,6 @@
 			<c:remove var="errorMessages" scope="session"/>
 		</c:if>
 
-
-
 		貸出件数ランキング<br>
 		<table>
 			<tr>
@@ -165,10 +163,11 @@
 					</td>
 					<td>
 						<c:forEach items="${books}" var="book">
-							<c:if test="${book.id == reservation.bookId}">
-								<c:if test="${book.lending == 0}"><c:out value="棚保管中"/></c:if>
-								<c:if test="${book.lending == 1}"><c:out value="貸出中"/></c:if>
-							</c:if>
+				<td>
+				<c:if test="${book.keeping ==1}">保管中</c:if>
+				<c:if test="${book.lending ==1}">貸出中</c:if>
+				<c:if test="${book.disposing ==1}">整理中</c:if>
+				<td>
 						</c:forEach>
 					</td>
 					<td>

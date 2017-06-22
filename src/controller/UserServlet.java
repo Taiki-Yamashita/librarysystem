@@ -8,11 +8,17 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
+import beans.Book;
+import beans.Circulation;
+import beans.Library;
 import beans.Reservation;
 import beans.User;
+import service.BookService;
+import service.CirculationService;
+import service.LibraryService;
 import service.ReservationService;
+import service.UserService;
 
 @WebServlet(urlPatterns = { "/user" })
 public class UserServlet extends HttpServlet{
@@ -22,15 +28,18 @@ public class UserServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		HttpSession session = request.getSession();
+		List<User> users = new UserService().selectAll();
+		List<Book> books = new BookService().selectAll();
+		List<Library> libraries = new LibraryService().selectAll();
+		List<Circulation> circulations = new CirculationService().selectMypage();
+		List<Reservation> reservations = new ReservationService().selectMypage();
 
-		List<Reservation> reservations = new ReservationService().selectAllView();
+
+		request.setAttribute("users", users);
 		request.setAttribute("reservations", reservations);
-
-		User loginUser = (User) session.getAttribute("loginUser");
-
-		request.setAttribute("loginUser", loginUser);
-
+		request.setAttribute("circulations", circulations);
+		request.setAttribute("books", books);
+		request.setAttribute("libraries", libraries);
 
 		request.getRequestDispatcher("/user.jsp").forward(request, response);
 	}

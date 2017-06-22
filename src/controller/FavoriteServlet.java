@@ -13,9 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.Book;
 import beans.Favorite;
-import beans.User;
 import service.FavoriteService;
 
 @WebServlet(urlPatterns = { "/favorite" })
@@ -37,11 +35,16 @@ public class FavoriteServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		/*お気に入り登録*/
-		Favorite favorite = new Favorite();
-		favorite.setUserId(request.getParameter("userId"));
-		favorite.setBookId(request.getParameter("bookId"));
-		new FavoriteService().insert(favorite);
+		/*ログインしていない時*/
+		if(request.getParameter("notLogin") != null){
+			request.getSession().setAttribute("loginErrorMessages", "ログインしてください");
+		}else{
+			/*お気に入り登録*/
+			Favorite favorite = new Favorite();
+			favorite.setUserId(request.getParameter("userId"));
+			favorite.setBookId(request.getParameter("bookId"));
+			new FavoriteService().insert(favorite);
+		}
 
 		String parameter = getParameter(request);
 		response.sendRedirect("./search?" + parameter);
@@ -120,25 +123,6 @@ public class FavoriteServlet extends HttpServlet{
 		}
 
 		return pageCountList;
-	}
-
-	public List<Integer> isFavorite(List<Favorite> favorites, User loginUser, List<Book> books){
-
-		List<Integer> isFavorite = new ArrayList<>();
-		int cnt = 0;
-		for(Book book : books){
-			boolean favoriteFlag = false;
-			for(Favorite favorite : favorites){
-				if(favorite.getBookId().equals(String.valueOf(book.getId())) && favorite.getUserId().equals(String.valueOf(loginUser.getId()))){
-					favoriteFlag = true;
-				}
-			}
-			if(favoriteFlag == true) isFavorite.add(-1);
-			else isFavorite.add(cnt);
-			cnt++;
-		}
-
-		return isFavorite;
 	}
 
 	public String getParameter(HttpServletRequest request){
