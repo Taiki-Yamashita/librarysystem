@@ -18,7 +18,6 @@
 			<tr><td><a href = "./favorite">お気に入り</a></td></tr>
 			<tr><td><a href = "./require">本のリクエスト</a></td></tr>
 			<tr><td><a href = "./admin/manage">管理画面</a></td></tr>
-			<tr><td><a href = "./introduction">本の紹介</a></td></tr>
 			<tr><td><a href = "./user">マイページ</a></td></tr>
 			<tr><td><a href = "./ranking">ランキング</a></td></tr>
 			<tr><td><a href="renewPassword?id=${loginUser.id}" name="id">パスワード編集</a></td></tr>
