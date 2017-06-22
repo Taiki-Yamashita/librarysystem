@@ -34,15 +34,16 @@ public class AddBookServlet extends HttpServlet {
 		request.setAttribute("libraryId", libraryId);
 
 
-
 		request.getRequestDispatcher("/admin/addBook.jsp").forward(request, response);
 	}
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException,
 	ServletException{
 
+
 		List<String> messages = new ArrayList<String>();
 		HttpSession session = request.getSession();
+
 
 		if(isValid(request, messages) == true) {
 
@@ -94,6 +95,7 @@ public class AddBookServlet extends HttpServlet {
 
 
 	private boolean isValid(HttpServletRequest request, List<String> messages){
+
 		String name = request.getParameter("name");
 		String author = request.getParameter("author");
 		String publisher = request.getParameter("publisher");
@@ -138,4 +140,5 @@ public class AddBookServlet extends HttpServlet {
 			return false;
 		}
 	}
+
 }

@@ -63,10 +63,10 @@
 					<c:forEach items="${notReturnedCounts}" var="count" varStatus="statusCount">
 						<c:if test="${statusBook.index == statusCount.index}">
 							<c:if test="${count ==1}">
-							<option value="${count}">延滞発生</option>
+							<option value="${count}">！</option>
 							</c:if>
 							<c:if test="${count !=1}">
-							異常なし
+
 							</c:if>
 						</c:if>
 					</c:forEach>
