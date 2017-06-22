@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import beans.Library;
 import beans.Notification;
+import beans.User;
 import service.LibraryService;
 import service.NotificationService;
 
@@ -26,8 +27,11 @@ public class TopServlet extends HttpServlet{
 
 		List<Library> libraries = new LibraryService().selectAll();
 
+		User loginUser = (User) request.getSession().getAttribute("loginUser");
+
 		request.setAttribute("informations", informations);
 		request.setAttribute("libraries", libraries);
+		request.setAttribute("loginUser", loginUser);
 
 		request.getRequestDispatcher("/top.jsp").forward(request, response);
 	}

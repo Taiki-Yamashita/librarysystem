@@ -21,6 +21,7 @@
 			<tr><td><a href = "./introduction">本の紹介</a></td></tr>
 			<tr><td><a href = "./user">マイページ</a></td></tr>
 			<tr><td><a href = "./ranking">ランキング</a></td></tr>
+			<tr><td><a href="renewPassword?id=${loginUser.id}" name="id">パスワード編集</a></td></tr>
 			<tr><td><a href = "./logout">ログアウト</a></td></tr>
 		</table>
 
