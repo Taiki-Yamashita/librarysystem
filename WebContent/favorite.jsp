@@ -54,14 +54,15 @@
 								<input type = "hidden" id = "${loginUser.id}" name = "userId" value = "${loginUser.id}"  >
 								<input type = "hidden" name = "num" value =1>
 								<input type = "hidden" name = "reservation" value="${book.id}">
-								<input type = "submit" value = "予約" />
+								<input type = "hidden" name = "fromFavorite" value = "1" />
 							</form>
 						</c:if>
 						<c:if test="${favorite.reserving != 1}">予約済み</c:if>
 					</td>
 					<td>
 						<form action="./delete" method="POST">
-<!-- ログインユーザーのID --><input type="hidden" value="${favorite.userId}" name="userId">
+							<!-- ログインユーザーのID -->
+							<input type="hidden" value="${favorite.userId}" name="userId">
 							<input type="hidden" value="${favorite.bookId}" name="bookId">
 							<input type="submit"  value="お気に入り削除" />
 						</form>

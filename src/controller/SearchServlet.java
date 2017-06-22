@@ -15,9 +15,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import beans.Book;
 import beans.Favorite;
+import beans.Library;
 import beans.User;
 import service.BookService;
 import service.FavoriteService;
+import service.LibraryService;
 
 @WebServlet(urlPatterns = { "/search" })
 public class SearchServlet extends HttpServlet{
@@ -66,10 +68,12 @@ public class SearchServlet extends HttpServlet{
 			if(isValid(selectedBooks, request)){
 
 				List<Favorite> favorites = new FavoriteService().selectAll();
+				List<Library> libraryNames = new LibraryService().selectAll();
 				User loginUser = (User) request.getSession().getAttribute("loginUser");
 
-				/*お気に入り・ログイン情報*/
+				/*お気に入り・図書館情報*/
 				request.setAttribute("isFavorites", isFavorite(favorites, loginUser, selectedBooks));
+				request.setAttribute("libraryNames", libraryNames);
 
 				/*ページ遷移管理*/
 				request.setAttribute("pageCountList", getPageCount(selectedBooks.size()));

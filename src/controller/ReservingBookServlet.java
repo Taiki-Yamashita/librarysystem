@@ -1,4 +1,4 @@
-package admin.controller;
+package controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -27,7 +27,6 @@ public class ReservingBookServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-
 		request.getRequestDispatcher("ranking.jsp").forward(request, response);
 	}
 
@@ -37,15 +36,50 @@ public class ReservingBookServlet extends HttpServlet {
 
 		int bookId = Integer.parseInt(request.getParameter("bookId"));
 		String userId = (request.getParameter("userId"));
+		String toRanking = request.getParameter("fromRanking");
+		String toFavorite = request.getParameter("fromFavorite");
 
 		List<Reservation> reservingCheck = new ReservationService().reservingCheck(bookId, userId);
 
-		if( reservingCheck ==null){
+		if(reservingCheck == null){
 			int num = Integer.parseInt(request.getParameter("num"));
 			new BookService().reservingBook(bookId, num);
 
 			if(num ==1){
+				Book reservingBook = new BookService().selectBook(bookId);
+				User reservingUser = new UserService().selectUser(userId);
 
+				Reservation addReservation = new Reservation();
+				addReservation.setUserId(String.valueOf(reservingUser.getId()));
+				addReservation.setBookId(String.valueOf(reservingBook.getId()));
+				addReservation.setBookName(reservingBook.getName());
+				addReservation.setLibraryId(request.getParameter("libraryId"));
+
+				new ReservationService().insert(addReservation);
+			}
+
+			if(toRanking != null) response.sendRedirect("./ranking");
+			if(toFavorite != null) response.sendRedirect("./favorite");
+			return;
+
+
+		}else if(reservingCheck.size() != 0){
+
+			List<String> messages = new ArrayList<String>();
+			HttpSession session = request.getSession();
+
+			messages.add("すでに予約されています");
+			session.setAttribute("errorMessages", messages);
+
+			if(toRanking != null) response.sendRedirect("./ranking");
+			if(toFavorite != null) response.sendRedirect("./favorite");
+			return;
+		}
+
+		int num = Integer.parseInt(request.getParameter("num"));
+		new BookService().reservingBook(bookId, num);
+
+		if(num ==1){
 
 			Book reservingBook = new BookService().selectBook(bookId);
 			User reservingUser = new UserService().selectUser(userId);
@@ -56,45 +90,10 @@ public class ReservingBookServlet extends HttpServlet {
 			addReservation.setBookName(reservingBook.getName());
 			addReservation.setLibraryId(request.getParameter("libraryId"));
 
-
 			new ReservationService().insert(addReservation);
-			}
-
-
-			response.sendRedirect("./ranking");
-			return;
-
-
-		}else if(reservingCheck.size() !=0 ){
-
-			List<String> messages = new ArrayList<String>();
-			HttpSession session = request.getSession();
-
-			messages.add("すでに予約されています");
-			session.setAttribute("errorMessages", messages);
-			response.sendRedirect("./ranking");
-			return;
 		}
 
-		int num = Integer.parseInt(request.getParameter("num"));
-		new BookService().reservingBook(bookId, num);
-
-		if(num ==1){
-
-
-		Book reservingBook = new BookService().selectBook(bookId);
-		User reservingUser = new UserService().selectUser(userId);
-
-		Reservation addReservation = new Reservation();
-		addReservation.setUserId(String.valueOf(reservingUser.getId()));
-		addReservation.setBookId(String.valueOf(reservingBook.getId()));
-		addReservation.setBookName(reservingBook.getName());
-		addReservation.setLibraryId(request.getParameter("libraryId"));
-
-
-		new ReservationService().insert(addReservation);
-		}
-
-		response.sendRedirect("./ranking");
+		if(toRanking != null) response.sendRedirect("./ranking");
+		if(toFavorite != null) response.sendRedirect("./favorite");
 	}
 }

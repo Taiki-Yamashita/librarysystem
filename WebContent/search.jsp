@@ -33,14 +33,14 @@
 					<td>
 						<c:if test="${empty bookStatus}">
 							<input type="radio" name="bookStatus" value="1" checked>全て
-							<input type="radio" name="bookStatus" value="2">貸出可
+							<input type="radio" name="bookStatus" value="2">棚保管中
 							<input type="radio" name="bookStatus" value="3">貸出中
 						</c:if>
 						<c:if test="${not empty bookStatus}">
 							<c:if test="${bookStatus == 1}"><input type="radio" name="bookStatus" value="1" checked>全て</c:if>
 							<c:if test="${bookStatus != 1}"><input type="radio" name="bookStatus" value="1">全て</c:if>
-							<c:if test="${bookStatus == 2}"><input type="radio" name="bookStatus" value="2" checked>貸出可</c:if>
-							<c:if test="${bookStatus != 2}"><input type="radio" name="bookStatus" value="2">貸出可</c:if>
+							<c:if test="${bookStatus == 2}"><input type="radio" name="bookStatus" value="2" checked>棚保管中</c:if>
+							<c:if test="${bookStatus != 2}"><input type="radio" name="bookStatus" value="2">棚保管中</c:if>
 							<c:if test="${bookStatus == 3}"><input type="radio" name="bookStatus" value="3" checked>貸出中</c:if>
 							<c:if test="${bookStatus != 3}"><input type="radio" name="bookStatus" value="3">貸出中</c:if>
 						</c:if>
@@ -367,8 +367,21 @@
 								</td>
 								<td><c:out value="${book.category}"/></td>
 								<td><c:out value="${book.type}"/></td>
-								<td><c:out value="${book.libraryId}"/></td>
-								<td><c:out value="${book.lending}"/></td>
+								<td>
+									<c:forEach items="${libraryNames}" var="library">
+										<c:if test="${library.id == book.libraryId}">
+											<c:out value="${library.name}"/>
+										</c:if>
+									</c:forEach>
+								</td>
+								<td>
+									<c:if test="${book.lending == 0}">
+										<c:out value="棚保管中"/>
+									</c:if>
+									<c:if test="${book.lending == 1}">
+										<c:out value="貸出中"/>
+									</c:if>
+								</td>
 								<td><c:out value="${book.isbnId}"/></td>
 								<td>
 									<form action="./reservation" method="POST">
