@@ -113,6 +113,7 @@
 								</c:if>
 								<c:remove var="data" />
 							</c:if>
+							<input type="hidden" value="1" name="num">
 						</form>
 					</td>
 				</tr>
@@ -208,6 +209,7 @@
 								</c:if>
 								<c:remove var="data" />
 							</c:if>
+							<input type="hidden" value="1" name="num">
 						</form>
 					</td>
 				</tr>

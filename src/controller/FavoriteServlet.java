@@ -47,6 +47,10 @@ public class FavoriteServlet extends HttpServlet{
 		}
 
 		String parameter = getParameter(request);
+		if(request.getParameter("num").matches("1")) {
+			response.sendRedirect("./ranking");
+			return;
+		}
 		response.sendRedirect("./search?" + parameter);
 	}
 
