@@ -147,33 +147,46 @@ public class UserDao {
 		try {
 			StringBuilder sql = new StringBuilder();
 			sql.append("UPDATE users SET");
-			sql.append("  login_id = ?");
-			sql.append(", password = ?");
-			sql.append(", name = ?");
-			sql.append(", address = ?");
-			sql.append(", tel = ?");
-			sql.append(", mail = ?");
-			sql.append(", point = ?");
-			sql.append(", library_id = ?");
-			sql.append(", register_date = ?");
-			sql.append(", stopping = ?");
+			if(user.getLoginId() == null) {
+				sql.append(" password = ?");
+				sql.append(" WHERE");
+				sql.append(" id = ?");
+				ps = connection.prepareStatement(sql.toString());
 
-			sql.append(" WHERE");
-			sql.append(" id = ?");
+				ps.setString(1, user.getPassword());
+				ps.setInt(2, user.getId());
+			} else {
+				sql.append("  login_id = ?");
+				sql.append(", password = ?");
+				sql.append(", name = ?");
+				sql.append(", address = ?");
+				sql.append(", tel = ?");
+				sql.append(", mail = ?");
+				sql.append(", point = ?");
+				sql.append(", library_id = ?");
+				sql.append(", register_date = ?");
+				sql.append(", stopping = ?");
 
-			ps = connection.prepareStatement(sql.toString());
+				sql.append(" WHERE");
+				sql.append(" id = ?");
 
-			ps.setString(1, user.getLoginId());
-			ps.setString(2, user.getPassword());
-			ps.setString(3, user.getName());
-			ps.setString(4, user.getAddress());
-			ps.setString(5, user.getTel());
-			ps.setString(6, user.getMail());
-			ps.setString(7, user.getPoint());
-			ps.setString(8, user.getLibraryId());
-			ps.setString(9, user.getRegisterDate());
-			ps.setString(10, "0");
-			ps.setInt(11, user.getId());
+				ps = connection.prepareStatement(sql.toString());
+
+				ps.setString(1, user.getLoginId());
+				ps.setString(2, user.getPassword());
+				ps.setString(3, user.getName());
+				ps.setString(4, user.getAddress());
+				ps.setString(5, user.getTel());
+				ps.setString(6, user.getMail());
+				ps.setString(7, user.getPoint());
+				ps.setString(8, user.getLibraryId());
+				ps.setString(9, user.getRegisterDate());
+				ps.setString(10, "0");
+				ps.setInt(11, user.getId());
+			}
+
+
+
 
 			int count = ps.executeUpdate();
 			if (count == 0) {
