@@ -28,8 +28,8 @@
 			<c:out value="${loginUser.name}"></c:out><br/>
 			<input type="hidden" name="userName" value="${loginUser.name}">
 
-			<label for="bookName">書名</label>
-			<input name="bookName" value="${newRequire.bookName}"/><br/>
+			<label for="bookName">書籍名</label>
+			<input name="bookName" value="${newRequire.bookName}"/>*必須<br/>
 
 			<label for="author">著者</label>
 			<input name="author" value="${newRequire.author}"/><br/>
@@ -37,7 +37,7 @@
 			<label for="publisher">出版社</label>
 			<input name="publisher"  value="${newRequire.publisher}"/><br/>
 
-			<input type="submit" value="登録" />
+			<input type="submit" value="申請" />
 		</form>
 </body>
 </html>

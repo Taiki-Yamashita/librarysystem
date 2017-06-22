@@ -10,14 +10,14 @@ import admin.beans.NotReturned;
 import admin.dao.NotReturnedDao;
 
 public class NotReturnedService {
-	public List<NotReturned> select() {
+	public List<NotReturned> select(int bookId) {
 
 		Connection connection = null;
 		try {
 			connection = getConnection();
 
 			NotReturnedDao notReturneddao = new NotReturnedDao();
-			List<NotReturned> ret = notReturneddao.getSelectAllNotReturned(connection);
+			List<NotReturned> ret = notReturneddao.getSelectAllNotReturned(connection, bookId);
 
 
 			commit(connection);

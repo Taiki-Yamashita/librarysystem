@@ -10,7 +10,7 @@
 </head>
 <body>
 	<br>
-	<a href = "./manage">管理画面</a>
+	<a href = "./manageBook">本の情報管理</a>
 
 
 <c:if test="${ not empty errorMessages }">

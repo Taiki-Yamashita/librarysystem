@@ -9,7 +9,7 @@
 <title>貸し出し管理</title>
 </head>
 <body>
-	<a href="manage">管理画面</a>
+	<a href="manageBook">本の情報一覧</a>
 	<form action="circulation" method="post">
 		<table>
 			<tr>
@@ -26,10 +26,7 @@
 					<td><c:out value = "${circulation.libraryName}" /></td>
 					<td><c:out value = "${circulation.lentDate}" /></td>
 					<td><c:out value = "${circulation.limitedDate}" /></td>
-					<td>
-					<input type="hidden" name="bookId" value="${circulation.bookId}"/>
-					<input type="submit" value="返却"/>
-					</td>
+
 				</tr>
 			</c:forEach>
 		</table>
