@@ -37,6 +37,8 @@ public class CancelingBookServlet extends HttpServlet {
 		int num = Integer.parseInt(request.getParameter("num"));
 		String time =request.getParameter("time");
 
+
+
 		new BookService().cancelingBook(bookId, num, time);
 
 
