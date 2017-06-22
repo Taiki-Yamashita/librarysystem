@@ -97,7 +97,7 @@ public class CirculationDao {
 			ps.setString(2, circulation.getBookId());
 			ps.setString(3, circulation.getLibraryId());
 			ps.setString(4, calendar.get(Calendar.YEAR)+"/"+(calendar.get(Calendar.MONTH)+1)+"/"+calendar.get(Calendar.DATE));//登録時刻から14日後
-			ps.setString(5, "0");
+			ps.setString(5, "1");
 			ps.setString(6, "0");
 
 			ps.executeUpdate();
@@ -285,6 +285,59 @@ public class CirculationDao {
 				//circulation.setReturning(returning);
 
 				ret.add(circulation);
+			}
+			return ret;
+		} finally {
+			close(rs);
+		}
+	}
+	public List<Circulation> selectMypage(Connection connection){
+
+		PreparedStatement ps = null;
+		try {
+			String sql = "SELECT * FROM circulations";
+			ps = connection.prepareStatement(sql);
+
+			ResultSet rs = ps.executeQuery();
+			List<Circulation> reservationList = toMypageList(rs);
+			if (reservationList.isEmpty()) {
+				return null;
+			}else {
+				return reservationList;
+			}
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
+
+
+	private List<Circulation> toMypageList(ResultSet rs) throws SQLException {
+
+		List<Circulation> ret = new ArrayList<Circulation>();
+		try {
+			while (rs.next()) {
+				String bookId = rs.getString("book_id");
+				String libraryId = rs.getString("library_id");
+				String userId = rs.getString("user_id");
+				String lentDate = rs.getString("lent_date");
+				String limitedDate = rs.getString("limited_date");
+				String lending = rs.getString("lending");
+				String returning = rs.getString("returning");
+
+
+				Circulation reservation = new Circulation();
+				reservation.setBookId(bookId);
+				reservation.setLibraryId(libraryId);
+				reservation.setUserId(userId);
+				reservation.setLentDate(lentDate);
+				reservation.setLimitedDate(limitedDate);
+				reservation.setLending(lending);
+				reservation.setReturning(returning);
+
+
+				ret.add(reservation);
 			}
 			return ret;
 		} finally {
