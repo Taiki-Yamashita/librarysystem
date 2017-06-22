@@ -360,9 +360,9 @@
 					<th>書籍</th><th>著者</th><th>出版日</th><th>カテゴリ</th><th>種類</th>
 					<th>図書館</th><th>状態</th><th>ISBN番号</th><th>予約</th><th>お気に入り</th>
 				</tr>
-				<c:forEach items="${books}" var="book" varStatus="status">
+				<c:forEach items="${books}" var="book" varStatus="count">
 					<c:if test="${book.id != 0}">
-						<c:if test="${status.index >= (pageNumber-1)*3 && status.index <= (pageNumber*3)-1}">
+						<c:if test="${count.index >= (pageNumber-1)*3 && count.index <= (pageNumber*3)-1}">
 							<tr>
 								<td><c:out value="${book.name}"/></td>
 								<td><c:out value="${book.author}"/></td>
@@ -387,7 +387,7 @@
 								<td><c:out value="${book.isbnId}"/></td>
 								<td>
 									<c:forEach items="${isReserving}" var="reserve">
-										<c:if test="${reserve == status.index}">
+										<c:if test="${reserve == count.index}">
 											<form action="./reservingBook" method="POST">
 												<!-- freeWord -->
 												<input type="hidden" name="selectBox" value="${selectBoxId}">
@@ -424,6 +424,7 @@
 												<input type="hidden" name="bookStatus" value="${bookStatus}">
 												<input type="hidden" name="sort" value="${sort}" >
 												<input type="hidden" value="${pageNumber}" name="pageNumber">
+												<input type = "hidden" name = "fromSearch" value="1">
 
 												<input type = "hidden" name = "bookId" value = "${book.id}" >
 												<input type = "hidden" id = "libraryId" name = "libraryId" value = "${book.libraryId}" >
@@ -439,7 +440,7 @@
 								</td>
 								<td>
 									<c:forEach items="${isFavorites}" var="favorite">
-										<c:if test="${favorite == status.index}">
+										<c:if test="${favorite == count.index}">
 											<form action="./favorite" method="POST">
 												<!-- freeWord -->
 												<input type="hidden" name="selectBox" value="${selectBoxId}">
