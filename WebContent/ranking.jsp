@@ -26,8 +26,6 @@
 			<c:remove var="errorMessages" scope="session"/>
 		</c:if>
 
-
-
 		貸出件数ランキング<br>
 		<table>
 			<tr>
