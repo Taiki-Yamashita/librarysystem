@@ -198,7 +198,7 @@ public class ReservationDao {
 			StringBuilder sql = new StringBuilder();
 			sql.append("SELECT * FROM reservations WHERE");
 			sql.append(" book_id = ? AND");
-			sql.append(" user_id = ?");
+			sql.append(" user_id = ? AND (delivering = 0 OR canceling =0)");
 
 			ps = connection.prepareStatement(sql.toString());
 
