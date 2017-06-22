@@ -14,22 +14,21 @@ import beans.Notification;
 import service.LibraryService;
 import service.NotificationService;
 
-@WebServlet(urlPatterns = { "/index.jsp" })
-public class TopServlet extends HttpServlet{
-	private static final long serialVersionUID = 1L;
-
+@WebServlet(urlPatterns = { "/information" })
+public class InformationServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		List<Notification> informations = new NotificationService().selectAll();
+		Notification information =
+				new NotificationService().select(Integer.parseInt(request.getParameter("id")));
 
 		List<Library> libraries = new LibraryService().selectAll();
 
-		request.setAttribute("informations", informations);
 		request.setAttribute("libraries", libraries);
 
-		request.getRequestDispatcher("/top.jsp").forward(request, response);
-	}
+		request.setAttribute("information", information);
 
+		request.getRequestDispatcher("information.jsp").forward(request, response);
+
+	}
 }

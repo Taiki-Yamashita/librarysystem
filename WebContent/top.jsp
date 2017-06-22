@@ -27,10 +27,15 @@
 	<h5>お知らせ</h5>
 		<c:forEach items="${informations}" var="information">
 			<a href="information?id=${information.id }"name="id"><c:out value="${information.title}"/></a>
-			<div class="libraryId"><c:out value="${information.libraryId}" /></div>
 			<div class="registeredDate">投稿日時:<c:out value="${information.registeredDate}" /></div>
-			<div class="message">投稿:<c:out value="${information.message}" /></div>
-
+			<div class="libraryId">
+			<c:forEach items="${libraries}" var="library">
+				<c:if test = "${library.id == information.libraryId}">
+					図書館:<c:out value="${library.name}" /></br>
+					-------------------------------------------------------------------------
+				</c:if>
+			</c:forEach>
+			</div>
 		</c:forEach>
 
 	</body>
