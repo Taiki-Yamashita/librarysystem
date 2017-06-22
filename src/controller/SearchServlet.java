@@ -16,10 +16,12 @@ import javax.servlet.http.HttpServletResponse;
 import beans.Book;
 import beans.Favorite;
 import beans.Library;
+import beans.Reservation;
 import beans.User;
 import service.BookService;
 import service.FavoriteService;
 import service.LibraryService;
+import service.ReservationService;
 
 @WebServlet(urlPatterns = { "/search" })
 public class SearchServlet extends HttpServlet{
@@ -68,11 +70,13 @@ public class SearchServlet extends HttpServlet{
 			if(isValid(selectedBooks, request)){
 
 				List<Favorite> favorites = new FavoriteService().selectAll();
+				List<Reservation> reservations = new ReservationService().selectAll();
 				List<Library> libraryNames = new LibraryService().selectAll();
 				User loginUser = (User) request.getSession().getAttribute("loginUser");
 
-				/*お気に入り・図書館情報*/
+				/*お気に入り・予約・図書館情報*/
 				request.setAttribute("isFavorites", isFavorite(favorites, loginUser, selectedBooks));
+				request.setAttribute("isReserving", isReserving(reservations, loginUser, selectedBooks));
 				request.setAttribute("libraryNames", libraryNames);
 
 				/*ページ遷移管理*/
@@ -187,15 +191,45 @@ public class SearchServlet extends HttpServlet{
 						favoriteFlag = true;
 					}
 				}
-				if(favoriteFlag == true) isFavorite.add(-1);
+				if(favoriteFlag == true) isFavorite.add(-10);
 				else isFavorite.add(cnt);
 				cnt++;
 			}
-
 			return isFavorite;
+		}else{
+			int cnt = 0;
+			for(Book book : books){
+				isFavorite.add(cnt);
+				cnt++;
+			}
 		}
-
-		isFavorite.add(-10);
 		return isFavorite;
+	}
+
+	public List<Integer> isReserving(List<Reservation> reservations, User loginUser, List<Book> books){
+
+		List<Integer> isReserving = new ArrayList<>();
+		if(reservations != null && loginUser != null){
+			int cnt = 0;
+			for(Book book : books){
+				boolean reservationFlag = false;
+				for(Reservation reservation : reservations){
+					if(reservation.getBookId().equals(String.valueOf(book.getId())) && reservation.getUserId().equals(String.valueOf(loginUser.getId()))){
+						reservationFlag = true;
+					}
+				}
+				if(reservationFlag == true) isReserving.add(-10);
+				else isReserving.add(cnt);
+				cnt++;
+			}
+			return isReserving;
+		}else{
+			int cnt = 0;
+			for(Book book : books){
+				isReserving.add(cnt);
+				cnt++;
+			}
+		}
+		return isReserving;
 	}
 }
