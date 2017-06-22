@@ -40,6 +40,7 @@ public class NortificationServlet extends HttpServlet{
 	ServletException{
 
 		Notification nortification = new Notification();
+		nortification.setTitle(request.getParameter("title"));
 		nortification.setMessage(request.getParameter("message"));
 		nortification.setLibraryId(request.getParameter("libraryId"));
 		nortification.setRegisteredDate(request.getParameter("registeredDate"));
@@ -68,7 +69,7 @@ public class NortificationServlet extends HttpServlet{
 			throws IOException, ServletException {
 
 		Notification newNotification = new Notification();
-
+		newNotification.setTitle(request.getParameter("title"));
 		newNotification.setMessage(request.getParameter("message"));
 		newNotification.setLibraryId(request.getParameter("libraryId"));
 
@@ -78,9 +79,13 @@ public class NortificationServlet extends HttpServlet{
 
 	private boolean isValid(HttpServletRequest request, List<String> messages){
 		String message = request.getParameter("message");
+		String title = request.getParameter("title");
 
 		if(StringUtils.isBlank(message) == true) {
 				messages.add("投稿の中身を入力してください");
+		}
+		if(StringUtils.isBlank(title) == true) {
+			messages.add("タイトルを入力してください");
 		}
 		if(messages.size() ==0) {
 			return true;
