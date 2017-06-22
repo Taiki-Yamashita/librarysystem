@@ -38,6 +38,7 @@ public class ReservingBookServlet extends HttpServlet {
 		String userId = (request.getParameter("userId"));
 		String toRanking = request.getParameter("fromRanking");
 		String toFavorite = request.getParameter("fromFavorite");
+		String toSearch = request.getParameter("fromSearch");
 
 		List<Reservation> reservingCheck = new ReservationService().reservingCheck(bookId, userId);
 
@@ -73,6 +74,7 @@ public class ReservingBookServlet extends HttpServlet {
 
 			if(toRanking != null) response.sendRedirect("./ranking");
 			if(toFavorite != null) response.sendRedirect("./favorite");
+			if(toSearch != null) response.sendRedirect("./search");
 			return;
 		}
 
