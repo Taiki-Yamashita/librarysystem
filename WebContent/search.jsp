@@ -379,16 +379,17 @@
 								<c:if test="${book.lending ==1}">貸出中</c:if>
 								<c:if test="${book.disposing ==1}">整理中</c:if>
 								<td>
-								<td><c:out value="${book.isbnId}"/></td>	<td>
-								<form action = "reservingBook" method = "post">
-									<input type = "hidden" name = "bookId" value = "${book.id}" >
-									<input type = "hidden" id = "libraryId" name = "libraryId" value = "${book.libraryId}" >
-									<input type = "hidden" id = "${loginUser.id}" name = "userId" value = "${loginUser.id}"  >
-									<input type = "hidden" name = "num" value =1>
-									<input type = "hidden" name = "reservation" value="${book.id}">
-									<input type = "hidden" name = "fromSearch" value = "1" >
-									<input type = "submit" value = "予約" />
-								</form>
+								<td><c:out value="${book.isbnId}"/></td>
+								<td>
+									<form action = "reservingBook" method = "post">
+										<input type = "hidden" name = "bookId" value = "${book.id}" >
+										<input type = "hidden" id = "libraryId" name = "libraryId" value = "${book.libraryId}" >
+										<input type = "hidden" id = "${loginUser.id}" name = "userId" value = "${loginUser.id}"  >
+										<input type = "hidden" name = "num" value = 1>
+										<input type = "hidden" name = "reservation" value="${book.id}">
+										<input type = "hidden" name = "fromSearch" value = "1" >
+										<input type = "submit" value = "予約" />
+									</form>
 								</td>
 
 								<td>
