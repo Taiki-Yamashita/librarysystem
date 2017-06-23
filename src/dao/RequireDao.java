@@ -46,4 +46,20 @@ public class RequireDao {
 			close(ps);
 		}
 	}
+	public void delete(Connection connection, String id) {
+		PreparedStatement ps = null;
+		try {
+			String sql = "DELETE FROM requires where id = ? ";
+
+			ps = connection.prepareStatement(sql.toString());
+
+			ps.setString(1, id);
+
+			ps.executeUpdate();
+		} catch (SQLException e){
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
 }

@@ -12,15 +12,24 @@
 	</head>
 	<body>
 		<h1>図書システム借りたいナ☆</h1>
-
+		<c:if test="${ not empty errorMessages }">
+			<div class="errorMessages">
+				<ul>
+					<c:forEach items="${errorMessages}" var="message">
+						<li><c:out value="${message}" />
+						</c:forEach>
+						</ul>
+			</div>
+			<c:remove var="errorMessages" scope="session"/>
+		</c:if>
 		<table border="1">
 			<tr><td><a href = "./search">検索</a></td></tr>
-			<tr><td><a href = "./favorite">お気に入り</a></td></tr>
-			<tr><td><a href = "./require">本のリクエスト</a></td></tr>
+			<tr><td><a href = "./favorite">お気に入り</a>*ログイン必須</td></tr>
+			<tr><td><a href = "./require">本のリクエスト</a>*ログイン必須</td></tr>
 			<tr><td><a href = "./admin/manage">管理画面</a></td></tr>
 			<tr><td><a href = "./user">マイページ</a></td></tr>
 			<tr><td><a href = "./ranking">ランキング</a></td></tr>
-			<tr><td><a href="renewPassword?id=${loginUser.id}" name="id">パスワード編集</a></td></tr>
+			<tr><td><a href="renewPassword?id=${loginUser.id}" name="id">パスワード編集</a>*ログイン必須</td></tr>
 			<tr><td><a href = "./logout">ログアウト</a></td></tr>
 		</table>
 

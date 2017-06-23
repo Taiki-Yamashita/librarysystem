@@ -12,8 +12,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import beans.Favorite;
+import beans.User;
 import service.FavoriteService;
 
 @WebServlet(urlPatterns = { "/favorite" })
@@ -23,6 +25,17 @@ public class FavoriteServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+		User loginUser = (User) request.getSession().getAttribute("loginUser");
+		HttpSession session = request.getSession();
+
+		if(loginUser == null) {
+			List<String> messages = new ArrayList<String>();
+			messages.add("ログインしてください");
+			session.setAttribute("errorMessages", messages);
+			response.sendRedirect("./");
+			return;
+		}
 
 		List<Favorite> favorites = new FavoriteService().selectAll();
 		request.setAttribute("favorites", favorites);

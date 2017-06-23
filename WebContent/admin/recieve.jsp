@@ -1,13 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
- <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@page isELIgnored="false"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>問い合わせ、リクエスト受信</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 </head>
 <body>
 	<a href = "manage">管理画面</a>
@@ -35,7 +37,7 @@
 		<input type="submit" value="絞込み" />
 	</form>
 
-	<form action="recieve" method = "post">
+
 
 		<table>
 
@@ -61,8 +63,10 @@
 					</td>
 					<td>
 						<c:if test="${recieve.showing == 0 }">
-							<input type="hidden" name="flag" id="flag" value="1">
-							<input type="checkbox" name="recieveId" id="recieveId" value="${recieve.id}">
+							<form action="recieve" method = "post">
+								<input type="hidden" name="flag" id="flag" value="1">
+								<input type="checkbox" name="recieveId" id="recieveId" value="${recieve.id}">
+							</form>
 						</c:if>
 						<c:if test="${recieve.showing != 0 }">
 							<c:out value="既読"></c:out>
@@ -70,18 +74,21 @@
 					</td>
 					<td>
 						<c:if test="${recieve.showing == 1 }">
-							<input type="hidden" name="flag" id="flag" value="0">
-							<input type="checkbox" name="recieveId2" id="recieveId2" value="${recieve.id}">
+							<form action="recieve" method = "post">
+								<input type="hidden" name="flag" id="flag" value="0">
+								<input type="checkbox" name="recieveId2" id="recieveId2" value="${recieve.id}">
+							</form>
 						</c:if>
 						<c:if test="${recieve.showing != 1 }">
 							<c:out value="未読なう"></c:out>
 						</c:if>
 					</td>
+					<td>
+					</td>
 				</tr>
 			</c:forEach>
-
 		</table>
 		<input type="submit" value="送信" />
-	</form>
+
 </body>
 </html>

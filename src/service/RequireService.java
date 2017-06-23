@@ -29,4 +29,22 @@ public class RequireService {
 			close(connection);
 		}
 	}
+	public void delete( String id) {
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			new RequireDao().delete(connection, id);
+
+			commit(connection);
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
 }

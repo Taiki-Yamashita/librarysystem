@@ -23,7 +23,14 @@ public class RenewPasswordServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		User loginUser = (User) request.getSession().getAttribute("loginUser");
-
+		HttpSession session = request.getSession();
+		if(loginUser == null) {
+			List<String> messages = new ArrayList<String>();
+			messages.add("ログインしてください");
+			session.setAttribute("errorMessages", messages);
+			response.sendRedirect("./");
+			return;
+		}
 		User editUser = new UserService().selectUser(String.valueOf(loginUser.getId()));
 
 		request.setAttribute("editUser", editUser);
