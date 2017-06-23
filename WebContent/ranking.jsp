@@ -26,6 +26,12 @@
 			<c:remove var="errorMessages" scope="session"/>
 		</c:if>
 
+		<c:if test="${ not empty loginErrorMessages }">
+			<c:forEach items="${loginErrorMessages}" var="message">
+				<font color="#ff0000"><c:out value="${message}" /></font><br>
+			</c:forEach>
+		</c:if>
+
 		貸出件数ランキング<br>
 		<table>
 			<tr>
@@ -199,9 +205,8 @@
 					<td>
 
 						<form action = "reservingBook" method = "post">
-							<c:if test="${empty loginUser}">
-							<input type="button" onclick="location.href='./login'"value="予約">
-							</c:if>
+							<c:if test="${empty loginUser}"><input type="hidden" name="notLoginRanking" value="1"></c:if>
+							<input type = "submit" value = "予約" />
 							<c:if test="${not empty loginUser}">
 							<c:forEach items="${isReservations}" var="isReservation">
 								<c:if test="${isReservation.userId == loginUser.id && isReservation.bookId
@@ -217,7 +222,6 @@
 							<input type = "hidden" name = "num" value =1>
 							<input type = "hidden" name = "reservation" value="${book.id}">
 							<input type = "hidden" name = "fromRanking" value = "1" >
-							<input type = "submit" value = "予約" />
 							</c:if>
 							<c:remove var="data" />
 						</c:if>
@@ -226,9 +230,8 @@
 					</td>
 					<td>
 						<form action = "favorite" method = "post">
-							<c:if test="${empty loginUser}">
-								<input type="button" onclick="location.href='./login'"value="お気に入り">
-							</c:if>
+							<c:if test="${empty loginUser}"><input type="hidden" name="notLoginFavorite" value="1"></c:if>
+							<input type = "submit" value = "お気に入り" />
 							<c:if test="${not empty loginUser}">
 								<c:forEach items="${isFavorites}" var="favorite">
 									<c:if test="${favorite.userId == loginUser.id && favorite.bookId
@@ -250,6 +253,8 @@
 				</tr>
 			</c:forEach>
 		</table>
+	<c:remove var="errorMessages" scope="session"/>
+		<c:remove var="loginErrorMessages" scope="session"/>
 
 	</body>
 </html>

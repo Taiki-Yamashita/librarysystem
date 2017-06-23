@@ -42,6 +42,9 @@ public class ReservingBookServlet extends HttpServlet {
 			request.getSession().setAttribute("loginErrorMessages", "ログインしてください");
 			String parameter = getParameter(request);
 			response.sendRedirect("./search?" + parameter);
+		} else if(request.getParameter("notLoginRanking") != null){
+			request.getSession().setAttribute("loginErrorMessages", "ログインしてください");
+			response.sendRedirect("./ranking");
 		}else{
 
 			int bookId = Integer.parseInt(request.getParameter("bookId"));
