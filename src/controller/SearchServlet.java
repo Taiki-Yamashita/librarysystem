@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -50,7 +51,15 @@ public class SearchServlet extends HttpServlet{
 			/*並び替え*/
 			String sort = request.getParameter("sort");
 
+			/*不正なURLパラメーター*/
+			boolean flag = isWrongParameter(bookStatus, selectBox, condition, libraries,
+					categories, types, sort, request.getParameter("isSearching"), request);
+
 			/*絞込み結果*/
+			if(!flag){
+				request.getRequestDispatcher("/search.jsp").forward(request, response);
+				return;
+			}
 			List<Book> selectedBooks = new BookService().getSelectedBooks(selectBox, freeWord, condition, sort, bookStatus,
 					newBooks, libraries, categories, types);
 
@@ -231,5 +240,70 @@ public class SearchServlet extends HttpServlet{
 			}
 		}
 		return isReserving;
+	}
+
+	public boolean isWrongParameter(String bookStatus, String selectBox, String condition, List<String> libraries,
+			List<String> categories, List<String> types, String sort, String isSearching, HttpServletRequest request){
+
+		boolean flag = true;
+		Pattern p = Pattern.compile("^\\d{1}$");
+
+		/*bookStatus*/
+		boolean bookStatusFlag = false;
+		if(p.matcher(bookStatus).find()){
+			for(int i = 1; i <= 3; i++){
+				if(String.valueOf(i).equals(bookStatus)){
+					bookStatusFlag = true;
+					break;
+				}
+			}
+		}
+		if(!bookStatusFlag) flag = false;
+
+		/*selectBox*/
+		boolean selectBoxFlag = false;
+		if(p.matcher(selectBox).find()){
+			for(int i = 1; i <= 6; i++){
+				if(String.valueOf(i).equals(selectBox)){
+					selectBoxFlag = true;
+					break;
+				}
+			}
+		}
+		if(!selectBoxFlag) flag = false;
+
+		/*condition*/
+		boolean conditionFlag = false;
+		if(p.matcher(condition).find()){
+			for(int i = 1; i <= 4; i++){
+				if(String.valueOf(i).equals(condition)){
+					conditionFlag = true;
+					break;
+				}
+			}
+		}
+		if(!conditionFlag) flag = false;
+
+		/*sort*/
+		boolean sortFlag = false;
+		if(p.matcher(sort).find()){
+			for(int i = 0; i <= 6; i++){
+				if(String.valueOf(i).equals(sort)){
+					sortFlag = true;
+					break;
+				}
+			}
+		}
+		if(!sortFlag) flag = false;
+
+		/*isSearching*/
+		if(isSearching.equals("1") || isSearching == null);
+		else flag = false;
+
+		if(!flag){
+			request.getSession().setAttribute("errorMessages", "不正なURLです");
+			return false;
+		}
+		return true;
 	}
 }
