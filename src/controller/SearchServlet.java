@@ -32,6 +32,9 @@ public class SearchServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		List<Library> libraryList = new LibraryService().selectAll();
+		request.setAttribute("libraryList", libraryList);
+
 		if(request.getParameter("isSearching") != null){
 
 			/*本の状態(貸出可・貸出中)*/
@@ -263,7 +266,7 @@ public class SearchServlet extends HttpServlet{
 		/*selectBox*/
 		boolean selectBoxFlag = false;
 		if(p.matcher(selectBox).find()){
-			for(int i = 1; i <= 6; i++){
+			for(int i = 1; i <= 5; i++){
 				if(String.valueOf(i).equals(selectBox)){
 					selectBoxFlag = true;
 					break;

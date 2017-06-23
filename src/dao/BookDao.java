@@ -41,6 +41,60 @@ public class BookDao {
 		}
 	}
 
+	public List<Book> selectShelfId(Connection connection){
+
+		PreparedStatement ps = null;
+		try {
+			String sql = "SELECT * FROM library_system.books GROUP BY shelf_id";
+			ps = connection.prepareStatement(sql);
+
+			ResultSet rs = ps.executeQuery();
+
+			List<Book> bookList = toBookList(rs);
+			if (bookList.isEmpty()) {
+				return null;
+			}else {
+				return bookList;
+			}
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
+	public List<Book> selectRefinedBook(Connection connection, String selectBox, String freeWord, String condition,
+			String selectedLibrary, String selectedShelfId, String isReserving, String delay, String bookStatus){
+
+		PreparedStatement ps = null;
+		try {
+			StringBuilder sql = new StringBuilder();
+			sql.append("SELECT * FROM books WHERE ");
+			if(bookStatus.equals("2")) sql.append("keeping = 1 AND ");
+			if(bookStatus.equals("3")) sql.append("lending = 1 AND ");
+			if(bookStatus.equals("4")) sql.append("disposing = 1 AND ");
+
+			if(!selectedShelfId.equals("0")) sql.append("shelf_id = ? AND ");
+
+			if(!selectedLibrary.equals("0")) sql.append("library_id = ?");
+
+			ps = connection.prepareStatement(sql.toString());
+
+			ps.setString(1,"");
+			ps.setString(2,"");
+			ResultSet rs = ps.executeQuery();
+
+			List<Book> bookList = toBookList(rs);
+			if (bookList.isEmpty()) {
+				return null;
+			}else {
+				return bookList;
+			}
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
 
 	public void insert(Connection connection, Book book) {
 
