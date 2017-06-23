@@ -195,7 +195,6 @@ public class SearchServlet extends HttpServlet{
 				else isFavorite.add(cnt);
 				cnt++;
 			}
-			System.out.println("お気に入り:" + isFavorite);
 			return isFavorite;
 		}else{
 			int cnt = 0;
@@ -223,7 +222,6 @@ public class SearchServlet extends HttpServlet{
 				else isReserving.add(cnt);
 				cnt++;
 			}
-			System.out.println("予約:" + isReserving);
 			return isReserving;
 		}else{
 			int cnt = 0;
