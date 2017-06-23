@@ -73,12 +73,12 @@ public class FavoriteService {
 		}
 	}
 
-	public void delete(Favorite favorite, String userId, String bookId) {
+	public void delete( String userId, String bookId) {
 		Connection connection = null;
 		try {
 			connection = getConnection();
 
-			new FavoriteDao().delete(connection, favorite, userId, bookId);
+			new FavoriteDao().delete(connection, userId, bookId);
 
 			commit(connection);
 		} catch (RuntimeException e) {

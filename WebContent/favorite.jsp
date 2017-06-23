@@ -62,8 +62,8 @@
 					<td>
 						<form action="./delete" method="POST">
 							<!-- ログインユーザーのID -->
-							<input type="hidden" value="${favorite.userId}" name="userId">
-							<input type="hidden" value="${favorite.bookId}" name="bookId">
+							<input type="hidden" value="${favorite.userId}" name="favoriteUserId">
+							<input type="hidden" value="${favorite.bookId}" name="favoriteBookId">
 							<input type="submit"  value="お気に入り削除" />
 						</form>
 					</td>
