@@ -44,24 +44,13 @@ public class AddBookServlet extends HttpServlet {
 		List<String> messages = new ArrayList<String>();
 		HttpSession session = request.getSession();
 
-
 		if(isValid(request, messages) == true) {
 
-			Book book = new Book();
-			book.setName(request.getParameter("name"));
-			book.setAuthor(request.getParameter("author"));
-			book.setPublisher(request.getParameter("publisher"));
-			book.setCategory(request.getParameter("category"));
-			book.setType(request.getParameter("type"));
-			book.setPublishedDate(request.getParameter("publishedDate"));
-			book.setLibraryId(request.getParameter("libraryId"));
-			book.setShelfId(request.getParameter("shelfId"));
-			book.setIsbnId(request.getParameter("isbnId"));
-
+			Book book = getNewBook(request);
 			new BookService().insert(book);
 
+			response.sendRedirect("./manageBook");
 
-		response.sendRedirect("./manageBook");
 		}else{
 			List<Library> libraries = new LibraryService().selectAll();
 			request.setAttribute("libraries", libraries);
@@ -81,8 +70,8 @@ public class AddBookServlet extends HttpServlet {
 		newBook.setName(request.getParameter("name"));
 		newBook.setAuthor(request.getParameter("author"));
 		newBook.setPublisher(request.getParameter("publisher"));
-		newBook.setCategory(request.getParameter("category"));
-		newBook.setType(request.getParameter("type"));
+		newBook.setCategory(getCategory(request));
+		newBook.setType(getType(request));
 		newBook.setPublishedDate(request.getParameter("publishedDate"));
 		newBook.setLibraryId(request.getParameter("libraryId"));
 		newBook.setShelfId(request.getParameter("shelfId"));
@@ -141,4 +130,32 @@ public class AddBookServlet extends HttpServlet {
 		}
 	}
 
+	public String getCategory(HttpServletRequest request){
+
+		String category = request.getParameter("category");
+
+		if(category.equals("1")) category = "文学";
+		if(category.equals("2")) category = "経済";
+		if(category.equals("3")) category = "芸能";
+		if(category.equals("4")) category = "歴史";
+		if(category.equals("5")) category = "学問";
+		if(category.equals("6")) category = "政治";
+		if(category.equals("7")) category = "暮らし";
+		if(category.equals("8")) category = "教育";
+		if(category.equals("9")) category = "SF";
+
+		return category;
+	}
+
+	public String getType(HttpServletRequest request){
+
+		String type = request.getParameter("type");
+
+		if(type.equals("1")) type = "文庫";
+		if(type.equals("2")) type = "新書";
+		if(type.equals("3")) type = "雑誌";
+		if(type.equals("4")) type = "コミックス";
+
+		return type;
+	}
 }

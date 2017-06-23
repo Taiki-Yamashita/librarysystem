@@ -85,12 +85,6 @@
 	</table>
 
 
-
-
-
-
-
-
 	<p>予約一覧</p>
 	<table>
 		<tr>
@@ -106,6 +100,7 @@
 					<td>
 						<c:forEach items="${books}" var="book">
 							<c:if test="${book.id == reservation.bookId}">${reservation.bookName}</c:if>
+
 						</c:forEach>
 					</td>
 					<td>
@@ -117,6 +112,7 @@
 					<td>
 						<form action = "cancelingBook" method = "post">
 							<input type = "hidden" name = "bookId" value = "${reservation.bookId}" >
+							<input type = "hidden" name ="bookName" value= "${reservation.bookName}" >
 							<input type = "hidden" id = "libraryId" name = "libraryId" value = "${reservation.libraryId }" >
 							<input type = "hidden" name = "time" value = "${reservation.reservedDate }">
 							<c:if test="${reservation.canceling == 0 }">
