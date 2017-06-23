@@ -13,11 +13,13 @@ import beans.Book;
 import beans.Favorite;
 import beans.Library;
 import beans.Ranking;
+import beans.Reservation;
 import beans.User;
 import service.BookService;
 import service.FavoriteService;
 import service.LibraryService;
 import service.RankingService;
+import service.ReservationService;
 
 @WebServlet(urlPatterns = { "/ranking" })
 public class RankingServlet extends HttpServlet {
@@ -32,6 +34,7 @@ public class RankingServlet extends HttpServlet {
 		List<Book> books = new BookService().selectAll();
 		List<Library> libraries = new LibraryService().selectAll();
 
+		List<Reservation> isReservations = new ReservationService().selectAll();
 		List<Favorite> favorites = new FavoriteService().selectAll();
 		User loginUser = (User) request.getSession().getAttribute("loginUser");
 
@@ -40,6 +43,7 @@ public class RankingServlet extends HttpServlet {
 		request.setAttribute("books", books);
 		request.setAttribute("libraries", libraries);
 		request.setAttribute("loginUser", loginUser);
+		request.setAttribute("isReservations", isReservations);
 		request.setAttribute("isFavorites", favorites);
 
 		request.getRequestDispatcher("/ranking.jsp").forward(request, response);

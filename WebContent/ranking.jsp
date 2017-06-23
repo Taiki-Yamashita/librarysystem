@@ -83,7 +83,22 @@
 						</c:forEach>
 					</td>
 					<td>
+
+
+					<c:if test="loginUser.id"></c:if>
 						<form action = "reservingBook" method = "post">
+							<c:if test="${empty loginUser}">
+							<input type="button" onclick="location.href='./login'"value="お気に入り">
+							</c:if>
+							<c:if test="${not empty loginUser}">
+							<c:forEach items="${isReservations}" var="reservation">
+								<c:if test="${reservation.userId == loginUser.id && reservation.bookId
+									== circulation.bookId &&reservation.canceling ==0}">
+									<c:set var="data" value="0" />
+								</c:if>
+							</c:forEach>
+							<c:if test="${data == 0}">予約済み</c:if>
+							<c:if test="${data != 0}">
 							<input type = "hidden" name = "bookId" value = "${circulation.bookId}" >
 							<input type = "hidden" id =  "${loginUser.libraryId}" name = "libraryId" value = "${loginUser.libraryId}" >
 							<input type = "hidden" id = "${loginUser.id}" name = "userId" value = "${loginUser.id}"  >
@@ -91,7 +106,11 @@
 							<input type = "hidden" name = "reservation" value="${book.id}">
 							<input type = "hidden" name = "fromRanking" value = "1" >
 							<input type = "submit" value = "予約" />
+							</c:if>
+							<c:remove var="data" />
+						</c:if>
 						</form>
+
 					</td>
 					<td>
 						<form action = "favorite" method = "post">
