@@ -24,19 +24,53 @@
 	<input name="author" id="author" value="${editBook.author }"/><br />
 
 	<label for="publisher">出版社</label><br>
-	<input name="publisher" id="publisher"/><br />
+	<input name="publisher" id="publisher" value ="${editBook.publisher }"/><br />
 
-	<label for="category">カテゴリ</label><br>
-	<input name="category" id="category"/><br />
+	<label for = "category">カテゴリ</label><br>
+	<c:if test="${editBook.category == '文学'}"><input type="radio" name="category" value="1" checked >文学</c:if>
+	<c:if test="${editBook.category != '文学'}"><input type="radio" name="category" value="1">文学</c:if>
+	<c:if test="${editBook.category == '経済'}"><input type="radio" name="category" value="2" checked >経済</c:if>
+	<c:if test="${editBook.category != '経済'}"><input type="radio" name="category" value="2">経済</c:if>
+	<c:if test="${editBook.category == '芸能'}"><input type="radio" name="category" value="3" checked >芸能</c:if>
+	<c:if test="${editBook.category != '芸能'}"><input type="radio" name="category" value="3">芸能</c:if>
+	<c:if test="${editBook.category == '歴史'}"><input type="radio" name="category" value="4" checked >歴史</c:if>
+	<c:if test="${editBook.category != '歴史'}"><input type="radio" name="category" value="4">歴史</c:if>
+	<c:if test="${editBook.category == '学問'}"><input type="radio" name="category" value="5" checked >学問</c:if>
+	<c:if test="${editBook.category != '学問'}"><input type="radio" name="category" value="5">学問</c:if>
+	<c:if test="${editBook.category == '政治'}"><input type="radio" name="category" value="6" checked >政治</c:if>
+	<c:if test="${editBook.category != '政治'}"><input type="radio" name="category" value="6">政治</c:if>
+	<c:if test="${editBook.category == '暮らし'}"><input type="radio" name="category" value="7" checked >暮らし</c:if>
+	<c:if test="${editBook.category != '暮らし'}"><input type="radio" name="category" value="7">暮らし</c:if>
+	<c:if test="${editBook.category == '教育'}"><input type="radio" name="category" value="8" checked >教育</c:if>
+	<c:if test="${editBook.category != '教育'}"><input type="radio" name="category" value="8">教育</c:if>
+	<c:if test="${editBook.category == 'SF'}"><input type="radio" name="category" value="9" checked >SF</c:if>
+	<c:if test="${editBook.category != 'SF'}"><input type="radio" name="category" value="9">SF</c:if>
+	<br>
+	<label for = "type">タイプ</label><br>
+	<c:if test="${editBook.type == '文庫'}"><input type="radio" name="type" value="1" checked >文庫</c:if>
+	<c:if test="${editBook.type != '文庫'}"><input type="radio" name="type" value="1">文庫</c:if>
+	<c:if test="${editBook.type == '新書'}"><input type="radio" name="type" value="2" checked >新書</c:if>
+	<c:if test="${editBook.type != '新書'}"><input type="radio" name="type" value="2">新書</c:if>
+	<c:if test="${editBook.type == '雑誌'}"><input type="radio" name="type" value="3" checked >雑誌</c:if>
+	<c:if test="${editBook.type != '雑誌'}"><input type="radio" name="type" value="3">雑誌</c:if>
+	<c:if test="${editBook.type == 'コミック'}"><input type="radio" name="type" value="4" checked >コミック</c:if>
+	<c:if test="${editBook.type != 'コミック'}"><input type="radio" name="type" value="4">コミック</c:if>
+	<br>
+	<label for = "library">図書館</label><br>
+	<c:if test="${editBook.libraryId == '1'}"><input type="radio" name="libraryId" value="1" checked >西馬込</c:if>
+	<c:if test="${editBook.libraryId != '1'}"><input type="radio" name="libraryId" value="1">西馬込</c:if>
+	<c:if test="${editBook.libraryId == '2'}"><input type="radio" name="libraryId" value="1" checked >馬込</c:if>
+	<c:if test="${editBook.libraryId != '2'}"><input type="radio" name="libraryId" value="1">馬込</c:if>
+	<c:if test="${editBook.libraryId == '3'}"><input type="radio" name="libraryId" value="1" checked >中延</c:if>
+	<c:if test="${editBook.libraryId != '3'}"><input type="radio" name="libraryId" value="1">中延</c:if>
+	<c:if test="${editBook.libraryId == '4'}"><input type="radio" name="libraryId" value="1" checked >戸越</c:if>
+	<c:if test="${editBook.libraryId != '4'}"><input type="radio" name="libraryId" value="1">戸越</c:if>
+	<c:if test="${editBook.libraryId == '5'}"><input type="radio" name="libraryId" value="1" checked >五反田</c:if>
+	<c:if test="${editBook.libraryId != '5'}"><input type="radio" name="libraryId" value="1">五反田</c:if>
 
-		<label for="type">種類</label><br>
-	<input name="type" id="type" value="${editBook.type }"/><br />
-
-	<label for="libraryId">図書館</label><br>
-	<input name="libraryId" id="libraryId"/><br />
-
+	<br>
 	<label for="shelfId">棚番号</label><br>
-	<input name="shelfId" id="shelfId"/><br />
+	<input name="shelfId" id="shelfId" value="${editBook.shelfId }"/><br />
 
 	<label for="isbnId">ISBN番号</label><br>
 	<input name="isbnId" id="isbnId" value="${editBook.isbnId }"/><br />
@@ -44,18 +78,55 @@
 	<label for="publishedDate">出版日</label><br>
 	<input name="publishedDate" id="publishedDate" value="${editBook.publishedDate }"/><br />
 
-	<label for="keeping">保管中</label><br>
-	<input name="keeping" id="keeping"/><br />
 
-	<label for="lending">貸出中</label><br>
-	<input name="lending" id="lending"/><br />
+	<label for = "status">本の状態</label><br>
+				<%
+					String[] checkBoxStatusNumbers = {"1","2","3"};
+					session.setAttribute("checkBoxStatusNumbers", checkBoxStatusNumbers);
+				%>
+						<c:forEach items="${checkBoxStatusNumbers}" var="checkBoxStatusNumber">
+							<%session.setAttribute("checkStatus", 0);%>
+							<c:forEach items="${status}" var="status">
+								<c:if test="${status == '保管中' && checkBoxStatusNumber == 1}">
+									<%session.setAttribute("checkStatus",1);%>
+									<input type="radio" name="status" value="1">保管中
+								</c:if>
+								<c:if test="${status == '貸出中' && checkBoxStatusNumber == 2}">
+									<%session.setAttribute("checkStatus",1);%>
+									<input type="radio" name="status" value="2">貸出中
+								</c:if>
+								<c:if test="${status == '整理中' && checkBoxStatusNumber == 3}">
+									<%session.setAttribute("checkStatus",1);%>
+									<input type="radio" name="status" value="3" >整理中
+								</c:if>
+							</c:forEach>
 
-		<label for="reserving">予約中</label><br>
-	<input name="reserving" id="reserving" value="${editBook.reserving }"/><br />
+							<c:if test="${checkStatus == 0 && checkBoxStatusNumber == 1}">
+								<input type="radio" name="status" value="1">保管中
+							</c:if>
+							<c:if test="${checkStatus == 0 && checkBoxStatusNumber == 2}">
+								<input type="radio" name="status" value="2">貸出中
+							</c:if>
+							<c:if test="${checkStatus == 0 && checkBoxStatusNumber == 3}">
+								<input type="radio" name="status" value="3">整理中
+							</c:if>
 
-	<label for="disposing">整理中</label><br>
-	<input name="disposing" id="disposing" value="${editBook.disposing }"/><br />
+						</c:forEach><br>
+
+
 
 
 	<br><input type="submit" value="投稿">
 </form>
+
+		<c:remove var="checkBoxLibraryNumber" scope="session"/>
+		<c:remove var="checkLibrary" scope="session"/>
+		<c:remove var="checkBoxCategoryNumber" scope="session"/>
+		<c:remove var="checkCategory" scope="session"/>
+		<c:remove var="checkBoxTypeNumber" scope="session"/>
+		<c:remove var="checkType" scope="session"/>
+		<c:remove var="checkBoxStatusNumber" scope="session"/>
+		<c:remove var="checkStatus" scope="session"/>
+
+</body>
+</html>
