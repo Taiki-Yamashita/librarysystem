@@ -9,11 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
+
 import admin.service.RecieveService;
 import beans.Require;
+import service.RequireService;
 
 @WebServlet(urlPatterns = {"/admin/receive"})
-public class RecieveServlet extends HttpServlet {
+public class ReceiveServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
@@ -36,9 +39,7 @@ public class RecieveServlet extends HttpServlet {
 		if(request.getParameter("flag") != null &&
 				(request.getParameter("receiveId") != null)) {
 			String[] idList = request.getParameterValues("receiveId");
-
 			for(String id: idList) {
-				System.out.println(7);
 				new RecieveService().update(1, Integer.parseInt(id));
 			}
 
@@ -47,9 +48,14 @@ public class RecieveServlet extends HttpServlet {
 				(request.getParameter("receiveId2") != null)){
 			String[] idList2 = request.getParameterValues("receiveId2");
 			for(String id2: idList2) {
-				System.out.println(9);
 				new RecieveService().update(0, Integer.parseInt(id2));
 			}
+		}
+//問い合わせ削除
+		if(!StringUtils.isEmpty(request.getParameter("deleteId"))) {
+			new RequireService().delete(request.getParameter("deleteId"));
+			response.sendRedirect("./receive");
+			return;
 		}
 
 //既読or未読表示
@@ -72,6 +78,7 @@ public class RecieveServlet extends HttpServlet {
 			response.sendRedirect("./receive");
 			return;
 		}
+
 	}
 }
 

@@ -14,7 +14,6 @@
 	<a href = "./search">検索</a>
 	<a href = "./require">本のリクエスト</a>
 	<a href = "./admin/manage">管理画面</a>
-	<a href = "./introduction">本の紹介</a>
 
 	<table>
 		<tr>

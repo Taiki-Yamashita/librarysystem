@@ -67,6 +67,7 @@ public class ReservingBookServlet extends HttpServlet {
 					addReservation.setLibraryId(request.getParameter("libraryId"));
 
 					new ReservationService().insert(addReservation);
+					new ReservationService().updateStatus(bookId,num);
 				}
 
 				if(toRanking != null) response.sendRedirect("./ranking");
@@ -109,6 +110,7 @@ public class ReservingBookServlet extends HttpServlet {
 				addReservation.setLibraryId(request.getParameter("libraryId"));
 
 				new ReservationService().insert(addReservation);
+				new ReservationService().updateStatus(bookId,num);
 			}
 
 			if(toRanking != null) response.sendRedirect("./ranking");

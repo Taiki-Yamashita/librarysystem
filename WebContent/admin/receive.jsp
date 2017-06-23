@@ -9,19 +9,25 @@
 <head>
 <title>問い合わせ、リクエスト受信</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="Content-Script-Type" content="text/javascript">
-<script language="JavaScript" type="text/javascript">
+<script type="text/javascript">
+function check(){
 
-//＜クリックした時に実行される関数＞
-//*** 問い合わせ削除
-function func1(form){
-document.form1.receiveId.value =form.deleteId.value;
-document.form1.submit();
+	if(window.confirm('よろしいですか？')){ // 確認ダイアログを表示
+
+		return true; // 「OK」時は送信を実行
+
+	}
+	else{ // 「キャンセル」時の処理
+
+		window.alert('キャンセルしました'); // 警告ダイアログを表示
+		return false; // 送信を中止
+	}
 }
 </script>
 </head>
 <body>
 	<a href = "manage">管理画面</a>
+	<h1>未読と削除一緒に押すと削除が反映されるお</h1>
 	<form action="receive" method = "post">
 		<c:if test="${empty num}">
 			<input type="radio" name="num" value="2" checked><label for = "num" >全て</label>
@@ -46,7 +52,7 @@ document.form1.submit();
 		<input type="submit" value="絞込み" />
 	</form>
 
-	<form action="receive" method = "post">
+	<form action="receive" method = "post" onSubmit="return check()">
 
 		<table>
 
@@ -58,12 +64,13 @@ document.form1.submit();
 				<th>リクエスト日</th>
 				<th>既読</th>
 				<th>未読にするよ</th>
+				<th>削除</th>
 			</tr>
 
 			<c:forEach items="${receives}" var="receive">
 				<tr>
 					<td><c:out value="${receive.userName}" /></td>
-					<td><c:out value="${receieve.bookName}" /></td>
+					<td><c:out value="${receive.bookName}" /></td>
 					<td><c:out value="${receive.author}" /></td>
 					<td><c:out value="${receive.publisher}" /></td>
 					<td>
@@ -89,20 +96,14 @@ document.form1.submit();
 						</c:if>
 					</td>
 					<td>
-						<input type="hidden" name="deleteId" value="${receive.id}">
-						<input type="button" onClick="func1(this.form)" value="問い合わせ削除">
+						<c:if test="${receive.showing == 1 }">
+							<input type="checkbox" name="deleteId" value="${receive.id}">
+						</c:if>
 					</td>
 				</tr>
 			</c:forEach>
 		</table>
-		<input type="submit" value="送信" />
-
+		<button type="submit" value="edit">送信</button>
 	</form>
-	<!-- 	問い合わせ削除用の仮想フォーム -->
-	<form name="form1" method="post" action="delete">
-		<input type="hidden" name="receiveId">
-		<input type="hidden" name="sw" value="0">
-	</form>
-
 </body>
 </html>
