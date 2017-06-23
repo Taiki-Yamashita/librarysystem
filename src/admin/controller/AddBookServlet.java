@@ -48,13 +48,9 @@ public class AddBookServlet extends HttpServlet {
 
 			Book book = getNewBook(request);
 			new BookService().insert(book);
-			response.sendRedirect("./addBook");
 
-<<<<<<< HEAD
-=======
+			response.sendRedirect("./manageBook");
 
-		response.sendRedirect("./manageBook");
->>>>>>> d8678f2f5f103f0a9c5c7b9d54025195abac34f5
 		}else{
 			List<Library> libraries = new LibraryService().selectAll();
 			request.setAttribute("libraries", libraries);
