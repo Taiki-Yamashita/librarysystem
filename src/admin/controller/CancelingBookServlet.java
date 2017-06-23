@@ -1,6 +1,7 @@
 package admin.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,7 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import beans.Reservation;
 import service.BookService;
+import service.ReservationService;
 
 
 
@@ -36,7 +39,10 @@ public class CancelingBookServlet extends HttpServlet {
 		String time =request.getParameter("time");
 
 		new BookService().cancelingBook(bookId, num, time);
-		new BookService().status(bookId);
+		List<Reservation> reservingStatus= new ReservationService().selectReserving	(bookId);
+
+		if(reservingStatus == null) new BookService().status(bookId);
+
 		response.sendRedirect("./user");
 	}
 }

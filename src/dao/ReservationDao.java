@@ -352,4 +352,27 @@ public class ReservationDao {
 
 	}
 
+	public List<Reservation> selectReserving(Connection connection, int bookId){
+
+		PreparedStatement ps = null;
+		try {
+			String sql = "SELECT * FROM reservations where book_id =? AND canceling =0";
+			ps = connection.prepareStatement(sql);
+
+			ps.setInt(1, bookId);
+
+			ResultSet rs = ps.executeQuery();
+			List<Reservation> reservationList = toReservationList(rs);
+			if (reservationList.isEmpty()) {
+				return null;
+			}else {
+				return reservationList;
+			}
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
+
 }
