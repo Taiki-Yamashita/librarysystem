@@ -69,18 +69,69 @@ public class BookDao {
 		try {
 			StringBuilder sql = new StringBuilder();
 			sql.append("SELECT * FROM books WHERE ");
-			if(bookStatus.equals("2")) sql.append("keeping = 1 AND ");
-			if(bookStatus.equals("3")) sql.append("lending = 1 AND ");
-			if(bookStatus.equals("4")) sql.append("disposing = 1 AND ");
 
-			if(!selectedShelfId.equals("0")) sql.append("shelf_id = ? AND ");
+			if(!selectBox.isEmpty()) sql.append(selectBox + " LIKE ?");
+			else{
+				if(condition.equals("4")) sql.append("name = ? or author = ? or publisher = ? or category = ? or isbn_id = ?");
+				else if(condition.equals("3")) sql.append("name LIKE ? or author LIKE ? or publisher LIKE ? or category LIKE ? or isbn_id LIKE ?");
+				else sql.append("CONCAT(name, author, publisher, category, isbn_id) LIKE ?");
+			}
 
-			if(!selectedLibrary.equals("0")) sql.append("library_id = ?");
+			if(bookStatus.equals("2")) sql.append(" AND keeping = 1");
+			if(bookStatus.equals("3")) sql.append(" AND lending = 1");
+			if(bookStatus.equals("4")) sql.append(" AND disposing = 1");
+
+			if(isReserving.equals("2")) sql.append(" AND reserving = 1");
+			if(isReserving.equals("3")) sql.append(" AND reserving = 0");
+
+			if(!selectedShelfId.equals("0")) sql.append(" AND shelf_id = ?");
+
+			if(!selectedLibrary.equals("0")) sql.append(" AND library_id = ?");
 
 			ps = connection.prepareStatement(sql.toString());
 
-			ps.setString(1,"");
-			ps.setString(2,"");
+			if(!selectBox.isEmpty()){
+				if(condition.equals("1")) ps.setString(1, "%" + freeWord + "%");
+				if(condition.equals("2")) ps.setString(1, freeWord + "%");
+				if(condition.equals("3")) ps.setString(1, "%" + freeWord);
+				if(condition.equals("4")) ps.setString(1, freeWord);
+
+				int cnt = 2;
+				if(!selectedShelfId.equals("0")) ps.setString(cnt++, selectedShelfId);
+				if(!selectedLibrary.equals("0")) ps.setString(cnt, selectedLibrary);
+			}else{
+				if(condition.equals("4")){
+					ps.setString(1, freeWord);
+					ps.setString(2, freeWord);
+					ps.setString(3, freeWord);
+					ps.setString(4, freeWord);
+					ps.setString(5, freeWord);
+
+					int cnt = 6;
+					if(!selectedShelfId.equals("0")) ps.setString(cnt++, selectedShelfId);
+					if(!selectedLibrary.equals("0")) ps.setString(cnt, selectedLibrary);
+				}
+				else if(condition.equals("3")){
+					ps.setString(1, "%" + freeWord);
+					ps.setString(2, "%" + freeWord);
+					ps.setString(3, "%" + freeWord);
+					ps.setString(4, "%" + freeWord);
+					ps.setString(5, "%" + freeWord);
+
+					int cnt = 6;
+					if(!selectedShelfId.equals("0")) ps.setString(cnt++, selectedShelfId);
+					if(!selectedLibrary.equals("0")) ps.setString(cnt, selectedLibrary);
+				}
+				else{
+					if(condition.equals("1")) ps.setString(1, "%" + freeWord + "%");
+					if(condition.equals("2")) ps.setString(1, freeWord + "%");
+
+					int cnt = 2;
+					if(!selectedShelfId.equals("0")) ps.setString(cnt++, selectedShelfId);
+					if(!selectedLibrary.equals("0")) ps.setString(cnt, selectedLibrary);
+				}
+			}
+
 			ResultSet rs = ps.executeQuery();
 
 			List<Book> bookList = toBookList(rs);

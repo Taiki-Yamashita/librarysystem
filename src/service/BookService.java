@@ -102,11 +102,12 @@ public class BookService {
 	public List<Book> selectRefinedBook(String selectBox, String freeWord, String condition, String selectedLibrary,
 			String selectedShelfId, String isReserving, String delay, String bookStatus) {
 
+		Map<String, String> columnMap = getMapData();
 		Connection connection = null;
 		try {
 			connection = getConnection();
 
-			List<Book> bookList = new BookDao().selectRefinedBook(connection, selectBox, freeWord, condition,
+			List<Book> bookList = new BookDao().selectRefinedBook(connection, columnMap.get(selectBox), freeWord, condition,
 					selectedLibrary, selectedShelfId, isReserving, delay, bookStatus);
 
 			commit(connection);

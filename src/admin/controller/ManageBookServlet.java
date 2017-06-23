@@ -54,6 +54,7 @@ public class ManageBookServlet extends HttpServlet {
 
 			books = new BookService().selectRefinedBook(selectBox, freeWord, condition,
 					selectedLibrary, selectedShelfId, isReserving, delay, bookStatus);
+			request.setAttribute("books", books);
 
 			/*値の保持*/
 			request.setAttribute("selectBox", new BookService().getMapCategory().get(selectBox));

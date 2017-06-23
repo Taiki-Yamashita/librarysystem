@@ -164,14 +164,17 @@
 					<td>延滞の有無</td>
 					<td>
 						<c:if test="${empty delay}">
-							<input type="radio" name="delay" value="1" checked>延滞無
-							<input type="radio" name="delay" value="2">延滞有
+							<input type="radio" name="delay" value="1" checked>全て
+							<input type="radio" name="delay" value="2" >延滞無
+							<input type="radio" name="delay" value="3">延滞有
 						</c:if>
 						<c:if test="${not empty delay}">
-							<c:if test="${delay == 1}"><input type="radio" name="delay" value="1" checked>延滞無</c:if>
-							<c:if test="${delay != 1}"><input type="radio" name="delay" value="1">延滞無</c:if>
-							<c:if test="${delay == 2}"><input type="radio" name="delay" value="2" checked>延滞有</c:if>
-							<c:if test="${delay != 2}"><input type="radio" name="delay" value="2">延滞有</c:if>
+							<c:if test="${delay == 1}"><input type="radio" name="delay" value="1" checked>全て</c:if>
+							<c:if test="${delay != 1}"><input type="radio" name="delay" value="1">全て</c:if>
+							<c:if test="${delay == 2}"><input type="radio" name="delay" value="2" checked>延滞無</c:if>
+							<c:if test="${delay != 2}"><input type="radio" name="delay" value="2">延滞無</c:if>
+							<c:if test="${delay == 3}"><input type="radio" name="delay" value="3" checked>延滞有</c:if>
+							<c:if test="${delay != 3}"><input type="radio" name="delay" value="3">延滞有</c:if>
 						</c:if>
 					</td>
 				</tr>
