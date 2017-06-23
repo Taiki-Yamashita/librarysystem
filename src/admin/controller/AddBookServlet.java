@@ -131,7 +131,10 @@ public class AddBookServlet extends HttpServlet {
 	public String getCategory(HttpServletRequest request){
 
 		String category = request.getParameter("category");
-
+		if(category ==null)	{
+			request.getRequestDispatcher("/admin/addBook.jsp");
+			return null;
+		}
 		if(category.equals("1")) category = "文学";
 		if(category.equals("2")) category = "経済";
 		if(category.equals("3")) category = "芸能";
@@ -148,7 +151,10 @@ public class AddBookServlet extends HttpServlet {
 	public String getType(HttpServletRequest request){
 
 		String type = request.getParameter("type");
-
+		if(type ==null)	{
+			request.getRequestDispatcher("/admin/addBook.jsp");
+			return null;
+		}
 		if(type.equals("1")) type = "文庫";
 		if(type.equals("2")) type = "新書";
 		if(type.equals("3")) type = "雑誌";

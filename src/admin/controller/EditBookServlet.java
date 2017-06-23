@@ -29,12 +29,14 @@ public class EditBookServlet extends HttpServlet{
 			throws ServletException, IOException {
 
 		String bookId = request.getParameter("id");
-
+		if(!bookId.matches("\\d*")) {
+			request.getRequestDispatcher("editBook.jsp").forward(request, response);
+			return;
+		}
 		Book editBook = new BookService().selectBook(Integer.parseInt(bookId));
 
 		request.setAttribute("editBook", editBook);
 		request.getRequestDispatcher("editBook.jsp").forward(request, response);
-
 	}
 
 

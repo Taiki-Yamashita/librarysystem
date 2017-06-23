@@ -11,7 +11,7 @@
 <body>
 	<br>
 	<a href = "./manageBook">本の情報管理</a>
-
+	<a href = "manage">管理画面</a>
 
 <c:if test="${ not empty errorMessages }">
 	<div class="errorMessages">
@@ -116,7 +116,7 @@
 
 
 
-	<label for = "type">タイプ</label><br>
+	<label for = "type">種類</label><br>
 				<%
 					String[] checkBoxTypeNumbers = {"1","2","3","4"};
 					session.setAttribute("checkBoxTypeNumbers", checkBoxTypeNumbers);

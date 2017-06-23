@@ -41,7 +41,7 @@ public class RecieveDao {
 		PreparedStatement ps = null;
 		try {
 			StringBuilder sql = new StringBuilder();
-			sql.append("SELECT * FROM requires");
+			sql.append("SELECT * FROM requires order by required_date ");
 
 			ps = connection.prepareStatement(sql.toString());
 

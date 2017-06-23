@@ -12,6 +12,8 @@
 </head>
 <body>
 
+<a href = "manage">管理画面</a>
+
 
 <form action="editUser"method="post"><br />
 

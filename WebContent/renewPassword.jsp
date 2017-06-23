@@ -10,7 +10,7 @@
 </head>
 <body>
 	<h1>パスワード変更画面</h1>
-
+	<a href = "./">トップ</a>
 	<c:if test="${ not empty errorMessages }">
 		<div class="errorMessages">
 			<ul>
@@ -25,10 +25,10 @@
 	<form action="renewPassword" method="post">
 		<input type="hidden" value="${loginUser.id}" id="id" name="id"/>
 		<label for="password">パスワード</label><br>
-		<input name="password" value="${editUser.password}" id="password"/><br/>
+		<input name="password" type="password" value="${editUser.password}" id="password"/><br/>
 
 		<label for="confirmedPassword">パスワード（確認用）</label><br>
-		<input name="confirmedPassword" value="${editUser.password}" id="confirmedPassword"/><br/>
+		<input name="confirmedPassword" type="password" value="${editUser.password}" id="confirmedPassword"/><br/>
 
 		<input type="submit" value="更新" />
 	</form>

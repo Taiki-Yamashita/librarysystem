@@ -27,7 +27,6 @@ public class ReceiveServlet extends HttpServlet {
 		List<Require> receives = new RecieveService().select();
 		//List<Require> receives = new RecieveService().select(Integer.parseInt(request.getParameter("num")));
 
-
 		request.setAttribute("receives", receives);
 		request.getRequestDispatcher("./receive.jsp").forward(request, response);
 	}

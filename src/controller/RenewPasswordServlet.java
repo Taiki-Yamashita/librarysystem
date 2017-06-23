@@ -15,7 +15,7 @@ import org.apache.commons.lang.StringUtils;
 
 import beans.User;
 import service.UserService;
-@WebServlet(urlPatterns = { "/renewPassword" })
+@WebServlet(urlPatterns = { "/renewPassword"})
 
 public class RenewPasswordServlet extends HttpServlet {
 	@Override
@@ -31,10 +31,11 @@ public class RenewPasswordServlet extends HttpServlet {
 			response.sendRedirect("./");
 			return;
 		}
-		User editUser = new UserService().selectUser(String.valueOf(loginUser.getId()));
+		//User editUser = new UserService().selectUser(String.valueOf(loginUser.getId()));
 
-		request.setAttribute("editUser", editUser);
+		//request.setAttribute("editUser", editUser);
 		request.getRequestDispatcher("renewPassword.jsp").forward(request, response);
+
 	}
 
 	@Override
@@ -52,9 +53,13 @@ public class RenewPasswordServlet extends HttpServlet {
 			return;
 		}
 		session.setAttribute("errorMessages", messages);
-		request.setAttribute("editUser", editUser);
-		request.getRequestDispatcher("renewPassword.jsp").forward(request, response);
-		//response.sendRedirect("./renewPassword");
+//		if(!editUser.getPassword().matches(request.getParameter("password"))) {
+//			editUser.setPassword(request.getParameter("password"));
+//		}
+//		editUser.setPassword(request.getParameter("confirmedPassword"));
+//		request.setAttribute("editUser", editUser);
+//		request.getRequestDispatcher("renewPassword.jsp").forward(request, response);
+		response.sendRedirect("./renewPassword");
 	}
 
 	private User getEditUser(HttpServletRequest request)
