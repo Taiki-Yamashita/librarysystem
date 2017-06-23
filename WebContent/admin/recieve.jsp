@@ -46,6 +46,7 @@
 				<th>出版社</th>
 				<th>リクエスト日</th>
 				<th>既読</th>
+				<th>未読にするよ</th>
 			</tr>
 
 			<c:forEach items="${recieves}" var="recieve">
@@ -65,6 +66,15 @@
 						</c:if>
 						<c:if test="${recieve.showing != 0 }">
 							<c:out value="既読"></c:out>
+						</c:if>
+					</td>
+					<td>
+						<c:if test="${recieve.showing == 1 }">
+							<input type="hidden" name="flag" id="flag" value="0">
+							<input type="checkbox" name="recieveId2" id="recieveId2" value="${recieve.id}">
+						</c:if>
+						<c:if test="${recieve.showing != 1 }">
+							<c:out value="未読なう"></c:out>
 						</c:if>
 					</td>
 				</tr>
