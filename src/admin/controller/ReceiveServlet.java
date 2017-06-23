@@ -9,11 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
+
 import admin.service.RecieveService;
 import beans.Require;
+import service.RequireService;
 
 @WebServlet(urlPatterns = {"/admin/receive"})
-public class RecieveServlet extends HttpServlet {
+public class ReceiveServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
@@ -51,6 +54,13 @@ public class RecieveServlet extends HttpServlet {
 				new RecieveService().update(0, Integer.parseInt(id2));
 			}
 		}
+//問い合わせ削除
+		if(!StringUtils.isEmpty(request.getParameter("deleteId"))) {
+			System.out.println(request.getParameter("deleteId"));
+			new RequireService().delete(request.getParameter("deleteId"));
+			response.sendRedirect("./receive");
+			return;
+		}
 
 //既読or未読表示
 		if (request.getParameter("num") == null) {
@@ -72,6 +82,7 @@ public class RecieveServlet extends HttpServlet {
 			response.sendRedirect("./receive");
 			return;
 		}
+
 	}
 }
 

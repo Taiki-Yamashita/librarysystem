@@ -9,16 +9,7 @@
 <head>
 <title>問い合わせ、リクエスト受信</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="Content-Script-Type" content="text/javascript">
-<script language="JavaScript" type="text/javascript">
 
-//＜クリックした時に実行される関数＞
-//*** 問い合わせ削除
-function func1(form){
-document.form1.receiveId.value =form.deleteId.value;
-document.form1.submit();
-}
-</script>
 </head>
 <body>
 	<a href = "manage">管理画面</a>
@@ -63,7 +54,7 @@ document.form1.submit();
 			<c:forEach items="${receives}" var="receive">
 				<tr>
 					<td><c:out value="${receive.userName}" /></td>
-					<td><c:out value="${receieve.bookName}" /></td>
+					<td><c:out value="${receive.bookName}" /></td>
 					<td><c:out value="${receive.author}" /></td>
 					<td><c:out value="${receive.publisher}" /></td>
 					<td>
@@ -89,20 +80,12 @@ document.form1.submit();
 						</c:if>
 					</td>
 					<td>
-						<input type="hidden" name="deleteId" value="${receive.id}">
-						<input type="button" onClick="func1(this.form)" value="問い合わせ削除">
+						<button type="submit" name="deleteId" value="${receive.id}">問い合わせ削除</button>
 					</td>
 				</tr>
 			</c:forEach>
 		</table>
-		<input type="submit" value="送信" />
-
+		<button type="submit" value="edit">送信</button>
 	</form>
-	<!-- 	問い合わせ削除用の仮想フォーム -->
-	<form name="form1" method="post" action="delete">
-		<input type="hidden" name="receiveId">
-		<input type="hidden" name="sw" value="0">
-	</form>
-
 </body>
 </html>
