@@ -40,7 +40,6 @@ public class AddBookServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException,
 	ServletException{
 
-
 		List<String> messages = new ArrayList<String>();
 		HttpSession session = request.getSession();
 
@@ -48,14 +47,8 @@ public class AddBookServlet extends HttpServlet {
 
 			Book book = getNewBook(request);
 			new BookService().insert(book);
-<<<<<<< HEAD
-			response.sendRedirect("./manageBook");
-
-=======
 
 			response.sendRedirect("./manageBook");
-
->>>>>>> c551938ba7f10433d9c3ea5eba1f0f92982caf80
 		}else{
 			List<Library> libraries = new LibraryService().selectAll();
 			request.setAttribute("libraries", libraries);
