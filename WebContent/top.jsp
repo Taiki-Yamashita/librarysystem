@@ -23,26 +23,18 @@
 			<c:remove var="errorMessages" scope="session"/>
 		</c:if>
 		<table border="1">
-			<tr><td><a href = "./search">検索</a></td><td><a href = "./ranking">ランキング</a></td><c:if test="loginUser.id !=null"></c:if>
+			<tr><td><a href = "./search">検索</a></td><td><a href = "./ranking">ランキング</a></td>
+<c:if test="${loginUser.id ==null}"><td><a href = "./login">ログイン</a></td></c:if>
+<c:if test="${loginUser.id !=null}"><td><a href = "./user">マイページ</a></td><td><a href="renewPassword?id=${loginUser.id}" name="id">パスワード編集</a></td>
+<td><a href = "./require">本のリクエスト</a></td><td><a href = "./logout">ログアウト</a></td></c:if>
 			</tr></table>
 
-		<h4>登録者メニュー</h4>
-		<table border="1">
-			<c:if test="${loginUser.id ==null}">
-			<tr><td><a href = "./login">ログイン</a></td></tr>
-			<tr><td>ユーザーページ</td></tr>
-			<tr><td>お気に入り</td></tr>
-			<tr><td>本のリクエスト</td></tr>
-			</c:if>
-			<c:if test="${loginUser.id !=null}">
-			<tr><td><a href = "./user">マイページ</a></td></tr>
-			<tr><td><a href="renewPassword?id=${loginUser.id}" name="id">パスワード編集</a>*ログイン必須</td></tr>
-			<tr><td><a href = "./favorite">お気に入り</a>*ログイン必須</td></tr>
-			<tr><td><a href = "./require">本のリクエスト</a>*ログイン必須</td></tr>
-			<tr><td><a href = "./logout">ログアウト</a></td></tr>
-			</c:if>
-		</table>
-			<a href = "./admin/manage">管理画面</a>
+		ログインするといろいろな機能がつかえます
+
+		(*^◯^*)
+
+		<br>
+		<a href = "./admin/manage">管理画面</a>
 
 	<h5>お知らせ</h5>
 		<c:forEach items="${informations}" var="information">
