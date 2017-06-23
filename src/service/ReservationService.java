@@ -175,4 +175,25 @@ public class ReservationService {
 			close(connection);
 		}
 	}
+	public List<Reservation> selectReserving(int bookId) {
+
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			List<Reservation> contacts = new ReservationDao().selectReserving(connection, bookId);
+
+			commit(connection);
+
+			return contacts;
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
 }
