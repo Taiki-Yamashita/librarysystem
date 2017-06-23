@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -8,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import beans.Book;
 import beans.Favorite;
@@ -29,6 +31,8 @@ public class RankingServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
 
+		User loginUser = (User) request.getSession().getAttribute("loginUser");
+
 		List<Ranking> circulations = new RankingService().circulationAll();
 		List<Ranking> reservations = new RankingService().reservationAll();
 		List<Book> books = new BookService().selectAll();
@@ -36,7 +40,6 @@ public class RankingServlet extends HttpServlet {
 
 		List<Reservation> isReservations = new ReservationService().selectAll();
 		List<Favorite> favorites = new FavoriteService().selectAll();
-		User loginUser = (User) request.getSession().getAttribute("loginUser");
 
 		request.setAttribute("circulations", circulations);
 		request.setAttribute("reservations", reservations);
@@ -47,5 +50,21 @@ public class RankingServlet extends HttpServlet {
 		request.setAttribute("isFavorites", favorites);
 
 		request.getRequestDispatcher("/ranking.jsp").forward(request, response);
+
+	}	@Override
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws IOException, ServletException {
+
+		List<String> messages = new ArrayList<String>();
+		HttpSession session = request.getSession();
+
+
+		List<Library> libraries = new LibraryService().selectAll();
+		request.setAttribute("libraries", libraries);
+
+		messages.add("ログインしてください");
+
+		session.setAttribute("errorMessages", messages);
+		response.sendRedirect("./ranking");
 	}
 }

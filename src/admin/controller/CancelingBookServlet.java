@@ -36,6 +36,7 @@ public class CancelingBookServlet extends HttpServlet {
 		String time =request.getParameter("time");
 
 		new BookService().cancelingBook(bookId, num, time);
+		new BookService().status(bookId));
 		response.sendRedirect("./user");
 	}
 }

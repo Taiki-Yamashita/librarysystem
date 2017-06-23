@@ -156,4 +156,23 @@ public class ReservationService {
 			close(connection);
 		}
 	}
+	public void updateStatus(int bookId,int num) {
+
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			new ReservationDao().updateStatus(connection,bookId, num);
+
+			commit(connection);
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
 }
