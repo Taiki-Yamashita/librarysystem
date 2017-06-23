@@ -58,8 +58,7 @@
 							<c:if test="${selectBoxId != 2}"><option value="2">書籍</option></c:if>
 							<c:if test="${selectBoxId != 3}"><option value="3">著者</option></c:if>
 							<c:if test="${selectBoxId != 4}"><option value="4">出版社</option></c:if>
-							<c:if test="${selectBoxId != 5}"><option value="5">カテゴリ</option></c:if>
-							<c:if test="${selectBoxId != 6}"><option value="6">ISBN番号</option></c:if>
+							<c:if test="${selectBoxId != 5}"><option value="5">ISBN番号</option></c:if>
 						</select>が
 					</td>
 					<td>
@@ -91,51 +90,17 @@
 			<table>
 				<tr>
 					<td>
-						<%
-							String[] checkBoxLibraryNumbers = {"1","2","3","4","5"};
-							session.setAttribute("checkBoxLibraryNumbers", checkBoxLibraryNumbers);
-						%>
-						<c:forEach items="${checkBoxLibraryNumbers}" var="checkBoxLibraryNumber">
+						<c:forEach items="${libraryList}" var="libraryName" varStatus="libraryCount">
 							<%session.setAttribute("checkLibrary", 0);%>
 							<c:forEach items="${libraries}" var="library">
-								<c:if test="${library == 1 && checkBoxLibraryNumber == 1}">
+								<c:if test="${library == libraryCount.count}">
 									<%session.setAttribute("checkLibrary",1);%>
-									<input type="checkbox" name="library1" value="1" checked="checked">【図書館名1】
-								</c:if>
-								<c:if test="${library == 2 && checkBoxLibraryNumber == 2}">
-									<%session.setAttribute("checkLibrary",1);%>
-									<input type="checkbox" name="library2" value="2" checked="checked">【図書館名2】
-								</c:if>
-								<c:if test="${library == 3 && checkBoxLibraryNumber == 3}">
-									<%session.setAttribute("checkLibrary",1);%>
-									<input type="checkbox" name="library3" value="3" checked="checked">【図書館名3】
-								</c:if>
-								<c:if test="${library == 4 && checkBoxLibraryNumber == 4}">
-									<%session.setAttribute("checkLibrary",1);%>
-									<input type="checkbox" name="library4" value="4" checked="checked">【図書館名4】
-								</c:if>
-								<c:if test="${library == 5 && checkBoxLibraryNumber == 5}">
-									<%session.setAttribute("checkLibrary",1);%>
-									<input type="checkbox" name="library5" value="5" checked="checked">【図書館名5】
+									<input type="checkbox" name="library${libraryCount.count}" value="${libraryCount.count}" checked="checked">${libraryName.name}
 								</c:if>
 							</c:forEach>
-
-							<c:if test="${checkLibrary == 0 && checkBoxLibraryNumber == 1}">
-								<input type="checkbox" name="library1" value="1">【図書館名1】
+							<c:if test="${checkLibrary == 0}">
+								<input type="checkbox" name="library${libraryCount.count}" value="${libraryCount.count}">${libraryName.name}
 							</c:if>
-							<c:if test="${checkLibrary == 0 && checkBoxLibraryNumber == 2}">
-								<input type="checkbox" name="library2" value="2">【図書館名2】
-							</c:if>
-							<c:if test="${checkLibrary == 0 && checkBoxLibraryNumber == 3}">
-								<input type="checkbox" name="library3" value="3">【図書館名3】
-							</c:if>
-							<c:if test="${checkLibrary == 0 && checkBoxLibraryNumber == 4}">
-								<input type="checkbox" name="library4" value="4">【図書館名4】
-							</c:if>
-							<c:if test="${checkLibrary == 0 && checkBoxLibraryNumber == 5}">
-								<input type="checkbox" name="library5" value="5">【図書館名5】
-							</c:if>
-
 						</c:forEach>
 					</td>
 				</tr>
@@ -549,7 +514,6 @@
 		<c:remove var="loginErrorMessages" scope="session"/>
 
 		<!-- 絞込み検索 -->
-		<c:remove var="checkBoxLibraryNumber" scope="session"/>
 		<c:remove var="checkLibrary" scope="session"/>
 		<c:remove var="checkBoxCategoryNumber" scope="session"/>
 		<c:remove var="checkCategory" scope="session"/>

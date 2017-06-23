@@ -41,6 +41,111 @@ public class BookDao {
 		}
 	}
 
+	public List<Book> selectShelfId(Connection connection){
+
+		PreparedStatement ps = null;
+		try {
+			String sql = "SELECT * FROM library_system.books GROUP BY shelf_id";
+			ps = connection.prepareStatement(sql);
+
+			ResultSet rs = ps.executeQuery();
+
+			List<Book> bookList = toBookList(rs);
+			if (bookList.isEmpty()) {
+				return null;
+			}else {
+				return bookList;
+			}
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
+	public List<Book> selectRefinedBook(Connection connection, String selectBox, String freeWord, String condition,
+			String selectedLibrary, String selectedShelfId, String isReserving, String delay, String bookStatus){
+
+		PreparedStatement ps = null;
+		try {
+			StringBuilder sql = new StringBuilder();
+			sql.append("SELECT * FROM books WHERE ");
+
+			if(!selectBox.isEmpty()) sql.append(selectBox + " LIKE ?");
+			else{
+				if(condition.equals("4")) sql.append("name = ? or author = ? or publisher = ? or category = ? or isbn_id = ?");
+				else if(condition.equals("3")) sql.append("name LIKE ? or author LIKE ? or publisher LIKE ? or category LIKE ? or isbn_id LIKE ?");
+				else sql.append("CONCAT(name, author, publisher, category, isbn_id) LIKE ?");
+			}
+
+			if(bookStatus.equals("2")) sql.append(" AND keeping = 1");
+			if(bookStatus.equals("3")) sql.append(" AND lending = 1");
+			if(bookStatus.equals("4")) sql.append(" AND disposing = 1");
+
+			if(isReserving.equals("2")) sql.append(" AND reserving = 1");
+			if(isReserving.equals("3")) sql.append(" AND reserving = 0");
+
+			if(!selectedShelfId.equals("0")) sql.append(" AND shelf_id = ?");
+
+			if(!selectedLibrary.equals("0")) sql.append(" AND library_id = ?");
+
+			ps = connection.prepareStatement(sql.toString());
+
+			if(!selectBox.isEmpty()){
+				if(condition.equals("1")) ps.setString(1, "%" + freeWord + "%");
+				if(condition.equals("2")) ps.setString(1, freeWord + "%");
+				if(condition.equals("3")) ps.setString(1, "%" + freeWord);
+				if(condition.equals("4")) ps.setString(1, freeWord);
+
+				int cnt = 2;
+				if(!selectedShelfId.equals("0")) ps.setString(cnt++, selectedShelfId);
+				if(!selectedLibrary.equals("0")) ps.setString(cnt, selectedLibrary);
+			}else{
+				if(condition.equals("4")){
+					ps.setString(1, freeWord);
+					ps.setString(2, freeWord);
+					ps.setString(3, freeWord);
+					ps.setString(4, freeWord);
+					ps.setString(5, freeWord);
+
+					int cnt = 6;
+					if(!selectedShelfId.equals("0")) ps.setString(cnt++, selectedShelfId);
+					if(!selectedLibrary.equals("0")) ps.setString(cnt, selectedLibrary);
+				}
+				else if(condition.equals("3")){
+					ps.setString(1, "%" + freeWord);
+					ps.setString(2, "%" + freeWord);
+					ps.setString(3, "%" + freeWord);
+					ps.setString(4, "%" + freeWord);
+					ps.setString(5, "%" + freeWord);
+
+					int cnt = 6;
+					if(!selectedShelfId.equals("0")) ps.setString(cnt++, selectedShelfId);
+					if(!selectedLibrary.equals("0")) ps.setString(cnt, selectedLibrary);
+				}
+				else{
+					if(condition.equals("1")) ps.setString(1, "%" + freeWord + "%");
+					if(condition.equals("2")) ps.setString(1, freeWord + "%");
+
+					int cnt = 2;
+					if(!selectedShelfId.equals("0")) ps.setString(cnt++, selectedShelfId);
+					if(!selectedLibrary.equals("0")) ps.setString(cnt, selectedLibrary);
+				}
+			}
+
+			ResultSet rs = ps.executeQuery();
+
+			List<Book> bookList = toBookList(rs);
+			if (bookList.isEmpty()) {
+				return null;
+			}else {
+				return bookList;
+			}
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
 
 	public void insert(Connection connection, Book book) {
 
@@ -661,5 +766,33 @@ public class BookDao {
 	} finally {
 		close(rs);
 	}
-}
+	}
+
+	public void status(Connection connection,int bookId) {
+
+		PreparedStatement ps = null;
+		try {
+			StringBuilder sql = new StringBuilder();
+			sql.append("UPDATE books SET");
+			sql.append(" reserving = ?");
+			sql.append(" WHERE");
+			sql.append(" id = ?");
+
+			ps = connection.prepareStatement(sql.toString());
+
+			ps.setInt(1, 0);
+			ps.setInt(2, bookId);
+
+
+			int count = ps.executeUpdate();
+			if (count == 0) {
+				throw new NoRowsUpdatedRuntimeException();
+			}
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+
+	}
 }

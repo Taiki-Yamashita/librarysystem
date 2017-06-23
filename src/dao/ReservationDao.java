@@ -324,5 +324,55 @@ public class ReservationDao {
 			close(rs);
 		}
 	}
+	public void updateStatus(Connection connection,int bookId, int num) {
+
+		PreparedStatement ps = null;
+		try {
+			StringBuilder sql = new StringBuilder();
+			sql.append("UPDATE books SET");
+			sql.append(" reserving = ?");
+			sql.append(" WHERE");
+			sql.append(" id = ?");
+
+			ps = connection.prepareStatement(sql.toString());
+
+			ps.setInt(1, num);
+			ps.setInt(2, bookId);
+
+
+			int count = ps.executeUpdate();
+			if (count == 0) {
+				throw new NoRowsUpdatedRuntimeException();
+			}
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+
+	}
+
+	public List<Reservation> selectReserving(Connection connection, int bookId){
+
+		PreparedStatement ps = null;
+		try {
+			String sql = "SELECT * FROM reservations where book_id =? AND canceling =0";
+			ps = connection.prepareStatement(sql);
+
+			ps.setInt(1, bookId);
+
+			ResultSet rs = ps.executeQuery();
+			List<Reservation> reservationList = toReservationList(rs);
+			if (reservationList.isEmpty()) {
+				return null;
+			}else {
+				return reservationList;
+			}
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
 
 }

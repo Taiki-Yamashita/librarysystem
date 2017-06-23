@@ -99,6 +99,53 @@ public class BookService {
 		}
 	}
 
+	public List<Book> selectRefinedBook(String selectBox, String freeWord, String condition, String selectedLibrary,
+			String selectedShelfId, String isReserving, String delay, String bookStatus) {
+
+		Map<String, String> columnMap = getMapData();
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			List<Book> bookList = new BookDao().selectRefinedBook(connection, columnMap.get(selectBox), freeWord, condition,
+					selectedLibrary, selectedShelfId, isReserving, delay, bookStatus);
+
+			commit(connection);
+
+			return bookList;
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
+
+	public List<Book> selectShelfId() {
+
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			List<Book> books = new BookDao().selectShelfId(connection);
+
+			commit(connection);
+
+			return books;
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
+
 	public List<Book> getSelectedBooks(String selectBox, String freeWord, String condition, String sort, String bookStatus,
 			List<String> newBooks, List<String> libraries, List<String> categories, List<String> types) {
 
@@ -131,8 +178,7 @@ public class BookService {
 		map.put("2", "name");
 		map.put("3", "author");
 		map.put("4", "publisher");
-		map.put("5", "category");
-		map.put("6", "isbn_id");
+		map.put("5", "isbn_id");
 
 		return map;
 	}
@@ -144,8 +190,7 @@ public class BookService {
 		map.put("2", "本");
 		map.put("3", "著者");
 		map.put("4", "出版社");
-		map.put("5", "カテゴリ");
-		map.put("6", "ISBN番号");
+		map.put("5", "ISBN番号");
 
 		return map;
 	}
@@ -248,6 +293,25 @@ public class BookService {
 			commit(connection);
 
 			return books;
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
+	public void status(int bookId) {
+
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			new BookDao().status(connection, bookId);
+
+			commit(connection);
 		} catch (RuntimeException e) {
 			rollback(connection);
 			throw e;
