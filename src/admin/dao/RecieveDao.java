@@ -69,17 +69,17 @@ public class RecieveDao {
 				String requiredDate = rs.getString("required_date");
 				String showing = rs.getString("showing");
 
-				Require recieve = new Require();
+				Require receive = new Require();
 
-				recieve.setUserName(userName);
-				recieve.setBookName(bookName);
-				recieve.setId(id);
-				recieve.setAuthor(author);
-				recieve.setPublisher(publisher);
-				recieve.setRequiredDate(requiredDate);
-				recieve.setShowing(showing);
+				receive.setUserName(userName);
+				receive.setBookName(bookName);
+				receive.setId(id);
+				receive.setAuthor(author);
+				receive.setPublisher(publisher);
+				receive.setRequiredDate(requiredDate);
+				receive.setShowing(showing);
 
-				ret.add(recieve);
+				ret.add(receive);
 			}
 			return ret;
 		} finally {

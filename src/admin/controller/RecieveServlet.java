@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import admin.service.RecieveService;
 import beans.Require;
 
-@WebServlet(urlPatterns = {"/admin/recieve"})
+@WebServlet(urlPatterns = {"/admin/receive"})
 public class RecieveServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -21,12 +21,12 @@ public class RecieveServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
 
-		List<Require> recieves = new RecieveService().select();
-		//List<Require> recieves = new RecieveService().select(Integer.parseInt(request.getParameter("num")));
+		List<Require> receives = new RecieveService().select();
+		//List<Require> receives = new RecieveService().select(Integer.parseInt(request.getParameter("num")));
 
 
-		request.setAttribute("recieves", recieves);
-		request.getRequestDispatcher("./recieve.jsp").forward(request, response);
+		request.setAttribute("receives", receives);
+		request.getRequestDispatcher("./receive.jsp").forward(request, response);
 	}
 
 	@Override
@@ -34,8 +34,8 @@ public class RecieveServlet extends HttpServlet {
 		throws ServletException,IOException {
 //未読既読送信
 		if(request.getParameter("flag") != null &&
-				(request.getParameter("recieveId") != null)) {
-			String[] idList = request.getParameterValues("recieveId");
+				(request.getParameter("receiveId") != null)) {
+			String[] idList = request.getParameterValues("receiveId");
 
 			for(String id: idList) {
 				System.out.println(7);
@@ -44,8 +44,8 @@ public class RecieveServlet extends HttpServlet {
 
 		}
 		if(request.getParameter("flag") != null &&
-				(request.getParameter("recieveId2") != null)){
-			String[] idList2 = request.getParameterValues("recieveId2");
+				(request.getParameter("receiveId2") != null)){
+			String[] idList2 = request.getParameterValues("receiveId2");
 			for(String id2: idList2) {
 				System.out.println(9);
 				new RecieveService().update(0, Integer.parseInt(id2));
@@ -54,22 +54,22 @@ public class RecieveServlet extends HttpServlet {
 
 //既読or未読表示
 		if (request.getParameter("num") == null) {
-			response.sendRedirect("./recieve");
+			response.sendRedirect("./receive");
 			return;
 		}
 		else if(request.getParameter("num").matches("0") || request.getParameter("num").matches("1")) {
-			List<Require> recieves = new RecieveService().select(Integer.parseInt(request.getParameter("num")));
-			request.setAttribute("recieves", recieves);
+			List<Require> receives = new RecieveService().select(Integer.parseInt(request.getParameter("num")));
+			request.setAttribute("receives", receives);
 			request.setAttribute("num", request.getParameter("num"));
-			request.getRequestDispatcher("./recieve.jsp").forward(request, response);
+			request.getRequestDispatcher("./receive.jsp").forward(request, response);
 		}
 		else if(request.getParameter("num").matches("2")) {
-			List<Require> recieves = new RecieveService().select();
-			request.setAttribute("recieves", recieves);
-			request.getRequestDispatcher("./recieve.jsp").forward(request, response);
+			List<Require> receives = new RecieveService().select();
+			request.setAttribute("receives", receives);
+			request.getRequestDispatcher("./receive.jsp").forward(request, response);
 		}
 		else {
-			response.sendRedirect("./recieve");
+			response.sendRedirect("./receive");
 			return;
 		}
 	}

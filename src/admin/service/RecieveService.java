@@ -16,8 +16,8 @@ public class RecieveService {
 		try {
 			connection = getConnection();
 
-			RecieveDao recievedao = new RecieveDao();
-			List<Require> ret = recievedao.getSelectAllRecieve(connection, num);
+			RecieveDao receivedao = new RecieveDao();
+			List<Require> ret = receivedao.getSelectAllRecieve(connection, num);
 
 
 			commit(connection);
@@ -39,8 +39,8 @@ public class RecieveService {
 		try {
 			connection = getConnection();
 
-			RecieveDao recievedao = new RecieveDao();
-			List<Require> ret = recievedao.getSelectAllRecieve(connection);
+			RecieveDao receivedao = new RecieveDao();
+			List<Require> ret = receivedao.getSelectAllRecieve(connection);
 
 
 			commit(connection);

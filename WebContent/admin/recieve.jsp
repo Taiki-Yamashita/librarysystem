@@ -9,11 +9,20 @@
 <head>
 <title>問い合わせ、リクエスト受信</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<script language="JavaScript" type="text/javascript">
 
+//＜クリックした時に実行される関数＞
+//*** 問い合わせ削除
+function func1(form){
+document.form1.receiveId.value =form.deleteId.value;
+document.form1.submit();
+}
+</script>
 </head>
 <body>
 	<a href = "manage">管理画面</a>
-	<form action="recieve" method = "post">
+	<form action="receive" method = "post">
 		<c:if test="${empty num}">
 			<input type="radio" name="num" value="2" checked><label for = "num" >全て</label>
 			<input type="radio" name="num" value="0"><label for = "num">未読表示</label>
@@ -37,7 +46,7 @@
 		<input type="submit" value="絞込み" />
 	</form>
 
-
+	<form action="receive" method = "post">
 
 		<table>
 
@@ -51,44 +60,49 @@
 				<th>未読にするよ</th>
 			</tr>
 
-			<c:forEach items="${recieves}" var="recieve">
+			<c:forEach items="${receives}" var="receive">
 				<tr>
-					<td><c:out value="${recieve.userName}" /></td>
-					<td><c:out value="${recieve.bookName}" /></td>
-					<td><c:out value="${recieve.author}" /></td>
-					<td><c:out value="${recieve.publisher}" /></td>
+					<td><c:out value="${receive.userName}" /></td>
+					<td><c:out value="${receieve.bookName}" /></td>
+					<td><c:out value="${receive.author}" /></td>
+					<td><c:out value="${receive.publisher}" /></td>
 					<td>
-						<fmt:parseDate var="date" value="${recieve.requiredDate}" pattern="yyyy-MM-dd HH:mm:ss" />
+						<fmt:parseDate var="date" value="${receive.requiredDate}" pattern="yyyy-MM-dd HH:mm:ss" />
 						<fmt:formatDate pattern = "yyyy年MM月dd日" value = "${date}" />
 					</td>
 					<td>
-						<c:if test="${recieve.showing == 0 }">
-							<form action="recieve" method = "post">
-								<input type="hidden" name="flag" id="flag" value="1">
-								<input type="checkbox" name="recieveId" id="recieveId" value="${recieve.id}">
-							</form>
+						<c:if test="${receive.showing == 0 }">
+							<input type="hidden" name="flag" id="flag" value="1">
+							<input type="checkbox" name="receiveId" id="receiveId" value="${receive.id}">
 						</c:if>
-						<c:if test="${recieve.showing != 0 }">
+						<c:if test="${receive.showing != 0 }">
 							<c:out value="既読"></c:out>
 						</c:if>
 					</td>
 					<td>
-						<c:if test="${recieve.showing == 1 }">
-							<form action="recieve" method = "post">
-								<input type="hidden" name="flag" id="flag" value="0">
-								<input type="checkbox" name="recieveId2" id="recieveId2" value="${recieve.id}">
-							</form>
+						<c:if test="${receive.showing == 1 }">
+							<input type="hidden" name="flag" id="flag" value="0">
+							<input type="checkbox" name="receiveId2" id="receiveId2" value="${receive.id}">
 						</c:if>
-						<c:if test="${recieve.showing != 1 }">
+						<c:if test="${receive.showing != 1 }">
 							<c:out value="未読なう"></c:out>
 						</c:if>
 					</td>
 					<td>
+						<input type="hidden" name="deleteId" value="${receive.id}">
+						<input type="button" onClick="func1(this.form)" value="問い合わせ削除">
 					</td>
 				</tr>
 			</c:forEach>
 		</table>
 		<input type="submit" value="送信" />
+
+	</form>
+	<!-- 	問い合わせ削除用の仮想フォーム -->
+	<form name="form1" method="post" action="delete">
+		<input type="hidden" name="receiveId">
+		<input type="hidden" name="sw" value="0">
+	</form>
 
 </body>
 </html>
