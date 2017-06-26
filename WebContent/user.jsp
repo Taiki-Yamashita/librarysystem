@@ -29,7 +29,7 @@
 			<th>ポイント</th>
 		</tr>
 
-
+<!-- ユーザー情報 -->
 	<c:forEach items="${users}" var="user">
 		<c:if test="${user.id == loginUser.id }">
 			<tr>
@@ -47,48 +47,12 @@
 
 	</table>
 
-	<!-- 貸出 -->
-<<<<<<< HEAD
+	<!-- 貸出テーブル -->
 	<c:forEach items="${circulations}" var="circulation">
-			<c:if test="${circulation.userId == loginUser.id && circulation.returning == 0 && circulation.lending ==1}">
-				<c:set var="flag" value="1" />
-=======
-	<p>貸出一覧</p>
-	<table>
-		<tr>
-			<th>本の名前</th>
-			<th>貸出日</th>
-			<th>期限</th>
-			<th>貸出図書館</th>
-
-		</tr>
-		<c:forEach items="${circulations}" var="circulation">
-
-			<c:if test="${circulation.userId == loginUser.id  && circulation.lending ==1}">
-				<tr>
-					<td>
-						<c:forEach items="${books}" var="book">
-							<c:if test="${book.id == circulation.bookId}">${book.name}</c:if>
-						</c:forEach>
-					</td>
-					<td>
-						<c:out value="${circulation.lentDate }"></c:out>
-					</td>
-					<td>
-						<c:out value="${circulation.limitedDate }"></c:out>
-					</td>
-
-					<td>
-						<c:forEach items="${ libraries}" var="library">
-							<c:if test="${library.id == circulation.libraryId}">${library.name}</c:if>
-						</c:forEach>
-					</td>
-
-				</tr>
->>>>>>> d9e9657bd85f7dfeb895ee4e1dcf9a7f1fa93425
-			</c:if>
+		<c:if test="${circulation.userId == loginUser.id && circulation.returning == 0 && circulation.lending ==1}">
+			<c:set var="flag" value="1" />
+		</c:if>
 	</c:forEach>
-
 	<c:if test="${not empty flag}">
 		<p>借りている本の一覧</p>
 		<table>
@@ -128,6 +92,12 @@
 			</c:forEach>
 		</table>
 	</c:if>
+
+	<c:if test="${empty flag}">
+		<h3>借りている本はありません</h3>
+	</c:if>
+
+	<!-- 予約テーブル -->
 	<c:forEach items="${reservations}" var="reservation">
 			<c:if test="${reservation.userId == loginUser.id && reservation.canceling == 0}">
 				<c:set var="flag2" value="1" />
@@ -178,6 +148,10 @@
 					</c:if>
 				</c:forEach>
 			</table>
+	</c:if>
+
+	<c:if test="${empty flag2}">
+		<h3>予約してる本はありません</h3>
 	</c:if>
 </body>
 </html>

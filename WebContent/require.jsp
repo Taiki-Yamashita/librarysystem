@@ -37,6 +37,8 @@
 			<label for="publisher">出版社</label>
 			<input name="publisher"  value="${newRequire.publisher}"/><br/>
 
+			<pre><textarea name="comment" rows="10" cols="100"><c:out value="${newRequire.comment}"/></textarea></pre>
+			（500文字以下で入力してください）
 			<input type="submit" value="申請" />
 		</form>
 </body>

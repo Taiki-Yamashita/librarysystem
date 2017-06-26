@@ -67,6 +67,7 @@ function check(){
 				<th>著者</th>
 				<th>出版社</th>
 				<th>リクエスト日</th>
+				<th>備考</th>
 				<th>既読</th>
 				<th>未読にするよ</th>
 				<th>削除</th>
@@ -78,6 +79,7 @@ function check(){
 						<td><c:out value="${receive.bookName}" /></td>
 						<td><c:out value="${receive.author}" /></td>
 						<td><c:out value="${receive.publisher}" /></td>
+						<td><c:out value="${receive.comment}" /></td>
 						<td>
 							<fmt:parseDate var="date" value="${receive.requiredDate}" pattern="yyyy-MM-dd HH:mm:ss" />
 							<fmt:formatDate pattern = "yyyy年MM月dd日" value = "${date}" />

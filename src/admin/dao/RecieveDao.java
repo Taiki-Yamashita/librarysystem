@@ -66,6 +66,7 @@ public class RecieveDao {
 				int id = rs.getInt("id");
 				String author = rs.getString("author");
 				String publisher = rs.getString("publisher");
+				String comment = rs.getString("comment");
 				String requiredDate = rs.getString("required_date");
 				String showing = rs.getString("showing");
 
@@ -76,6 +77,7 @@ public class RecieveDao {
 				receive.setId(id);
 				receive.setAuthor(author);
 				receive.setPublisher(publisher);
+				receive.setComment(comment);
 				receive.setRequiredDate(requiredDate);
 				receive.setShowing(showing);
 
