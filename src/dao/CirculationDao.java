@@ -42,6 +42,31 @@ public class CirculationDao {
 		}
 	}
 
+	public List<Circulation> selectDelayBook(Connection connection){
+
+		String currentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+		PreparedStatement ps = null;
+		try {
+			String sql = "SELECT * FROM library_system.circulations where limited_date <= ? and returning = ?";
+			ps = connection.prepareStatement(sql);
+			ps.setString(1, currentDate);
+			ps.setString(2, "1");
+
+
+			ResultSet rs = ps.executeQuery();
+			List<Circulation> circulationList = toMypageList(rs);
+			if (circulationList.isEmpty()) {
+				return null;
+			}else {
+				return circulationList;
+			}
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
+
 	public List<Circulation> select(Connection connection, Date date) throws ParseException{
 
 		PreparedStatement ps = null;
@@ -318,6 +343,7 @@ public class CirculationDao {
 		List<Circulation> ret = new ArrayList<Circulation>();
 		try {
 			while (rs.next()) {
+				int id = rs.getInt("id");
 				String bookId = rs.getString("book_id");
 				String libraryId = rs.getString("library_id");
 				String userId = rs.getString("user_id");
@@ -328,6 +354,7 @@ public class CirculationDao {
 
 
 				Circulation reservation = new Circulation();
+				reservation.setId(id);
 				reservation.setBookId(bookId);
 				reservation.setLibraryId(libraryId);
 				reservation.setUserId(userId);

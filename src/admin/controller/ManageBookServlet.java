@@ -13,9 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import admin.beans.NotReturned;
 import admin.service.NotReturnedService;
 import beans.Book;
+import beans.Circulation;
 import beans.Library;
 import beans.Reservation;
 import service.BookService;
+import service.CirculationService;
 import service.LibraryService;
 import service.ReservationService;
 
@@ -52,11 +54,45 @@ public class ManageBookServlet extends HttpServlet {
 			String delay = request.getParameter("delay");
 			String bookStatus = request.getParameter("bookStatus");
 
+			/*絞りこんだ本*/
 			books = new BookService().selectRefinedBook(selectBox, freeWord, condition,
 					selectedLibrary, selectedShelfId, isReserving, delay, bookStatus);
+			/*遅延している本*/
+			List<Book> delayBooks = getDelayBook();
+
+			/*遅延の有無を条件に足す*/
+			if(delay.equals("1")){
+				isValid(books, request);
+				request.setAttribute("books", books);
+			}
+			if(delay.equals("2")){
+				List<Book> refinedBooks = new ArrayList<Book>();
+				if(delayBooks != null && books != null){
+					for(Book book : books){
+						boolean flag = true;
+						for(Book delayBook : delayBooks){
+							if(delayBook.getId() == book.getId()) flag = false;
+						}
+						if(flag) refinedBooks.add(book);
+					}
+				}
+				isValid(refinedBooks, request);
+				request.setAttribute("books", refinedBooks);
+			}
+			if(delay.equals("3")){
+				List<Book> refinedBooks = new ArrayList<Book>();
+				if(delayBooks != null && books != null){
+					for(Book book : books){
+						for(Book delayBook : delayBooks){
+							if(delayBook.getId() == book.getId()) refinedBooks.add(book);
+						}
+					}
+				}
+				isValid(refinedBooks, request);
+				request.setAttribute("books", refinedBooks);
+			}
 
 			/*値の保持*/
-			request.setAttribute("books", books);
 			request.setAttribute("selectBox", new BookService().getMapCategory().get(selectBox));
 			request.setAttribute("selectBoxId", selectBox);
 			request.setAttribute("freeWord", freeWord);
@@ -68,9 +104,22 @@ public class ManageBookServlet extends HttpServlet {
 			request.setAttribute("bookStatus", bookStatus);
 		}
 
-		isValid(books, request);
 		request.getRequestDispatcher("/admin/manageBook.jsp").forward(request, response);
 
+	}
+
+	public List<Book> getDelayBook(){
+
+		List<Circulation> delayBookIdList = new CirculationService().selectDelayBook();
+		List<Book> delayBooks = new ArrayList<Book>();
+		if(delayBookIdList != null){
+			for(Circulation delayBookId : delayBookIdList){
+				Book delayBook = new BookService().selectBook(Integer.parseInt(delayBookId.getBookId()));
+				delayBooks.add(delayBook);
+			}
+		}
+
+		return delayBooks;
 	}
 
 	public void isValid(List<Book> books, HttpServletRequest request){

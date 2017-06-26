@@ -75,6 +75,28 @@ public class CirculationService {
 		}
 	}
 
+	public List<Circulation> selectDelayBook() {
+
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			List<Circulation> books = new CirculationDao().selectDelayBook(connection);
+
+			commit(connection);
+
+			return books;
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
+
 	public List<Circulation> select(Date date) throws ParseException {
 
 		Connection connection = null;
