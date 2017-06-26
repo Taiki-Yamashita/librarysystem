@@ -27,6 +27,16 @@ public class ManageUserServlet extends HttpServlet {
 		List<User> users = new UserService().selectAll();
 		List<Library> libraries = new LibraryService().selectAll();
 
+		if(request.getParameter("isSearching") != null){
+
+			String freeWord = request.getParameter("freeWord");
+			String selectedLibrary = request.getParameter("selectedLibrary");
+
+			request.setAttribute("freeWord", freeWord);
+			request.setAttribute("selectedLibrary", selectedLibrary);
+
+			users = new UserService().getRefinedUser(freeWord, selectedLibrary);
+		}
 
 		request.setAttribute("users", users);
 		request.setAttribute("libraries", libraries);

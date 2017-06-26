@@ -211,6 +211,31 @@ public class UserDao {
 
 	}
 
+	public List<User> getRefinedUser(Connection connection, String freeWord, String selectedLibrary) {
+
+		PreparedStatement ps = null;
+		try {
+			StringBuilder sql = new StringBuilder();
+			sql.append("SELECT * FROM users WHERE ");
+			sql.append("CONCAT(login_id, password, name, address, tel, mail) LIKE ? ");
+			if(!selectedLibrary.equals("0")) sql.append("AND library_id = ? ");
+			sql.append("ORDER BY register_date DESC");
+
+			ps = connection.prepareStatement(sql.toString());
+			ps.setString(1, "%" + freeWord + "%");
+			if(!selectedLibrary.equals("0")) ps.setString(2, selectedLibrary);
+
+			System.out.println(ps);
+
+			ResultSet rs = ps.executeQuery();
+			List<User> ret = toUserList(rs);
+			return ret;
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
 
 	public List<User> getSelectAllUser(Connection connection) {
 

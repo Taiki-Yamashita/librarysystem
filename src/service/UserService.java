@@ -126,6 +126,30 @@ public class UserService {
 		}
 	}
 
+	public List<User> getRefinedUser(String freeWord, String selectedLibrary) {
+
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			UserDao userdao = new UserDao();
+			List<User> ret = userdao.getRefinedUser(connection, freeWord, selectedLibrary);
+
+
+			commit(connection);
+			return ret;
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch(Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
+
+
 	public User getLoginUser(String loginId, String password) {
 
 		Connection connection = null;

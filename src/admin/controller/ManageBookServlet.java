@@ -115,7 +115,7 @@ public class ManageBookServlet extends HttpServlet {
 		if(delayBookIdList != null){
 			for(Circulation delayBookId : delayBookIdList){
 				Book delayBook = new BookService().selectBook(Integer.parseInt(delayBookId.getBookId()));
-				delayBooks.add(delayBook);
+				if(delayBook != null) delayBooks.add(delayBook);
 			}
 		}
 
@@ -125,7 +125,7 @@ public class ManageBookServlet extends HttpServlet {
 	public void isValid(List<Book> books, HttpServletRequest request){
 
 		List<String> errorMessages = new ArrayList<>();
-		if(books == null){
+		if(books == null || books.isEmpty()){
 			errorMessages.add("検索結果が見つかりませんでした");
 			request.getSession().setAttribute("errorMessages", errorMessages);
 		}
