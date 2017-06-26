@@ -30,9 +30,9 @@
 //
 //            if( length > 0 )
 //
-//                System.out.println( "¥n[" + query + "] : " +
+//                System.out.println( "¥n["  query  "] : " 
 //
-//                                    Integer.toString( length ) +
+//                                    Integer.toString( length ) 
 //
 //                                    " 件ヒットしました。" );
 //
@@ -90,13 +90,13 @@
 //
 //        if( clauses.length > 0 ){
 //
-//            System.out.println( "¥n[" + q + "] もしかして・・・" );
+//            System.out.println( "¥n["  q  "] もしかして・・・" );
 //
 //            for( BooleanClause clause : clauses ){
 //
 //                Term term = ((TermQuery)clause.getQuery()).getTerm();
 //
-//                System.out.println( "¥t" + term.text() );
+//                System.out.println( "¥t"  term.text() );
 //
 //            }
 //

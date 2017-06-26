@@ -21,7 +21,7 @@ public class RecieveDao {
 		try {
 			StringBuilder sql = new StringBuilder();
 			sql.append("SELECT * FROM requires where showing = ?");
-			//sql.append("ORDER BY  DESC limit " + num);
+			//sql.append("ORDER BY  DESC limit "  num);
 
 			ps = connection.prepareStatement(sql.toString());
 
