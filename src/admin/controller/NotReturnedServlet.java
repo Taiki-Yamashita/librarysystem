@@ -51,9 +51,8 @@ public class NotReturnedServlet extends HttpServlet {
 		throws ServletException,IOException {
 
 		String lending =request.getParameter("lending");
-		String num = "0";
 
-		new BookService().lendingBook(lending, num);
+		new BookService().lendingBook(lending);
 		response.sendRedirect("./notreturn");
 	}
 }

@@ -39,7 +39,8 @@ public class RequireDao {
 			ps.setString(2, require.getBookName());
 			ps.setString(3, require.getAuthor());
 			ps.setString(4, require.getPublisher());
-			ps.setString(5, require.getComment());
+			if(require.getComment().isEmpty()) ps.setString(5, "特になし");
+			else ps.setString(5, require.getComment());
 			ps.setString(6, "0");
 
 			ps.executeUpdate();

@@ -62,10 +62,7 @@ public class RequireServlet extends HttpServlet {
 		if (StringUtils.isEmpty(bookName)) {
 			messages.add("書籍名を入力してください");
 		}
-		if (StringUtils.isEmpty(comment)) {
-			messages.add("備考を入力してください");
-		}
-		if (comment.length() <= 500) {
+		if (comment.length() > 500) {
 			messages.add("備考は500文字以下で入力してください");
 		}
 		if (messages.size() == 0) {

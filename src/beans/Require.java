@@ -59,4 +59,5 @@ public class Require {
 	public void setRequiredDate(String requiredDate) {
 		this.requiredDate = requiredDate;
 	}
+
 }
