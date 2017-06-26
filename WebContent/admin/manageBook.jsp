@@ -190,10 +190,9 @@
 
 		<c:if test="${not empty books}">
 			<table>
-				<tr><th>ID</th><th>名前</th><th>著者</th><th>出版社</th><th>カテゴリ</th><th>種類</th><th>図書館</th><th>棚番号</th><th>出版日</th><th>本の状態</th><th>予約数</th><th>延滞</th></tr>
+				<tr><th>名前</th><th>著者</th><th>出版社</th><th>カテゴリ</th><th>種類</th><th>図書館</th><th>棚番号</th><th>出版日</th><th>本の状態</th><th>予約数</th><th>延滞</th></tr>
 				<c:forEach items="${books}" var="book" varStatus="statusBook">
 					<tr>
-						<td>${book.id }</td>
 						<td>${book.name}</td>
 						<td>${book.author}</td>
 						<td>${book.publisher}</td>
