@@ -33,7 +33,6 @@ public class UserServlet extends HttpServlet{
 		List<Library> libraries = new LibraryService().selectAll();
 		List<Circulation> circulations = new CirculationService().selectMypage();
 		List<Reservation> reservations = new ReservationService().selectMypage();
-System.out.println(circulations.get(0));
 		request.setAttribute("users", users);
 		request.setAttribute("reservations", reservations);
 		request.setAttribute("circulations", circulations);
