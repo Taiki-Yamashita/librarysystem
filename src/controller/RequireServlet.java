@@ -56,12 +56,18 @@ public class RequireServlet extends HttpServlet {
 	private boolean isValid(Require require, HttpServletRequest request) {
 
 		List<String> messages = new ArrayList<String>();
-		String bookName = require.getBookName();
+		String bookName = request.getParameter("bookName");
+		String comment = request.getParameter("comment");
 
 		if (StringUtils.isEmpty(bookName)) {
 			messages.add("書籍名を入力してください");
 		}
-
+		if (StringUtils.isEmpty(comment)) {
+			messages.add("備考を入力してください");
+		}
+		if (comment.length() <= 500) {
+			messages.add("備考は500文字以下で入力してください");
+		}
 		if (messages.size() == 0) {
 			return true;
 		} else {
@@ -78,6 +84,7 @@ public class RequireServlet extends HttpServlet {
 		require.setBookName(request.getParameter("bookName"));
 		require.setAuthor(request.getParameter("author"));
 		require.setPublisher(request.getParameter("publisher"));
+		require.setComment(request.getParameter("comment"));
 
 		return require;
 	}

@@ -8,8 +8,15 @@ public class Require {
 	private String author;
 	private String publisher;;
 	private String requiredDate;
+	private String comment;
 	private String showing;
 
+	public String getComment() {
+		return comment;
+	}
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
 	public String getShowing() {
 		return showing;
 	}
