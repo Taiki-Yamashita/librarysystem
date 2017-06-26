@@ -32,7 +32,7 @@
 			<td>貸出中</td>
 			</c:if>
 			<c:if test="${book.lending != 1 }">
-			<td>保管中</td>
+			<td>貸出可</td>
 			</c:if>
 
    	 		<td>
