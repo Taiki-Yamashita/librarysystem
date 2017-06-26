@@ -242,7 +242,7 @@ public class UserDao {
 		PreparedStatement ps = null;
 		try {
 			StringBuilder sql = new StringBuilder();
-			sql.append("SELECT * FROM users");
+			sql.append("SELECT * FROM users ORDER BY register_date DESC");
 
 			//sql.append("SELECT * FROM users order by branch_id asc, department_id asc ");
 
