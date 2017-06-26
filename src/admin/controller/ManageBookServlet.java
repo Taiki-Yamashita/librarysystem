@@ -54,9 +54,9 @@ public class ManageBookServlet extends HttpServlet {
 
 			books = new BookService().selectRefinedBook(selectBox, freeWord, condition,
 					selectedLibrary, selectedShelfId, isReserving, delay, bookStatus);
-			request.setAttribute("books", books);
 
 			/*値の保持*/
+			request.setAttribute("books", books);
 			request.setAttribute("selectBox", new BookService().getMapCategory().get(selectBox));
 			request.setAttribute("selectBoxId", selectBox);
 			request.setAttribute("freeWord", freeWord);
@@ -67,8 +67,19 @@ public class ManageBookServlet extends HttpServlet {
 			request.setAttribute("delay", delay);
 			request.setAttribute("bookStatus", bookStatus);
 		}
+
+		isValid(books, request);
 		request.getRequestDispatcher("/admin/manageBook.jsp").forward(request, response);
 
+	}
+
+	public void isValid(List<Book> books, HttpServletRequest request){
+
+		List<String> errorMessages = new ArrayList<>();
+		if(books == null){
+			errorMessages.add("検索結果が見つかりませんでした");
+			request.getSession().setAttribute("errorMessages", errorMessages);
+		}
 	}
 
 	public List<Integer> getReservationCount(List<Book> books){
