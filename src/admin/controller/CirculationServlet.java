@@ -36,9 +36,8 @@ public class CirculationServlet extends HttpServlet {
 		throws ServletException,IOException {
 
 		String lending =request.getParameter("bookId");
-		String num = "0";
 
-		new BookService().lendingBook(lending, num);
+		new BookService().lendingBook(lending);
 		Circulation circulation = new Circulation();
 		circulation.setBookId(request.getParameter("bookId"));
 
