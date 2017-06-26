@@ -47,40 +47,8 @@
 
 	</table>
 
-<<<<<<< HEAD
 	<!-- 貸出 -->
-	<p>貸出一覧</p>
-	<table>
-		<tr>
-			<th>本の名前</th>
-			<th>貸出日</th>
-			<th>期限</th>
-			<th>貸出図書館</th>
 
-		</tr>
-		<c:forEach items="${circulations}" var="circulation">
-
-			<c:if test="${circulation.userId == loginUser.id && circulation.returning == 0 && circulation.lending ==1}">
-				<tr>
-					<td>
-						<c:forEach items="${books}" var="book">
-							<c:if test="${book.id == circulation.bookId}">${book.name}</c:if>
-						</c:forEach>
-					</td>
-					<td>
-						<c:out value="${circulation.lentDate }"></c:out>
-					</td>
-					<td>
-						<c:out value="${circulation.limitedDate }"></c:out>
-					</td>
-
-					<td>
-						<c:forEach items="${ libraries}" var="library">
-							<c:if test="${library.id == circulation.libraryId}">${library.name}</c:if>
-						</c:forEach>
-					</td>
-=======
-	<!-- 貸出テーブル -->
 	<c:forEach items="${circulations}" var="circulation">
 		<c:if test="${circulation.userId == loginUser.id && circulation.returning == 0 && circulation.lending ==1}">
 			<c:set var="flag" value="1" />
@@ -94,7 +62,6 @@
 				<th>貸出日</th>
 				<th>期限</th>
 				<th>貸出図書館</th>
->>>>>>> 2d4293546b46caf4d33dd37079af46b71a135d08
 
 			</tr>
 			<c:forEach items="${circulations}" var="circulation">
