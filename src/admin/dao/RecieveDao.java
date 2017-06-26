@@ -134,4 +134,26 @@ public class RecieveDao {
 		}
 	}
 
+	public Require getSelectRecieve(Connection connection, int id) {
+
+			PreparedStatement ps = null;
+			try {
+				StringBuilder sql = new StringBuilder();
+				sql.append("SELECT * FROM requires where id = ? ");
+
+				ps = connection.prepareStatement(sql.toString());
+
+				ps.setInt(1, id);
+
+				ResultSet rs = ps.executeQuery();
+				List<Require> ret = toRecieveList(rs);
+				return ret.get(0);
+			} catch (SQLException e) {
+				throw new SQLRuntimeException(e);
+			} finally {
+				close(ps);
+			}
+
+	}
+
 }

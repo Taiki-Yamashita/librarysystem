@@ -95,4 +95,27 @@ public class RecieveService {
 			close(connection);
 		}
 	}
+
+	public Require selectUser(int id) {
+
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			RecieveDao receivedao = new RecieveDao();
+			Require ret = receivedao.getSelectRecieve(connection, id);
+
+			commit(connection);
+			return ret;
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch(Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
+
 }
