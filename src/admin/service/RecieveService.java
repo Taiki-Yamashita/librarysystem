@@ -42,7 +42,6 @@ public class RecieveService {
 			RecieveDao receivedao = new RecieveDao();
 			List<Require> ret = receivedao.getSelectAllRecieve(connection);
 
-
 			commit(connection);
 			return ret;
 		} catch (RuntimeException e) {
@@ -64,8 +63,28 @@ public class RecieveService {
 
 		new RecieveDao().update(connection, flag, id);
 
+			commit(connection);
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch(Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
+
+	public List<Require> getSelectedBooks(String freeWord) {
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			RecieveDao receivedao = new RecieveDao();
+			List<Require> ret = receivedao.getSelectedBooks(connection, freeWord);
 
 			commit(connection);
+			return ret;
 		} catch (RuntimeException e) {
 			rollback(connection);
 			throw e;

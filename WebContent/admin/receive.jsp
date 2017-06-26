@@ -52,6 +52,11 @@ function check(){
 		<input type="submit" value="絞込み" />
 	</form>
 
+	<form action="receive" method="post">
+		<input type="text" name="freeWord" id="freeWord" value="${freeWord}">
+		<button type="submit" value="free">フリーワード検索</button>
+	</form>
+
 	<form action="receive" method = "post" onSubmit="return check()">
 
 		<table>
@@ -66,42 +71,80 @@ function check(){
 				<th>未読にするよ</th>
 				<th>削除</th>
 			</tr>
-
-			<c:forEach items="${receives}" var="receive">
-				<tr>
-					<td><c:out value="${receive.userName}" /></td>
-					<td><c:out value="${receive.bookName}" /></td>
-					<td><c:out value="${receive.author}" /></td>
-					<td><c:out value="${receive.publisher}" /></td>
-					<td>
-						<fmt:parseDate var="date" value="${receive.requiredDate}" pattern="yyyy-MM-dd HH:mm:ss" />
-						<fmt:formatDate pattern = "yyyy年MM月dd日" value = "${date}" />
-					</td>
-					<td>
-						<c:if test="${receive.showing == 0 }">
-							<input type="hidden" name="flag" id="flag" value="1">
-							<input type="checkbox" name="receiveId" id="receiveId" value="${receive.id}">
-						</c:if>
-						<c:if test="${receive.showing != 0 }">
-							<c:out value="既読"></c:out>
-						</c:if>
-					</td>
-					<td>
-						<c:if test="${receive.showing == 1 }">
-							<input type="hidden" name="flag" id="flag" value="0">
-							<input type="checkbox" name="receiveId2" id="receiveId2" value="${receive.id}">
-						</c:if>
-						<c:if test="${receive.showing != 1 }">
-							<c:out value="未読なう"></c:out>
-						</c:if>
-					</td>
-					<td>
-						<c:if test="${receive.showing == 1 }">
-							<input type="checkbox" name="deleteId" value="${receive.id}">
-						</c:if>
-					</td>
-				</tr>
-			</c:forEach>
+			<c:if test="${empty books}">
+				<c:forEach items="${receives}" var="receive">
+					<tr>
+						<td><c:out value="${receive.userName}" /></td>
+						<td><c:out value="${receive.bookName}" /></td>
+						<td><c:out value="${receive.author}" /></td>
+						<td><c:out value="${receive.publisher}" /></td>
+						<td>
+							<fmt:parseDate var="date" value="${receive.requiredDate}" pattern="yyyy-MM-dd HH:mm:ss" />
+							<fmt:formatDate pattern = "yyyy年MM月dd日" value = "${date}" />
+						</td>
+						<td>
+							<c:if test="${receive.showing == 0 }">
+								<input type="hidden" name="flag" id="flag" value="1">
+								<input type="checkbox" name="receiveId" id="receiveId" value="${receive.id}">
+							</c:if>
+							<c:if test="${receive.showing != 0 }">
+								<c:out value="既読"></c:out>
+							</c:if>
+						</td>
+						<td>
+							<c:if test="${receive.showing == 1 }">
+								<input type="hidden" name="flag" id="flag" value="0">
+								<input type="checkbox" name="receiveId2" id="receiveId2" value="${receive.id}">
+							</c:if>
+							<c:if test="${receive.showing != 1 }">
+								<c:out value="未読なう"></c:out>
+							</c:if>
+						</td>
+						<td>
+							<c:if test="${receive.showing == 1 }">
+								<input type="checkbox" name="deleteId" value="${receive.id}">
+							</c:if>
+						</td>
+					</tr>
+				</c:forEach>
+			</c:if>
+			<c:if test="${not empty books}">
+				<c:forEach items="${books}" var="ReaquiredBook">
+					<tr>
+						<td><c:out value="${ReaquiredBook.userName}" /></td>
+						<td><c:out value="${ReaquiredBook.bookName}" /></td>
+						<td><c:out value="${ReaquiredBook.author}" /></td>
+						<td><c:out value="${ReaquiredBook.publisher}" /></td>
+						<td>
+							<fmt:parseDate var="date" value="${ReaquiredBook.requiredDate}" pattern="yyyy-MM-dd HH:mm:ss" />
+							<fmt:formatDate pattern = "yyyy年MM月dd日" value = "${date}" />
+						</td>
+						<td>
+							<c:if test="${ReaquiredBook.showing == 0 }">
+								<input type="hidden" name="flag" id="flag" value="1">
+								<input type="checkbox" name="receiveId" id="receiveId" value="${ReaquiredBook.id}">
+							</c:if>
+							<c:if test="${ReaquiredBook.showing != 0 }">
+								<c:out value="既読"></c:out>
+							</c:if>
+						</td>
+						<td>
+							<c:if test="${ReaquiredBook.showing == 1 }">
+								<input type="hidden" name="flag" id="flag" value="0">
+								<input type="checkbox" name="receiveId2" id="receiveId2" value="${ReaquiredBook.id}">
+							</c:if>
+							<c:if test="${ReaquiredBook.showing != 1 }">
+								<c:out value="未読なう"></c:out>
+							</c:if>
+						</td>
+						<td>
+							<c:if test="${ReaquiredBook.showing == 1 }">
+								<input type="checkbox" name="deleteId" value="${ReaquiredBook.id}">
+							</c:if>
+						</td>
+					</tr>
+				</c:forEach>
+			</c:if>
 		</table>
 		<button type="submit" value="edit">送信</button>
 	</form>

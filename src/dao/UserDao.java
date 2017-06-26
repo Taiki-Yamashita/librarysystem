@@ -147,14 +147,25 @@ public class UserDao {
 		try {
 			StringBuilder sql = new StringBuilder();
 			sql.append("UPDATE users SET");
-			if(user.getLoginId() == null) {
+			if(user.getPassword() == null || user.getPassword().isEmpty()) {
+				sql.append(" login_id = ?");
+				sql.append(" WHERE");
+				sql.append(" id = ?");
+				ps = connection.prepareStatement(sql.toString());
+
+				ps.setString(1, user.getLoginId());
+				ps.setInt(2, user.getId());
+			}
+			else if(user.getName() == null) {
 				sql.append(" password = ?");
+				sql.append(" , login_id = ?");
 				sql.append(" WHERE");
 				sql.append(" id = ?");
 				ps = connection.prepareStatement(sql.toString());
 
 				ps.setString(1, user.getPassword());
-				ps.setInt(2, user.getId());
+				ps.setString(2, user.getLoginId());
+				ps.setInt(3, user.getId());
 			} else {
 				sql.append("  login_id = ?");
 				sql.append(", password = ?");
