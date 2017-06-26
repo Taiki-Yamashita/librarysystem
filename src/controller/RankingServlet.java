@@ -50,5 +50,6 @@ public class RankingServlet extends HttpServlet {
 		request.getRequestDispatcher("/ranking.jsp").forward(request, response);
 
 
+
 	}
 }

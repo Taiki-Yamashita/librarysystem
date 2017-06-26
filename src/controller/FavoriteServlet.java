@@ -37,6 +37,8 @@ public class FavoriteServlet extends HttpServlet{
 			return;
 		}
 
+
+
 		List<Favorite> favorites = new FavoriteService().selectAll();
 		request.setAttribute("favorites", favorites);
 
@@ -49,9 +51,10 @@ public class FavoriteServlet extends HttpServlet{
 			throws ServletException, IOException {
 
 		/*ログインしていない時*/
-		if(request.getParameter("notLogin") != null){
+		if(request.getParameter("notLogin") != null || request.getParameter("notLoginRanking") !=null){
 			request.getSession().setAttribute("loginErrorMessages", "ログインしてください");
-		}else{
+		}
+		else{
 			/*お気に入り登録*/
 			Favorite favorite = new Favorite();
 			favorite.setUserId(request.getParameter("userId"));
