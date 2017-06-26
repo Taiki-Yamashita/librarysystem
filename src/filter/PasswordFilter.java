@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 
 import beans.User;
 
-@WebFilter("/renewPassword")
+@WebFilter("/renewPassword?id.")
 public class PasswordFilter implements Filter {
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)

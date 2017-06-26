@@ -86,10 +86,12 @@ public class SearchServlet extends HttpServlet{
 				List<Library> libraryNames = new LibraryService().selectAll();
 				User loginUser = (User) request.getSession().getAttribute("loginUser");
 
+
 				/*お気に入り・予約・図書館情報*/
 				request.setAttribute("isFavorites", isFavorite(favorites, loginUser, selectedBooks));
 				request.setAttribute("isReserving", isReserving(reservations, loginUser, selectedBooks));
 				request.setAttribute("libraryNames", libraryNames);
+				request.setAttribute("reservations", reservations);
 
 				/*ページ遷移管理*/
 				request.setAttribute("pageCountList", getPageCount(selectedBooks.size()));

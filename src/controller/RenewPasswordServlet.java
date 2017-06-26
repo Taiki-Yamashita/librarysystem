@@ -31,9 +31,12 @@ public class RenewPasswordServlet extends HttpServlet {
 			response.sendRedirect("./");
 			return;
 		}
-		//User editUser = new UserService().selectUser(String.valueOf(loginUser.getId()));
+		//String loginId = loginUser.getLoginId();
+		User editUser = new UserService().selectUser(String.valueOf(loginUser.getId()));
 
-		//request.setAttribute("editUser", editUser);
+		request.setAttribute("editUser", editUser);
+		request.setAttribute("loginUser", loginUser);
+
 		request.getRequestDispatcher("renewPassword.jsp").forward(request, response);
 
 	}
@@ -45,20 +48,13 @@ public class RenewPasswordServlet extends HttpServlet {
 		List<String> messages = new ArrayList<String>();
 		HttpSession session = request.getSession();
 		User editUser = getEditUser(request);
-
 		if (isValid(request, messages)) {
-			//editUser.setPassword(request.getParameter("password"));
 			new UserService().update(editUser);
 			response.sendRedirect("./");
 			return;
 		}
 		session.setAttribute("errorMessages", messages);
-//		if(!editUser.getPassword().matches(request.getParameter("password"))) {
-//			editUser.setPassword(request.getParameter("password"));
-//		}
-//		editUser.setPassword(request.getParameter("confirmedPassword"));
-//		request.setAttribute("editUser", editUser);
-//		request.getRequestDispatcher("renewPassword.jsp").forward(request, response);
+
 		response.sendRedirect("./renewPassword");
 	}
 
@@ -66,6 +62,7 @@ public class RenewPasswordServlet extends HttpServlet {
 			throws IOException, ServletException {
 		User editUser = new User();
 		editUser.setId(Integer.parseInt(request.getParameter("id")));
+		editUser.setLoginId(request.getParameter("loginId"));
 		editUser.setPassword(request.getParameter("password"));
 		return editUser;
 	}

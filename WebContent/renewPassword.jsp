@@ -10,6 +10,7 @@
 </head>
 <body>
 	<h1>パスワード変更画面</h1>
+	<h2>パスワードが未入力の場合、現在のパスワードで更新されます</h2>
 	<a href = "./">トップ</a>
 	<c:if test="${ not empty errorMessages }">
 		<div class="errorMessages">
@@ -24,6 +25,10 @@
 
 	<form action="renewPassword" method="post">
 		<input type="hidden" value="${loginUser.id}" id="id" name="id"/>
+
+		<label for="loginId">ログインID</label><br>
+		<input name="loginId"  value="${editUser.loginId}" id="loginId"/><br/>
+
 		<label for="password">パスワード</label><br>
 		<input name="password" type="password" value="${editUser.password}" id="password"/><br/>
 

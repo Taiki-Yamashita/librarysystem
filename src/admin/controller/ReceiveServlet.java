@@ -34,7 +34,17 @@ public class ReceiveServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request,HttpServletResponse response)
 		throws ServletException,IOException {
-//未読既読送信
+		if(request.getParameter("freeWord") != null) {
+			String freeWord = request.getParameter("freeWord");
+			List<Require> selectedBooks = new RecieveService().getSelectedBooks(freeWord);
+
+			request.setAttribute("freeWord", freeWord);
+			request.setAttribute("books", selectedBooks);
+			request.getRequestDispatcher("./receive.jsp").forward(request, response);
+			return;
+		}
+
+		//未読既読送信
 		if(request.getParameter("flag") != null &&
 				(request.getParameter("receiveId") != null)) {
 			String[] idList = request.getParameterValues("receiveId");
@@ -50,14 +60,14 @@ public class ReceiveServlet extends HttpServlet {
 				new RecieveService().update(0, Integer.parseInt(id2));
 			}
 		}
-//問い合わせ削除
+		//問い合わせ削除
 		if(!StringUtils.isEmpty(request.getParameter("deleteId"))) {
 			new RequireService().delete(request.getParameter("deleteId"));
 			response.sendRedirect("./receive");
 			return;
 		}
 
-//既読or未読表示
+		//既読or未読表示
 		if (request.getParameter("num") == null) {
 			response.sendRedirect("./receive");
 			return;
