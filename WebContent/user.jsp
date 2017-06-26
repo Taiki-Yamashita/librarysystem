@@ -59,7 +59,7 @@
 		</tr>
 		<c:forEach items="${circulations}" var="circulation">
 
-			<c:if test="${circulation.userId == loginUser.id && circulation.returning == 0 && circulation.lending ==1}">
+			<c:if test="${circulation.userId == loginUser.id  && circulation.lending ==1}">
 				<tr>
 					<td>
 						<c:forEach items="${books}" var="book">

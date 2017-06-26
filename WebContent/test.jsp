@@ -7,24 +7,44 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>貸出用ページ</title>
 </head>
 <body>
+	<a href = "./">トップ</a>
+	<a href = "./search">検索</a>
+	<a href = "./favorite">お気に入り</a>
+	<a href = "./require">本のリクエスト</a>
+	<a href = "./admin/manage">管理画面</a>
+	<a href = "./introduction">本の紹介</a>
+	<a href = "./user">マイページ</a>
+
+<table>
+		<tr>
+			<th>書籍名</th>
+			<th></th>
+		</tr>
 <c:forEach items="${books}" var="book">
 
+			<tr>
 			<td>${book.name}</td>
 
    	 		<td>
+   	 			<c:if test="${book.lending == 1 }">貸出済み</c:if>
+				<c:if test="${book.lending != 1 }">
    	 			<form action = "admin/lendingBook" method = "post">
    	 				<input type = "hidden" id = "bookId" name = "bookId" value = "${book.id}" >
    	 				<input type = "hidden" id = "libraryId" name = "libraryId" value = "${book.libraryId}" >
-						<input id = "userId" name = "userId"  >
+						<input type ="hidden" name = "userId" value = "${loginUser.id }" >
 						<input type = "hidden" name = "num" value = 1 >
 						<input type = "hidden" name = "resetNum" value=1>
 						<input type = "submit" value = "貸出" />
-
    	 			</form>
+   	 			</c:if>
    	 		</td>
+   	 		</tr>
+
+
 </c:forEach>
+</table>
 </body>
 </html>
