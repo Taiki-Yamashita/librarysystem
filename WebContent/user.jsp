@@ -47,7 +47,8 @@
 
 	</table>
 
-	<!-- 貸出テーブル -->
+	<!-- 貸出 -->
+
 	<c:forEach items="${circulations}" var="circulation">
 		<c:if test="${circulation.userId == loginUser.id && circulation.returning == 0 && circulation.lending ==1}">
 			<c:set var="flag" value="1" />

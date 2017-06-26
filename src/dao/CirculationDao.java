@@ -133,6 +133,62 @@ public class CirculationDao {
 		}
 	}
 
+	public void lending(Connection connection, Circulation circulation) {
+
+		PreparedStatement ps = null;
+		try {
+			StringBuilder sql = new StringBuilder();
+			sql.append("UPDATE circulations SET");
+			sql.append(" lending = ?");
+			sql.append(" WHERE");
+			sql.append(" book_id = ?");
+
+			ps = connection.prepareStatement(sql.toString());
+
+			ps.setString(1, "1");
+			ps.setString(2, circulation.getBookId());
+
+
+			int count = ps.executeUpdate();
+			if (count == 0) {
+				throw new NoRowsUpdatedRuntimeException();
+			}
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+
+	}
+
+	public void returning(Connection connection, Circulation circulation, String num) {
+
+			PreparedStatement ps = null;
+			try {
+				StringBuilder sql = new StringBuilder();
+				sql.append("UPDATE circulations SET");
+				sql.append(" lending = ?");
+				sql.append(" WHERE");
+				sql.append(" book_id = ?");
+
+				ps = connection.prepareStatement(sql.toString());
+
+				ps.setString(1, num);
+				ps.setString(2, circulation.getBookId());
+
+				int count = ps.executeUpdate();
+				if (count == 0) {
+					throw new NoRowsUpdatedRuntimeException();
+				}
+			} catch (SQLException e) {
+				throw new SQLRuntimeException(e);
+			} finally {
+				close(ps);
+			}
+
+		}
+
+
 	public void update(Connection connection, Circulation circulation) {
 
 		PreparedStatement ps = null;
@@ -372,7 +428,7 @@ public class CirculationDao {
 		}
 	}
 
-	public void flag(Connection connection, String num, String id) {
+	public void lendingFlag(Connection connection,String id) {
 
 		PreparedStatement ps = null;
 		try {
@@ -386,8 +442,39 @@ public class CirculationDao {
 
 			ps = connection.prepareStatement(sql.toString());
 
-			ps.setString(1, num);
+			ps.setString(1, "1");
 			ps.setString(2, "0");
+			ps.setString(3, "0");
+			ps.setString(4, id);
+
+
+			int count = ps.executeUpdate();
+			if (count == 0) {
+				throw new NoRowsUpdatedRuntimeException();
+			}
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+
+	}
+	public void returningFlag(Connection connection,String id) {
+
+		PreparedStatement ps = null;
+		try {
+			StringBuilder sql = new StringBuilder();
+			sql.append("UPDATE books SET");
+			sql.append(" lending = ?");
+			sql.append(" ,keeping = ?");
+			sql.append(" ,disposing = ?");
+			sql.append(" WHERE");
+			sql.append(" id = ?");
+
+			ps = connection.prepareStatement(sql.toString());
+
+			ps.setString(1, "0");
+			ps.setString(2, "1");
 			ps.setString(3, "0");
 			ps.setString(4, id);
 

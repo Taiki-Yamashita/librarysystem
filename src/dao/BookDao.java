@@ -23,7 +23,7 @@ public class BookDao {
 
 		PreparedStatement ps = null;
 		try {
-			String sql = "SELECT * FROM books";
+			String sql = "SELECT * FROM books ORDER BY published_date DESC";
 			ps = connection.prepareStatement(sql);
 
 			ResultSet rs = ps.executeQuery();
@@ -87,6 +87,8 @@ public class BookDao {
 			if(!selectedShelfId.equals("0")) sql.append(" AND shelf_id = ?");
 
 			if(!selectedLibrary.equals("0")) sql.append(" AND library_id = ?");
+
+			sql.append(" ORDER BY published_date DESC");
 
 			ps = connection.prepareStatement(sql.toString());
 
@@ -598,7 +600,7 @@ public class BookDao {
 		}
 	}
 
-	public void lendingBook(Connection connection, String lending, String num) {
+	public void lendingBook(Connection connection, String bookId) {
 
 		PreparedStatement ps = null;
 		try {
@@ -611,7 +613,31 @@ public class BookDao {
 
 			ps = connection.prepareStatement(sql.toString());
 
-			ps.setString(1, num);
+			ps.setString(1, "1");
+			ps.setString(2, bookId);
+
+			ps.executeUpdate();
+		}catch(SQLException e){
+			throw new SQLRuntimeException(e);
+		}finally{
+			close(ps);
+		}
+	}
+
+	public void returningBook(Connection connection, String lending) {
+
+		PreparedStatement ps = null;
+		try {
+			StringBuilder sql = new StringBuilder();
+			sql.append("UPDATE books SET");
+			sql.append(" lending = ?");
+
+			sql.append(" WHERE");
+			sql.append(" id = ?");
+
+			ps = connection.prepareStatement(sql.toString());
+
+			ps.setString(1, "0");
 			ps.setString(2, lending);
 
 			ps.executeUpdate();
