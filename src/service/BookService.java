@@ -221,13 +221,13 @@ public class BookService {
 	}
 
 
-	public void lendingBook(String lending, String num) {
+	public void lendingBook(String bookId) {
 
 		Connection connection = null;
 		try {
 			connection = getConnection();
 
-			new BookDao().lendingBook(connection, lending, num);
+			new BookDao().lendingBook(connection, bookId);
 
 			commit(connection);
 		} catch (RuntimeException e) {
@@ -240,6 +240,27 @@ public class BookService {
 			close(connection);
 		}
 	}
+
+	public void returningBook(String lending) {
+
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			new BookDao().returningBook(connection, lending);
+
+			commit(connection);
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
+
 
 
 

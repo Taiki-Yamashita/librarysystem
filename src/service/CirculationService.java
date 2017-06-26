@@ -33,6 +33,48 @@ public class CirculationService {
 		}
 	}
 
+	public void lending(Circulation circulation) {
+
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			new CirculationDao().lending(connection, circulation);
+
+			commit(connection);
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
+
+
+	public void returning(Circulation circulation,String num) {
+
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			new CirculationDao().returning(connection, circulation, num);
+
+			commit(connection);
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
+
+
 	public void update(Circulation circulation) {
 
 		Connection connection = null;
@@ -181,13 +223,32 @@ public class CirculationService {
 			close(connection);
 		}
 	}
-	public void flag(String num, String id) {
+	public void lendingFlag(String id) {
 
 		Connection connection = null;
 		try {
 			connection = getConnection();
 
-			new CirculationDao().flag(connection, num, id);
+			new CirculationDao().lendingFlag(connection,id);
+
+			commit(connection);
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
+	public void returningFlag(String id) {
+
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			new CirculationDao().returningFlag(connection, id);
 
 			commit(connection);
 		} catch (RuntimeException e) {
