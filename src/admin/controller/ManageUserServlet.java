@@ -1,6 +1,7 @@
 package admin.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -38,11 +39,21 @@ public class ManageUserServlet extends HttpServlet {
 			users = new UserService().getRefinedUser(freeWord, selectedLibrary);
 		}
 
+		isValid(users, request);
 		request.setAttribute("users", users);
 		request.setAttribute("libraries", libraries);
 
 		request.getRequestDispatcher("/admin/manageUser.jsp").forward(request, response);
 
+	}
+
+	public void isValid(List<User> users, HttpServletRequest request){
+
+		List<String> errorMessages = new ArrayList<>();
+		if(users == null || users.isEmpty()){
+			errorMessages.add("検索結果が見つかりませんでした");
+			request.getSession().setAttribute("errorMessages", errorMessages);
+		}
 	}
 
 }
