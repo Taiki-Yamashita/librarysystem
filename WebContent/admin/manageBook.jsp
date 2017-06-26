@@ -199,7 +199,7 @@
 						<td>${book.category}</td>
 						<td>${book.type}</td>
 						<td>
-							<c:forEach items="${libraries}" var="library">
+							<c:forEach items="${libraryList}" var="library">
 								<c:if test="${book.libraryId ==library.id}">
 									<option value="${library.id}">${library.name}</option>
 								</c:if>

@@ -23,7 +23,7 @@ public class BookDao {
 
 		PreparedStatement ps = null;
 		try {
-			String sql = "SELECT * FROM books";
+			String sql = "SELECT * FROM books ORDER BY published_date DESC";
 			ps = connection.prepareStatement(sql);
 
 			ResultSet rs = ps.executeQuery();
@@ -87,6 +87,8 @@ public class BookDao {
 			if(!selectedShelfId.equals("0")) sql.append(" AND shelf_id = ?");
 
 			if(!selectedLibrary.equals("0")) sql.append(" AND library_id = ?");
+
+			sql.append(" ORDER BY published_date DESC");
 
 			ps = connection.prepareStatement(sql.toString());
 
