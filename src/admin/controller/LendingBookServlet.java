@@ -9,8 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.Circulation;
+import beans.User;
 import service.BookService;
 import service.CirculationService;
+import service.UserService;
 
 
 
@@ -30,8 +32,12 @@ public class LendingBookServlet extends HttpServlet {
 		throws ServletException,IOException {
 
 		String bookId = request.getParameter("bookId");
+		int userId = Integer.parseInt(request.getParameter("userId"));
 		String num = request.getParameter("num");
 		Circulation circulation = new Circulation();
+		User user = new UserService().select(userId);
+		int point = Integer.parseInt(user.getPoint());
+		new UserService().point(point, userId);
 
 		if(num.matches("1")) {
 			circulation.setUserId(request.getParameter("userId"));
@@ -41,14 +47,18 @@ public class LendingBookServlet extends HttpServlet {
 			new CirculationService().lending(circulation);
 			new CirculationService().lendingFlag(bookId);
 			new BookService().lendingBook(bookId);
+
 		} else {
 			circulation.setUserId(request.getParameter("userId"));
 			circulation.setBookId(request.getParameter("bookId"));
 			circulation.setLibraryId(request.getParameter("libraryId"));
+			user.setPoint(request.getParameter("userId"));
 
+			System.out.println(num);
 			new CirculationService().returning(circulation, num);
 			new CirculationService().returningFlag(bookId);
 			new BookService().returningBook(bookId);
+
 		}
 
 

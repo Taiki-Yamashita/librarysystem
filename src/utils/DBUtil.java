@@ -14,15 +14,7 @@ public class DBUtil {
 	private static final String DRIVER = "com.mysql.jdbc.Driver";
 	private static final String URL = "jdbc:mysql://localhost:3306/library_system";
 	private static final String USER = "root";
-<<<<<<< HEAD
-=======
 
-<<<<<<< HEAD
-
-=======
-<<<<<<< HEAD
->>>>>>> 85ea834ea3c3122dc1fe849b868824a23a3aa302
->>>>>>> 9a3a4cd5ffbf1f353ac1802d1b398491e55eb93a
 
 	private static final String PASSWORD = "Okada0121washo";
 	//private static final String PASSWORD = "9244kuniyoshi";
@@ -32,22 +24,16 @@ public class DBUtil {
 
 
 	//private static final String PASSWORD = "Okada0121washo";
-<<<<<<< HEAD
+
 	//private static final String PASSWORD = "H06-m10-d31";
 
 	//private static final String PASSWORD = "9244Tatsuya";
 
-=======
-	private static final String PASSWORD = "H06-m10-d31";
-<<<<<<< HEAD
-=======
-=======
-	private static final String PASSWORD = "9244Tatsuya";
+	//private static final String PASSWORD = "H06-m10-d31";
 
->>>>>>> 7d2a20f18b72bf8b452bbcc3fd560b622929f43e
->>>>>>> 274942a3566c1b80a24e4a79e688c8baf656d19f
->>>>>>> 85ea834ea3c3122dc1fe849b868824a23a3aa302
->>>>>>> 9a3a4cd5ffbf1f353ac1802d1b398491e55eb93a
+	//private static final String PASSWORD = "9244Tatsuya";
+
+
 	static {
 
 		try {
