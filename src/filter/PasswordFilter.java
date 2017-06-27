@@ -17,14 +17,13 @@ import javax.servlet.http.HttpSession;
 
 import beans.User;
 
-@WebFilter("/renewPassword.*$")
+@WebFilter("/renewPassword")
 public class PasswordFilter implements Filter {
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException{
 
 		String target = String.valueOf(((HttpServletRequest)request).getQueryString());
-System.out.println(7);
 		HttpSession session =((HttpServletRequest)request).getSession();
 		User loginUser = (User) ((HttpServletRequest) request).getSession().getAttribute("loginUser");
 		if(loginUser == null) {
