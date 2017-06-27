@@ -248,20 +248,38 @@
 				   	 	<td>
 					   	 	<form action = "circulation" method = "get">
 					   	 		<input type = "hidden" name = "id" value = "${book.id}" >
-					   	 		<input type = "submit" value = "貸出一覧" />
+					   	 		<input type = "submit" value = "貸出履歴" />
 					   	 	</form>
 				   	 	</td>
 				   	 	<td>
-					   	 	<form action = "reservation" method = "get">
-					   	 		<input type = "hidden" name = "id" value = "${book.id}" >
-					   	 		<input type = "submit" value = "予約一覧" />
-					   	 	</form>
+							<c:forEach items="${reservationCounts}" var="count" varStatus="statusCount">
+								<c:if test="${statusBook.index == statusCount.index}">
+									<c:if test="${count !=-1}">
+								   	 	<form action = "reservation" method = "get">
+								   	 		<input type = "hidden" name = "id" value = "${book.id}" >
+								   	 		<input type = "submit" value = "予約一覧" />
+								   	 	</form>
+									</c:if>
+									<c:if test="${count ==-1}">
+										予約なし
+									</c:if>
+								</c:if>
+							</c:forEach>
 				   	 	</td>
 				   	 	<td>
-					   	 	<form action = "notReturned" method = "get">
-					   	 		<input type = "hidden" name = "id" value = "${book.id}" >
-					   	 		<input type = "submit" value = "未返却リスト" />
-					   	 	</form>
+				   	 	<c:forEach items="${notReturnedCounts}" var="count" varStatus="statusCount">
+							<c:if test="${statusBook.index == statusCount.index}">
+								<c:if test="${count ==1}">
+								   	<form action = "notReturned" method = "get">
+								   		 <input type = "hidden" name = "id" value = "${book.id}" >
+								   	 	<input type = "submit" value = "未返却者情報" />
+								   	</form>
+					   	 		</c:if>
+					   	 		<c:if test="${count !=1}">
+					   	 			<c:out value="未返却なし"></c:out>
+					   	 		</c:if>
+					   	 	</c:if>
+					   	 </c:forEach>
 				   	 	</td>
 					</tr>
 				</c:forEach>
