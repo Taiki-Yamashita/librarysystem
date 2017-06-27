@@ -22,6 +22,16 @@
 			</div>
 			<c:remove var="errorMessages" scope="session"/>
 		</c:if>
+		<c:if test="${ not empty doneMessages }">
+			<div class="errorMessages">
+				<ul>
+					<c:forEach items="${doneMessages}" var="message">
+						<li><c:out value="${message}" />
+						</c:forEach>
+						</ul>
+			</div>
+			<c:remove var="doneMessages" scope="session"/>
+		</c:if>
 
 		<c:if test="${ not empty registerMessage}">
 			<div class="registerMessages">

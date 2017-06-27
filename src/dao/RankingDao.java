@@ -61,7 +61,7 @@ public class RankingDao {
 
 		PreparedStatement ps = null;
 		try {
-			String sql = "SELECT *, COUNT(*) as count FROM library_system.book_rankings GROUP BY book_id ORDER BY count(*) DESC; ";
+			String sql = "SELECT *, COUNT(*) as count FROM library_system.book_rankings GROUP BY book_id ORDER BY count(*) DESC,book_id ; ";
 			ps = connection.prepareStatement(sql);
 
 
@@ -106,7 +106,7 @@ public class RankingDao {
 
 		PreparedStatement ps = null;
 		try {
-			String sql = "SELECT *, COUNT(*) as count FROM library_system.book_reservations GROUP BY book_id ORDER BY count(*) DESC; ";
+			String sql = "SELECT *, COUNT(*) as count FROM library_system.book_reservations GROUP BY book_id ORDER BY count(*) DESC,book_id; ";
 			ps = connection.prepareStatement(sql);
 
 
