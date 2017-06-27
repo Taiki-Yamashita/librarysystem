@@ -49,13 +49,11 @@ function check(){
 				<input type="radio" name="num" value="1"><label for = "num">既読表示</label>
 			</c:if>
 		</c:if>
+		<label for="freeWord">フリーワード検索</label>
+		<input type="text" name="freeWord" id="freeWord" value="${freeWord}">
 		<input type="submit" value="絞込み" />
 	</form>
 
-	<form action="receive" method="post">
-		<input type="text" name="freeWord" id="freeWord" value="${freeWord}">
-		<button type="submit" value="free">フリーワード検索</button>
-	</form>
 
 	<form action="receive" method = "post" onSubmit="return check()">
 

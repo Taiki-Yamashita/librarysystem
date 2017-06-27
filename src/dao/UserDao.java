@@ -225,8 +225,6 @@ public class UserDao {
 			ps.setString(1, "%" + freeWord + "%");
 			if(!selectedLibrary.equals("0")) ps.setString(2, selectedLibrary);
 
-			System.out.println(ps);
-
 			ResultSet rs = ps.executeQuery();
 			List<User> ret = toUserList(rs);
 			return ret;

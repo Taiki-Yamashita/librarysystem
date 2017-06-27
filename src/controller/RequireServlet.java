@@ -45,8 +45,14 @@ public class RequireServlet extends HttpServlet {
 		Require require = getRequire(request);
 		if (isValid(require, request)) {
 			new RequireService().insert(require);
+
+			String registerMessage = "図書を申請しました";
+			HttpSession session = request.getSession();
+			session.setAttribute("registerMessage", registerMessage);
 			response.sendRedirect("./");
 		} else {
+
+
 			request.setAttribute("newRequire", require);
 			request.getRequestDispatcher("./require.jsp").forward(request, response);
 		}
