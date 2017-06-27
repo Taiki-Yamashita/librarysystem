@@ -10,6 +10,7 @@
 </head>
 <body>
 	<a href="manageBook">本の情報一覧</a>
+	<c:if test="${not empty circulation }">
 	<form action="circulation" method="post">
 		<table>
 			<tr>
@@ -41,5 +42,9 @@
 			</c:forEach>
 		</table>
 	</form>
+	</c:if>
+	<c:if test="${empty circulation}">
+	<br>貸出履歴がありません
+	</c:if>
 </body>
 </html>
