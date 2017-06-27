@@ -42,6 +42,8 @@ public class FavoriteServlet extends HttpServlet{
 		List<Favorite> favorites = new FavoriteService().selectAll();
 		request.setAttribute("favorites", favorites);
 
+		request.setAttribute("loginUser", loginUser);
+
 		request.getRequestDispatcher("/favorite.jsp").forward(request, response);
 
 	}

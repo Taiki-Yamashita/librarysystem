@@ -14,7 +14,13 @@
 	<a href = "./search">検索</a>
 	<a href = "./require">本のリクエスト</a>
 	<a href = "./admin/manage">管理画面</a>
-	<c:if test="${not empty favorites}">
+	<c:forEach items="${favorites}" var="favorite">
+		<c:if test="${favorite.userId == loginUser.id}">
+			<c:set var="flag" value="1" />
+		</c:if>
+	</c:forEach>
+
+	<c:if test="${not empty favorites && flag == '1'}">
 		<table>
 			<tr>
 				<th>書籍名</th>
@@ -73,8 +79,9 @@
 			</c:forEach>
 		</table>
 	</c:if>
-	<c:if test="${empty favorites}">
+	<c:if test="${empty favorites  && empty flag}">
 	 	<h1>お気に入り未登録です</h1>
 	</c:if>
+	<c:remove var="flag"/>
 </body>
 </html>

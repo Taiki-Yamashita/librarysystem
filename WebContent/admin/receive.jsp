@@ -75,12 +75,13 @@ function check(){
 				<c:forEach items="${receives}" var="receive">
 					<tr>
 						<td><c:out value="${receive.userName}" /></td>
-						<td><c:if test="${receive.comment == '特になし' }">
-							<td><c:out value="${receive.bookName}" /></td>
-						</c:if>
-						<c:if test="${receive.comment != '特になし' && not empty receive.comment}">
-							<a href="remark?id=${receive.id}"><c:out value="${receive.bookName}" /></a>
-						</c:if>
+						<td>
+							<c:if test="${receive.comment == '特になし' }">
+								<c:out value="${receive.bookName}" />
+							</c:if>
+							<c:if test="${receive.comment != '特になし' && not empty receive.comment}">
+								<a href="remark?id=${receive.id}"><c:out value="${receive.bookName}" /></a>
+							</c:if>
 						</td>
 						<td><c:out value="${receive.author}" /></td>
 						<td><c:out value="${receive.publisher}" /></td>
