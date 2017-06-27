@@ -18,14 +18,24 @@
 				<th>最寄り図書館</th>
 				<th>貸した日</th>
 				<th>期限</th>
+				<th></th>
 			</tr>
 			<c:forEach items = "${circulations}" var="circulation">
 				<tr>
 					<td><c:out value = "${circulation.userName}" /></td>
 					<td><c:out value = "${circulation.bookName}" /></td>
 					<td><c:out value = "${circulation.libraryName}" /></td>
-					<td><c:out value = "${circulation.lentDate}" /></td>
-					<td><c:out value = "${circulation.limitedDate}" /></td>
+					<td>
+					<fmt:parseDate var="date" value="${circulation.lentDate}" pattern="yyyy-MM-dd HH:mm:ss" />
+					<fmt:formatDate pattern = "yyyy年MM月dd日" value = "${date}" />
+					</td>
+					<td>
+					<fmt:parseDate var="date" value="${circulation.limitedDate}" pattern="yyyy-MM-dd HH:mm:ss" />
+					<fmt:formatDate pattern = "yyyy年MM月dd日" value = "${date}" />
+					<td>
+						<c:if test="${circulation.returning ==1}">
+							<c:out value="遅延中"></c:out>
+						</c:if>
 
 				</tr>
 			</c:forEach>

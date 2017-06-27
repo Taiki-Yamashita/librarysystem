@@ -351,7 +351,7 @@ public class CirculationDao {
 				String libraryName = rs.getString("library_name");
 				String lentDate = rs.getString("lent_date");
 				String limitedDate = rs.getString("limited_date");
-				//String returning = rs.getString("returning");
+				String returning = rs.getString("returning");
 
 				Circulation circulation = new Circulation();
 				circulation.setId(id);
@@ -363,7 +363,7 @@ public class CirculationDao {
 				circulation.setLibraryName(libraryName);
 				circulation.setLentDate(lentDate);
 				circulation.setLimitedDate(limitedDate);
-				//circulation.setReturning(returning);
+				circulation.setReturning(returning);
 
 				ret.add(circulation);
 			}
