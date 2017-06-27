@@ -43,18 +43,31 @@
 		</c:if>
 
 		<table border="1">
-			<tr><td><a href = "./search">検索</a></td><td><a href = "./ranking">ランキング</a></td>
-<c:if test="${loginUser.id ==null}"><td><a href = "./login">ログイン</a></td></c:if>
-<c:if test="${loginUser.id !=null}"><td><a href = "./user">マイページ</a></td><td><a href ="./favorite">お気に入り</a></td><td><a href="./renewPassword">パスワード編集</a></td>
-<td><a href = "./require">本のリクエスト</a></td><td><a href = "./logout">ログアウト</a></td></c:if>
-			</tr></table>
+			<tr>
+				<td><a href = "./search">検索</a></td>
+				<td><a href = "./ranking">ランキング</a></td>
+				<c:if test="${loginUser.id ==null}">
+
+				</c:if>
+				<c:if test="${loginUser.id !=null}">
+					<td><a href = "./user">マイページ</a></td>
+					<td><a href ="./favorite">お気に入り</a></td>
+					<td><a href="./renewPassword">パスワード編集</a></td>
+					<td><a href = "./require">本のリクエスト</a></td>
+					<td><a href = "./logout">ログアウト</a></td>
+				</c:if>
+			</tr>
+		</table>
 
 		ログインするといろいろな機能がつかえます
 
 		(*^◯^*)
 
 		<br>
-		<a href = "./admin/manage">管理画面</a>
+		<c:if test="${loginUser.id == 0}">
+			<a href = "./admin/manage">管理画面</a>
+		</c:if>
+
 
 	<h5>お知らせ</h5>
 		<c:forEach items="${informations}" var="information">
