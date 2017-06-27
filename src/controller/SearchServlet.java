@@ -206,14 +206,14 @@ public class SearchServlet extends HttpServlet{
 					}
 				}
 				if(favoriteFlag == true) isFavorite.add(-10);
-				else isFavorite.add(cnt++);
+				else isFavorite.add(cnt);
 				cnt++;
 			}
 			return isFavorite;
 		}else{
 			int cnt = 0;
 			for(Book book : books){
-				isFavorite.add(cnt++);
+				isFavorite.add(cnt);
 				cnt++;
 			}
 		}
@@ -233,14 +233,14 @@ public class SearchServlet extends HttpServlet{
 					}
 				}
 				if(reservationFlag == true) isReserving.add(-10);
-				else isReserving.add(cnt++);
+				else isReserving.add(cnt);
 				cnt++;
 			}
 			return isReserving;
 		}else{
 			int cnt = 0;
 			for(Book book : books){
-				isReserving.add(cnt++);
+				isReserving.add(cnt);
 				cnt++;
 			}
 		}
