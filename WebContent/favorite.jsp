@@ -48,7 +48,6 @@
 							 favorite.reserving != 1 && favorite.disposing != 1}">棚なう</c:if>
 							<c:if test = "${favorite.keeping == 1}">保管中</c:if>
 							<c:if test = "${favorite.lending == 1}">貸出中</c:if>
-							<c:if test = "${favorite.reserving == 1}">予約中</c:if>
 							<c:if test = "${favorite.disposing == 1}">整理中</c:if>
 						</td>
 						<td>
