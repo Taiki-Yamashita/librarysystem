@@ -224,7 +224,7 @@ public class ReservationDao {
 
 		PreparedStatement ps = null;
 		try {
-			String sql = "SELECT * FROM reservations where book_id = ? and canceling=0";
+			String sql = "SELECT * FROM reservations where book_id = ? and delivering =0 and canceling=0";
 			ps = connection.prepareStatement(sql);
 			ps.setInt(1, bookId);
 

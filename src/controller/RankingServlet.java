@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -35,6 +36,8 @@ public class RankingServlet extends HttpServlet {
 		List<Ranking> reservations = new RankingService().reservationAll();
 		List<Book> books = new BookService().selectAll();
 		List<Library> libraries = new LibraryService().selectAll();
+		List<Integer> reservationCounts = getReservationCount(reservations);
+		List<Integer> circulationCounts = getCirculationCount(circulations);
 
 		List<Reservation> isReservations = new ReservationService().selectAll();
 		List<Favorite> favorites = new FavoriteService().selectAll();
@@ -44,12 +47,28 @@ public class RankingServlet extends HttpServlet {
 		request.setAttribute("books", books);
 		request.setAttribute("libraries", libraries);
 		request.setAttribute("loginUser", loginUser);
+		request.setAttribute("reservationCounts", reservationCounts);
+		request.setAttribute("circulationCounts", circulationCounts);
+
 		request.setAttribute("isReservations", isReservations);
 		request.setAttribute("isFavorites", favorites);
 
 		request.getRequestDispatcher("/ranking.jsp").forward(request, response);
+	}
 
+	public List<Integer> getReservationCount(List<Ranking> reservations){
 
+		List<Integer> reservationCounts = new ArrayList<>();
+		for(Ranking reservation : reservations){
+			reservationCounts.add(Integer.parseInt(reservation.getCount()));
+		}return reservationCounts;
+	}
 
+	public List<Integer> getCirculationCount(List<Ranking> circulations){
+
+		List<Integer> circulationCounts = new ArrayList<>();
+		for(Ranking circulation : circulations){
+			circulationCounts.add(Integer.parseInt(circulation.getCount()));
+		}return circulationCounts;
 	}
 }
