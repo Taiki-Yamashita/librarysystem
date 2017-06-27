@@ -34,15 +34,6 @@ public class ReceiveServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request,HttpServletResponse response)
 		throws ServletException,IOException {
-		if(request.getParameter("freeWord") != null) {
-			String freeWord = request.getParameter("freeWord");
-			List<Require> selectedBooks = new RecieveService().getSelectedBooks(freeWord);
-
-			request.setAttribute("freeWord", freeWord);
-			request.setAttribute("books", selectedBooks);
-			request.getRequestDispatcher("./receive.jsp").forward(request, response);
-			return;
-		}
 
 		//未読既読送信
 		if(request.getParameter("flag") != null &&
@@ -64,6 +55,38 @@ public class ReceiveServlet extends HttpServlet {
 		if(!StringUtils.isEmpty(request.getParameter("deleteId"))) {
 			new RequireService().delete(request.getParameter("deleteId"));
 			response.sendRedirect("./receive");
+			return;
+		}
+		//フリーワードかつ既読絞込み
+		if(request.getParameter("freeWord") != null) {
+			String freeWord = request.getParameter("freeWord");
+			List<Require> selectedBooks = new RecieveService().getSelectedBooks(freeWord);
+
+			request.setAttribute("freeWord", freeWord);
+			request.setAttribute("books", selectedBooks);
+			request.getRequestDispatcher("./receive.jsp").forward(request, response);
+			return;
+		}
+
+		//フリーワードかつ未読絞込み
+		if(request.getParameter("freeWord") != null) {
+			String freeWord = request.getParameter("freeWord");
+			List<Require> selectedBooks = new RecieveService().getSelectedBooks(freeWord);
+
+			request.setAttribute("freeWord", freeWord);
+			request.setAttribute("books", selectedBooks);
+			request.getRequestDispatcher("./receive.jsp").forward(request, response);
+			return;
+		}
+
+		//フリーワード絞込み
+		if(request.getParameter("freeWord") != null) {
+			String freeWord = request.getParameter("freeWord");
+			List<Require> selectedBooks = new RecieveService().getSelectedBooks(freeWord);
+
+			request.setAttribute("freeWord", freeWord);
+			request.setAttribute("books", selectedBooks);
+			request.getRequestDispatcher("./receive.jsp").forward(request, response);
 			return;
 		}
 
