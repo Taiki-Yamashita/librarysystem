@@ -12,6 +12,7 @@ import beans.Circulation;
 import beans.User;
 import service.BookService;
 import service.CirculationService;
+import service.ReservationService;
 import service.UserService;
 
 
@@ -47,6 +48,7 @@ public class LendingBookServlet extends HttpServlet {
 			new CirculationService().lending(circulation);
 			new CirculationService().lendingFlag(bookId);
 			new BookService().lendingBook(bookId);
+			new ReservationService().delete(circulation);
 
 		} else {
 			circulation.setUserId(request.getParameter("userId"));
