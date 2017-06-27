@@ -34,7 +34,6 @@ public class ReceiveServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request,HttpServletResponse response)
 		throws ServletException,IOException {
-
 		//未読既読送信
 		if(request.getParameter("flag") != null &&
 				(request.getParameter("receiveId") != null)) {
@@ -51,63 +50,27 @@ public class ReceiveServlet extends HttpServlet {
 				new RecieveService().update(0, Integer.parseInt(id2));
 			}
 		}
+
 		//問い合わせ削除
 		if(!StringUtils.isEmpty(request.getParameter("deleteId"))) {
 			new RequireService().delete(request.getParameter("deleteId"));
 			response.sendRedirect("./receive");
 			return;
 		}
-		//フリーワードかつ既読絞込み
-		if(request.getParameter("freeWord") != null) {
-			String freeWord = request.getParameter("freeWord");
-			List<Require> selectedBooks = new RecieveService().getSelectedBooks(freeWord);
 
+		//フリーワードかつ既読or未読絞込み
+		if(request.getParameter("num") != null) {
+
+			String freeWord = request.getParameter("freeWord");
+			String num = request.getParameter("num");
+
+			List<Require> selectedBooks = new RecieveService().getSelectedBooks(freeWord, num);
+
+			request.setAttribute("num", num);
 			request.setAttribute("freeWord", freeWord);
 			request.setAttribute("books", selectedBooks);
+			//response.sendRedirect("./receive");
 			request.getRequestDispatcher("./receive.jsp").forward(request, response);
-			return;
-		}
-
-		//フリーワードかつ未読絞込み
-		if(request.getParameter("freeWord") != null) {
-			String freeWord = request.getParameter("freeWord");
-			List<Require> selectedBooks = new RecieveService().getSelectedBooks(freeWord);
-
-			request.setAttribute("freeWord", freeWord);
-			request.setAttribute("books", selectedBooks);
-			request.getRequestDispatcher("./receive.jsp").forward(request, response);
-			return;
-		}
-
-		//フリーワード絞込み
-		if(request.getParameter("freeWord") != null) {
-			String freeWord = request.getParameter("freeWord");
-			List<Require> selectedBooks = new RecieveService().getSelectedBooks(freeWord);
-
-			request.setAttribute("freeWord", freeWord);
-			request.setAttribute("books", selectedBooks);
-			request.getRequestDispatcher("./receive.jsp").forward(request, response);
-			return;
-		}
-
-		//既読or未読表示
-		if (request.getParameter("num") == null) {
-			response.sendRedirect("./receive");
-			return;
-		}
-		else if(request.getParameter("num").matches("0") || request.getParameter("num").matches("1")) {
-			List<Require> receives = new RecieveService().select(Integer.parseInt(request.getParameter("num")));
-			request.setAttribute("receives", receives);
-			request.setAttribute("num", request.getParameter("num"));
-			request.getRequestDispatcher("./receive.jsp").forward(request, response);
-		}
-		else if(request.getParameter("num").matches("2")) {
-			List<Require> receives = new RecieveService().select();
-			request.setAttribute("receives", receives);
-			request.getRequestDispatcher("./receive.jsp").forward(request, response);
-		}
-		else {
-			response.sendRedirect("./receive");
 			return;
 		}
 

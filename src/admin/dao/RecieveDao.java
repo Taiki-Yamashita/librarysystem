@@ -114,16 +114,24 @@ public class RecieveDao {
 		}
 	}
 
-	public List<Require> getSelectedBooks(Connection connection, String freeWord) {
+	public List<Require> getSelectedBooks(Connection connection, String freeWord, String num) {
 		PreparedStatement ps = null;
 		try {
 			StringBuilder sql = new StringBuilder();
-			sql.append("SELECT * FROM requires where");
-			sql.append(" CONCAT(user_name, book_name, publisher, publisher, required_date) LIKE ? ORDER BY required_date ASC");
+			sql.append("SELECT * FROM requires");
+				sql.append(" where CONCAT(user_name, book_name, publisher, publisher, required_date) LIKE ? ");
+			if(!num.matches("2")) {
+				sql.append(" and showing = ?");
+				sql.append(" ORDER BY required_date ASC");
+			}
 
 			ps = connection.prepareStatement(sql.toString());
 
-			ps.setString(1, "%" + freeWord + "%");
+				ps.setString(1, "%" + freeWord + "%");
+			if(!num.matches("2")) {
+				ps.setString(2, num);
+			}
+
 			ResultSet rs = ps.executeQuery();
 			List<Require> ret = toRecieveList(rs);
 			return ret;

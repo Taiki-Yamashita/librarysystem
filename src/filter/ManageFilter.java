@@ -16,29 +16,32 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import beans.User;
-@WebFilter(urlPatterns = {"/admin"})
+
+@WebFilter("/admin/manage")
 public class ManageFilter implements Filter {
 
 		public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 				throws IOException, ServletException{
 
 
+
 			String target = String.valueOf(((HttpServletRequest)request).getRequestURI());
 			HttpSession session =((HttpServletRequest)request).getSession();
-
-			User user = (User)session.getAttribute("loginUser");
-			if (user.getId() != 1){
+			List<String> messages = new ArrayList<String>();
+			User loginUser = (User)session.getAttribute("loginUser");
+			if(loginUser == null) {
+				messages.add("指定されたURLは存在しません");
+				session.setAttribute("errorMessages", messages);
+				((HttpServletResponse)response).sendRedirect("../");
+				return;
+			}
+			if (loginUser.getId() != 0 ){
 				/* まだ認証されていない */
-
-					List<String> messages = new ArrayList<String>();
 					messages.add("指定されたURLは存在しません");
-
 					session.setAttribute("errorMessages", messages);
 					session.setAttribute("target", target);
 
-					((HttpServletResponse)response).sendRedirect("./home");
-
-
+					((HttpServletResponse)response).sendRedirect("./top");
 					return;
 				//}
 			}

@@ -75,13 +75,13 @@ public class RecieveService {
 		}
 	}
 
-	public List<Require> getSelectedBooks(String freeWord) {
+	public List<Require> getSelectedBooks(String freeWord, String num) {
 		Connection connection = null;
 		try {
 			connection = getConnection();
 
 			RecieveDao receivedao = new RecieveDao();
-			List<Require> ret = receivedao.getSelectedBooks(connection, freeWord);
+			List<Require> ret = receivedao.getSelectedBooks(connection, freeWord, num);
 
 			commit(connection);
 			return ret;
