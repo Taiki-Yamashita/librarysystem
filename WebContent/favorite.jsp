@@ -79,7 +79,7 @@
 			</c:forEach>
 		</table>
 	</c:if>
-	<c:if test="${empty favorites  && empty flag}">
+	<c:if test="${empty flag}">
 	 	<h1>お気に入り未登録です</h1>
 	</c:if>
 	<c:remove var="flag"/>
