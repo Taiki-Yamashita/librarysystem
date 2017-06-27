@@ -1,13 +1,14 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import beans.User;
 import service.UserService;
@@ -27,17 +28,29 @@ public class LoginServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException{
 
+		if(isValid(request)){
+			response.sendRedirect("./");
+			return;
+		}
+		response.sendRedirect("./login");
+	}
+
+	public boolean isValid(HttpServletRequest request){
+
+		List<String> messages = new ArrayList<>();
+
 		String loginId = request.getParameter("loginId");
 		String password = request.getParameter("password");
 
 		User user = new UserService().getLoginUser(loginId, password);
 
-		if(user != null){
-			HttpSession session = request.getSession();
-			session.setAttribute("loginUser", user);
-			request.getSession().setAttribute("loginUser", user);
-			response.sendRedirect("./");
-		} else response.sendRedirect("./login");
+		if(user == null){
+			messages.add("ログインに失敗しました");
+			request.getSession().setAttribute("errorMessages", messages);
+			return false;
+		}
 
+		request.getSession().setAttribute("loginUser", user);
+		return true;
 	}
 }

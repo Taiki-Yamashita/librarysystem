@@ -11,15 +11,14 @@
 <body>
 	<a href = "./">トップ</a>
 	<h1>パスワード変更画面</h1>
-	<h2>パスワードが未入力の場合、現在のパスワードで更新されます</h2>
 	<a href = "./">トップ</a>
 	<c:if test="${ not empty errorMessages }">
 		<div class="errorMessages">
 			<ul>
 				<c:forEach items="${errorMessages}" var="message">
 					<li><c:out value="${message}" />
-					</c:forEach>
-					</ul>
+				</c:forEach>
+			</ul>
 		</div>
 		<c:remove var="errorMessages" scope="session"/>
 	</c:if>
@@ -28,10 +27,10 @@
 		<input type="hidden" value="${loginUser.id}" id="id" name="id"/>
 
 		<label for="loginId">ログインID</label><br>
-		<input name="loginId"  value="${editUser.loginId}" id="loginId"/><br/>
+		<input name="loginId"  value="${editUser.loginId}" id="loginId" /><br/>
 
 		<label for="password">パスワード</label><br>
-		<input name="password" type="password" value="${editUser.password}" id="password"/><br/>
+		<input name="password" type="password" value="${editUser.password}" id="password" /><br/>
 
 		<label for="confirmedPassword">パスワード（確認用）</label><br>
 		<input name="confirmedPassword" type="password" value="${editUser.password}" id="confirmedPassword"/><br/>

@@ -23,18 +23,6 @@ public class RenewPasswordServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		User loginUser = (User) request.getSession().getAttribute("loginUser");
-		HttpSession session = request.getSession();
-		if(loginUser == null) {
-			List<String> messages = new ArrayList<String>();
-			messages.add("ログインしてください");
-			session.setAttribute("errorMessages", messages);
-			response.sendRedirect("./");
-			return;
-		}
-		//String loginId = loginUser.getLoginId();
-		User editUser = new UserService().selectUser(String.valueOf(loginUser.getId()));
-
-		request.setAttribute("editUser", editUser);
 		request.setAttribute("loginUser", loginUser);
 
 		request.getRequestDispatcher("renewPassword.jsp").forward(request, response);

@@ -13,6 +13,12 @@
 	<body>
 		<h1>図書システム借りたいナ☆</h1>
 
+		<c:if test="${ not empty errorMessages }">
+			<c:forEach items="${errorMessages}" var="message">
+				<font color="#ff0000"><c:out value="${message}" /></font><br>
+			</c:forEach>
+		</c:if>
+
 		<form action="./login" method="POST">
 			<table border="1">
 				<tr><td>ログインID:<input name="loginId" type="text"/></td></tr>
@@ -21,6 +27,7 @@
 			<input type="submit"  value="ログイン" />
 		</form>
 
-
+		<!-- エラーメッセージ -->
+		<c:remove var="errorMessages" scope="session"/>
 	</body>
 </html>
