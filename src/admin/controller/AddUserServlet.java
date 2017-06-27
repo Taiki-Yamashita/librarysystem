@@ -89,7 +89,7 @@ public class AddUserServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		String address = request.getParameter("address");
 		String tel = request.getParameter("tel");
-		String mail = request.getParameter("mail");
+		//String mail = request.getParameter("mail");
 		String libraryId = request.getParameter("libraryId");
 
 

@@ -19,10 +19,10 @@
 
 	<input name="id" type="hidden" value="${editUser.id}"/>
 
-	<label for="loginId">ログインID</label><br>
+	<label for="loginId">ログインID(半角英数字6～20文字)</label><br>
 	<input name="loginId" id="loginId" value="${editUser.loginId }"/><br />
 
-	<label for="password">パスワード</label><br>
+	<label for="password">パスワード()</label><br>
 	<input name="password" id="password" /><br />
 
 	<label for="name">名前</label><br>
@@ -55,8 +55,16 @@
 
 		<br>
 
-		<label for="registerDate">登録日</label><br>
+		<label for="registerDate">登録日（更新日）</label><br>
 	<input name="registerDate" id="registerDate" value="${editUser.registerDate }"/><br />
 
-	<br><input type="submit" value="投稿">
+	<br><button type="submit" name="post2" >編集</button>
 </form>
+<form action="renewUser" method="post">
+	<input type="hidden" name=renewDate >
+	<input type="hidden" name=renewUserId value="${editUser.id}">
+	<input type="hidden" name=renewUserLoginId value="${editUser.loginId}">
+	<button type="submit" name="renew" >期限更新</button>
+</form>
+</body>
+</html>

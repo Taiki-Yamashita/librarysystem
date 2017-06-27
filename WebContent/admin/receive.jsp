@@ -70,6 +70,51 @@ function check(){
 				<th>削除</th>
 			</tr>
 
+			<c:if test="${not empty receives}">
+				<c:forEach items="${receives}" var="receive">
+					<tr>
+						<td><c:out value="${receive.userName}" /></td>
+						<td>
+							<c:if test="${receive.comment == '特になし' || empty receive.comment}">
+								<c:out value="${receive.bookName}" />
+							</c:if>
+							<c:if test="${receive.comment != '特になし' && not empty receive.comment}">
+								<a href="remark?id=${receive.id}"><c:out value="${receive.bookName}" /></a>
+							</c:if>
+						</td>
+						<td><c:out value="${receive.author}" /></td>
+						<td><c:out value="${receive.publisher}" /></td>
+						<td>
+							<fmt:parseDate var="date" value="${receive.requiredDate}" pattern="yyyy-MM-dd HH:mm:ss" />
+							<fmt:formatDate pattern = "yyyy年MM月dd日" value = "${date}" />
+						</td>
+						<td>
+							<c:if test="${receive.showing == 0 }">
+								<input type="hidden" name="flag" id="flag" value="1">
+								<input type="checkbox" name="receiveId" id="receiveId" value="${receive.id}">
+							</c:if>
+							<c:if test="${receive.showing != 0 }">
+								<c:out value="既読"></c:out>
+							</c:if>
+						</td>
+						<td>
+							<c:if test="${receive.showing == 1 }">
+								<input type="hidden" name="flag" id="flag" value="0">
+								<input type="checkbox" name="receiveId2" id="receiveId2" value="${receive.id}">
+							</c:if>
+							<c:if test="${receive.showing != 1 }">
+								<c:out value="未読なう"></c:out>
+							</c:if>
+						</td>
+						<td>
+							<c:if test="${receive.showing == 1 }">
+								<input type="checkbox" name="deleteId" value="${receive.id}">
+							</c:if>
+						</td>
+					</tr>
+				</c:forEach>
+			</c:if>
+
 			<c:if test="${not empty books}">
 				<c:forEach items="${books}" var="ReaquiredBook">
 					<tr>
