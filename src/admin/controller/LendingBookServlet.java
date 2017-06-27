@@ -1,6 +1,7 @@
 package admin.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -58,10 +59,8 @@ public class LendingBookServlet extends HttpServlet {
 				new ReservationService().updateDeliveringStatus(userReserving.getId());
 
 				/*予約解除で予約が0になったらbooksのreservingを0に*/
-				//Reservation reserving = new Reservation
-				if(reserving == null){
-					new BookService().updateReserving(circulation.getBookId());
-				}
+				List<Reservation> reserving = new ReservationService().selectReservingBook(circulation.getBookId());
+				if(reserving == null) new BookService().updateReserving(circulation.getBookId());
 			}
 
 		} else {
