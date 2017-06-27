@@ -353,7 +353,7 @@
 								<td>
 									<c:forEach items="${isReserving}" var="reserve">
 										<c:if test="${reserve == count.index}">
-											<c:set var="flag" value="1"/>
+											<c:set var="reservationFlag" value="1"/>
 											<form action="./reservingBook" method="POST">
 												<!-- freeWord -->
 												<input type="hidden" name="selectBox" value="${selectBoxId}">
@@ -403,13 +403,13 @@
 											</form>
 										</c:if>
 									</c:forEach>
-									<c:if test="${flag != 1}">予約済</c:if>
-									<c:remove var="flag"/>
+									<c:if test="${reservationFlag != 1}">予約済</c:if>
+									<c:remove var="reservationFlag"/>
 								</td>
 								<td>
 									<c:forEach items="${isFavorites}" var="favorite">
 										<c:if test="${favorite == count.index}">
-											<c:set var="flag" value="1"/>
+											<c:set var="favoriteFlag" value="1"/>
 											<form action="./favorite" method="POST">
 												<!-- freeWord -->
 												<input type="hidden" name="selectBox" value="${selectBoxId}">
@@ -454,8 +454,8 @@
 											</form>
 										</c:if>
 									</c:forEach>
-									<c:if test="${flag != 1}">お気に入り済</c:if>
-									<c:remove var="flag"/>
+									<c:if test="${favoriteFlag != 1}">お気に入り済</c:if>
+									<c:remove var="favoriteFlag"/>
 								</td>
 							</tr>
 						</c:if>
