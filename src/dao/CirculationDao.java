@@ -490,4 +490,49 @@ public class CirculationDao {
 		}
 
 	}
+	public List<Circulation> select(Connection connection, int bookId){
+
+		PreparedStatement ps = null;
+		try {
+			String sql = "SELECT *, COUNT(*) as count FROM library_system.circulations where book_id =? and lending = 1 GROUP BY book_id ORDER BY count(*) DESC,book_id";
+			ps = connection.prepareStatement(sql);
+			ps.setInt(1, bookId);
+
+			ResultSet rs = ps.executeQuery();
+			List<Circulation> circulationList = toSelectList(rs);
+			if (circulationList.isEmpty()) {
+				return null;
+			}
+				return circulationList;
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
+	private List<Circulation> toSelectList(ResultSet rs) throws SQLException {
+
+		List<Circulation> ret = new ArrayList<Circulation>();
+		try {
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String userId = rs.getString("user_id");
+				String bookId = rs.getString("book_id");
+				String libraryId = rs.getString("library_id");
+				String lending = rs.getString("lending");
+
+				Circulation circulation = new Circulation();
+				circulation.setId(id);
+				circulation.setUserId(userId);
+				circulation.setBookId(bookId);
+				circulation.setLibraryId(libraryId);
+				circulation.setLending(lending);
+
+				ret.add(circulation);
+			}
+			return ret;
+		} finally {
+			close(rs);
+		}
+	}
 }

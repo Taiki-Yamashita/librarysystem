@@ -61,7 +61,7 @@ public class RankingDao {
 
 		PreparedStatement ps = null;
 		try {
-			String sql = "SELECT *, COUNT(*) as count FROM library_system.book_rankings GROUP BY book_id ORDER BY count(*) DESC,book_id ; ";
+			String sql = "SELECT *, COUNT(*) as count FROM library_system.circulations where lending = 1 GROUP BY book_id ORDER BY count(*) DESC,book_id ";
 			ps = connection.prepareStatement(sql);
 
 
@@ -83,13 +83,10 @@ public class RankingDao {
 		List<Ranking> ret = new ArrayList<Ranking>();
 		try {
 			while (rs.next()) {
-
-				String bookName = rs.getString("book_name");
 				String bookId = rs.getString("book_id");
 				String count = rs.getString("count");
 
 				Ranking circulations = new Ranking();
-				circulations.setBookName(bookName);
 				circulations.setBookId(bookId);
 				circulations.setCount(count);
 
@@ -106,7 +103,7 @@ public class RankingDao {
 
 		PreparedStatement ps = null;
 		try {
-			String sql = "SELECT *, COUNT(*) as count FROM library_system.book_reservations GROUP BY book_id ORDER BY count(*) DESC,book_id; ";
+			String sql = "SELECT *, COUNT(*) as count FROM library_system.book_reservations where canceling=0  GROUP BY book_id ORDER BY count(*) DESC,book_id; ";
 			ps = connection.prepareStatement(sql);
 
 

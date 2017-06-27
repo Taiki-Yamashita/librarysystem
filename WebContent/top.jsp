@@ -47,7 +47,7 @@
 				<td><a href = "./search">検索</a></td>
 				<td><a href = "./ranking">ランキング</a></td>
 				<c:if test="${loginUser.id ==null}">
-
+					<td><a href = "./login">ログイン</a></td>
 				</c:if>
 				<c:if test="${loginUser.id !=null}">
 					<td><a href = "./user">マイページ</a></td>

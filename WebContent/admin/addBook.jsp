@@ -214,8 +214,10 @@
 	<input name = "isbnId" id = "isbnId" value = "${newBook.isbnId }"/><br />
 
 	<label for = "publishedDate">出版日</label><br>
-	<input name = "publishedDate" id = "publishedDate" value ="${newBook.publishedDate }"/><br />
-
+	<input name = "publishedDate" id = "publishedDate" value ="${publishedDate }"/>年
+	<input name = "publishedDate2" id = "publishedDate2" value ="${publishedDate2 }"/>月
+	<input name = "publishedDate3" id = "publishedDate3" value ="${publishedDate3 }"/>日
+	<br>
 
 
 	<input type="submit" value="登録" />
