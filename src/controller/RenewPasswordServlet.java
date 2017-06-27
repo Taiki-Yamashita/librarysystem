@@ -22,9 +22,6 @@ public class RenewPasswordServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		User loginUser = (User) request.getSession().getAttribute("loginUser");
-		request.setAttribute("loginUser", loginUser);
-
 		request.getRequestDispatcher("renewPassword.jsp").forward(request, response);
 
 	}
@@ -33,15 +30,14 @@ public class RenewPasswordServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
-		List<String> messages = new ArrayList<String>();
 		HttpSession session = request.getSession();
 		User editUser = getEditUser(request);
-		if (isValid(request, messages)) {
+		if (isValid(request)) {
 			new UserService().update(editUser);
+			session.setAttribute("doneMessages", "ユーザー情報を更新しました");
 			response.sendRedirect("./");
 			return;
 		}
-		session.setAttribute("errorMessages", messages);
 
 		response.sendRedirect("./renewPassword");
 	}
@@ -51,27 +47,33 @@ public class RenewPasswordServlet extends HttpServlet {
 		User editUser = new User();
 		editUser.setId(Integer.parseInt(request.getParameter("id")));
 		editUser.setLoginId(request.getParameter("loginId"));
-		editUser.setPassword(request.getParameter("password"));
+		editUser.setPassword(request.getParameter("newPassword"));
 		return editUser;
 	}
 
-	private boolean isValid(HttpServletRequest request, List<String> messages) {
-		if(!StringUtils.isBlank(request.getParameter("password"))) {
-			String password = request.getParameter("password");
-			String confirmedpassword = request.getParameter("confirmedPassword");
-			if (StringUtils.isBlank(password) == true) {
-				messages.add("パスワードを入力してください");
-//			} else if ( !password.matches("\\w{6,255}$") ) {
-//				messages.add("パスワードは半角数字6文字以上255文字以下で入力してください");
-			}
-			if (!password.matches(confirmedpassword)) {
-				messages.add("パスワードとパスワード確認が不一致です");
-			}
+	private boolean isValid(HttpServletRequest request) {
+
+		User loginUser = (User)request.getSession().getAttribute("loginUser");
+		List<String> messages = new ArrayList<String>();
+		String loginId = request.getParameter("loginId");
+		String newPassword = request.getParameter("newPassword");
+		String confirmedPassword = request.getParameter("confirmedPassword");
+
+		if(StringUtils.isBlank(loginId)) messages.add("ログインIDを入力してください");
+		else if(loginId.length() < 6) messages.add("ログインIDは6文字以上で登録してください");
+
+		if(StringUtils.isBlank(newPassword) && StringUtils.isBlank(confirmedPassword));
+		else if(StringUtils.isBlank(newPassword) || StringUtils.isBlank(confirmedPassword)){
+			messages.add("新しいパスワードと確認用パスワードは一致させてください");
 		}
-		if (messages.size() == 0) {
-			return true;
-		} else {
-			return false;
+		else{
+			if(!newPassword.equals(confirmedPassword)) messages.add("新しいパスワードと確認用パスワードは一致させてください");
+			if(newPassword.length() < 6 || confirmedPassword.length() < 6) messages.add("パスワードは6文字以上で登録してください");
 		}
+
+		if (messages.size() == 0) return true;
+
+		request.getSession().setAttribute("errorMessages", messages);
+		return false;
 	}
 }

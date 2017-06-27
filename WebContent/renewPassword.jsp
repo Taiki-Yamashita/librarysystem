@@ -27,13 +27,13 @@
 		<input type="hidden" value="${loginUser.id}" id="id" name="id"/>
 
 		<label for="loginId">ログインID</label><br>
-		<input name="loginId"  value="${editUser.loginId}" id="loginId" /><br/>
+		<input name="loginId"  value="${loginUser.loginId}" id="loginId" /><br/>
 
-		<label for="password">パスワード</label><br>
-		<input name="password" type="password" value="${editUser.password}" id="password" /><br/>
+		<label for="newPassword">新しいパスワード</label><br>
+		<input name="newPassword" type="password" value="" id="newPassword" placeholder="未記入は変更なし"/><br/>
 
-		<label for="confirmedPassword">パスワード（確認用）</label><br>
-		<input name="confirmedPassword" type="password" value="${editUser.password}" id="confirmedPassword"/><br/>
+		<label for="confirmedPassword">確認用</label><br>
+		<input name="confirmedPassword" type="password" value="" id="confirmedPassword" placeholder="未記入は変更なし"/><br/>
 
 		<input type="submit" value="更新" />
 	</form>
