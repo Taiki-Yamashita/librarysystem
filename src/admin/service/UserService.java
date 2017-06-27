@@ -101,4 +101,23 @@ public class UserService {
 			close(connection);
 		}
 	}
+
+	public void update(int renewUserId, String renewUserLoginId) {
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			new UserDao().update(connection, renewUserId, renewUserLoginId);
+
+			commit(connection);
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
 }

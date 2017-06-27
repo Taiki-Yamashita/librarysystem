@@ -17,14 +17,11 @@ import javax.servlet.http.HttpSession;
 
 import beans.User;
 
-@WebFilter("/admin/manage")
+@WebFilter("/admin/*")
 public class ManageFilter implements Filter {
 
 		public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 				throws IOException, ServletException{
-
-
-
 			String target = String.valueOf(((HttpServletRequest)request).getRequestURI());
 			HttpSession session =((HttpServletRequest)request).getSession();
 			List<String> messages = new ArrayList<String>();

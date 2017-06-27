@@ -37,6 +37,58 @@ public class ReservationDao {
 		}
 	}
 
+
+	public List<Reservation> selectReservingBook(Connection connection, String bookId){
+
+		PreparedStatement ps = null;
+		try {
+			String sql = "SELECT * FROM reservations WHERE book_id = ? AND delivering = ? AND canceling = ?";
+			ps = connection.prepareStatement(sql);
+
+			ps.setString(1, bookId);
+			ps.setString(2, "0");
+			ps.setString(3, "0");
+
+			ResultSet rs = ps.executeQuery();
+			List<Reservation> reservationList = toReservationList(rs);
+			if (reservationList.isEmpty()) {
+				return null;
+			}else {
+				return reservationList;
+			}
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
+
+	public Reservation selectUserReserving(Connection connection, String userId){
+
+		PreparedStatement ps = null;
+		try {
+			String sql = "SELECT * FROM reservations WHERE user_id = ? AND delivering = ? AND canceling = ?";
+			ps = connection.prepareStatement(sql);
+			ps.setString(1, userId);
+			ps.setString(2, "0");
+			ps.setString(3, "0");
+
+			ResultSet rs = ps.executeQuery();
+
+
+			Reservation reservation = toReservation(rs);
+			if (reservation == null) {
+				return null;
+			}else {
+				return reservation;
+			}
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
+
 	public List<Reservation> selectAllView(Connection connection){
 
 		PreparedStatement ps = null;
@@ -134,6 +186,32 @@ public class ReservationDao {
 
 	}
 
+	public void updateDeliveringStatus(Connection connection, int id){
+
+		PreparedStatement ps = null;
+		try {
+			StringBuilder sql = new StringBuilder();
+			sql.append("UPDATE reservations SET");
+			sql.append(" delivering = ?");
+			sql.append(" WHERE");
+			sql.append(" id = ?");
+
+			ps = connection.prepareStatement(sql.toString());
+
+			ps.setString(1, "1");
+			ps.setString(2, String.valueOf(id));
+
+			int count = ps.executeUpdate();
+			if (count == 0) {
+				throw new NoRowsUpdatedRuntimeException();
+			}
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
+
 	private List<Reservation> toReservationList(ResultSet rs) throws SQLException {
 
 		List<Reservation> ret = new ArrayList<Reservation>();
@@ -155,6 +233,36 @@ public class ReservationDao {
 				reservation.setCanceling(canceling);
 
 				ret.add(reservation);
+			}
+			return ret;
+		} finally {
+			close(rs);
+		}
+	}
+
+	private Reservation toReservation(ResultSet rs) throws SQLException {
+
+		Reservation ret = new Reservation();
+		try {
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String userId = rs.getString("user_id");
+				String bookId = rs.getString("book_id");
+				String bookName = rs.getString("book_name");
+				String libraryId = rs.getString("library_id");
+				String reservedDate = rs.getString("reserved_date");
+				String delivering = rs.getString("delivering");
+				String canceling = rs.getString("canceling");
+
+				ret.setId(id);
+				ret.setUserId(userId);
+				ret.setBookId(bookId);
+				ret.setBookName(bookName);
+				ret.setLibraryId(libraryId);
+				ret.setReservedDate(reservedDate);
+				ret.setDelivering(delivering);
+				ret.setCanceling(canceling);
+
 			}
 			return ret;
 		} finally {

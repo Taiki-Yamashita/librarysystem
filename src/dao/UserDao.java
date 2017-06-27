@@ -196,9 +196,6 @@ public class UserDao {
 				ps.setInt(11, user.getId());
 			}
 
-
-
-
 			int count = ps.executeUpdate();
 			if (count == 0) {
 				throw new NoRowsUpdatedRuntimeException();
@@ -377,6 +374,30 @@ public class UserDao {
 			close(ps);
 		}
 	}
+
+	public void update(Connection connection, int renewUserId, String renewUserLoginId) {
+		PreparedStatement ps = null;
+		try {
+			StringBuilder sql = new StringBuilder();
+			sql.append("UPDATE users SET");
+			sql.append(" login_id = ?");
+			sql.append(", register_date = CURRENT_TIMESTAMP");
+
+			sql.append(" WHERE id= ? ");
+
+			ps = connection.prepareStatement(sql.toString());
+
+			ps.setString(1, renewUserLoginId);
+			ps.setInt(2, renewUserId);
+
+			ps.executeUpdate();
+		}catch(SQLException e){
+			throw new SQLRuntimeException(e);
+		}finally{
+			close(ps);
+		}
+	}
+
 }
 
 
