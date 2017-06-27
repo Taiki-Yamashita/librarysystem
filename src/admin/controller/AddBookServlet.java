@@ -55,6 +55,9 @@ public class AddBookServlet extends HttpServlet {
 
 			Book newBook = getNewBook(request);
 			request.setAttribute("newBook", newBook);
+			request.setAttribute("publishedDate", request.getParameter("publishedDate"));
+			request.setAttribute("publishedDate2", request.getParameter("publishedDate2"));
+			request.setAttribute("publishedDate3", request.getParameter("publishedDate3"));
 
 			session.setAttribute("errorMessages", messages);
 			request.getRequestDispatcher("/admin/addBook.jsp").forward(request, response);
@@ -67,7 +70,7 @@ public class AddBookServlet extends HttpServlet {
 		String year = request.getParameter("publishedDate");
 		String month = request.getParameter("publishedDate2");
 		String day = request.getParameter("publishedDate3");
-		String publishedDate = new String(year + "-" + month + "-"+ day + "00:00:00");
+		String publishedDate = new String(year + "-" + month + "-"+ day + " 00:00:00");
 
 		newBook.setName(request.getParameter("name"));
 		newBook.setAuthor(request.getParameter("author"));
