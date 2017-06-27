@@ -27,38 +27,35 @@
 <c:forEach items="${books}" var="book">
 
 			<tr>
-			<td>${book.name}</td>
-			<c:if test="${book.lending == 1 }">
-			<td>貸出中</td>
-			</c:if>
-			<c:if test="${book.lending != 1 }">
-			<td>貸出可</td>
-			</c:if>
-
-   	 		<td>
-   	 			<c:if test="${book.lending == 1 }">
-   	 			<form action="admin/lendingBook" method = "post">
-   	 				<input type = "hidden" id = "bookId" name = "bookId" value = "${book.id}" >
-   	 				<input type = "hidden" id = "libraryId" name = "libraryId" value = "${book.libraryId}" >
-						<input type ="hidden" name = "userId" value = "${loginUser.id }" >
-						<input type = "hidden" name = "num" value = 0 >
-						<input type = "hidden" name = "resetNum" value=1>
-						<input type = "submit" value = "返却" />
-   	 			</form>
-   	 			</c:if>
+				<td>${book.name}</td>
+				<c:if test="${book.lending == 1 }">
+				<td>貸出中</td>
+				</c:if>
 				<c:if test="${book.lending != 1 }">
-   	 			<form action = "admin/lendingBook" method = "post">
-   	 				<input type = "hidden" id = "bookId" name = "bookId" value = "${book.id}" >
-   	 				<input type = "hidden" id = "libraryId" name = "libraryId" value = "${book.libraryId}" >
-						<input type ="hidden" name = "userId" value = "${loginUser.id }" >
-						<input type = "hidden" name = "num" value = 1 >
-						<input type = "hidden" name = "resetNum" value=1>
-						<input type = "submit" value = "貸出" />
-   	 			</form>
-   	 			</c:if>
-   	 		</td>
-   	 		</tr>
+				<td>貸出可</td>
+				</c:if>
 
+	   	 		<td>
+	   	 			<c:if test="${book.lending == 1 }">
+		   	 			<form action="admin/lendingBook" method = "post">
+		   	 				<input type = "hidden" id = "bookId" name = "bookId" value = "${book.id}" >
+		   	 				<input type = "hidden" id = "libraryId" name = "libraryId" value = "${book.libraryId}" >
+							<input type ="hidden" name = "userId" value = "${loginUser.id }" >
+							<input type = "hidden" name = "num" value = 0 >
+							<input type = "submit" value = "返却" />
+		   	 			</form>
+	   	 			</c:if>
+					<c:if test="${book.lending != 1 }">
+		   	 			<form action = "admin/lendingBook" method = "post">
+		   	 				<input type = "hidden" id = "bookId" name = "bookId" value = "${book.id}" >
+		   	 				<input type = "hidden" id = "libraryId" name = "libraryId" value = "${book.libraryId}" >
+							<input type ="hidden" name = "userId" value = "${loginUser.id }" >
+							<input type = "hidden" name = "num" value = 1 >
+							<input type = "submit" value = "貸出" />
+		   	 			</form>
+	   	 			</c:if>
+	   	 		</td>
+   	 		</tr>
 
 </c:forEach>
 </table>

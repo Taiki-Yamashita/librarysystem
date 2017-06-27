@@ -52,6 +52,26 @@ public class ReservationService {
 		}
 	}
 
+	public void updateDeliveringStatus(int id) {
+
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			new ReservationDao().updateDeliveringStatus(connection, id);
+
+			commit(connection);
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
+
 	public void delete(Circulation circulation) {
 
 		Connection connection = null;
@@ -93,6 +113,29 @@ public class ReservationService {
 			close(connection);
 		}
 	}
+
+	public Reservation selectUserReserving(String userId) {
+
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			Reservation reservation = new ReservationDao().selectUserReserving(connection, userId);
+
+			commit(connection);
+
+			return reservation;
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
+
 	public List<Reservation> selectAllView() {
 
 		Connection connection = null;
