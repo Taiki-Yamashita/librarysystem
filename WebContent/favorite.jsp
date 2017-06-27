@@ -52,7 +52,7 @@
 							<c:if test = "${favorite.disposing == 1}">整理中</c:if>
 						</td>
 						<td>
-							<c:if test="${favorite.reserving == 1}">
+							<c:if test="${favorite.reserving == 0}">
 								<form action = "reservingBook" method = "post">
 									<input type = "hidden" name = "bookId" value = "${favorite.bookId}" >
 									<input type = "hidden" id = "libraryId" name = "libraryId" value = "${favorite.libraryId}" >
@@ -60,9 +60,10 @@
 									<input type = "hidden" name = "num" value =1>
 									<input type = "hidden" name = "reservation" value="${book.id}">
 									<input type = "hidden" name = "fromFavorite" value = "1" />
+									<input type = "submit" value = "予約">
 								</form>
 							</c:if>
-							<c:if test="${favorite.reserving != 1}">予約済み</c:if>
+							<c:if test="${favorite.reserving != 0}">予約済み</c:if>
 						</td>
 						<td>
 							<form action="./delete" method="POST">
