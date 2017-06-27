@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import beans.Circulation;
 import beans.Reservation;
 import exception.NoRowsUpdatedRuntimeException;
 import exception.SQLRuntimeException;
@@ -338,6 +339,31 @@ public class ReservationDao {
 
 			ps.setInt(1, num);
 			ps.setInt(2, bookId);
+
+
+			int count = ps.executeUpdate();
+			if (count == 0) {
+				throw new NoRowsUpdatedRuntimeException();
+			}
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+
+	}
+
+	public void delete(Connection connection, Circulation circulation) {
+
+		PreparedStatement ps = null;
+		try {
+			StringBuilder sql = new StringBuilder();
+			sql.append("DELETE FROM `library_system`.`reservations` WHERE book_id=? AND user_id =?");
+
+			ps = connection.prepareStatement(sql.toString());
+
+			ps.setString(1, circulation.getBookId());
+			ps.setString(2, circulation.getUserId());
 
 
 			int count = ps.executeUpdate();

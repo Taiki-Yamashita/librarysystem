@@ -55,28 +55,25 @@ public class UserService {
 		}
 	}
 
-//	public User getSelectUser(int id) {
-//
-//		Connection connection = null;
-//		try {
-//			connection = getConnection();
-//
-//			UserDao userDao = new UserDao();
-//			User user = userDao.getSelectUser(connection, id);
-//
-//			commit(connection);
-//
-//			return user;
-//		} catch (RuntimeException e) {
-//			rollback(connection);
-//			throw e;
-//		} catch (Error e) {
-//			rollback(connection);
-//			throw e;
-//		} finally {
-//			close(connection);
-//		}
-//	}
+	public void point(int point, int userId) {
+
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			new UserDao().point(connection, point, userId);
+
+			commit(connection);
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
 
 	public User selectUser(String userId) {
 
@@ -119,6 +116,29 @@ public class UserService {
 			rollback(connection);
 			throw e;
 		} catch(Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
+
+	public User select(int userId) {
+
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			UserDao userDao = new UserDao();
+			User user = userDao.select(connection, userId);
+
+			commit(connection);
+
+			return user;
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
 			rollback(connection);
 			throw e;
 		} finally {

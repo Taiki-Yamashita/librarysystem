@@ -331,6 +331,52 @@ public class UserDao {
 				close(ps);
 			}
 		}
+
+	public void point(Connection connection, int point, int userId){
+		PreparedStatement ps = null;
+		try {
+			StringBuilder sql = new StringBuilder();
+			sql.append("UPDATE users SET");
+			sql.append(" point = ?");
+
+			sql.append(" WHERE id=?");
+
+			ps = connection.prepareStatement(sql.toString());
+
+			ps.setInt(1, (point+1));
+			ps.setInt(2, userId);
+
+			ps.executeUpdate();
+			}catch(SQLException e){
+				throw new SQLRuntimeException(e);
+			}finally{
+				close(ps);
+			}
+		}
+	public User select(Connection connection, int userId){
+		PreparedStatement ps = null;
+		try {
+			String sql = "SELECT * FROM users WHERE id = ? ";
+
+			ps = connection.prepareStatement(sql);
+			ps.setInt(1, userId);
+
+			ResultSet rs =ps.executeQuery();
+			List<User> userList = toUserList(rs);
+			if(userList.isEmpty() == true) {
+				return null;
+			} else if(2<= userList.size()) {
+				throw new IllegalStateException("2<= userList.size()");
+			} else {
+				return userList.get(0);
+
+			}
+		}catch(SQLException e) {
+			throw new SQLRuntimeException(e);
+		}finally {
+			close(ps);
+		}
+	}
 }
 
 
