@@ -35,13 +35,33 @@
 		貸出件数ランキング<br>
 		<table>
 			<tr>
-				<th>順位</th><th>書籍</th><th>著者</th><th>出版社</th><th>カテゴリ</th>
+				<th>順位</th><th>貸出数</th><th>書籍</th><th>著者</th><th>出版社</th><th>カテゴリ</th>
 				<th>種類</th><th>図書館</th><th>状態</th><th>ISBN</th><th>予約</th>
 			</tr>
 			<c:forEach  begin="0" end="19" step="1" varStatus="status" items="${circulations}" var="circulation">
 				<tr>
 					<td><c:out value="${status.count}"/>位</td>
-					<td><c:out value="${circulation.bookName}"/></td>
+					<td>
+						<c:forEach items="${circulationCounts}" var="count" varStatus="statusCount">
+							<c:if test="${status.count == statusCount.count}">
+								<c:if test="${count !=-1}">
+									<option value="${count}">${count}件</option>
+								</c:if>
+								<c:if test="${count ==-1}">
+								0件
+								</c:if>
+							</c:if>
+							</c:forEach>
+
+					</td>
+
+
+					<td><c:out value="${circulation.bookId}"/>
+						<c:forEach items="${books }" var="book">
+							<c:if test="${circulation.bookId == book.id }">${book.name }</c:if>
+						</c:forEach>
+
+					</td>
 					<td>
 						<c:forEach items="${books}" var="book">
 							<c:if test="${book.id == circulation.bookId}">
@@ -149,12 +169,26 @@
 		予約件数ランキング<br>
 		<table>
 			<tr>
-				<th>順位</th><th>書籍</th><th>著者</th><th>出版社</th><th>カテゴリ</th>
+				<th>順位</th><th>予約数</th><th>書籍</th><th>著者</th><th>出版社</th><th>カテゴリ</th>
 				<th>種類</th><th>図書館</th><th>状態</th><th>ISBN</th><th>予約</th>
 			</tr>
 			<c:forEach  begin="0" end="19" step="1" varStatus="status" items="${reservations}" var="reservation">
 				<tr>
 					<td><c:out value="${status.count}"/>位</td>
+					<td>
+							<c:forEach items="${reservationCounts}" var="count" varStatus="statusCount">
+								<c:if test="${status.count == statusCount.count}">
+									<c:if test="${count !=-1}">
+										<option value="${count}">${count}件</option>
+									</c:if>
+									<c:if test="${count ==-1}">
+									0件
+									</c:if>
+								</c:if>
+							</c:forEach>
+					</td>
+
+
 					<td><c:out value="${reservation.bookName }"/></td>
 					<td>
 						<c:forEach items="${books}" var="book">

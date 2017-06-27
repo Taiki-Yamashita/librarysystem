@@ -54,6 +54,26 @@ public class BookService {
 		}
 	}
 
+	public void updateReserving(String bookId) {
+
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			new BookDao().updateReserving(connection, bookId);
+
+			commit(connection);
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
+
 	public Book selectBook(int bookId) {
 
 		Connection connection = null;

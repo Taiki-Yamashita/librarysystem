@@ -1,6 +1,7 @@
 package admin.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.Circulation;
+import beans.Reservation;
 import beans.User;
 import service.BookService;
 import service.CirculationService;
@@ -44,11 +46,22 @@ public class LendingBookServlet extends HttpServlet {
 			circulation.setUserId(request.getParameter("userId"));
 			circulation.setBookId(request.getParameter("bookId"));
 			circulation.setLibraryId(request.getParameter("libraryId"));
+
+			/*circulationsに本を追加*/
 			new CirculationService().insert(circulation);
-			new CirculationService().lending(circulation);
+
+			/*booksのフラグを貸し出し中に変更*/
 			new CirculationService().lendingFlag(bookId);
-			new BookService().lendingBook(bookId);
-			new ReservationService().delete(circulation);
+
+			/*ユーザーが予約していたら予約を解除する*/
+			Reservation userReserving = new ReservationService().selectUserReserving(circulation.getUserId());
+			if(userReserving.getUserId() != null){
+				new ReservationService().updateDeliveringStatus(userReserving.getId());
+
+				/*予約解除で予約が0になったらbooksのreservingを0に*/
+				List<Reservation> reserving = new ReservationService().selectReservingBook(circulation.getBookId());
+				if(reserving == null) new BookService().updateReserving(circulation.getBookId());
+			}
 
 		} else {
 			circulation.setUserId(request.getParameter("userId"));
@@ -56,13 +69,10 @@ public class LendingBookServlet extends HttpServlet {
 			circulation.setLibraryId(request.getParameter("libraryId"));
 			user.setPoint(request.getParameter("userId"));
 
-			System.out.println(num);
 			new CirculationService().returning(circulation, num);
 			new CirculationService().returningFlag(bookId);
 			new BookService().returningBook(bookId);
-
 		}
-
 
 		response.sendRedirect("/LibrarySystem/test");
 	}
