@@ -15,11 +15,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.Book;
+import beans.Circulation;
 import beans.Favorite;
 import beans.Library;
 import beans.Reservation;
 import beans.User;
 import service.BookService;
+import service.CirculationService;
 import service.FavoriteService;
 import service.LibraryService;
 import service.ReservationService;
@@ -84,6 +86,7 @@ public class SearchServlet extends HttpServlet{
 				List<Favorite> favorites = new FavoriteService().selectAll();
 				List<Reservation> reservations = new ReservationService().selectAll();
 				List<Library> libraryNames = new LibraryService().selectAll();
+				List<Circulation> circulationList = new CirculationService().selectMypage();
 				User loginUser = (User) request.getSession().getAttribute("loginUser");
 
 
@@ -92,6 +95,7 @@ public class SearchServlet extends HttpServlet{
 				request.setAttribute("isReserving", isReserving(reservations, loginUser, selectedBooks));
 				request.setAttribute("libraryNames", libraryNames);
 				request.setAttribute("reservations", reservations);
+				request.setAttribute("circulationList", circulationList);
 
 				/*予約数が20以上*/
 				int reservingCount = 0;

@@ -67,6 +67,20 @@ public class ReservingBookServlet extends HttpServlet {
 				return;
 			}
 
+			/*貸出中*/
+			if(request.getParameter("lendingFlag") != null){
+
+				request.getSession().setAttribute("errorMessages", "貸出中の本は予約できません");
+
+				if(toRanking != null) response.sendRedirect("./ranking");
+				if(toFavorite != null) response.sendRedirect("./favorite");
+				if(toSearch != null){
+					String parameter = getParameter(request);
+					response.sendRedirect("./search?" + parameter);
+				}
+				return;
+			}
+
 			List<Reservation> reservingCheck = new ReservationService().reservingCheck(bookId, userId);
 
 			if(reservingCheck == null){

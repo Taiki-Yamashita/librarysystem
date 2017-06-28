@@ -400,6 +400,16 @@
 
 												<c:if test="${empty loginUser}"><input type="hidden" name="notLogin" value="1"></c:if>
 												<c:if test="${not empty reservationMax}"><input type="hidden" name="reservationMax" value="1"></c:if>
+
+												<c:forEach items="${circulationList}" var="circulationBook">
+													<c:if test="${book.id == circulationBook.bookId &&
+															circulationBook.userId == loginUser.id && circulationBook.lending == 1}">
+														<c:set var="lendingFlag" value="1" />
+													</c:if>
+												</c:forEach>
+												<c:if test="${not empty lendingFlag}"><input type="hidden" name="lendingFlag" value="1"></c:if>
+												<c:remove var="lendingFlag" />
+
 												<input type="submit"  value="予約" />
 											</form>
 										</c:if>

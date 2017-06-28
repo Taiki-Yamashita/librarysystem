@@ -11,12 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.Book;
+import beans.Circulation;
 import beans.Favorite;
 import beans.Library;
 import beans.Ranking;
 import beans.Reservation;
 import beans.User;
 import service.BookService;
+import service.CirculationService;
 import service.FavoriteService;
 import service.LibraryService;
 import service.RankingService;
@@ -37,6 +39,7 @@ public class RankingServlet extends HttpServlet {
 		List<Ranking> reservations = new RankingService().reservationAll();
 		List<Book> books = new BookService().selectAll();
 		List<Library> libraries = new LibraryService().selectAll();
+		List<Circulation> circulationList = new CirculationService().selectMypage();
 
 		/*予約数が20以上*/
 		int reservingCount = 0;
@@ -62,6 +65,7 @@ public class RankingServlet extends HttpServlet {
 		request.setAttribute("books", books);
 		request.setAttribute("libraries", libraries);
 		request.setAttribute("loginUser", loginUser);
+		request.setAttribute("circulationList", circulationList);
 
 		request.setAttribute("isReservations", isReservations);
 		request.setAttribute("isFavorites", favorites);

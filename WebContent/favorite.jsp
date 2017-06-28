@@ -66,6 +66,16 @@
 									<input type = "hidden" name = "reservation" value="${book.id}">
 									<input type = "hidden" name = "fromFavorite" value = "1" />
 									<c:if test="${not empty reservationMax}"><input type = "hidden" name = "reservationMax" value = "1" /></c:if>
+
+									<c:forEach items="${circulationList}" var="circulationBook">
+										<c:if test="${favorite.bookId == circulationBook.bookId &&
+												circulationBook.userId == loginUser.id && circulationBook.lending == 1}">
+											<c:set var="lendingFlag" value="1" />
+										</c:if>
+									</c:forEach>
+									<c:if test="${not empty lendingFlag}"><input type="hidden" name="lendingFlag" value="1"></c:if>
+									<c:remove var="lendingFlag" />
+
 									<input type = "submit" value = "予約">
 								</form>
 							</c:if>

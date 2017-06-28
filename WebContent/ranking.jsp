@@ -117,29 +117,40 @@
 					</td>
 					<td>
 						<form action = "reservingBook" method = "post">
-							<c:if test="${empty loginUser}"><input type="hidden" name="notLoginRanking" value="1">
-							<input type = "submit" value = "予約" />
+							<c:if test="${empty loginUser}">
+								<input type="hidden" name="notLoginRanking" value="1">
+								<input type = "submit" value = "予約" />
 							</c:if>
 							<c:if test="${not empty loginUser}">
-							<c:forEach items="${isReservations}" var="reservation">
-								<c:if test="${reservation.userId == loginUser.id && reservation.bookId
-									== circulation.bookId &&reservation.canceling ==0}">
-									<c:set var="data" value="0" />
+								<c:forEach items="${isReservations}" var="reservation">
+									<c:if test="${reservation.userId == loginUser.id && reservation.bookId
+										== circulation.bookId && reservation.canceling ==0 && reservation.delivering ==0}">
+										<c:set var="data" value="0" />
+									</c:if>
+								</c:forEach>
+								<c:if test="${data == 0}">予約済み</c:if>
+								<c:if test="${data != 0}">
+									<input type = "hidden" name = "bookId" value = "${circulation.bookId}" >
+									<input type = "hidden" id =  "${loginUser.libraryId}" name = "libraryId" value = "${loginUser.libraryId}" >
+									<input type = "hidden" id = "${loginUser.id}" name = "userId" value = "${loginUser.id}"  >
+									<input type = "hidden" name = "num" value =1>
+									<input type = "hidden" name = "reservation" value="${book.id}">
+									<input type = "hidden" name = "fromRanking" value = "1" >
+									<c:if test="${not empty reservationMax}"><input type="hidden" name="reservationMax" value="1"></c:if>
+
+									<c:forEach items="${circulationList}" var="circulationBook">
+										<c:if test="${circulation.bookId == circulationBook.bookId &&
+												circulationBook.userId == loginUser.id && circulationBook.lending == 1}">
+											<c:set var="lendingFlag" value="1" />
+										</c:if>
+									</c:forEach>
+									<c:if test="${not empty lendingFlag}"><input type="hidden" name="lendingFlag" value="1"></c:if>
+									<c:remove var="lendingFlag" />
+
+									<input type = "submit" value = "予約" />
 								</c:if>
-							</c:forEach>
-							<c:if test="${data == 0}">予約済み</c:if>
-							<c:if test="${data != 0}">
-							<input type = "hidden" name = "bookId" value = "${circulation.bookId}" >
-							<input type = "hidden" id =  "${loginUser.libraryId}" name = "libraryId" value = "${loginUser.libraryId}" >
-							<input type = "hidden" id = "${loginUser.id}" name = "userId" value = "${loginUser.id}"  >
-							<input type = "hidden" name = "num" value =1>
-							<input type = "hidden" name = "reservation" value="${book.id}">
-							<input type = "hidden" name = "fromRanking" value = "1" >
-							<c:if test="${not empty reservationMax}"><input type="hidden" name="reservationMax" value="1"></c:if>
-							<input type = "submit" value = "予約" />
+								<c:remove var="data" />
 							</c:if>
-							<c:remove var="data" />
-						</c:if>
 						</form>
 					</td>
 					<td>
@@ -262,19 +273,30 @@
 							<c:if test="${not empty loginUser}">
 							<c:forEach items="${isReservations}" var="isReservation">
 								<c:if test="${isReservation.userId == loginUser.id && isReservation.bookId
-									== reservation.bookId &&isReservation.canceling ==0}">
+									== reservation.bookId && isReservation.canceling == 0 && isReservation.delivering == 0}">
 									<c:set var="data" value="0" />
 								</c:if>
 							</c:forEach>
 							<c:if test="${data == 0}">予約済み</c:if>
 							<c:if test="${data != 0}">
-							<input type = "hidden" name = "bookId" value = "${reservation.bookId}" >
-							<input type = "hidden" id =  "${loginUser.libraryId}" name = "libraryId" value = "${loginUser.libraryId}" >
-							<input type = "hidden" id = "${loginUser.id}" name = "userId" value = "${loginUser.id}"  >
-							<input type = "hidden" name = "num" value =1>
-							<input type = "hidden" name = "reservation" value="${book.id}">
-							<input type = "hidden" name = "fromRanking" value = "1" >
-							<input type = "submit" value = "予約" />
+								<input type = "hidden" name = "bookId" value = "${reservation.bookId}" >
+								<input type = "hidden" id =  "${loginUser.libraryId}" name = "libraryId" value = "${loginUser.libraryId}" >
+								<input type = "hidden" id = "${loginUser.id}" name = "userId" value = "${loginUser.id}"  >
+								<input type = "hidden" name = "num" value =1>
+								<input type = "hidden" name = "reservation" value="${book.id}">
+								<input type = "hidden" name = "fromRanking" value = "1" >
+								<c:if test="${not empty reservationMax}"><input type="hidden" name="reservationMax" value="1"></c:if>
+
+								<c:forEach items="${circulationList}" var="circulationBook">
+									<c:if test="${circulation.bookId == circulationBook.bookId &&
+											circulationBook.userId == loginUser.id && circulationBook.lending == 1}">
+										<c:set var="lendingFlag" value="1" />
+									</c:if>
+								</c:forEach>
+								<c:if test="${not empty lendingFlag}"><input type="hidden" name="lendingFlag" value="1"></c:if>
+								<c:remove var="lendingFlag" />
+
+								<input type = "submit" value = "予約" />
 							</c:if>
 							<c:remove var="data" />
 						</c:if>

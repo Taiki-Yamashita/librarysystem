@@ -14,10 +14,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.Book;
+import beans.Circulation;
 import beans.Favorite;
 import beans.Reservation;
 import beans.User;
 import service.BookService;
+import service.CirculationService;
 import service.FavoriteService;
 import service.ReservationService;
 
@@ -33,6 +35,7 @@ public class FavoriteServlet extends HttpServlet{
 		List<Book> books = new BookService().selectAll();
 		List<Reservation> reservations = new ReservationService().selectAll();
 		List<Favorite> favorites = new FavoriteService().selectAll();
+		List<Circulation> circulationList = new CirculationService().selectMypage();
 
 		/*予約数が20以上*/
 		int reservingCount = 0;
@@ -42,6 +45,7 @@ public class FavoriteServlet extends HttpServlet{
 		}
 
 		request.setAttribute("favorites", favorites);
+		request.setAttribute("circulationList", circulationList);
 		request.getRequestDispatcher("/favorite.jsp").forward(request, response);
 
 	}
