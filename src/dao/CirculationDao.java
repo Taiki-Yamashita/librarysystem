@@ -535,4 +535,54 @@ public class CirculationDao {
 			close(rs);
 		}
 	}
+	public List<Circulation> selectLimit(Connection connection, int userId){
+
+		PreparedStatement ps = null;
+		try {
+			String sql = "SELECT * FROM circulations where lending = ? AND user_id =?";
+			ps = connection.prepareStatement(sql);
+			ps.setString(1, "1");
+			ps.setInt(2, userId);
+
+
+			ResultSet rs = ps.executeQuery();
+			List<Circulation> circulationList = toLimitList(rs);
+			if (circulationList.isEmpty()) {
+				return null;
+			}else {
+				return circulationList;
+			}
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
+	private List<Circulation> toLimitList(ResultSet rs) throws SQLException {
+
+		List<Circulation> ret = new ArrayList<Circulation>();
+		try {
+			while (rs.next()) {
+				int id = rs.getInt("id");
+
+				String userId = rs.getString("user_id");
+				String bookId = rs.getString("book_id");
+				String libraryId = rs.getString("library_id");
+				//String returning = rs.getString("returning");
+
+				Circulation circulation = new Circulation();
+				circulation.setId(id);
+				circulation.setUserId(userId);
+				circulation.setBookId(bookId);
+				circulation.setLibraryId(libraryId);
+				//circulation.setReturning(returning);
+
+				ret.add(circulation);
+			}
+			return ret;
+		} finally {
+			close(rs);
+		}
+	}
+
 }
