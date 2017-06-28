@@ -17,7 +17,7 @@
 //
 //import beans.User;
 //
-//@WebFilter(urlPatterns = {"/favorite", "/require", "/user/*"})
+//@WebFilter(urlPatterns = {"/favorite", "/require", "/user/*", "/require"})
 //public class LoginCheckFilter implements Filter {
 //
 //	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)

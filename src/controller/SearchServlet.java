@@ -93,6 +93,13 @@ public class SearchServlet extends HttpServlet{
 				request.setAttribute("libraryNames", libraryNames);
 				request.setAttribute("reservations", reservations);
 
+				/*予約数が20以上*/
+				int reservingCount = 0;
+				for(Integer reservation : isReserving(reservations, loginUser, selectedBooks)){
+					if(reservation == -10) reservingCount++;
+					if(reservingCount >= 20) request.setAttribute("reservationMax", "1");
+				}
+
 				/*ページ遷移管理*/
 				request.setAttribute("pageCountList", getPageCount(selectedBooks.size()));
 				if(request.getParameter("pageNumber") == null) request.setAttribute("pageNumber", "1");
@@ -232,7 +239,9 @@ public class SearchServlet extends HttpServlet{
 						if(reservation.getCanceling().equals("0") && reservation.getDelivering().equals("0")) reservationFlag = true;
 					}
 				}
-				if(reservationFlag == true) isReserving.add(-10);
+				if(reservationFlag == true){
+					isReserving.add(-10);
+				}
 				else isReserving.add(cnt);
 				cnt++;
 			}
@@ -244,6 +253,7 @@ public class SearchServlet extends HttpServlet{
 				cnt++;
 			}
 		}
+
 		return isReserving;
 	}
 
