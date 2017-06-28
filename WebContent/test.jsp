@@ -32,18 +32,15 @@
 	</c:forEach>
 			<tr>
 				<td>${book.name}</td>
-				<c:if test="${book.lending == 1 && empty flag}">
+				<c:if test="${book.lending == 1 }">
 				<td>貸出中</td>
 				</c:if>
-				<c:if test="${book.lending != 1 && empty flag}">
+				<c:if test="${book.lending != 1 }">
 				<td>貸出可</td>
-				</c:if>
-				<c:if test="${flag == '1'}">
-				<td>貸出NG</td>
 				</c:if>
 
 	   	 		<td>
-	   	 			<c:if test="${book.lending == 1 && empty flag}">
+	   	 			<c:if test="${book.lending == 1 && flag == '1'}">
 		   	 			<form action="lendingBook" method = "post">
 		   	 				<input type = "hidden" id = "bookId" name = "bookId" value = "${book.id}" >
 		   	 				<input type = "hidden" id = "libraryId" name = "libraryId" value = "${book.libraryId}" >
@@ -61,9 +58,9 @@
 							<input type = "submit" value = "貸出" />
 		   	 			</form>
 	   	 			</c:if>
-	   	 			<c:if test="${flag == '1'}">
-					<td>貸出NG</td>
-					</c:if>
+	   	 			<c:if test="${book.lending != 1 && flag == '1'}">
+	   	 				貸出NG
+	   	 			</c:if>
 	   	 		</td>
    	 		</tr>
 
