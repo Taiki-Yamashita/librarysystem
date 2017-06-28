@@ -216,16 +216,16 @@
 							<c:if test="${book.lending ==1}">貸出中</c:if>
 							<c:if test="${book.disposing ==1}">整理中</c:if>
 						<td>
-							<c:forEach items="${reservationCounts}" var="count" varStatus="statusCount">
-								<c:if test="${statusBook.count == statusCount.count}">
-									<c:if test="${count !=-1}">
-										<option value="${count}">${count}</option>
-									</c:if>
-									<c:if test="${count ==-1}">
-										0
+							<c:forEach items="${reservations }" var="reservation">
+								<c:if test="${reservation.bookId == book.id }">
+									<c:if test="${reservation.count !=-1}">
+										<option value="${reservation.count}">${reservation.count}件</option>
+										<c:set var="data" value="1" />
 									</c:if>
 								</c:if>
 							</c:forEach>
+							<c:if test="${empty data}">0件</c:if>
+							<c:remove var="data" />
 						</td>
 						<td>
 							<c:forEach items="${notReturnedCounts}" var="count" varStatus="statusCount">
@@ -252,19 +252,19 @@
 					   	 	</form>
 				   	 	</td>
 				   	 	<td>
-							<c:forEach items="${reservationCounts}" var="count" varStatus="statusCount">
-								<c:if test="${statusBook.index == statusCount.index}">
-									<c:if test="${count !=-1}">
-								   	 	<form action = "reservation" method = "get">
-								   	 		<input type = "hidden" name = "id" value = "${book.id}" >
-								   	 		<input type = "submit" value = "予約一覧" />
-								   	 	</form>
-									</c:if>
-									<c:if test="${count ==-1}">
-										予約なし
+							<c:forEach items="${reservations }" var="reservation">
+								<c:if test="${reservation.bookId == book.id }">
+								<c:if test="${reservation.count !=-1}">
+								   	 <form action = "reservation" method = "get">
+								   	 	<input type = "hidden" name = "id" value = "${book.id}" >
+								   	 	<input type = "submit" value = "予約一覧" />
+								   	 	<c:set var="data" value="1" />
+								   	</form>
 									</c:if>
 								</c:if>
 							</c:forEach>
+						<c:if test="${empty data}">予約なし</c:if>
+							<c:remove var="data" />
 				   	 	</td>
 				   	 	<td>
 				   	 	<c:forEach items="${notReturnedCounts}" var="count" varStatus="statusCount">
@@ -275,9 +275,7 @@
 								   	 	<input type = "submit" value = "未返却者情報" />
 								   	</form>
 					   	 		</c:if>
-					   	 		<c:if test="${count !=1}">
-					   	 			<c:out value="未返却なし"></c:out>
-					   	 		</c:if>
+
 					   	 	</c:if>
 					   	 </c:forEach>
 				   	 	</td>

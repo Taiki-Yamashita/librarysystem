@@ -35,11 +35,11 @@ public class ManageBookServlet extends HttpServlet {
 		List<Book> books = new BookService().selectAll();
 		List<Library> libraryList = new LibraryService().selectAll();
 		List<Book> shelfIdList = new BookService().selectShelfId();
-		List<Integer> reservationCounts = getReservationCount(reservations);
+		//List<Integer> reservationCounts = getReservationCount(reservations);
 		List<Integer> notReturnedCounts = getNotReturnedCount(books);
 
 		request.setAttribute("reservations", reservations);
-		request.setAttribute("reservationCounts", reservationCounts);
+		//request.setAttribute("reservationCounts", reservationCounts);
 		request.setAttribute("notReturnedCounts", notReturnedCounts);
 		request.setAttribute("books", books);
 		request.setAttribute("libraryList", libraryList);
@@ -143,7 +143,9 @@ public class ManageBookServlet extends HttpServlet {
 			}
 			if(reservation!=null){	reservationCounts.add(Integer.parseInt(reservation.getCount()));
 			}
-		}return reservationCounts;
+		}
+		System.out.println(reservationCounts);
+		return reservationCounts;
 	}
 
 
