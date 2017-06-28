@@ -33,7 +33,7 @@
 		</c:if>
 
 		貸出件数ランキング<br>
-		<c:if test="${not empty circulation }">
+		<c:if test="${not empty circulations }">
 		<table>
 			<tr>
 				<th>順位</th><th>貸出数</th><th>書籍</th><th>著者</th><th>出版社</th><th>カテゴリ</th>
@@ -166,11 +166,11 @@
 			</c:forEach>
 		</table>
 		</c:if>
-		<c:if test="${empty circulation }">貸出がありません</c:if>
+		<c:if test="${empty circulations }">貸出がありません</c:if>
 
 		<br>
 		予約件数ランキング<br>
-		<c:if test="${not empty reservation }">
+		<c:if test="${not empty reservations }">
 		<table>
 			<tr>
 				<th>順位</th><th>予約数</th><th>書籍</th><th>著者</th><th>出版社</th><th>カテゴリ</th>
@@ -298,7 +298,7 @@
 			</c:forEach>
 		</table>
 		</c:if>
-		<c:if test="${empty reservation}">予約がありません</c:if>
+		<c:if test="${empty reservations}">予約がありません</c:if>
 	<c:remove var="errorMessages" scope="session"/>
 		<c:remove var="loginErrorMessages" scope="session"/>
 

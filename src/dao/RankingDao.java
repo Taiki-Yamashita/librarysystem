@@ -103,7 +103,7 @@ public class RankingDao {
 
 		PreparedStatement ps = null;
 		try {
-			String sql = "SELECT *, COUNT(*) as count FROM library_system.book_reservations where canceling=0  GROUP BY book_id ORDER BY count(*) ,book_id; ";
+			String sql = "SELECT *, COUNT(*) as count FROM library_system.reservations where canceling=0  GROUP BY book_id ORDER BY count(*) DESC,book_id; ";
 			ps = connection.prepareStatement(sql);
 
 
@@ -121,6 +121,51 @@ public class RankingDao {
 		}
 	}
 	private List<Ranking> toReservations(ResultSet rs) throws SQLException {
+
+		List<Ranking> ret = new ArrayList<Ranking>();
+		try {
+			while (rs.next()) {
+
+				String bookName = rs.getString("book_name");
+				String bookId = rs.getString("book_id");
+				String count = rs.getString("count");
+
+				Ranking reservations = new Ranking();
+				reservations.setBookName(bookName);
+				reservations.setBookId(bookId);
+				reservations.setCount(count);
+
+
+				ret.add(reservations);
+			}
+			return ret;
+		} finally {
+			close(rs);
+		}
+	}
+
+	public List<Ranking> managementAll(Connection connection){
+
+		PreparedStatement ps = null;
+		try {
+			String sql = "SELECT *, COUNT(*) as count FROM library_system.reservations where canceling=0  GROUP BY book_id ";
+			ps = connection.prepareStatement(sql);
+
+
+			ResultSet rs = ps.executeQuery();
+			List<Ranking> reservations = toManagements(rs);
+			if (reservations.isEmpty()) {
+				return null;
+			}else {
+				return reservations;
+			}
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
+	private List<Ranking> toManagements(ResultSet rs) throws SQLException {
 
 		List<Ranking> ret = new ArrayList<Ranking>();
 		try {
