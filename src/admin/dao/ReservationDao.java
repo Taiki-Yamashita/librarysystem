@@ -143,7 +143,7 @@ public class ReservationDao {
 
 		PreparedStatement ps = null;
 		try {
-			String sql = "SELECT *  FROM reservations where book_id =? AND canceling=0";
+			String sql = "SELECT *  FROM reservations where book_id =? AND canceling=0 AND delivering=0";
 			ps = connection.prepareStatement(sql);
 
 			ps.setInt(1, bookId);

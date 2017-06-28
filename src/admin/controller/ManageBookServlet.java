@@ -30,7 +30,7 @@ public class ManageBookServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
 
-		List<Ranking> reservations = new RankingService().reservationAll();
+		List<Ranking> reservations = new RankingService().managementAll();
 
 		List<Book> books = new BookService().selectAll();
 		List<Library> libraryList = new LibraryService().selectAll();
@@ -38,6 +38,7 @@ public class ManageBookServlet extends HttpServlet {
 		List<Integer> reservationCounts = getReservationCount(reservations);
 		List<Integer> notReturnedCounts = getNotReturnedCount(books);
 
+		request.setAttribute("reservations", reservations);
 		request.setAttribute("reservationCounts", reservationCounts);
 		request.setAttribute("notReturnedCounts", notReturnedCounts);
 		request.setAttribute("books", books);
@@ -141,7 +142,6 @@ public class ManageBookServlet extends HttpServlet {
 				reservationCounts.add(-1);
 			}
 			if(reservation!=null){	reservationCounts.add(Integer.parseInt(reservation.getCount()));
-			System.out.println(reservation.getCount());
 			}
 		}return reservationCounts;
 	}

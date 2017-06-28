@@ -54,6 +54,7 @@ public class RankingService {
 		}
 	}
 
+
 	public List<Ranking> reservationAll() {
 
 		Connection connection = null;
@@ -61,6 +62,28 @@ public class RankingService {
 			connection = getConnection();
 
 			List<Ranking> reservations = new RankingDao().reservationAll(connection);
+
+			commit(connection);
+
+			return reservations;
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
+
+	public List<Ranking> managementAll() {
+
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			List<Ranking> reservations = new RankingDao().managementAll(connection);
 
 			commit(connection);
 
