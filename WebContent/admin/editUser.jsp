@@ -29,7 +29,7 @@
 	<input name="loginId" id="loginId" value="${editUser.loginId }"/><br />
 
 	<label for="password">パスワード(半角英数字6～20文字)</label><br>
-	<input name="password" id="password" /><br />
+	<input name="password" type="password" id="password" /><br />
 
 	<label for="name">名前</label><br>
 	<input name="name" id="name"  value="${editUser.name }"/><br />
@@ -62,9 +62,10 @@
 		<br>
 
 		<label for="registerDate">登録日（更新日）</label><br>
-	<input name="registerDate" id="registerDate" value="${editUser.registerDate }"/><br />
-
-	<br><button type="submit" name="post2" >編集</button>
+		<input type="hidden" name="registerDate" id="registerDate" value="${editUser.registerDate }"/>
+		<fmt:parseDate var="date" value="${editUser.registerDate}" pattern="yyyy-MM-dd HH:mm:ss" />
+		<fmt:formatDate pattern = "yyyy年MM月dd日" value = "${date}" />
+		<button type="submit" name="post2" >編集</button>
 </form>
 <form action="renewUser" method="post">
 	<input type="hidden" name=renewDate >
