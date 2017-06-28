@@ -38,7 +38,7 @@ public class ManageFilter implements Filter {
 					session.setAttribute("errorMessages", messages);
 					session.setAttribute("target", target);
 
-					((HttpServletResponse)response).sendRedirect("./top");
+					((HttpServletResponse)response).sendRedirect("../");
 					return;
 				//}
 			}
