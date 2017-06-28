@@ -36,8 +36,15 @@ public class RankingServlet extends HttpServlet {
 		List<Ranking> reservations = new RankingService().reservationAll();
 		List<Book> books = new BookService().selectAll();
 		List<Library> libraries = new LibraryService().selectAll();
-		List<Integer> reservationCounts = getReservationCount(reservations);
-		List<Integer> circulationCounts = getCirculationCount(circulations);
+
+		if(reservations != null){
+			List<Integer> reservationCounts = getReservationCount(reservations);
+			request.setAttribute("reservationCounts", reservationCounts);
+		}
+		if(circulations != null){
+			List<Integer> circulationCounts = getCirculationCount(circulations);
+			request.setAttribute("circulationCounts", circulationCounts);
+		}
 
 		List<Reservation> isReservations = new ReservationService().selectAll();
 		List<Favorite> favorites = new FavoriteService().selectAll();
@@ -47,8 +54,6 @@ public class RankingServlet extends HttpServlet {
 		request.setAttribute("books", books);
 		request.setAttribute("libraries", libraries);
 		request.setAttribute("loginUser", loginUser);
-		request.setAttribute("reservationCounts", reservationCounts);
-		request.setAttribute("circulationCounts", circulationCounts);
 
 		request.setAttribute("isReservations", isReservations);
 		request.setAttribute("isFavorites", favorites);

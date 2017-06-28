@@ -217,7 +217,7 @@
 							<c:if test="${book.disposing ==1}">整理中</c:if>
 						<td>
 							<c:forEach items="${reservationCounts}" var="count" varStatus="statusCount">
-								<c:if test="${statusBook.count == statusCount.index}">
+								<c:if test="${statusBook.count == statusCount.count}">
 									<c:if test="${count !=-1}">
 										<option value="${count}">${count}</option>
 									</c:if>

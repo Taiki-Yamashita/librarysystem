@@ -137,7 +137,12 @@ public class ManageBookServlet extends HttpServlet {
 
 		List<Integer> reservationCounts = new ArrayList<>();
 		for(Ranking reservation : reservations){
-			reservationCounts.add(Integer.parseInt(reservation.getCount()));
+			if(reservation==null){
+				reservationCounts.add(-1);
+			}
+			if(reservation!=null){	reservationCounts.add(Integer.parseInt(reservation.getCount()));
+			System.out.println(reservation.getCount());
+			}
 		}return reservationCounts;
 	}
 
