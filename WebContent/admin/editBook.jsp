@@ -65,8 +65,8 @@
 	<c:if test="${editBook.type != '新書'}"><input type="radio" name="type" value="2">新書</c:if>
 	<c:if test="${editBook.type == '雑誌'}"><input type="radio" name="type" value="3" checked >雑誌</c:if>
 	<c:if test="${editBook.type != '雑誌'}"><input type="radio" name="type" value="3">雑誌</c:if>
-	<c:if test="${editBook.type == 'コミック'}"><input type="radio" name="type" value="4" checked >コミック</c:if>
-	<c:if test="${editBook.type != 'コミック'}"><input type="radio" name="type" value="4">コミック</c:if>
+	<c:if test="${editBook.type == 'コミックス'}"><input type="radio" name="type" value="4" checked >コミックス</c:if>
+	<c:if test="${editBook.type != 'コミックス'}"><input type="radio" name="type" value="4">コミックス</c:if>
 	<br>
 	<label for = "library">図書館</label><br>
 	<c:if test="${editBook.libraryId == '1'}"><input type="radio" name="libraryId" value="1" checked >西馬込</c:if>
@@ -94,42 +94,15 @@
 
 
 	<label for = "status">本の状態</label>*必須<br>
-				<%
-					String[] checkBoxStatusNumbers = {"1","2","3"};
-					session.setAttribute("checkBoxStatusNumbers", checkBoxStatusNumbers);
-				%>
-						<c:forEach items="${checkBoxStatusNumbers}" var="checkBoxStatusNumber">
-							<%session.setAttribute("checkStatus", 0);%>
-							<c:forEach items="${status}" var="status">
-								<c:if test="${status == '保管中' && checkBoxStatusNumber == 1}">
-									<%session.setAttribute("checkStatus",1);%>
-									<input type="radio" name="status" value="1">保管中
-								</c:if>
-								<c:if test="${status == '貸出中' && checkBoxStatusNumber == 2}">
-									<%session.setAttribute("checkStatus",1);%>
-									<input type="radio" name="status" value="2">貸出中
-								</c:if>
-								<c:if test="${status == '整理中' && checkBoxStatusNumber == 3}">
-									<%session.setAttribute("checkStatus",1);%>
-									<input type="radio" name="status" value="3" >整理中
-								</c:if>
-							</c:forEach>
+		<label for = "status">タイプ</label><br>
+	<c:if test="${editBook.keeping == '1'}"><input type="radio" name="status" value="1" checked >保管中</c:if>
+	<c:if test="${editBook.keeping != '1'}"><input type="radio" name="status" value="1">保管中</c:if>
+	<c:if test="${editBook.lending == '2'}"><input type="radio" name="status" value="2" checked >貸出中</c:if>
+	<c:if test="${editBook.keeping != '2'}"><input type="radio" name="status" value="2">貸出中</c:if>
+	<c:if test="${editBook.disposing == '3'}"><input type="radio" name="status" value="2">整理中</c:if>
+	<c:if test="${editBook.keeping != '3'}"><input type="radio" name="status" value="3">整理中</c:if>
 
-							<c:if test="${checkStatus == 0 && checkBoxStatusNumber == 1}">
-								<input type="radio" name="status" value="1">保管中
-							</c:if>
-							<c:if test="${checkStatus == 0 && checkBoxStatusNumber == 2}">
-								<input type="radio" name="status" value="2">貸出中
-							</c:if>
-							<c:if test="${checkStatus == 0 && checkBoxStatusNumber == 3}">
-								<input type="radio" name="status" value="3">整理中
-							</c:if>
-
-						</c:forEach><br>
-
-
-
-
+	<br>
 	<br><input type="submit" value="投稿">
 </form>
 

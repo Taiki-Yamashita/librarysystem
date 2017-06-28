@@ -35,6 +35,12 @@ public class EditBookServlet extends HttpServlet{
 		}
 		Book editBook = new BookService().selectBook(Integer.parseInt(bookId));
 
+		String publishedDate = editBook.getPublishedDate();
+		String[] date = publishedDate.split("-");
+
+		request.setAttribute("publishedDate", date[0]);
+		request.setAttribute("publishedDate2", date[1]);
+		request.setAttribute("publishedDate3", date[2].split(" ")[0]);
 		request.setAttribute("editBook", editBook);
 		request.getRequestDispatcher("editBook.jsp").forward(request, response);
 	}
@@ -58,14 +64,15 @@ public class EditBookServlet extends HttpServlet{
 			List<Library> libraries = new LibraryService().selectAll();
 			request.setAttribute("libraries", libraries);
 
+			String publishedDate = request.getParameter("publishedDate");
+			String publishedDate2 = request.getParameter("publishedDate2");
+			String publishedDate3 = request.getParameter("publishedDate3");
+
 			Book editBook = getEditBook(request);
 			request.setAttribute("editBook", editBook);
-
-			request.setAttribute("publishedDate", request.getParameter("publishedDate"));
-			request.setAttribute("publishedDate2", request.getParameter("publishedDate2"));
-			request.setAttribute("publishedDate3", request.getParameter("publishedDate3"));
-
-
+			request.setAttribute("publishedDate", publishedDate);
+			request.setAttribute("publishedDate2", publishedDate2);
+			request.setAttribute("publishedDate3", publishedDate3);
 			session.setAttribute("errorMessages", messages);
 			request.getRequestDispatcher("/admin/editBook.jsp").forward(request, response);
 		}
@@ -92,6 +99,8 @@ public class EditBookServlet extends HttpServlet{
 			editBook.setShelfId(request.getParameter("shelfId"));
 			editBook.setIsbnId(request.getParameter("isbnId"));
 			editBook.setPublishedDate(publishedDate);
+
+
 			if(status.equals("1")){
 				editBook.setKeeping("1");
 				editBook.setLending("0");
