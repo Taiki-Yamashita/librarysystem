@@ -32,10 +32,18 @@ public class RankingServlet extends HttpServlet {
 
 		User loginUser = (User) request.getSession().getAttribute("loginUser");
 
+		List<Reservation> reservationList = new ReservationService().selectAll();
 		List<Ranking> circulations = new RankingService().circulationAll();
 		List<Ranking> reservations = new RankingService().reservationAll();
 		List<Book> books = new BookService().selectAll();
 		List<Library> libraries = new LibraryService().selectAll();
+
+		/*予約数が20以上*/
+		int reservingCount = 0;
+		for(Integer reservation : isReserving(reservationList, loginUser, books)){
+			if(reservation == -10) reservingCount++;
+			if(reservingCount >= 20) request.setAttribute("reservationMax", "1");
+		}
 
 		if(reservations != null){
 			List<Integer> reservationCounts = getReservationCount(reservations);
@@ -75,5 +83,35 @@ public class RankingServlet extends HttpServlet {
 		for(Ranking circulation : circulations){
 			circulationCounts.add(Integer.parseInt(circulation.getCount()));
 		}return circulationCounts;
+	}
+
+	public List<Integer> isReserving(List<Reservation> reservations, User loginUser, List<Book> books){
+
+		List<Integer> isReserving = new ArrayList<>();
+		if(reservations != null && loginUser != null){
+			int cnt = 0;
+			for(Book book : books){
+				boolean reservationFlag = false;
+				for(Reservation reservation : reservations){
+					if(reservation.getBookId().equals(String.valueOf(book.getId())) && reservation.getUserId().equals(String.valueOf(loginUser.getId()))){
+						if(reservation.getCanceling().equals("0") && reservation.getDelivering().equals("0")) reservationFlag = true;
+					}
+				}
+				if(reservationFlag == true){
+					isReserving.add(-10);
+				}
+				else isReserving.add(cnt);
+				cnt++;
+			}
+			return isReserving;
+		}else{
+			int cnt = 0;
+			for(Book book : books){
+				isReserving.add(cnt);
+				cnt++;
+			}
+		}
+
+		return isReserving;
 	}
 }

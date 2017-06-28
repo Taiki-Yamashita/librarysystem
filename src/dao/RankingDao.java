@@ -61,7 +61,7 @@ public class RankingDao {
 
 		PreparedStatement ps = null;
 		try {
-			String sql = "SELECT *, COUNT(*) as count FROM library_system.circulations where lending = 1 GROUP BY book_id ORDER BY count(*) DESC,book_id ";
+			String sql = "SELECT *, COUNT(*) as count FROM library_system.circulations GROUP BY book_id ORDER BY count(*) DESC,book_id ";
 			ps = connection.prepareStatement(sql);
 
 

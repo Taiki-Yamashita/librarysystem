@@ -135,6 +135,7 @@
 							<input type = "hidden" name = "num" value =1>
 							<input type = "hidden" name = "reservation" value="${book.id}">
 							<input type = "hidden" name = "fromRanking" value = "1" >
+							<c:if test="${not empty reservationMax}"><input type="hidden" name="reservationMax" value="1"></c:if>
 							<input type = "submit" value = "予約" />
 							</c:if>
 							<c:remove var="data" />
