@@ -61,6 +61,11 @@ public class EditBookServlet extends HttpServlet{
 			Book editBook = getEditBook(request);
 			request.setAttribute("editBook", editBook);
 
+			request.setAttribute("publishedDate", request.getParameter("publishedDate"));
+			request.setAttribute("publishedDate2", request.getParameter("publishedDate2"));
+			request.setAttribute("publishedDate3", request.getParameter("publishedDate3"));
+
+
 			session.setAttribute("errorMessages", messages);
 			request.getRequestDispatcher("/admin/editBook.jsp").forward(request, response);
 		}
@@ -72,6 +77,10 @@ public class EditBookServlet extends HttpServlet{
 			int book_id = Integer.parseInt(bookId);
 			Book editBook = new BookService().selectBook(book_id);
 			String status =request.getParameter("status");
+			String year = request.getParameter("publishedDate");
+			String month = request.getParameter("publishedDate2");
+			String day = request.getParameter("publishedDate3");
+			String publishedDate = new String(year + "-" + month + "-"+ day + " 00:00:00");
 
 
 			editBook.setName(request.getParameter("name"));
@@ -82,7 +91,7 @@ public class EditBookServlet extends HttpServlet{
 			editBook.setLibraryId(request.getParameter("libraryId"));
 			editBook.setShelfId(request.getParameter("shelfId"));
 			editBook.setIsbnId(request.getParameter("isbnId"));
-			editBook.setPublishedDate(request.getParameter("publishedDate"));
+			editBook.setPublishedDate(publishedDate);
 			if(status.equals("1")){
 				editBook.setKeeping("1");
 				editBook.setLending("0");
@@ -108,11 +117,14 @@ public class EditBookServlet extends HttpServlet{
 			String publisher = request.getParameter("publisher");
 			String category = request.getParameter("category");
 			String type = request.getParameter("type");
-			String publishedDate = request.getParameter("publishedDate");
 			String libraryId = request.getParameter("libraryId");
 			String shelfId = request.getParameter("shelfId");
 			String isbnId = request.getParameter("isbnId");
 			String status = request.getParameter("status");
+			String year = request.getParameter("publishedDate");
+			String month = request.getParameter("publishedDate2");
+			String day = request.getParameter("publishedDate3");
+			String publishedDate = new String(year + "-" + month + "-"+ day + " 00:00:00");
 
 			if(StringUtils.isBlank(name) == true) {
 					messages.add("書籍名を入力してください");

@@ -13,17 +13,29 @@
 <body>
 
 
+<c:if test="${ not empty errorMessages }">
+	<div class="errorMessages">
+		<ul>
+			<c:forEach items="${errorMessages}" var="message">
+				<li><c:out value="${message}" />
+				</c:forEach>
+				</ul>
+	</div>
+	<c:remove var="errorMessages" scope="session"/>
+</c:if>
+
+
 <form action="editBook"method="post"><br />
 
 	<input name="book_id" type="hidden" value="${editBook.id}"/>
 
-	<label for="name">名前</label><br>
+	<label for="name">名前</label>*必須<br>
 	<input name="name" id="name" value="${editBook.name }"/><br />
 
-	<label for="author">著者</label><br>
+	<label for="author">著者</label>*必須<br>
 	<input name="author" id="author" value="${editBook.author }"/><br />
 
-	<label for="publisher">出版社</label><br>
+	<label for="publisher">出版社</label>*必須<br>
 	<input name="publisher" id="publisher" value ="${editBook.publisher }"/><br />
 
 	<label for = "category">カテゴリ</label><br>
@@ -69,17 +81,19 @@
 	<c:if test="${editBook.libraryId != '5'}"><input type="radio" name="libraryId" value="1">五反田</c:if>
 
 	<br>
-	<label for="shelfId">棚番号</label><br>
+	<label for="shelfId">棚番号</label>*必須<br>
 	<input name="shelfId" id="shelfId" value="${editBook.shelfId }"/><br />
 
-	<label for="isbnId">ISBN番号</label><br>
+	<label for="isbnId">ISBN番号</label>*必須<br>
 	<input name="isbnId" id="isbnId" value="${editBook.isbnId }"/><br />
 
-	<label for="publishedDate">出版日</label><br>
-	<input name="publishedDate" id="publishedDate" value="${editBook.publishedDate }"/><br />
+	<label for = "publishedDate">出版日</label>*必須<br>
+	<input name = "publishedDate" id = "publishedDate" value ="${publishedDate }"/>年
+	<input name = "publishedDate2" id = "publishedDate2" value ="${publishedDate2 }"/>月
+	<input name = "publishedDate3" id = "publishedDate3" value ="${publishedDate3 }"/>日<br />
 
 
-	<label for = "status">本の状態</label><br>
+	<label for = "status">本の状態</label>*必須<br>
 				<%
 					String[] checkBoxStatusNumbers = {"1","2","3"};
 					session.setAttribute("checkBoxStatusNumbers", checkBoxStatusNumbers);
