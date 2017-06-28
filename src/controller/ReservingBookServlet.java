@@ -53,13 +53,27 @@ public class ReservingBookServlet extends HttpServlet {
 			String toFavorite = request.getParameter("fromFavorite");
 			String toSearch = request.getParameter("fromSearch");
 
+			/*予約数が20以上*/
+			if(request.getParameter("reservationMax") != null) {
+
+				request.getSession().setAttribute("errorMessages", "予約は20冊以上できません");
+
+				if(toRanking != null) response.sendRedirect("./ranking");
+				if(toFavorite != null) response.sendRedirect("./favorite");
+				if(toSearch != null){
+					String parameter = getParameter(request);
+					response.sendRedirect("./search?" + parameter);
+				}
+				return;
+			}
+
 			List<Reservation> reservingCheck = new ReservationService().reservingCheck(bookId, userId);
 
 			if(reservingCheck == null){
 				int num = Integer.parseInt(request.getParameter("num"));
 
 
-				if(num ==1){
+				if(num == 1){
 					Book reservingBook = new BookService().selectBook(bookId);
 					User reservingUser = new UserService().selectUser(userId);
 

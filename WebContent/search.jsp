@@ -399,6 +399,7 @@
 												<input type = "hidden" name = "reservation" value="${book.id}">
 
 												<c:if test="${empty loginUser}"><input type="hidden" name="notLogin" value="1"></c:if>
+												<c:if test="${not empty reservationMax}"><input type="hidden" name="reservationMax" value="1"></c:if>
 												<input type="submit"  value="予約" />
 											</form>
 										</c:if>

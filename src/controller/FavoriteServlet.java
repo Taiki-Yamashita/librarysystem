@@ -12,11 +12,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
+import beans.Book;
 import beans.Favorite;
+import beans.Reservation;
 import beans.User;
+import service.BookService;
 import service.FavoriteService;
+import service.ReservationService;
 
 @WebServlet(urlPatterns = { "/favorite" })
 public class FavoriteServlet extends HttpServlet{
@@ -27,23 +30,18 @@ public class FavoriteServlet extends HttpServlet{
 			throws ServletException, IOException {
 
 		User loginUser = (User) request.getSession().getAttribute("loginUser");
-		HttpSession session = request.getSession();
+		List<Book> books = new BookService().selectAll();
+		List<Reservation> reservations = new ReservationService().selectAll();
+		List<Favorite> favorites = new FavoriteService().selectAll();
 
-		if(loginUser == null) {
-			List<String> messages = new ArrayList<String>();
-			messages.add("ログインしてください");
-			session.setAttribute("errorMessages", messages);
-			response.sendRedirect("./");
-			return;
+		/*予約数が20以上*/
+		int reservingCount = 0;
+		for(Integer reservation : isReserving(reservations, loginUser, books)){
+			if(reservation == -10) reservingCount++;
+			if(reservingCount >= 20) request.setAttribute("reservationMax", "1");
 		}
 
-
-
-		List<Favorite> favorites = new FavoriteService().selectAll();
 		request.setAttribute("favorites", favorites);
-
-		request.setAttribute("loginUser", loginUser);
-
 		request.getRequestDispatcher("/favorite.jsp").forward(request, response);
 
 	}
@@ -194,5 +192,35 @@ public class FavoriteServlet extends HttpServlet{
 				+ "&pageNumber=" + pageNumber + "&isSearching=" + isSearching;
 
 		return parameter;
+	}
+
+	public List<Integer> isReserving(List<Reservation> reservations, User loginUser, List<Book> books){
+
+		List<Integer> isReserving = new ArrayList<>();
+		if(reservations != null && loginUser != null){
+			int cnt = 0;
+			for(Book book : books){
+				boolean reservationFlag = false;
+				for(Reservation reservation : reservations){
+					if(reservation.getBookId().equals(String.valueOf(book.getId())) && reservation.getUserId().equals(String.valueOf(loginUser.getId()))){
+						if(reservation.getCanceling().equals("0") && reservation.getDelivering().equals("0")) reservationFlag = true;
+					}
+				}
+				if(reservationFlag == true){
+					isReserving.add(-10);
+				}
+				else isReserving.add(cnt);
+				cnt++;
+			}
+			return isReserving;
+		}else{
+			int cnt = 0;
+			for(Book book : books){
+				isReserving.add(cnt);
+				cnt++;
+			}
+		}
+
+		return isReserving;
 	}
 }

@@ -100,7 +100,7 @@
 
 	<!-- 予約テーブル -->
 	<c:forEach items="${reservations}" var="reservation">
-			<c:if test="${reservation.userId == loginUser.id && reservation.canceling == 0}">
+			<c:if test="${reservation.userId == loginUser.id && reservation.canceling == 0 && reservation.delivering == 0}">
 				<c:set var="flag2" value="1" />
 			</c:if>
 	</c:forEach>

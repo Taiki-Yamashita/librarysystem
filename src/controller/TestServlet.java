@@ -1,4 +1,4 @@
-package admin.controller;
+package controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -26,11 +26,22 @@ public class TestServlet extends HttpServlet {
 
 		User loginUser = (User) request.getSession().getAttribute("loginUser");
 		List<Book> books = new BookService().selectAll();
+<<<<<<< HEAD:src/admin/controller/TestServlet.java
 		List<Circulation> circulations = new CirculationService().selectLimit(loginUser.getId());
 		System.out.println(circulations.size());
+=======
+		List<Circulation> circulations = new CirculationService().selectMypage();
+		User loginUser = (User) request.getSession().getAttribute("loginUser");
+		System.out.println(loginUser.getId());
+>>>>>>> 628f051bd5061e99e78f97d83daa2ddafa0a8f3b:src/controller/TestServlet.java
 
-		request.setAttribute("books", books);
 		request.setAttribute("circulations", circulations);
+		request.setAttribute("books", books);
+<<<<<<< HEAD:src/admin/controller/TestServlet.java
+		request.setAttribute("circulations", circulations);
+=======
+		request.setAttribute("loginUser", loginUser);
+>>>>>>> 628f051bd5061e99e78f97d83daa2ddafa0a8f3b:src/controller/TestServlet.java
 
 		request.getRequestDispatcher("/test.jsp").forward(request, response);
 
