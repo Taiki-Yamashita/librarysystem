@@ -90,7 +90,15 @@
 						</c:forEach>
 					</td>
 					<td>
-						<c:out value="${circulation.bookId}"/>
+						<c:forEach items="${books}" var="book">
+							<c:if test="${book.id == circulation.bookId}">
+							<c:forEach items="${libraries }" var="library">
+								<c:if test="${book.libraryId == library.id }">
+								<c:out value="${library.name}"/>
+								</c:if>
+							</c:forEach>
+							</c:if>
+						</c:forEach>
 					</td>
 					<td>
 						<c:forEach items="${books}" var="book">
@@ -216,7 +224,15 @@
 						</c:forEach>
 					</td>
 					<td>
-						図書館
+						<c:forEach items="${books}" var="book">
+							<c:if test="${book.id == reservation.bookId}">
+							<c:forEach items="${libraries }" var="library">
+								<c:if test="${book.libraryId == library.id }">
+								<c:out value="${library.name}"/>
+								</c:if>
+							</c:forEach>
+							</c:if>
+						</c:forEach>
 					</td>
 					<td>
 					<c:forEach items="${books}" var="book">
