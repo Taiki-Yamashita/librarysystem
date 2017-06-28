@@ -55,14 +55,6 @@
 							</c:forEach>
 
 					</td>
-
-
-					<td><c:out value="${circulation.bookId}"/>
-						<c:forEach items="${books }" var="book">
-							<c:if test="${circulation.bookId == book.id }">${book.name }</c:if>
-						</c:forEach>
-
-					</td>
 					<td>
 						<c:forEach items="${books}" var="book">
 							<c:if test="${book.id == circulation.bookId}">
@@ -110,8 +102,6 @@
 						</c:forEach>
 					</td>
 					<td>
-
-
 						<form action = "reservingBook" method = "post">
 							<c:if test="${empty loginUser}"><input type="hidden" name="notLoginRanking" value="1">
 							<input type = "submit" value = "予約" />
@@ -136,7 +126,6 @@
 							<c:remove var="data" />
 						</c:if>
 						</form>
-
 					</td>
 					<td>
 						<form action = "favorite" method = "post">
@@ -191,8 +180,6 @@
 								</c:if>
 							</c:forEach>
 					</td>
-
-
 					<td><c:out value="${reservation.bookName }"/></td>
 					<td>
 						<c:forEach items="${books}" var="book">
@@ -269,9 +256,8 @@
 							<c:remove var="data" />
 						</c:if>
 						</form>
-
-					</td>
-					<td>
+						</td>
+						<td>
 						<form action = "favorite" method = "post">
 							<c:if test="${empty loginUser}"><input type="hidden" name="notLoginRanking" value="1">
 							<input type = "submit" value = "お気に入り" />
@@ -301,6 +287,5 @@
 		<c:if test="${empty reservations}">予約がありません</c:if>
 	<c:remove var="errorMessages" scope="session"/>
 		<c:remove var="loginErrorMessages" scope="session"/>
-
 	</body>
 </html>
