@@ -144,7 +144,6 @@ public class ManageBookServlet extends HttpServlet {
 			if(reservation!=null){	reservationCounts.add(Integer.parseInt(reservation.getCount()));
 			}
 		}
-		System.out.println(reservationCounts);
 		return reservationCounts;
 	}
 
