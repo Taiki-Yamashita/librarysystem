@@ -26,22 +26,25 @@
 		</tr>
 <c:forEach items="${books}" var="book">
 	<c:forEach items="${circulations}" var="circulation">
-		<c:if test="${circulation.bookId == book.id }">
+		<c:if test="${circulation.returning == 1 && loginUser.id == circulation.userId}">
+			<c:set var="flag" value="1"/>
+		</c:if>
+	</c:forEach>
 			<tr>
 				<td>${book.name}</td>
-				<c:if test="${book.lending == 1 }">
+				<c:if test="${book.lending == 1 && empty flag}">
 				<td>貸出中</td>
 				</c:if>
-				<c:if test="${book.lending != 1 }">
+				<c:if test="${book.lending != 1 && empty flag}">
 				<td>貸出可</td>
 				</c:if>
-				<c:if test="${book.lending != 1 }">
+				<c:if test="${flag == '1'}">
 				<td>貸出NG</td>
 				</c:if>
 
 	   	 		<td>
-	   	 			<c:if test="${book.lending == 1 }">
-		   	 			<form action="admin/lendingBook" method = "post">
+	   	 			<c:if test="${book.lending == 1 && empty flag}">
+		   	 			<form action="lendingBook" method = "post">
 		   	 				<input type = "hidden" id = "bookId" name = "bookId" value = "${book.id}" >
 		   	 				<input type = "hidden" id = "libraryId" name = "libraryId" value = "${book.libraryId}" >
 							<input type ="hidden" name = "userId" value = "${loginUser.id }" >
@@ -49,8 +52,8 @@
 							<input type = "submit" value = "返却" />
 		   	 			</form>
 	   	 			</c:if>
-					<c:if test="${book.lending != 1 }">
-		   	 			<form action = "admin/lendingBook" method = "post">
+					<c:if test="${book.lending != 1 && empty flag}">
+		   	 			<form action = "lendingBook" method = "post">
 		   	 				<input type = "hidden" id = "bookId" name = "bookId" value = "${book.id}" >
 		   	 				<input type = "hidden" id = "libraryId" name = "libraryId" value = "${book.libraryId}" >
 							<input type ="hidden" name = "userId" value = "${loginUser.id }" >
@@ -58,10 +61,13 @@
 							<input type = "submit" value = "貸出" />
 		   	 			</form>
 	   	 			</c:if>
+	   	 			<c:if test="${flag == '1'}">
+					<td>貸出NG</td>
+					</c:if>
 	   	 		</td>
    	 		</tr>
-   	 	</c:if>
-	</c:forEach>
+
+	<c:remove var="return"/>
 </c:forEach>
 </table>
 </body>
