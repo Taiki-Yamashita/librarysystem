@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
+
 import beans.User;
 import exception.NoRowsUpdatedRuntimeException;
 import exception.SQLRuntimeException;
@@ -168,14 +170,15 @@ public class UserDao {
 				ps.setInt(3, user.getId());
 			} else {
 				sql.append("  login_id = ?");
-				sql.append(", password = ?");
+				if(!StringUtils.isEmpty(user.getPassword())) {
+					sql.append(", password = ?");
+				}
 				sql.append(", name = ?");
 				sql.append(", address = ?");
 				sql.append(", tel = ?");
 				sql.append(", mail = ?");
 				sql.append(", point = ?");
 				sql.append(", library_id = ?");
-				sql.append(", register_date = ?");
 				sql.append(", stopping = ?");
 
 				sql.append(" WHERE");
@@ -184,16 +187,28 @@ public class UserDao {
 				ps = connection.prepareStatement(sql.toString());
 
 				ps.setString(1, user.getLoginId());
-				ps.setString(2, user.getPassword());
-				ps.setString(3, user.getName());
-				ps.setString(4, user.getAddress());
-				ps.setString(5, user.getTel());
-				ps.setString(6, user.getMail());
-				ps.setString(7, user.getPoint());
-				ps.setString(8, user.getLibraryId());
-				ps.setString(9, user.getRegisterDate());
-				ps.setString(10, "0");
-				ps.setInt(11, user.getId());
+				if(!StringUtils.isEmpty(user.getPassword())) {
+					ps.setString(2, user.getPassword());
+					ps.setString(3, user.getName());
+					ps.setString(4, user.getAddress());
+					ps.setString(5, user.getTel());
+					ps.setString(6, user.getMail());
+					ps.setString(7, user.getPoint());
+					ps.setString(8, user.getLibraryId());
+					ps.setString(9, user.getRegisterDate());
+					ps.setString(10, "0");
+					ps.setInt(11, user.getId());
+				} else {
+					ps.setString(1, user.getLoginId());
+					ps.setString(2, user.getName());
+					ps.setString(3, user.getAddress());
+					ps.setString(4, user.getTel());
+					ps.setString(5, user.getMail());
+					ps.setString(6, user.getPoint());
+					ps.setString(7, user.getLibraryId());
+					ps.setString(8, "0");
+					ps.setInt(9, user.getId());
+				}
 			}
 
 			int count = ps.executeUpdate();

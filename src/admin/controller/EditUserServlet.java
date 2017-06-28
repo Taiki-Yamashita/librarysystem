@@ -75,7 +75,6 @@ public class EditUserServlet extends HttpServlet{
 		editUser.setTel(request.getParameter("tel"));
 		editUser.setMail(request.getParameter("mail"));
 		editUser.setPoint(request.getParameter("point"));
-		editUser.setRegisterDate(request.getParameter("registerDate"));
 		editUser.setLibraryId(request.getParameter("libraryId"));
 		return editUser;
 	}
@@ -99,9 +98,7 @@ public class EditUserServlet extends HttpServlet{
 		}else if (!loginId.matches("\\w{6,20}")){
 			messages.add("ログインIDは半角英数字6～20文字で入力してください");
 		}
-		if (StringUtils.isBlank(password)) {
-			messages.add("パスワードを入力してください");
-		}else if (!password.matches("\\w{6,20}")) {
+		if (!StringUtils.isEmpty(password) && !password.matches("\\w{6,20}")) {
 			messages.add("パスワードは半角英数字6～20文字で入力してください");
 		}
 		if (StringUtils.isBlank(address)) {
