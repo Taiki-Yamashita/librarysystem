@@ -40,7 +40,7 @@
 				</c:if>
 
 	   	 		<td>
-	   	 			<c:if test="${book.lending == 1 && flag == '1'}">
+	   	 			<c:if test="${book.lending == 1}">
 		   	 			<form action="lendingBook" method = "post">
 		   	 				<input type = "hidden" id = "bookId" name = "bookId" value = "${book.id}" >
 		   	 				<input type = "hidden" id = "libraryId" name = "libraryId" value = "${book.libraryId}" >
@@ -49,7 +49,9 @@
 							<input type = "submit" value = "返却" />
 		   	 			</form>
 	   	 			</c:if>
-					<c:if test="${book.lending != 1 && empty flag}">
+
+					<c:if test="${book.lending != 1 && empty flag }">
+						<c:if test="${circulationSize<9}">
 		   	 			<form action = "lendingBook" method = "post">
 		   	 				<input type = "hidden" id = "bookId" name = "bookId" value = "${book.id}" >
 		   	 				<input type = "hidden" id = "libraryId" name = "libraryId" value = "${book.libraryId}" >
@@ -57,6 +59,8 @@
 							<input type = "hidden" name = "num" value = 1 >
 							<input type = "submit" value = "貸出" />
 		   	 			</form>
+		   	 			</c:if>
+		   	 			<c:if test="${circulationSize>8}">貸出NG</c:if>
 	   	 			</c:if>
 	   	 			<c:if test="${book.lending != 1 && flag == '1'}">
 	   	 				貸出NG
