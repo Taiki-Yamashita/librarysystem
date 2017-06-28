@@ -37,7 +37,7 @@
 		<table>
 			<tr>
 				<th>順位</th><th>貸出数</th><th>書籍</th><th>著者</th><th>出版社</th><th>カテゴリ</th>
-				<th>種類</th><th>図書館</th><th>状態</th><th>ISBN</th><th>予約</th>
+				<th>種類</th><th>図書館</th><th>状態</th><th>ISBN</th><th>予約</th><th>お気に入り</th>
 			</tr>
 			<c:forEach  begin="0" end="19" step="1" varStatus="status" items="${circulations}" var="circulation">
 				<tr>
@@ -53,7 +53,13 @@
 								</c:if>
 							</c:if>
 							</c:forEach>
-
+					</td>
+					<td>
+						<c:forEach items="${books}" var="book">
+							<c:if test="${book.id == circulation.bookId}">
+								<c:out value="${book.name}"/>
+							</c:if>
+						</c:forEach>
 					</td>
 					<td>
 						<c:forEach items="${books}" var="book">
@@ -163,7 +169,7 @@
 		<table>
 			<tr>
 				<th>順位</th><th>予約数</th><th>書籍</th><th>著者</th><th>出版社</th><th>カテゴリ</th>
-				<th>種類</th><th>図書館</th><th>状態</th><th>ISBN</th><th>予約</th>
+				<th>種類</th><th>図書館</th><th>状態</th><th>ISBN</th><th>予約</th><th>お気に入り</th>
 			</tr>
 			<c:forEach  begin="0" end="19" step="1" varStatus="status" items="${reservations}" var="reservation">
 				<tr>
