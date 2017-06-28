@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -47,8 +48,20 @@ public class EditUserServlet extends HttpServlet{
 			User editUser = getEditUser(request);
 			request.setAttribute("editUser", editUser);
 			new UserService().update(editUser);
+			response.sendRedirect("./manageUser");
 		}
-		response.sendRedirect("./manageUser");
+		else {
+			HttpSession session = request.getSession();
+			User editUser2 = getEditUser(request);
+			session.setAttribute("errorMessages", messages);
+
+			List<Library> libraries = new LibraryService().selectAll();
+			request.setAttribute("libraries", libraries);
+			request.setAttribute("editUser", editUser2);
+			//response.sendRedirect("./editUser");
+			request.getRequestDispatcher("./editUser.jsp").forward(request, response);
+		}
+
 	}
 
 	private User getEditUser(HttpServletRequest request) {
@@ -81,7 +94,7 @@ public class EditUserServlet extends HttpServlet{
 		if (StringUtils.isBlank(name)) {
 			messages.add("名前を入力してください");
 		}
-		if (StringUtils.isEmpty(loginId)) {
+		if (StringUtils.isBlank(loginId)) {
 			messages.add("ログインIDを入力してください");
 		}else if (!loginId.matches("\\w{6,20}")){
 			messages.add("ログインIDは半角英数字6～20文字で入力してください");

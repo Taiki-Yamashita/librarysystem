@@ -11,6 +11,12 @@
 <link href="css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+		<c:if test="${ not empty errorMessages }">
+			<c:forEach items="${errorMessages}" var="message">
+				<c:out value="${message}"/>
+			</c:forEach>
+			<c:remove var="errorMessages" scope="session"/>
+		</c:if>
 
 <a href = "manage">管理画面</a>
 
@@ -22,7 +28,7 @@
 	<label for="loginId">ログインID(半角英数字6～20文字)</label><br>
 	<input name="loginId" id="loginId" value="${editUser.loginId }"/><br />
 
-	<label for="password">パスワード()</label><br>
+	<label for="password">パスワード(半角英数字6～20文字)</label><br>
 	<input name="password" id="password" /><br />
 
 	<label for="name">名前</label><br>
@@ -43,14 +49,14 @@
 
 		<label for="libraryId">図書館</label><br>
 		<select name="libraryId">
-				<c:forEach items="${libraries}" var="library">
-					<c:if test="${editUser.libraryId == library.id }">
-						<option selected value="${library.id}">${library.name } </option>
-					</c:if>
-					<c:if test="${editUser.libraryId != library.id }">
-						<option  value="${library.id}">${library.name } </option>
-					</c:if>
-				</c:forEach>
+			<c:forEach items="${libraries}" var="library">
+				<c:if test="${editUser.libraryId == library.id }">
+					<option selected value="${library.id}">${library.name } </option>
+				</c:if>
+				<c:if test="${editUser.libraryId != library.id }">
+					<option  value="${library.id}">${library.name } </option>
+				</c:if>
+			</c:forEach>
 		</select>
 
 		<br>
