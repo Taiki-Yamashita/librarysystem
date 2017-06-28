@@ -28,9 +28,13 @@ public class TestServlet extends HttpServlet {
 		List<Book> books = new BookService().selectAll();
 		User loginUser = (User) request.getSession().getAttribute("loginUser");
 		List<Circulation> circulation = new CirculationService().selectLimit(loginUser.getId());
-		int circulationSize = circulation.size();
+		if(circulation != null){
+			int circulationSize=circulation.size();
+			System.out.println(circulationSize);
+			request.setAttribute("circulationSize", circulationSize);
+		}
 		List<Circulation> circulations = new CirculationService().selectMypage();
-		request.setAttribute("circulationSize", circulationSize);
+
 		request.setAttribute("books", books);
 		request.setAttribute("circulation", circulation);
 		request.setAttribute("circulations", circulations);
