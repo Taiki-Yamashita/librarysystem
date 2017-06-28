@@ -53,14 +53,14 @@ public class RenewPasswordServlet extends HttpServlet {
 
 	private boolean isValid(HttpServletRequest request) {
 
-		User loginUser = (User)request.getSession().getAttribute("loginUser");
 		List<String> messages = new ArrayList<String>();
 		String loginId = request.getParameter("loginId");
 		String newPassword = request.getParameter("newPassword");
 		String confirmedPassword = request.getParameter("confirmedPassword");
 
 		if(StringUtils.isBlank(loginId)) messages.add("ログインIDを入力してください");
-		else if(loginId.length() < 6) messages.add("ログインIDは6文字以上で登録してください");
+		else if(loginId.length() < 6) messages.add("ログインIDは6文字以上で入力してください");
+		else if(!loginId.matches("\\w{6,20}")) messages.add("ログインIDは半角英数字で入力してください");
 
 		if(StringUtils.isBlank(newPassword) && StringUtils.isBlank(confirmedPassword));
 		else if(StringUtils.isBlank(newPassword) || StringUtils.isBlank(confirmedPassword)){

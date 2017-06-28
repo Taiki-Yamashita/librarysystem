@@ -33,14 +33,14 @@
 					<td>
 						<c:if test="${empty bookStatus}">
 							<input type="radio" name="bookStatus" value="1" checked>全て
-							<input type="radio" name="bookStatus" value="2">棚保管中
+							<input type="radio" name="bookStatus" value="2">保管中
 							<input type="radio" name="bookStatus" value="3">貸出中
 						</c:if>
 						<c:if test="${not empty bookStatus}">
 							<c:if test="${bookStatus == 1}"><input type="radio" name="bookStatus" value="1" checked>全て</c:if>
 							<c:if test="${bookStatus != 1}"><input type="radio" name="bookStatus" value="1">全て</c:if>
-							<c:if test="${bookStatus == 2}"><input type="radio" name="bookStatus" value="2" checked>棚保管中</c:if>
-							<c:if test="${bookStatus != 2}"><input type="radio" name="bookStatus" value="2">棚保管中</c:if>
+							<c:if test="${bookStatus == 2}"><input type="radio" name="bookStatus" value="2" checked>保管中</c:if>
+							<c:if test="${bookStatus != 2}"><input type="radio" name="bookStatus" value="2">保管中</c:if>
 							<c:if test="${bookStatus == 3}"><input type="radio" name="bookStatus" value="3" checked>貸出中</c:if>
 							<c:if test="${bookStatus != 3}"><input type="radio" name="bookStatus" value="3">貸出中</c:if>
 						</c:if>
@@ -248,17 +248,17 @@
 				<c:if test="${sort == 2}"><input type="radio" name="sort" value="2" checked>古い順</c:if>
 				<c:if test="${sort != 2}"><input type="radio" name="sort" value="2">古い順</c:if>
 
-				<c:if test="${sort == 3}"><input type="radio" name="sort" value="3" checked>書籍順</c:if>
-				<c:if test="${sort != 3}"><input type="radio" name="sort" value="3">書籍順</c:if>
+				<c:if test="${sort == 3}"><input type="radio" name="sort" value="3" checked>書籍名順</c:if>
+				<c:if test="${sort != 3}"><input type="radio" name="sort" value="3">書籍名順</c:if>
 
-				<c:if test="${sort == 4}"><input type="radio" name="sort" value="4" checked>著者順</c:if>
-				<c:if test="${sort != 4}"><input type="radio" name="sort" value="4">著者順</c:if>
+				<c:if test="${sort == 4}"><input type="radio" name="sort" value="4" checked>著者名順</c:if>
+				<c:if test="${sort != 4}"><input type="radio" name="sort" value="4">著者名順</c:if>
 
-				<c:if test="${sort == 5}"><input type="radio" name="sort" value="5" checked>カテゴリ順</c:if>
-				<c:if test="${sort != 5}"><input type="radio" name="sort" value="5">カテゴリ順</c:if>
+				<c:if test="${sort == 5}"><input type="radio" name="sort" value="5" checked>カテゴリ名順</c:if>
+				<c:if test="${sort != 5}"><input type="radio" name="sort" value="5">カテゴリ名順</c:if>
 
-				<c:if test="${sort == 6}"><input type="radio" name="sort" value="6" checked>出版社順</c:if>
-				<c:if test="${sort != 6}"><input type="radio" name="sort" value="6">出版社順</c:if>
+				<c:if test="${sort == 6}"><input type="radio" name="sort" value="6" checked>出版社名順</c:if>
+				<c:if test="${sort != 6}"><input type="radio" name="sort" value="6">出版社名順</c:if>
 
 				<!-- freeWord -->
 				<input type="hidden" name="selectBox" value="${selectBoxId}">
@@ -327,7 +327,7 @@
 				</tr>
 				<c:forEach items="${books}" var="book" varStatus="count">
 					<c:if test="${book.id != 0}">
-						<c:if test="${count.index >= (pageNumber-1)*3 && count.index <= (pageNumber*3)-1}">
+						<c:if test="${count.index >= (pageNumber-1)*10 && count.index <= (pageNumber*10)-1}">
 							<tr>
 								<td><c:out value="${book.name}"/></td>
 								<td><c:out value="${book.author}"/></td>
