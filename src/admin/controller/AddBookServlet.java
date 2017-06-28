@@ -28,6 +28,7 @@ public class AddBookServlet extends HttpServlet {
 			HttpServletResponse response) throws IOException, ServletException {
 
 		List<Library> libraries = new LibraryService().selectAll();
+
 		String libraryId = request.getParameter("libraryId");
 
 		request.setAttribute("libraries", libraries);
