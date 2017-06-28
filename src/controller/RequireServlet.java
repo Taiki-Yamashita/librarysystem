@@ -14,7 +14,6 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.lang.StringUtils;
 
 import beans.Require;
-import beans.User;
 import service.RequireService;
 
 @WebServlet(urlPatterns = {"/require"})
@@ -26,15 +25,6 @@ public class RequireServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
 
-		User loginUser = (User) request.getSession().getAttribute("loginUser");
-		HttpSession session = request.getSession();
-		if(loginUser == null) {
-			List<String> messages = new ArrayList<String>();
-			messages.add("ログインしてください");
-			session.setAttribute("errorMessages", messages);
-			response.sendRedirect("./");
-			return;
-		}
 		request.getRequestDispatcher("/require.jsp").forward(request, response);
 	}
 

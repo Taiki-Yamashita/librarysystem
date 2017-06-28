@@ -20,6 +20,12 @@
 		</c:if>
 	</c:forEach>
 
+	<c:if test="${ not empty errorMessages }">
+		<c:forEach items="${errorMessages}" var="message">
+			<font color="#ff0000"><c:out value="${message}" /></font><br>
+		</c:forEach>
+	</c:if>
+
 	<c:if test="${not empty favorites && flag == '1'}">
 		<table>
 			<tr>
@@ -59,6 +65,7 @@
 									<input type = "hidden" name = "num" value =1>
 									<input type = "hidden" name = "reservation" value="${book.id}">
 									<input type = "hidden" name = "fromFavorite" value = "1" />
+									<c:if test="${not empty reservationMax}"><input type = "hidden" name = "reservationMax" value = "1" /></c:if>
 									<input type = "submit" value = "予約">
 								</form>
 							</c:if>
@@ -82,6 +89,9 @@
 	<c:if test="${empty flag}">
 	 	<h1>お気に入り未登録です</h1>
 	</c:if>
+
 	<c:remove var="flag"/>
+	<!-- エラーメッセージ -->
+	<c:remove var="errorMessages" scope="session"/>
 </body>
 </html>

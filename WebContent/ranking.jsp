@@ -37,7 +37,7 @@
 		<table>
 			<tr>
 				<th>順位</th><th>貸出数</th><th>書籍</th><th>著者</th><th>出版社</th><th>カテゴリ</th>
-				<th>種類</th><th>図書館</th><th>状態</th><th>ISBN</th><th>予約</th>
+				<th>種類</th><th>図書館</th><th>状態</th><th>ISBN</th><th>予約</th><th>お気に入り</th>
 			</tr>
 			<c:forEach  begin="0" end="19" step="1" varStatus="status" items="${circulations}" var="circulation">
 				<tr>
@@ -53,15 +53,13 @@
 								</c:if>
 							</c:if>
 							</c:forEach>
-
 					</td>
-
-
-					<td><c:out value="${circulation.bookId}"/>
-						<c:forEach items="${books }" var="book">
-							<c:if test="${circulation.bookId == book.id }">${book.name }</c:if>
+					<td>
+						<c:forEach items="${books}" var="book">
+							<c:if test="${book.id == circulation.bookId}">
+								<c:out value="${book.name}"/>
+							</c:if>
 						</c:forEach>
-
 					</td>
 					<td>
 						<c:forEach items="${books}" var="book">
@@ -92,7 +90,15 @@
 						</c:forEach>
 					</td>
 					<td>
-						<c:out value="${circulation.bookId}"/>
+						<c:forEach items="${books}" var="book">
+							<c:if test="${book.id == circulation.bookId}">
+							<c:forEach items="${libraries }" var="library">
+								<c:if test="${book.libraryId == library.id }">
+								<c:out value="${library.name}"/>
+								</c:if>
+							</c:forEach>
+							</c:if>
+						</c:forEach>
 					</td>
 					<td>
 						<c:forEach items="${books}" var="book">
@@ -110,8 +116,6 @@
 						</c:forEach>
 					</td>
 					<td>
-
-
 						<form action = "reservingBook" method = "post">
 							<c:if test="${empty loginUser}"><input type="hidden" name="notLoginRanking" value="1">
 							<input type = "submit" value = "予約" />
@@ -131,12 +135,12 @@
 							<input type = "hidden" name = "num" value =1>
 							<input type = "hidden" name = "reservation" value="${book.id}">
 							<input type = "hidden" name = "fromRanking" value = "1" >
+							<c:if test="${not empty reservationMax}"><input type="hidden" name="reservationMax" value="1"></c:if>
 							<input type = "submit" value = "予約" />
 							</c:if>
 							<c:remove var="data" />
 						</c:if>
 						</form>
-
 					</td>
 					<td>
 						<form action = "favorite" method = "post">
@@ -174,7 +178,7 @@
 		<table>
 			<tr>
 				<th>順位</th><th>予約数</th><th>書籍</th><th>著者</th><th>出版社</th><th>カテゴリ</th>
-				<th>種類</th><th>図書館</th><th>状態</th><th>ISBN</th><th>予約</th>
+				<th>種類</th><th>図書館</th><th>状態</th><th>ISBN</th><th>予約</th><th>お気に入り</th>
 			</tr>
 			<c:forEach  begin="0" end="19" step="1" varStatus="status" items="${reservations}" var="reservation">
 				<tr>
@@ -191,8 +195,6 @@
 								</c:if>
 							</c:forEach>
 					</td>
-
-
 					<td><c:out value="${reservation.bookName }"/></td>
 					<td>
 						<c:forEach items="${books}" var="book">
@@ -223,7 +225,15 @@
 						</c:forEach>
 					</td>
 					<td>
-						図書館
+						<c:forEach items="${books}" var="book">
+							<c:if test="${book.id == reservation.bookId}">
+							<c:forEach items="${libraries }" var="library">
+								<c:if test="${book.libraryId == library.id }">
+								<c:out value="${library.name}"/>
+								</c:if>
+							</c:forEach>
+							</c:if>
+						</c:forEach>
 					</td>
 					<td>
 					<c:forEach items="${books}" var="book">
@@ -269,9 +279,8 @@
 							<c:remove var="data" />
 						</c:if>
 						</form>
-
-					</td>
-					<td>
+						</td>
+						<td>
 						<form action = "favorite" method = "post">
 							<c:if test="${empty loginUser}"><input type="hidden" name="notLoginRanking" value="1">
 							<input type = "submit" value = "お気に入り" />
@@ -301,6 +310,5 @@
 		<c:if test="${empty reservations}">予約がありません</c:if>
 	<c:remove var="errorMessages" scope="session"/>
 		<c:remove var="loginErrorMessages" scope="session"/>
-
 	</body>
 </html>
