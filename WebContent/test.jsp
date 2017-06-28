@@ -25,7 +25,8 @@
 			<th></th>
 		</tr>
 <c:forEach items="${books}" var="book">
-
+	<c:forEach items="${circulations}" var="circulation">
+		<c:if test="${circulation.bookId == book.id }">
 			<tr>
 				<td>${book.name}</td>
 				<c:if test="${book.lending == 1 }">
@@ -33,6 +34,9 @@
 				</c:if>
 				<c:if test="${book.lending != 1 }">
 				<td>貸出可</td>
+				</c:if>
+				<c:if test="${book.lending != 1 }">
+				<td>貸出NG</td>
 				</c:if>
 
 	   	 		<td>
@@ -56,7 +60,8 @@
 	   	 			</c:if>
 	   	 		</td>
    	 		</tr>
-
+   	 	</c:if>
+	</c:forEach>
 </c:forEach>
 </table>
 </body>
