@@ -11,7 +11,10 @@
 <link href="css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+	<h1>図書システム借りたいナ☆</h1>
+	<h2>ユーザー登録画面</h2>
 
+	<a href = "./manageBook">本の情報管理</a>
 
 <c:if test="${ not empty errorMessages }">
 	<div class="errorMessages">
