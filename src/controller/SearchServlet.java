@@ -194,8 +194,8 @@ public class SearchServlet extends HttpServlet{
 	public List<String> getPageCount(int booksCount){
 
 		List<String> pageCountList = new ArrayList<>();
-		int pageCount = booksCount / 3 + 1;
-		if(booksCount % 3 == 0) pageCount--;
+		int pageCount = booksCount / 10 + 1;
+		if(booksCount % 10 == 0) pageCount--;
 
 		for(int i = 1; i <= pageCount; i++){
 			pageCountList.add(String.valueOf(i));

@@ -147,7 +147,7 @@ public class RankingDao {
 
 		PreparedStatement ps = null;
 		try {
-			String sql = "SELECT *, COUNT(*) as count FROM library_system.reservations where canceling=0  GROUP BY book_id ";
+			String sql = "SELECT *, COUNT(*) as count FROM library_system.reservations where canceling=0 AND delivering =0 GROUP BY book_id ";
 			ps = connection.prepareStatement(sql);
 
 

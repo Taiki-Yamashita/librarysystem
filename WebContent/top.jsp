@@ -59,9 +59,12 @@
 			</tr>
 		</table>
 
-		ログインするといろいろな機能がつかえます
+		<c:if test="${empty loginUser}">
+			ログインするといろいろな機能がつかえます
 
-		(*^◯^*)
+			(*^◯^*)
+		</c:if>
+
 
 		<br>
 		<c:if test="${loginUser.id == 0}">

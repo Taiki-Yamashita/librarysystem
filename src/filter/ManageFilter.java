@@ -27,14 +27,14 @@ public class ManageFilter implements Filter {
 			List<String> messages = new ArrayList<String>();
 			User loginUser = (User)session.getAttribute("loginUser");
 			if(loginUser == null) {
-				messages.add("指定されたURLは存在しません");
+				messages.add("アクセス権がありません");
 				session.setAttribute("errorMessages", messages);
 				((HttpServletResponse)response).sendRedirect("../");
 				return;
 			}
 			if (loginUser.getId() != 0 ){
 				/* まだ認証されていない */
-					messages.add("指定されたURLは存在しません");
+					messages.add("アクセス権がありません");
 					session.setAttribute("errorMessages", messages);
 					session.setAttribute("target", target);
 

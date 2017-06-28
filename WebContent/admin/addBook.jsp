@@ -28,17 +28,17 @@
 
 
 <form action = "./addBook"method = "post"><br />
-	<label for = "name">名前</label><br>
+	<label for = "name">名前</label>*必須<br>
 	<input name = "name" id = "name" value = "${newBook.name }"/><br />
 
-	<label for = "author">著者</label><br>
+	<label for = "author">著者</label>*必須<br>
 	<input name = "author" id = "author" value = "${newBook.author }"/><br />
 
-	<label for = "publisher">出版社</label><br>
+	<label for = "publisher">出版社</label>*必須<br>
 	<input name = "publisher" id = "publisher" value = "${newBook.publisher }"/><br />
 
 
-	<label for = "category">カテゴリ</label><br>
+	<label for = "category">カテゴリ</label>*必須<br>
 						<%
 							String[] checkBoxCategoryNumbers = {"1","2","3","4","5","6","7","8","9"};
 							session.setAttribute("checkBoxCategoryNumbers", checkBoxCategoryNumbers);
@@ -116,7 +116,7 @@
 
 
 
-	<label for = "type">種類</label><br>
+	<label for = "type">種類</label>*必須<br>
 				<%
 					String[] checkBoxTypeNumbers = {"1","2","3","4"};
 					session.setAttribute("checkBoxTypeNumbers", checkBoxTypeNumbers);
@@ -159,7 +159,7 @@
 
 
 
-	<label for = "library">図書館</label><br>
+	<label for = "library">図書館</label>*必須<br>
 				<%
 					String[] checkBoxLibraryNumbers = {"1","2","3","4","5"};
 					session.setAttribute("checkBoxLibraryNumbers", checkBoxLibraryNumbers);
@@ -207,13 +207,13 @@
 							</c:if>
 						</c:forEach><br>
 
-	<label for="shelfId">棚番号</label><br>
+	<label for="shelfId">棚番号</label>*必須<br>
 	<input name = "shelfId" id = "shelfId" value = "${newBook.shelfId }"/><br />
 
-	<label for = "isbnId">ISBN番号</label><br>
+	<label for = "isbnId">ISBN番号</label>*必須<br>
 	<input name = "isbnId" id = "isbnId" value = "${newBook.isbnId }"/><br />
 
-	<label for = "publishedDate">出版日</label><br>
+	<label for = "publishedDate">出版日</label>*必須<br>
 	<input name = "publishedDate" id = "publishedDate" value ="${publishedDate }"/>年
 	<input name = "publishedDate2" id = "publishedDate2" value ="${publishedDate2 }"/>月
 	<input name = "publishedDate3" id = "publishedDate3" value ="${publishedDate3 }"/>日

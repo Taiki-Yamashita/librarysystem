@@ -17,7 +17,13 @@ import javax.servlet.http.HttpSession;
 
 import beans.User;
 
+<<<<<<< HEAD
 @WebFilter(urlPatterns = {"/favorite", "/require", "/user/*", "/require"})
+=======
+
+@WebFilter(urlPatterns = {"/require", "/user/*", "/require"})
+
+>>>>>>> 40b2aad63428f52ed58b6ae3b91c2515f1b256ac
 public class LoginCheckFilter implements Filter {
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
