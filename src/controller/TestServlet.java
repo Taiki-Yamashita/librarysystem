@@ -1,4 +1,4 @@
-package admin.controller;
+package controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -10,7 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.Book;
+import beans.Circulation;
+import beans.User;
 import service.BookService;
+import service.CirculationService;
 
 @WebServlet(urlPatterns = {"/test"})
 public class TestServlet extends HttpServlet {
@@ -21,9 +24,17 @@ public class TestServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
 
-		List<Book> books = new BookService().selectAll();
 
+		List<Book> books = new BookService().selectAll();
+		User loginUser = (User) request.getSession().getAttribute("loginUser");
+		List<Circulation> circulation = new CirculationService().selectLimit(loginUser.getId());
+		int circulationSize = circulation.size();
+		List<Circulation> circulations = new CirculationService().selectMypage();
+		request.setAttribute("circulationSize", circulationSize);
 		request.setAttribute("books", books);
+		request.setAttribute("circulation", circulation);
+		request.setAttribute("circulations", circulations);
+
 
 		request.getRequestDispatcher("/test.jsp").forward(request, response);
 
