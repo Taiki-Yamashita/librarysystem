@@ -26,16 +26,16 @@
 
 		<form action="addUser" method="post">
 
-			<label for="name">名前</label><br>
+			<label for="name">名前</label>*必須<br>
 			<input name="name" value="${newUser.name}" id="name"/><br/>
 
-			<label for="loginId">ログインID</label><br>
+			<label for="loginId">ログインID</label>*必須<br>
 			<input name="loginId" value="${newUser.loginId}" id="loginId"/><br/>
 
-			<label for="password">パスワード</label><br>
-			<input name="password" value="${newUser.password}" id="password"/><br/>
+			<label for="password">パスワード</label>*必須<br>
+			<input name="password" type = "password" value="${newUser.password}" id="password"/><br/>
 
-			<label for="address">住所</label><br>
+			<label for="address">住所</label>*必須<br>
 			<input name="address" value="${newUser.address}" id="address"/><br/>
 
 			<label for="tel">電話番号</label><br>
@@ -44,7 +44,7 @@
 			<label for="mail">メールアドレス</label><br>
 			<input name="mail"  value="${newUser.mail}"  id="mail"/><br/>
 
-			<label for="libraryId">最寄り図書館</label><br>
+			<label for="libraryId">最寄り図書館</label>*必須<br>
 			<select name="libraryId" >
 				<option value="0">選択してください</option>
 				<c:forEach items="${libraries}" var="library">

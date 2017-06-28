@@ -54,6 +54,9 @@ public class ReceiveServlet extends HttpServlet {
 		//問い合わせ削除
 		if(!StringUtils.isEmpty(request.getParameter("deleteId"))) {
 			new RequireService().delete(request.getParameter("deleteId"));
+		}
+
+		if(request.getParameter("num") == null) {
 			response.sendRedirect("./receive");
 			return;
 		}
@@ -66,9 +69,17 @@ public class ReceiveServlet extends HttpServlet {
 
 			List<Require> selectedBooks = new RecieveService().getSelectedBooks(freeWord, num);
 
+			if(num.equals("0") && selectedBooks.isEmpty()){
+				request.getSession().setAttribute("errorMessages", "未読はありません");
+			}
+			if(num.equals("1") && selectedBooks.isEmpty()){
+				request.getSession().setAttribute("errorMessages", "既読はありません");
+			}
+
 			request.setAttribute("num", num);
 			request.setAttribute("freeWord", freeWord);
 			request.setAttribute("books", selectedBooks);
+			//response.sendRedirect("./receive");
 			//response.sendRedirect("./receive");
 			request.getRequestDispatcher("./receive.jsp").forward(request, response);
 			return;

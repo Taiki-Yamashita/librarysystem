@@ -54,6 +54,12 @@ function check(){
 		<input type="submit" value="絞込み" />
 	</form>
 
+	<c:if test="${ not empty errorMessages }">
+		<c:forEach items="${errorMessages}" var="message">
+			<font color="#ff0000"><c:out value="${message}" /></font><br>
+		</c:forEach>
+	</c:if>
+	<c:if test="${empty errorMessages }">
 
 	<form action="receive" method = "post" onSubmit="return check()">
 
@@ -162,5 +168,7 @@ function check(){
 		</table>
 		<button type="submit" value="edit">確認</button>
 	</form>
+	</c:if>
+	<c:remove var="errorMessages" scope="session"/>
 </body>
 </html>

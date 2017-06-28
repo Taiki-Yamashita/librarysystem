@@ -28,6 +28,7 @@ public class AddBookServlet extends HttpServlet {
 			HttpServletResponse response) throws IOException, ServletException {
 
 		List<Library> libraries = new LibraryService().selectAll();
+
 		String libraryId = request.getParameter("libraryId");
 
 		request.setAttribute("libraries", libraries);
@@ -95,10 +96,14 @@ public class AddBookServlet extends HttpServlet {
 		String publisher = request.getParameter("publisher");
 		String category = request.getParameter("category");
 		String type = request.getParameter("type");
-		String publishedDate = request.getParameter("publishedDate");
 		String libraryId = request.getParameter("libraryId");
 		String shelfId = request.getParameter("shelfId");
 		String isbnId = request.getParameter("isbnId");
+		String year = request.getParameter("publishedDate");
+		String month = request.getParameter("publishedDate2");
+		String day = request.getParameter("publishedDate3");
+		String publishedDate = new String(year + "-" + month + "-"+ day + " 00:00:00");
+
 
 		if(StringUtils.isBlank(name) == true) {
 				messages.add("名前を入力してください");
@@ -126,6 +131,9 @@ public class AddBookServlet extends HttpServlet {
 		}
 		if(StringUtils.isBlank(isbnId) == true) {
 			messages.add("ISBN番号を入力してください");
+		}
+		if(StringUtils.isEmpty(publishedDate) == true ) {
+			messages.add("日付のフォーマットが不正です");
 		}
 
 		if(messages.size() ==0) {
