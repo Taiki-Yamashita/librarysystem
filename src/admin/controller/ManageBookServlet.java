@@ -15,11 +15,11 @@ import admin.service.NotReturnedService;
 import beans.Book;
 import beans.Circulation;
 import beans.Library;
-import beans.Reservation;
+import beans.Ranking;
 import service.BookService;
 import service.CirculationService;
 import service.LibraryService;
-import service.ReservationService;
+import service.RankingService;
 
 @WebServlet(urlPatterns = {"/admin/manageBook"})
 public class ManageBookServlet extends HttpServlet {
@@ -30,10 +30,12 @@ public class ManageBookServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
 
+		List<Ranking> reservations = new RankingService().reservationAll();
+
 		List<Book> books = new BookService().selectAll();
 		List<Library> libraryList = new LibraryService().selectAll();
 		List<Book> shelfIdList = new BookService().selectShelfId();
-		List<Integer> reservationCounts = getReservationCount(books);
+		List<Integer> reservationCounts = getReservationCount(reservations);
 		List<Integer> notReturnedCounts = getNotReturnedCount(books);
 
 		request.setAttribute("reservationCounts", reservationCounts);
@@ -131,20 +133,19 @@ public class ManageBookServlet extends HttpServlet {
 		}
 	}
 
-	public List<Integer> getReservationCount(List<Book> books){
+	public List<Integer> getReservationCount(List<Ranking> reservations){
 
 		List<Integer> reservationCounts = new ArrayList<>();
-		for(Book book : books){
-			List<Reservation> reservationList = new ReservationService().select(book.getId());
-			if(reservationList == null){
+		for(Ranking reservation : reservations){
+			if(reservation==null){
 				reservationCounts.add(-1);
-			}else{
-				reservationCounts.add(reservationList.size());
 			}
-		}
-
-		return reservationCounts;
+			if(reservation!=null){	reservationCounts.add(Integer.parseInt(reservation.getCount()));
+			System.out.println(reservation.getCount());
+			}
+		}return reservationCounts;
 	}
+
 
 	public List<Integer> getNotReturnedCount(List<Book> books){
 

@@ -116,7 +116,7 @@
 				</tr>
 				<c:forEach items="${reservations}" var="reservation">
 
-					<c:if test="${reservation.userId == loginUser.id && reservation.canceling == 0}">
+					<c:if test="${reservation.userId == loginUser.id && reservation.canceling == 0 && reservation.delivering == 0}">
 						<tr>
 							<td>
 								<c:forEach items="${books}" var="book">
