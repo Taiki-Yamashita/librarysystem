@@ -11,25 +11,34 @@
 		<link href="./css/style.css" rel="stylesheet" type="text/css">
 	</head>
 	<body>
+		<h1>図書システム借りたいナ☆</h1>
 		<h2>検索</h2>
 
-		<!--
-			AND検索OR検索
-		 -->
+		<c:if test="${empty loginUser}">
+			<input type="button" onclick="location.href='./login'"value="ログイン">
+		</c:if>
 
-		<a href = "./">トップ</a>
-		<a href = "./favorite">お気に入り</a>
-		<a href = "./require">本のリクエスト</a>
-		<a href = "./admin/manage">管理画面</a>
-		<a href = "./introduction">本の紹介</a><br/>
+		<c:if test="${not empty loginUser}">
+			<input type="button" onclick="location.href='./logout'"value="ログアウト">
+		</c:if>
+		<br>
+
+		<table border="1">
+			<tr>
+				<td><input type="button" onclick="location.href='./'"value="トップ"></td>
+				<td><input type="button" onclick="location.href='./ranking'"value="ランキング"></td>
+				<td><input type="button" onclick="location.href='./user'"value="マイページ"></td>
+				<td><input type="button" onclick="location.href='./favorite'"value="お気に入り"></td>
+			</tr>
+		</table>
 
 		<hr width="1500px">
 
-		<p>◎検索</p>
+		<p>◎探す</p>
 		<form action="./search" method="GET">
 			<table>
 				<tr>
-					<td>【状態】</td>
+					<td>状態</td>
 					<td>
 						<c:if test="${empty bookStatus}">
 							<input type="radio" name="bookStatus" value="1" checked>全て
@@ -229,7 +238,10 @@
 						<input type="hidden" name="isSearching" value="1">
 						<input type="hidden" name="sort" value="0">
 						<input type="submit" value="絞り込む">
+
+						<input type="button" onclick="location.href='./search'"value="クリア">
 					</td>
+
 				</tr>
 			</table>
 		</form>
@@ -299,13 +311,10 @@
 			<hr width="1500px">
 		</c:if>
 
-		<p><input type="button" onclick="location.href='./search'"value="クリア"></p>
-
 		<c:if test="${ not empty errorMessages }">
 			<c:forEach items="${errorMessages}" var="message">
 				<font color="#ff0000"><c:out value="${message}" /></font><br>
 			</c:forEach>
-			<p><a href="./require">本をリクエストする</a></p>
 		</c:if>
 		<c:if test="${ not empty loginErrorMessages }">
 			<c:forEach items="${loginErrorMessages}" var="message">
@@ -524,6 +533,7 @@
 					</c:forEach>
 				</tr>
 			</table>
+			<p><a href="./require">本をリクエストする</a></p>
 		</c:if>
 
 		<!-- エラーメッセージ -->

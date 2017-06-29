@@ -8,12 +8,30 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>ランキング</title>
+		<link href="./css/styleOkada.css" rel="stylesheet" type="text/css">
 	</head>
 	<body>
-
-		<a href="./">トップ</a>
-
+		<h1>図書システムかりたいナ☆</h1>
 		<h2>人気ランキング</h2>
+
+
+		<c:if test="${empty loginUser}">
+			<input type="button" onclick="location.href='./login'"value="ログイン">
+		</c:if>
+
+		<c:if test="${not empty loginUser}">
+			<input type="button" onclick="location.href='./logout'"value="ログアウト">
+		</c:if>
+		<br>
+
+		<table border="1">
+			<tr>
+				<td><input type="button" onclick="location.href='./'"value="トップ"></td>
+				<td><input type="button" onclick="location.href='./search'"value="検索"></td>
+				<td><input type="button" onclick="location.href='./user'"value="マイページ"></td>
+				<td><input type="button" onclick="location.href='./favorite'"value="お気に入り"></td>
+			</tr>
+		</table>
 
 		<c:if test="${ not empty errorMessages }">
 			<div class="errorMessages">
@@ -34,7 +52,7 @@
 
 		貸出件数ランキング<br>
 		<c:if test="${not empty circulations }">
-		<table>
+		<table class="ranking">
 			<tr>
 				<th>順位</th><th>貸出数</th><th>書籍</th><th>著者</th><th>出版社</th><th>カテゴリ</th>
 				<th>種類</th><th>図書館</th><th>状態</th><th>ISBN</th><th>予約</th><th>お気に入り</th>
@@ -119,7 +137,7 @@
 						<form action = "reservingBook" method = "post">
 							<c:if test="${empty loginUser}">
 								<input type="hidden" name="notLoginRanking" value="1">
-								<input type = "submit" value = "予約" />
+								<input class="reserve" type = "submit" value = "予約" />
 							</c:if>
 							<c:if test="${not empty loginUser}">
 								<c:forEach items="${isReservations}" var="reservation">
@@ -147,7 +165,7 @@
 									<c:if test="${not empty lendingFlag}"><input type="hidden" name="lendingFlag" value="1"></c:if>
 									<c:remove var="lendingFlag" />
 
-									<input type = "submit" value = "予約" />
+									<input class="reserve" type = "submit" value = "予約" />
 								</c:if>
 								<c:remove var="data" />
 							</c:if>
@@ -157,7 +175,7 @@
 						<form action = "favorite" method = "post">
 							<c:if test="${empty loginUser}">
 								<input type="hidden" name="notLoginRanking" value="1">
-								<input type = "submit" value = "お気に入り" />
+								<input class="favorite" type = "submit" value = "お気に入り" />
 							</c:if>
 							<c:if test="${not empty loginUser}">
 								<c:forEach items="${isFavorites}" var="favorite">
@@ -170,7 +188,7 @@
 								<c:if test="${data != 0}">
 									<input type="hidden" value="${loginUser.id}" name="userId">
 									<input type="hidden" value="${circulation.bookId}" name="bookId">
-									<input type="submit"  value="お気に入り" />
+									<input class="favorite" type="submit"  value="お気に入り" />
 								</c:if>
 								<c:remove var="data" />
 							</c:if>
@@ -268,7 +286,7 @@
 
 
 							<c:if test="${empty loginUser}"><input type="hidden" name="notLoginRanking" value="1">
-							<input type = "submit" value = "予約" />
+							<input class="reserve" type = "submit" value = "予約" />
 							</c:if>
 							<c:if test="${not empty loginUser}">
 							<c:forEach items="${isReservations}" var="isReservation">
@@ -296,7 +314,7 @@
 								<c:if test="${not empty lendingFlag}"><input type="hidden" name="lendingFlag" value="1"></c:if>
 								<c:remove var="lendingFlag" />
 
-								<input type = "submit" value = "予約" />
+								<input class="reserve" type = "submit" value = "予約" />
 							</c:if>
 							<c:remove var="data" />
 						</c:if>
@@ -305,7 +323,7 @@
 						<td>
 						<form action = "favorite" method = "post">
 							<c:if test="${empty loginUser}"><input type="hidden" name="notLoginRanking" value="1">
-							<input type = "submit" value = "お気に入り" />
+							<input class="favorite" type = "submit" value = "お気に入り" />
 							</c:if>
 							<c:if test="${not empty loginUser}">
 								<c:forEach items="${isFavorites}" var="favorite">
@@ -318,7 +336,7 @@
 								<c:if test="${data != 0}">
 									<input type="hidden" value="${loginUser.id}" name="userId">
 									<input type="hidden" value="${reservation.bookId}" name="bookId">
-									<input type="submit"  value="お気に入り" />
+									<input class="favorite" type="submit"  value="お気に入り" />
 								</c:if>
 								<c:remove var="data" />
 							</c:if>
