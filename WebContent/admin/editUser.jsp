@@ -13,17 +13,17 @@
 <link href="../css/styleKuniyoshi.css" rel="stylesheet" type="text/css">
 </head>
 <body class="admin">
+<p><a href = "manage">管理画面</a></p>
 	<h1>図書システム借りたいナ☆</h1>
 	<h2>ユーザー登録画面</h2>
+	<div class="errorMessages">
 		<c:if test="${ not empty errorMessages }">
 			<c:forEach items="${errorMessages}" var="message">
-				<c:out value="${message}"/>
+				<c:out value="${message}"/><br>
 			</c:forEach>
 			<c:remove var="errorMessages" scope="session"/>
 		</c:if>
-
-<a href = "manage">管理画面</a>
-
+	</div>
 
 <form class="editUserForm" action="editUser"method="post"><br />
 

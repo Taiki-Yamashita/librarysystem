@@ -27,11 +27,10 @@
 		</script>
 	</head>
 	<body>
+	<p class="center"><a href="./manage">管理画面</a></p>
 		<h1>ユーザー編集</h1>
-		<p class="center"><a href="./manage">管理画面</a></p>
-
 	<div class="center">
-		<h3>検索</h3>
+		<h3>◎検索</h3>
 
 		<table border="1" class="manage">
 			<tr>

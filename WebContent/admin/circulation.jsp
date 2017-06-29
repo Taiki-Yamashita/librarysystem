@@ -12,7 +12,8 @@
 <title>貸し出し管理</title>
 </head>
 <body>
-	<a href="manageBook">本の情報一覧</a>
+	<p><a href="manageBook">本の情報一覧</a></p>
+	<h1>貸出履歴</h1>
 	<c:if test="${not empty circulations }">
 	<form action="circulation" method="post">
 		<table border="2" class="manage">
@@ -24,25 +25,26 @@
 				<th>期限</th>
 				<th></th>
 			</tr>
-			<c:forEach items = "${circulations}" var="circulation">
-				<tr>
+			<tr>
+				<c:forEach items = "${circulations}" var="circulation">
 					<td><c:out value = "${circulation.userName}" /></td>
 					<td><c:out value = "${circulation.bookName}" /></td>
 					<td><c:out value = "${circulation.libraryName}" /></td>
 					<td>
-					<fmt:parseDate var="date" value="${circulation.lentDate}" pattern="yyyy-MM-dd HH:mm:ss" />
-					<fmt:formatDate pattern = "yyyy年MM月dd日" value = "${date}" />
+						<fmt:parseDate var="date" value="${circulation.lentDate}" pattern="yyyy-MM-dd HH:mm:ss" />
+						<fmt:formatDate pattern = "yyyy年MM月dd日" value = "${date}" />
 					</td>
 					<td>
 					<fmt:parseDate var="date" value="${circulation.limitedDate}" pattern="yyyy-MM-dd HH:mm:ss" />
 					<fmt:formatDate pattern = "yyyy年MM月dd日" value = "${date}" />
+					</td>
 					<td>
 						<c:if test="${circulation.returning ==1}">
 							<c:out value="遅延中"></c:out>
 						</c:if>
-
-				</tr>
+					</td>
 			</c:forEach>
+			</tr>
 		</table>
 	</form>
 	</c:if>

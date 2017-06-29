@@ -10,10 +10,9 @@
 		<link href="../css/styleKuniyoshi.css" rel="stylesheet" type="text/css">
 	</head>
 	<body class="admin">
+	<p><a href = "./manageUser">ユーザー管理画面</a></p>
 		<h1>図書システム借りたいナ☆</h1>
 		<h2>ユーザー登録画面</h2>
-
-		<a href = "./manageUser">ユーザー管理画面</a><br>
 
 <c:if test="${ not empty errorMessages }">
 	<div class="errorMessages">

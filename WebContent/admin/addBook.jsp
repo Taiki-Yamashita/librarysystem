@@ -11,10 +11,11 @@
 <link href="../css/styleTaiki.css" rel="stylesheet" type="text/css">
 <link href="../css/styleKuniyoshi.css" rel="stylesheet" type="text/css">
 </head>
+
 <body class="admin">
+<p><a href = "./manageBook">本の情報管理</a></p>
 	<h1>図書システム借りたいナ☆</h1>
 	<h2>ユーザー登録画面</h2>
-	<a href = "./manageBook">本の情報管理</a>
 <c:if test="${ not empty errorMessages }">
 	<div class="errorMessages">
 		<c:forEach items="${errorMessages}" var="message">

@@ -29,9 +29,9 @@ function check(){
 </script>
 </head>
 <body>
+<p><a href = "manage">管理画面</a></p>
 	<h1>図書システム借りたいナ☆</h1>
 	<h2>問合わせ受取</h2>
-	<a href = "manage">管理画面</a>
 	<form action="receive" method = "post">
 		<c:if test="${empty num}">
 			<input type="radio" name="num" value="2" checked><label for = "num" >全て</label>
@@ -57,17 +57,17 @@ function check(){
 		<input type="text" name="freeWord" id="freeWord" value="${freeWord}">
 		<input class="focus" type="submit" value="絞込み" />
 	</form>
-
-	<c:if test="${ not empty errorMessages }">
-		<c:forEach items="${errorMessages}" var="message">
-			<font color="#ff0000"><c:out value="${message}" /></font><br>
-		</c:forEach>
-	</c:if>
+	<div class="errorMessages">
+		<c:if test="${ not empty errorMessages }">
+			<c:forEach items="${errorMessages}" var="message">
+				<c:out value="${message}" /><br>
+			</c:forEach>
+		</c:if>
+	</div>
 	<c:if test="${empty errorMessages }">
 
 	<form action="receive" method = "post" onSubmit="return check()">
-		<input class="exception" type="submit" value="実行" />
-
+		<input class="exception" type="submit" value="実行" /><br><br>
 		<table border="2" class="manage">
 
 

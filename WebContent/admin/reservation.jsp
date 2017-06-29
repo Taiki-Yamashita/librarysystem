@@ -11,8 +11,8 @@
 <title>予約管理</title>
 </head>
 <body>
-	<p>予約管理</p>
-	<p><a href="./manageBook">管理画面</a></p>
+<p><a href="./manageBook">管理画面</a></p>
+	<h1>予約一覧</h1>
 	<table border="2" class="manage">
 		<tr><th>予約者ID</th>
 			<th>予約者</th>
