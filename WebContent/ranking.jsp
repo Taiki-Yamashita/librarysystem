@@ -60,7 +60,9 @@
 				<th>種類</th><th>図書館</th><th>状態</th><th>ISBN</th><th>予約</th><th>お気に入り</th>
 			</tr>
 			<c:forEach  begin="0" end="19" step="1" varStatus="status" items="${circulations}" var="circulation">
-				<tr>
+				<c:if test="${status.count ==1 }"><tr class="winner"></c:if>
+				<c:if test="${status.count ==2 || status.count ==3}"><tr class="semiWinner"></c:if>
+				<c:if test="${status.count >3}"><tr ></c:if>
 					<td><c:out value="${status.count}"/>位</td>
 					<td>
 						<c:forEach items="${circulationCounts}" var="count" varStatus="statusCount">
@@ -212,7 +214,9 @@
 				<th>種類</th><th>図書館</th><th>状態</th><th>ISBN</th><th>予約</th><th>お気に入り</th>
 			</tr>
 			<c:forEach  begin="0" end="19" step="1" varStatus="status" items="${reservations}" var="reservation">
-				<tr>
+				<c:if test="${status.count ==1 }"><tr class="winner"></c:if>
+				<c:if test="${status.count ==2 || status.count ==3}"><tr class="semiWinner"></c:if>
+				<c:if test="${status.count >3}"><tr ></c:if>
 					<td><c:out value="${status.count}"/>位</td>
 					<td>
 							<c:forEach items="${reservationCounts}" var="count" varStatus="statusCount">

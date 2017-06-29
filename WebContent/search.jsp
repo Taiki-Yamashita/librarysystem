@@ -239,7 +239,7 @@
 						で
 						<input type="hidden" name="isSearching" value="1">
 						<input type="hidden" name="sort" value="0">
-						<input class="focus" type="submit" value="絞り込む">
+						<input class="focus" type="submit" value="絞込み">
 
 						<input class="clear" type="button" onclick="location.href='./search'"value="クリア">
 					</td>
@@ -308,7 +308,7 @@
 				<input type="hidden" name="isSearching" value="1">
 				<input type="hidden" name="bookStatus" value="${bookStatus}">
 
-				<input class="sort" type="submit" value="並び替える">
+				<input class="sort" type="submit" value="並び替え">
 			</form>
 			<hr width="1500px">
 		</c:if>

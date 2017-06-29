@@ -34,6 +34,11 @@ select {
 	font-size: 16px;
 }
 
+.form {
+	margin-left:120px;
+	font-size:16px;
+}
+
 
 ul.pageNav01 {
 	margin: 0 0 10px;
@@ -83,6 +88,7 @@ ul, menu, dir {
 .register {
 	margin-top: 3%;
 	font-size: 30px;
+	font-weight: 900;
     text-align: center;
     line-height: 1;
 	width: 150px;
@@ -107,15 +113,16 @@ ul, menu, dir {
 
 .focus {
 	margin-top: 3%;
+	font-weight: 900;
 	font-size: 20px;
     text-align: center;
     line-height: 1;
-	width: 100px;
-    height: 50px;
+	width: 160px;
+    height: 60px;
     display: inline-block;
     padding: 0.5em 1em;
     text-decoration: none;
-    background: #248;/*ボタン色*/
+    background: #668ad8;/*ボタン色*/
     color: #FFF;
     border-bottom: solid 4px #627295;
     border-radius: 14px;
@@ -132,6 +139,7 @@ ul, menu, dir {
 
 .exception {
 	margin-top: 3%;
+	font-weight: 900;
 	font-size: 20px;
     text-align: center;
     line-height: 1;
@@ -157,6 +165,7 @@ ul, menu, dir {
 
 .post {
 	margin-top: 3%;
+	font-weight: 900;
 	font-size: 20px;
     text-align: center;
     line-height: 1;
@@ -165,7 +174,7 @@ ul, menu, dir {
     display: inline-block;
     padding: 0.5em 1em;
     text-decoration: none;
-    background: #00f;;/*ボタン色*/
+    background: #668ad8;;/*ボタン色*/
     color: #FFF;
     border-bottom: solid 4px #627295;
     border-radius: 14px;
@@ -182,6 +191,7 @@ ul, menu, dir {
 
 .reserve {
 	font-size: 20px;
+	font-weight: 900;
     text-align: center;
     line-height: 1;
 	width: 100px;
@@ -189,7 +199,7 @@ ul, menu, dir {
     display: inline-block;
     padding: 0.5em 1em;
     text-decoration: none;
-    background: #668ad8;/*ボタン色*/
+    background: rgb(202, 0, 0);/*ボタン色*/
     color: #FFF;
     border-bottom: solid 4px #627295;
     border-radius: 14px;
@@ -206,6 +216,7 @@ ul, menu, dir {
 
 .favorite {
 	font-size: 15px;
+	font-weight: 900;
     text-align: center;
     line-height: 1;
 	width: 100px;
@@ -213,7 +224,7 @@ ul, menu, dir {
     display: inline-block;
     padding: 0.5em 1em;
     text-decoration: none;
-    background: #668ad8;/*ボタン色*/
+    background: #ff8000;/*ボタン色*/
     color: #FFF;
     border-bottom: solid 4px #627295;
     border-radius: 14px;
@@ -230,6 +241,7 @@ ul, menu, dir {
 
 .cancel {
 	font-size: 20px;
+	font-weight: 900;
     text-align: center;
     line-height: 1;
 	width: 100px;
@@ -253,6 +265,7 @@ ul, menu, dir {
 }
 .delete {
 	font-size: 20px;
+	font-weight: 900;
     text-align: center;
     line-height: 1;
 	width: 100px;
@@ -276,14 +289,15 @@ ul, menu, dir {
 }
 .clear {
 	font-size: 20px;
+	font-weight: 900;
     text-align: center;
     line-height: 1;
-	width: 100px;
-    height: 50px;
+	width: 160px;
+    height: 60px;
     display: inline-block;
     padding: 0.5em 1em;
     text-decoration: none;
-    background: #248;/*ボタン色*/
+    background: #668ad8;/*ボタン色*/
     color: #FFF;
     border-bottom: solid 4px #627295;
     border-radius: 14px;
@@ -300,10 +314,11 @@ ul, menu, dir {
 
 .sort {
 	font-size: 20px;
+	font-weight: 900;
     text-align: center;
     line-height: 1;
-	width: 100px;
-    height: 50px;
+	width: 160px;
+    height: 60px;
     display: inline-block;
     padding: 0.5em 1em;
     text-decoration: none;
@@ -324,6 +339,7 @@ ul, menu, dir {
 
 .userChange {
 	font-size: 20px;
+	font-weight: 900;
     text-align: center;
     line-height: 1;
 	width: 100px;
@@ -348,6 +364,7 @@ ul, menu, dir {
 
 .reday {
 	font-size: 20px;
+	font-weight: 900;
     text-align: center;
     line-height: 1;
 	width: 100px;
@@ -372,6 +389,7 @@ ul, menu, dir {
 
 button {
 	margin-top:3%;
+	font-weight: 900;
 	font-size: 20px;
     text-align: center;
     line-height: 1;
@@ -397,6 +415,7 @@ button {/*ボタンを押したとき*/
 
 .edit {
 	font-size: 20px;
+	font-weight: 900;
     text-align: center;
     line-height: 1;
 	width: 100px;
@@ -421,6 +440,7 @@ button {/*ボタンを押したとき*/
 
 .circulation {
 	font-size: 17px;
+	font-weight: 900;
     text-align: center;
     line-height: 1;
 	width: 100px;
@@ -445,6 +465,7 @@ button {/*ボタンを押したとき*/
 
 .reservation {
 	font-size: 17px;
+	font-weight: 900;
     text-align: center;
     line-height: 1;
 	width: 100px;
@@ -452,7 +473,7 @@ button {/*ボタンを押したとき*/
     display: inline-block;
     padding: 0.5em 1em;
     text-decoration: none;
-    background: #ff8080;/*ボタン色*/
+    background: #ff0000;/*ボタン色*/
     color: #FFF;
     border-bottom: solid 4px #627295;
     border-radius: 14px;
@@ -469,6 +490,7 @@ button {/*ボタンを押したとき*/
 
 .notReturn {
 	font-size: 17px;
+	font-weight: 900;
     text-align: center;
     line-height: 1;
 	width: 100px;
@@ -493,6 +515,7 @@ button {/*ボタンを押したとき*/
 
 .addBook {
 	font-size: 17px;
+	font-weight: 900;
     text-align: center;
     line-height: 1;
 	width: 200px;
@@ -517,6 +540,7 @@ button {/*ボタンを押したとき*/
 
 .fenix {
 	font-size: 20px;
+	font-weight: 900;
     text-align: center;
     line-height: 1;
 	width: 100px;
@@ -540,6 +564,7 @@ button {/*ボタンを押したとき*/
 }
 .stop {
 	font-size: 20px;
+	font-weight: 900;
     text-align: center;
     line-height: 1;
 	width: 100px;
@@ -561,4 +586,35 @@ button {/*ボタンを押したとき*/
     border-bottom: none;
     outline: none;
 }
-
+.request {
+	font-size: 20px;
+	font-weight: 900;
+    text-align: center;
+    line-height: 1;
+	width: 100px;
+    height: 50px;
+    display: inline-block;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    background: #248;/*ボタン色*/
+    color: #FFF;
+    border-bottom: solid 4px #627295;
+    border-radius: 14px;
+    cursor:pointer;
+}
+.request {/*ボタンを押したとき*/
+    -ms-transform: translateY(4px);
+    -webkit-transform: translateY(4px);
+    transform: translateY(4px);/*下に動く*/
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);/*影を小さく*/
+    border-bottom: none;
+    outline: none;
+}
+.winner{
+	font-weight:900;
+	font-size:20px;
+}
+.semiWinner{
+	font-weight:600;
+	font-size:18px;
+}
