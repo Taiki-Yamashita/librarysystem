@@ -8,7 +8,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>検索</title>
-		<link href="./css/style.css" rel="stylesheet" type="text/css">
+		<link href="./css/styleOkada.css" rel="stylesheet" type="text/css">
 	</head>
 	<body>
 		<h1>図書システム借りたいナ☆</h1>
@@ -237,9 +237,9 @@
 						で
 						<input type="hidden" name="isSearching" value="1">
 						<input type="hidden" name="sort" value="0">
-						<input type="submit" value="絞り込む">
+						<input class="focus" type="submit" value="絞り込む">
 
-						<input type="button" onclick="location.href='./search'"value="クリア">
+						<input class="clear" type="button" onclick="location.href='./search'"value="クリア">
 					</td>
 
 				</tr>
@@ -306,7 +306,7 @@
 				<input type="hidden" name="isSearching" value="1">
 				<input type="hidden" name="bookStatus" value="${bookStatus}">
 
-				<input type="submit" value="並び替える">
+				<input class="sort" type="submit" value="並び替える">
 			</form>
 			<hr width="1500px">
 		</c:if>
@@ -419,7 +419,7 @@
 												<c:if test="${not empty lendingFlag}"><input type="hidden" name="lendingFlag" value="1"></c:if>
 												<c:remove var="lendingFlag" />
 
-												<input type="submit"  value="予約" />
+												<input class="reserve" type="submit"  value="予約" />
 											</form>
 										</c:if>
 									</c:forEach>
@@ -470,7 +470,7 @@
 												<input type="hidden" value="${book.id}" name="bookId">
 												<input type="hidden" value="${pageNumber}" name="pageNumber">
 												<c:if test="${empty loginUser}"><input type="hidden" name="notLogin" value="1"></c:if>
-												<input type="submit"  value="お気に入り" />
+												<input class="favorite" type="submit"  value="お気に入り" />
 											</form>
 										</c:if>
 									</c:forEach>

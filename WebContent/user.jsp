@@ -8,6 +8,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>予約管理</title>
+		<link href="./css/styleOkada.css" rel="stylesheet" type="text/css">
 	</head>
 	<body>
 		<h1>図書システムかりたいナ☆</h1>
@@ -60,7 +61,7 @@
 					</table>
 				</td>
 				<td>
-					<input type="button" onclick="location.href='./renewPassword'"value="ログインID/パスワード編集">
+					<input type="button" class="userChange" onclick="location.href='./renewPassword'"value="ログインID/パスワード編集">
 					<p>住所などの変更は窓口まで</p>
 				</td>
 			</tr>
@@ -161,7 +162,7 @@
 										<input type = "hidden" name = "time" value = "${reservation.reservedDate }">
 										<c:if test="${reservation.canceling == 0 }">
 											<input type = "hidden" name = "num" value =1>
-											<input type = "submit" value = "キャンセル" />
+											<input class="cancel" type = "submit" value = "キャンセル" />
 										</c:if>
 									</form>
 								</td>
