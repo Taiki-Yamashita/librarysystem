@@ -7,7 +7,7 @@
 		<title>ユーザー登録</title>
 		<link href="../css/styleOkada.css" rel="stylesheet" type="text/css">
 	</head>
-	<body>
+	<body class="admin">
 		<h1>図書システム借りたいナ☆</h1>
 		<h2>ユーザー登録画面</h2>
 
@@ -25,7 +25,7 @@
 </c:if>
 
 
-		<form action="addUser" method="post">
+		<form class="addUserForm" action="addUser" method="post">
 
 			<label for="name">名前</label>*必須<br>
 			<input name="name" value="${newUser.name}" id="name"/><br/>
@@ -57,7 +57,7 @@
 					</c:if>
 				</c:forEach>
 			</select>
-		<input class ="register" type="submit" value="登録" />
+		<br><input class ="register" type="submit" value="登録" />
 		</form>
 	</body>
 </html>
