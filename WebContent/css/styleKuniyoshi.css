@@ -21,6 +21,7 @@
 	background-color: #248;
 	color: #fff;
 	border-style: none;
+	cursor : pointer;
 }
 
 .loginButton{
@@ -32,6 +33,7 @@
 	background-color: #248;
 	color: #fff;
 	border-style: none;
+	cursor : pointer;
 }
 
 .searchButton{
@@ -43,6 +45,7 @@
 	background-color: #248;
 	color: #fff;
 	border-style: none;
+	cursor : pointer;
 }
 
 p{
