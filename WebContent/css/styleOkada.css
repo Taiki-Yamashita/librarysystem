@@ -1,4 +1,23 @@
 @CHARSET "UTF-8";
+input {
+	font-size:16px;
+}
+.admin {
+    background-color: rgb(236, 255, 223);
+}
+.notificationForm{
+	margin-left: 120px;
+	font-size: 16px;
+}
+.addBookForm{
+	margin-left: 120px;
+	font-size: 16px;
+}
+
+.editBookForm{
+	margin-left: 120px;
+	font-size: 16px;
+}
 
 ul.pageNav01 {
 	margin: 0 0 10px;
@@ -55,7 +74,7 @@ ul, menu, dir {
     display: inline-block;
     padding: 0.5em 1em;
     text-decoration: none;
-    background: #668ad8;/*ボタン色*/
+    background: rgb(202, 0, 0);;/*ボタン色*/
     color: #FFF;
     border-bottom: solid 4px #627295;
     border-radius: 14px;
@@ -130,7 +149,7 @@ ul, menu, dir {
     display: inline-block;
     padding: 0.5em 1em;
     text-decoration: none;
-    background: #668ad8;/*ボタン色*/
+    background: #00f;;/*ボタン色*/
     color: #FFF;
     border-bottom: solid 4px #627295;
     border-radius: 14px;
@@ -310,3 +329,4 @@ ul, menu, dir {
     border-bottom: none;
     outline: none;
 }
+

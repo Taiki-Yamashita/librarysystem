@@ -10,7 +10,7 @@
 <title>本の編集</title>
 <link href="../css/styleOkada.css" rel="stylesheet" type="text/css">
 </head>
-<body>
+<body  class="admin">
 	<h1>図書システム借りたいナ☆</h1>
 	<h2>本の編集</h2>
 
@@ -18,17 +18,15 @@
 
 <c:if test="${ not empty errorMessages }">
 	<div class="errorMessages">
-		<ul>
-			<c:forEach items="${errorMessages}" var="message">
-				<li><c:out value="${message}" />
-				</c:forEach>
-				</ul>
+		<c:forEach items="${errorMessages}" var="message">
+			<c:out value="${message}" />
+		</c:forEach>
 	</div>
 	<c:remove var="errorMessages" scope="session"/>
 </c:if>
 
 
-<form action="editBook"method="post"><br />
+<form class="editBookForm" action="editBook"method="post"><br />
 
 	<input name="book_id" type="hidden" value="${editBook.id}"/>
 
