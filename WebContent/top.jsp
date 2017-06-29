@@ -41,14 +41,14 @@
 
 		<p>ログインするといろいろな機能がつかえます(*^◯^*)</p>
 		<c:if test="${loginUser.id == null}">
-			<table border="1" class="notLoginTopTable">
+			<table class="notLoginTopTable">
 
 				<tr>
 					<td rowspan="2"><input class="searchButton" type="button" onclick="location.href='./search'"value="検索"></td>
 					<td><input class="rankingButton" type="button" onclick="location.href='./ranking'"value="ランキング"></td>
 				</tr>
 				<tr>
-					<td><input type="button" onclick="location.href='./login'"value="ログイン"></td>
+					<td><input class="loginButton" type="button" onclick="location.href='./login'"value="ログイン"></td>
 				</tr>
 			</table>
 		</c:if>

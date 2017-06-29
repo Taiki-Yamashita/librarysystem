@@ -17,10 +17,7 @@ import javax.servlet.http.HttpSession;
 
 import beans.User;
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 1c054587102654e7ab1bd9a27e5f078a2a80fb4c
 @WebFilter(urlPatterns = {"/require", "/user/*", "/require","/renewPassword"})
 public class LoginCheckFilter implements Filter {
 
