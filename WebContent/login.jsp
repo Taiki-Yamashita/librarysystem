@@ -9,6 +9,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<link href="./css/styleTaiki.css" rel="stylesheet" type="text/css">
+		<link href="./css/styleOkada.css" rel="stylesheet" type="text/css">
 		<title>ログイン</title>
 	</head>
 	<body>
@@ -22,8 +23,8 @@
 			</div>
 			<c:remove var="errorMessages" scope="session"/>
 		</c:if>
-		<div class = "center">
-			<form action="./login" method="POST">
+		<div class="center">
+			<form action="./login" method="POST" class="default">
 				<table border="1" class="center">
 					<tr><td>ログインID:<input name="loginId" type="text"/></td></tr>
 					<tr><td>パスワード:<input name="password" type="password"/></td></tr>
@@ -38,6 +39,5 @@
 				</tr>
 			</table>
 		</div>
-
 	</body>
 </html>
