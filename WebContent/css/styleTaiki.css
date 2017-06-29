@@ -45,7 +45,13 @@ p.center {
 	text-align:center; /* インライン要素の中央揃え */
 }
 .center {
-	width:50%; /* 600px以下は幅いっぱいに広げる */
+	margin-left:auto;
+	margin-right:auto;
+	text-align:center; /* インライン要素の中央揃え */
+}
+table.centermanage {
+	width:100%; /* 600px以下は幅いっぱいに広げる */
+	height: 500px;
 	margin-left:auto;
 	margin-right:auto;
 	text-align:center; /* インライン要素の中央揃え */
@@ -55,4 +61,11 @@ table.center {
 	margin-left:auto;
 	margin-right:auto;
 	text-align:center; /* インライン要素の中央揃え */
+}
+a.right {
+	float:right;
+	margin-right:40px;
+}
+a.font {
+	font-size:30px;
 }

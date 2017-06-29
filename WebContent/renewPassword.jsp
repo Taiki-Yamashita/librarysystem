@@ -21,9 +21,9 @@
 		</div>
 		<c:remove var="errorMessages" scope="session"/>
 	</c:if>
-	<a href = "./logout">ログアウト</a>
-
-		<table border="1">
+	<a class="right" href = "./logout">ログアウト</a>
+	<br/>
+		<table border="1" class="center">
 			<tr>
 				<td><a href = "./">トップ</a></td>
 				<td><a href = "./search">検索</a></td>
@@ -32,20 +32,21 @@
 			</tr>
 		</table>
 
+	<div class="center">
+		<form action="renewPassword" method="post">
+			<input type="hidden" value="${loginUser.id}" id="id" name="id"/>
 
-	<form action="renewPassword" method="post">
-		<input type="hidden" value="${loginUser.id}" id="id" name="id"/>
+			<label for="loginId">ログインID</label><br>
+			<input name="loginId"  value="${loginUser.loginId}" id="loginId" /><br/>
 
-		<label for="loginId">ログインID</label><br>
-		<input name="loginId"  value="${loginUser.loginId}" id="loginId" /><br/>
+			<label for="newPassword">新しいパスワード</label><br>
+			<input name="newPassword" type="password" value="" id="newPassword" placeholder="未記入は変更なし"/><br/>
 
-		<label for="newPassword">新しいパスワード</label><br>
-		<input name="newPassword" type="password" value="" id="newPassword" placeholder="未記入は変更なし"/><br/>
+			<label for="confirmedPassword">確認用</label><br>
+			<input name="confirmedPassword" type="password" value="" id="confirmedPassword" placeholder="未記入は変更なし"/><br/>
 
-		<label for="confirmedPassword">確認用</label><br>
-		<input name="confirmedPassword" type="password" value="" id="confirmedPassword" placeholder="未記入は変更なし"/><br/>
-
-		<input type="submit" value="更新" />
-	</form>
+			<input type="submit" value="更新" />
+		</form>
+	</div>
 </body>
 </html>

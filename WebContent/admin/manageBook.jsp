@@ -7,7 +7,7 @@
 	<head>
 	<title>本情報管理</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<link href="./css/styleTaiki.css" rel="stylesheet" type="text/css">
+		<link href="../css/styleTaiki.css" rel="stylesheet" type="text/css">
 		<script type="text/javascript">
 		function check(){
 
@@ -25,9 +25,10 @@
 		</script>
 	</head>
 	<body>
-	<p><a href="./manage">管理画面</a></p>
+	<p class="center"><a href="./manage">管理画面</a></p>
+	<div class="center">
 		<p>◎検索</p>
-		<table border=1>
+		<table border=1 class="center">
 			<tr>
 				<td>
 					<form action="./manageBook" method="GET">
@@ -201,8 +202,7 @@
 				</td>
 			</tr>
 		</table>
-
-
+	</div>
 
 		<p>◎本リスト</p>
 

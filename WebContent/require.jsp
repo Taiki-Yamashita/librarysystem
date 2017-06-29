@@ -11,22 +11,19 @@
 <title>リクエスト</title>
 </head>
 <body>
-	<a href = "./">トップ</a>
-
 	<h1>リクエスト</h1>
 
 		<c:if test="${ not empty errorMessages }">
 			<div class="errorMessages">
-				<ul>
-					<c:forEach items="${errorMessages}" var="message">
-						<li><c:out value="${message}" />
-					</c:forEach>
-				</ul>
+				<c:forEach items="${errorMessages}" var="message">
+					<c:out value="${message}" />
+				</c:forEach>
 			</div>
 			<c:remove var="errorMessages" scope="session"/>
 		</c:if>
-		<a href = "./logout">ログアウト</a>
-		<table border="1">
+		<a href = "./logout" class="right">ログアウト</a>
+		<br/>
+		<table border="1" class="center">
 			<tr>
 				<td><a href = "./">トップ</a></td>
 				<td><a href = "./search">検索</a></td>
@@ -34,25 +31,27 @@
 				<td><a href = "./user">マイページ</a></td>
 			</tr>
 		</table>
+		<div class="center">
+			<form action="require" method="post">
 
-		<form action="require" method="post">
+				<label for="userName">申請者:</label>
+				<c:out value="${loginUser.name}"></c:out><br/>
+				<input type="hidden" name="userName" value="${loginUser.name}">
 
-			<label for="userName">申請者:</label>
-			<c:out value="${loginUser.name}"></c:out><br/>
-			<input type="hidden" name="userName" value="${loginUser.name}">
+				<label for="bookName">書籍名:</label>
+				<input name="bookName" value="${newRequire.bookName}"/>*必須<br/>
 
-			<label for="bookName">書籍名:</label>
-			<input name="bookName" value="${newRequire.bookName}"/>*必須<br/>
+				<label for="author">著者:</label>
+				<input name="author" value="${newRequire.author}"/><br/>
 
-			<label for="author">著者:</label>
-			<input name="author" value="${newRequire.author}"/><br/>
+				<label for="publisher">出版社:</label>
+				<input name="publisher"  value="${newRequire.publisher}"/><br/>
 
-			<label for="publisher">出版社:</label>
-			<input name="publisher"  value="${newRequire.publisher}"/><br/>
-
-			<pre><textarea name="comment" rows="10" cols="100"><c:out value="${newRequire.comment}"/></textarea></pre>
-			（500文字以下で入力してください）
-			<input type="submit" value="申請" />
-		</form>
+				<label for="comment">備考:</label>
+				<pre><textarea name="comment" rows="10" cols="100"><c:out value="${newRequire.comment}"/></textarea></pre>
+				（500文字以下で入力してください）
+				<input type="submit" value="申請" />
+			</form>
+		</div>
 </body>
 </html>

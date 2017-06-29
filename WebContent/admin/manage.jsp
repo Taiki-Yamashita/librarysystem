@@ -8,17 +8,18 @@
 <head>
 <title>管理画面</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="./css/styleTaiki.css" rel="stylesheet" type="text/css">
+<link href="../css/styleTaiki.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-	<p><a href = "../">トップ画面</a></p>
-		<table border="1" class="center">
+	<p class="center"><a href = "../">トップ画面</a></p>
+		<table border="1" class="centermanage">
 			<tr>
-				<td><a href = "./manageUser">ユーザー情報管理</a></td>
-				<td><a href = "./manageBook">本の情報管理</a></td>
+				<td><a class="font" href = "./manageUser">ユーザー情報管理</a></td>
+				<td><a class="font" href = "./manageBook">本の情報管理</a></td>
 			</tr>
-				<tr><td><a href = "./receive">問い合わせ受取</a></td>
-				<td><a href = "./notification">お知らせ投稿</a></td>
+			<tr>
+				<td><a class="font" href = "./receive">問い合わせ受取</a></td>
+				<td><a class="font" href = "./notification">お知らせ投稿</a></td>
 			</tr>
 		</table>
 </body>
