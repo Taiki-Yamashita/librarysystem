@@ -9,7 +9,7 @@
 <title>本登録</title>
 <link href="../css/styleOkada.css" rel="stylesheet" type="text/css">
 </head>
-<body>
+<body class="admin">
 	<h1>図書システム借りたいナ☆</h1>
 	<h2>ユーザー登録画面</h2>
 	<a href = "./manageBook">本の情報管理</a>
@@ -22,7 +22,7 @@
 	<c:remove var="errorMessages" scope="session"/>
 </c:if>
 <div class=addBookText></div>
-<form action = "./addBook"method = "post" name="register"><br />
+<form class="addBookForm" action = "./addBook"method = "post" name="register"><br />
 	<label for = "name">名前</label>*必須<br>
 	<input name = "name" id = "name" value = "${newBook.name }"/><br />
 
@@ -200,7 +200,7 @@
 	<label for = "publishedDate">出版日</label>*必須<br>
 	<input name = "publishedDate" id = "publishedDate" value ="${publishedDate }"/>年
 	<input name = "publishedDate2" id = "publishedDate2" value ="${publishedDate2 }"/>月
-	<input name = "publishedDate3" id = "publishedDate3" value ="${publishedDate3 }"/>日
+	<input name = "publishedDate3" id = "publishedDate3" value ="${publishedDate3 }"/>日<br>
 	<input class ="register" type="submit" value="登録" />
 	</form>
 </body>

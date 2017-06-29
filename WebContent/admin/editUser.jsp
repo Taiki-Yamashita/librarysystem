@@ -10,7 +10,7 @@
 <title>ユーザーの編集</title>
 <link href="../css/styleOkada.css" rel="stylesheet" type="text/css">
 </head>
-<body>
+<body class="admin">
 	<h1>図書システム借りたいナ☆</h1>
 	<h2>ユーザー登録画面</h2>
 		<c:if test="${ not empty errorMessages }">
@@ -23,7 +23,7 @@
 <a href = "manage">管理画面</a>
 
 
-<form action="editUser"method="post"><br />
+<form class="editUserForm" action="editUser"method="post"><br />
 
 	<input name="id" type="hidden" value="${editUser.id}"/>
 
@@ -67,13 +67,15 @@
 		<input type="hidden" name="registerDate" id="registerDate" value="${editUser.registerDate }"/>
 		<fmt:parseDate var="date" value="${editUser.registerDate}" pattern="yyyy-MM-dd HH:mm:ss" />
 		<fmt:formatDate pattern = "yyyy年MM月dd日" value = "${date}" />
-			<input class ="register" type="submit" value="登録" />
-</form>
-<form action="renewUser" method="post">
-	<input type="hidden" name=renewDate >
-	<input type="hidden" name=renewUserId value="${editUser.id}">
-	<input type="hidden" name=renewUserLoginId value="${editUser.loginId}">
-	<button type="submit" name="renew" >期限更新</button>
-</form>
+	</form>
+	<div class="edit">
+		<input class ="register" type="submit" value="登録" />
+		<form action="renewUser" method="post">
+			<input type="hidden" name=renewDate >
+			<input type="hidden" name=renewUserId value="${editUser.id}">
+			<input type="hidden" name=renewUserLoginId value="${editUser.loginId}">
+			<button type="submit" name="renew" >期限更新</button>
+		</form>
+	</div>
 </body>
 </html>
