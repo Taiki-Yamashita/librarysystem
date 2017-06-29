@@ -201,7 +201,6 @@
 	<input name = "publishedDate" id = "publishedDate" value ="${publishedDate }"/>年
 	<input name = "publishedDate2" id = "publishedDate2" value ="${publishedDate2 }"/>月
 	<input name = "publishedDate3" id = "publishedDate3" value ="${publishedDate3 }"/>日
-	<br>
 	<input class ="register" type="submit" value="登録" />
 	</form>
 </body>
