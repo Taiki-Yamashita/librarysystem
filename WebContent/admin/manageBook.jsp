@@ -28,8 +28,8 @@
 	<body>
 	<p class="center"><a href="./manage">管理画面</a></p>
 	<div class="center">
-		<p>◎検索</p>
-		<table border=1 class="center">
+		<h2>◎検索</h2>
+		<table border=1 class="manage">
 			<tr>
 				<td>
 					<form action="./manageBook" method="GET">
@@ -214,8 +214,21 @@
 		</c:if>
 
 		<c:if test="${not empty books}">
-			<table>
-				<tr><th>名前</th><th>著者</th><th>出版社</th><th>カテゴリ</th><th>種類</th><th>図書館</th><th>棚番号</th><th>出版日</th><th>本の状態</th><th>予約数</th><th>延滞</th></tr>
+			<table border="2" class="manage">
+				<tr>
+					<th>名前</th>
+					<th>著者</th>
+					<th>出版社</th>
+					<th>カテゴリ</th>
+					<th>種類</th>
+					<th>図書館</th>
+					<th>棚番号</th>
+					<th>出版日</th>
+					<th>本の状態</th>
+					<th>予約数</th>
+					<th>延滞</th>
+				</tr>
+
 				<c:forEach items="${books}" var="book" varStatus="statusBook">
 					<tr>
 						<td>${book.name}</td>

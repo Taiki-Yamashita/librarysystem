@@ -30,9 +30,9 @@
 		<p class="center"><a href="./manage">管理画面</a></p>
 
 	<div class="center">
-		<p>◎検索</p>
+		<h2>◎検索</h2>
 
-		<table border="1" class="center">
+		<table border="1" class="manage">
 			<tr>
 				<td>
 					<form action="./manageUser" method="GET">
@@ -98,7 +98,7 @@
 		</c:if>
 
 		<c:if test="${not empty users}">
-			<table>
+			<table border="2" class="manage">
 				<tr>
 					<th>ID</th>
 					<th>ログインID</th>
