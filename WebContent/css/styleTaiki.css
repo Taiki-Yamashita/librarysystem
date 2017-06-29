@@ -47,4 +47,9 @@ table.manage {
 	text-align:center; /* インライン要素の中央揃え */
 	border: 10px solid #800040;
 }
+table.form {
+	width:100%; /* 600px以下は幅いっぱいに広げる */
+
+	text-align:left; /* インライン要素の中央揃え */
+}
 

@@ -9,6 +9,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>ランキング</title>
 		<link href="./css/styleOkada.css" rel="stylesheet" type="text/css">
+		<link href="./css/styleTaiki.css" rel="stylesheet" type="text/css">
 	</head>
 	<body>
 		<h1>図書システムかりたいナ☆</h1>
@@ -43,16 +44,16 @@
 			</div>
 			<c:remove var="errorMessages" scope="session"/>
 		</c:if>
-
+	<div class="errorMessages">
 		<c:if test="${ not empty loginErrorMessages }">
 			<c:forEach items="${loginErrorMessages}" var="message">
-				<font color="#ff0000"><c:out value="${message}" /></font><br>
+				<c:out value="${message}" /><br>
 			</c:forEach>
 		</c:if>
-
+	</div>
 		貸出件数ランキング<br>
 		<c:if test="${not empty circulations }">
-		<table class="ranking">
+		<table border="2" class="manage">
 			<tr>
 				<th>順位</th><th>貸出数</th><th>書籍</th><th>著者</th><th>出版社</th><th>カテゴリ</th>
 				<th>種類</th><th>図書館</th><th>状態</th><th>ISBN</th><th>予約</th><th>お気に入り</th>
@@ -204,7 +205,7 @@
 		<br>
 		予約件数ランキング<br>
 		<c:if test="${not empty reservations }">
-		<table>
+		<table border="2" class="manage">
 			<tr>
 				<th>順位</th><th>予約数</th><th>書籍</th><th>著者</th><th>出版社</th><th>カテゴリ</th>
 				<th>種類</th><th>図書館</th><th>状態</th><th>ISBN</th><th>予約</th><th>お気に入り</th>

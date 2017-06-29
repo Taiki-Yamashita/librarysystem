@@ -9,6 +9,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>検索</title>
 		<link href="./css/styleOkada.css" rel="stylesheet" type="text/css">
+		<link href="./css/styleTaiki.css" rel="stylesheet" type="text/css">
 	</head>
 	<body>
 		<h1>図書システム借りたいナ☆</h1>
@@ -329,10 +330,18 @@
 		</c:if>
 
 		<c:if test="${not empty books}">
-			<table border="1">
+			<table border="2" class="manage">
 				<tr>
-					<th>書籍</th><th>著者</th><th>出版日</th><th>カテゴリ</th><th>種類</th>
-					<th>図書館</th><th>状態</th><th>ISBN番号</th><th>予約</th><th>お気に入り</th>
+					<th>書籍</th>
+					<th>著者</th>
+					<th>出版日</th>
+					<th>カテゴリ</th>
+					<th>種類</th>
+					<th>図書館</th>
+					<th>状態</th>
+					<th>ISBN番号</th>
+					<th>予約</th>
+					<th>お気に入り</th>
 				</tr>
 				<c:forEach items="${books}" var="book" varStatus="count">
 					<c:if test="${book.id != 0}">

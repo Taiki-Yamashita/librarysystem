@@ -29,7 +29,7 @@
 	<p class="center"><a href="./manage">管理画面</a></p>
 	<div class="center">
 		<h2>◎検索</h2>
-		<table border=1 class="manage">
+		<table border="2" class="manage">
 			<tr>
 				<td>
 					<form action="./manageBook" method="GET">
