@@ -1,9 +1,36 @@
 @CHARSET "UTF-8";
 
-/*未ログイン時のトップページ*/
-.notLoginTopTable {
+/*トップ画面*/
+
+.subButton{
+	margin-left : auto;
+}
+
+.menuBar{
+	width : 79%;
+	margin-left : auto;
+	margin-right : auto;
+}
+.menuBar tr td{
+	width : 200px;
+	text-align : center;
+}
+
+.menuBar input{
+	width : 100%;
+	background-color: #ff8000;
+	color: #fff;
+	border-style: none;
+	cursor : pointer;
+}
+
+p{
+	text-align: center;
+}
+
+.topTable {
 	width: 80%;
-	height: 200px;
+	height: 300px;
 	border-collapse: separate;
 	border-spacing: 5px;
 	border-color: red;
@@ -12,12 +39,38 @@
 	text-align: center;
 }
 
-.rankingButton{
-	font-size: 30px;
-	width : 300px;
-	height : 140px;
+/*ログイン時のトップページ*/
+.loginedSearchButton{
+	font-size: 70px;
+	width : 100%;
+	height : 300px;
 	font-weight: bold;
-	padding: 10px 30px;
+	padding: 10px 105px;
+	background-color: #248;
+	color: #fff;
+	border-style: none;
+	cursor : pointer;
+}
+
+.loginedRankingButton{
+	font-size: 70px;
+	width : 100%;
+	height : 300px;
+	font-weight: bold;
+	padding: 10px 0px;
+	background-color: #248;
+	color: #fff;
+	border-style: none;
+	cursor : pointer;
+}
+
+/*未ログイン時のトップページ*/
+.rankingButton{
+	font-size: 40px;
+	width : 100%;
+	height : 210px;
+	font-weight: bold;
+	padding: 10px 0px;
 	background-color: #248;
 	color: #fff;
 	border-style: none;
@@ -25,11 +78,11 @@
 }
 
 .loginButton{
-	font-size: 30px;
-	width : 300px;
-	height : 60px;
+	font-size: 40px;
+	width : 100%;
+	height : 90px;
 	font-weight: bold;
-	padding: 10px 30px;
+	padding: 10px 0px;
 	background-color: #248;
 	color: #fff;
 	border-style: none;
@@ -38,18 +91,14 @@
 
 .searchButton{
 	font-size: 70px;
-	width : 300px;
-	height : 205px;
+	width : 100%;
+	height : 305px;
 	font-weight: bold;
 	padding: 10px 30px;
 	background-color: #248;
 	color: #fff;
 	border-style: none;
 	cursor : pointer;
-}
-
-p{
-	text-align: center;
 }
 
 /*お知らせ*/
