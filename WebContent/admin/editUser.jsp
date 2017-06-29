@@ -68,7 +68,7 @@
 		<fmt:parseDate var="date" value="${editUser.registerDate}" pattern="yyyy-MM-dd HH:mm:ss" />
 		<fmt:formatDate pattern = "yyyy年MM月dd日" value = "${date}" />
 	</form>
-	<div class="edit">
+	<div class="set">
 		<input class ="register" type="submit" value="登録" />
 		<form action="renewUser" method="post">
 			<input type="hidden" name=renewDate >

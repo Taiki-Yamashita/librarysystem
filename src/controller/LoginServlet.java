@@ -44,7 +44,7 @@ public class LoginServlet extends HttpServlet{
 
 		User user = new UserService().getLoginUser(loginId, password);
 
-		if(user == null){
+		if(user == null || user.getStopping().matches("1")){
 			messages.add("ログインに失敗しました");
 			request.getSession().setAttribute("errorMessages", messages);
 			return false;

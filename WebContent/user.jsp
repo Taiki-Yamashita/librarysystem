@@ -9,13 +9,14 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>予約管理</title>
 		<link href="./css/styleOkada.css" rel="stylesheet" type="text/css">
+		<link href="./css/styleTaiki.css" rel="stylesheet" type="text/css">
 	</head>
 	<body>
 		<h1>図書システムかりたいナ☆</h1>
 		<h2>${loginUser.name}さんのマイページ</h2>
 		<input type="button" onclick="location.href='./logout'"value="ログアウト">
 
-		<table border="1">
+		<table border="2" class="center">
 			<tr>
 				<td><input type="button" onclick="location.href='./'"value="トップ"></td>
 				<td><input type="button" onclick="location.href='./search'"value="検索"></td>
@@ -25,25 +26,25 @@
 		</table>
 
 		<p>登録情報</p>
-		<table border="1">
+		<table border="2" class="manage">
 			<tr>
 				<td>
 					<!-- ユーザー情報 -->
 					<table>
 						<tr>
-							<th>住所</th>
+							<th>住所:</th>
 							<td>${loginUser.address}</td>
 						</tr>
 						<tr>
-							<th>電話番号</th>
+							<th>電話番号:</th>
 							<td>${loginUser.tel}</td>
 						</tr>
 						<tr>
-							<th>メールアドレス</th>
+							<th>メールアドレス:</th>
 							<td>${loginUser.mail}</td>
 						</tr>
 						<tr>
-							<th>受取図書館</th>
+							<th>受取図書館:</th>
 							<td>
 								<c:forEach items="${libraries}" var="library">
 									<c:if test="${library.id == loginUser.libraryId}">${library.name}</c:if>
@@ -51,11 +52,14 @@
 							</td>
 						</tr>
 						<tr>
-							<th>アカウントの有効期限</th>
-							<td>${loginUser.registerDate}(現在は登録日)</td>
+							<th>アカウントの有効期限:</th>
+							<td>
+								<fmt:parseDate var="date" value="${loginUser.registerDate}(現在は登録日)" pattern="yyyy-MM-dd HH:mm:ss" />
+								<fmt:formatDate pattern = "yyyy年MM月dd日" value = "${date}" />
+							</td>
 						</tr>
 						<tr>
-							<th>ポイント</th>
+							<th>ポイント:</th>
 							<td>${loginUser.point}</td>
 						</tr>
 					</table>
@@ -77,7 +81,7 @@
 		</c:forEach>
 		<c:if test="${not empty flag}">
 			<h4>借りている本の一覧</h4>
-			<table>
+			<table border="2" class="manage">
 				<tr>
 					<th>本の名前</th>
 					<th>貸出日</th>
@@ -128,7 +132,7 @@
 
 		<c:if test="${not empty flag2}">
 			<h4>予約一覧</h4>
-				<table>
+				<table border="2" class="manage">
 					<tr>
 						<th>本の名前</th>
 						<th>受取図書館</th>

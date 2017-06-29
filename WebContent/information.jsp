@@ -10,16 +10,34 @@
 <title>お知らせ</title>
 </head>
 <body>
-タイトル:<c:out value="${information.title}" /></br>
-お知らせ内容:<c:out value="${information.message}" /></br>
-<c:forEach items="${libraries}" var="library">
-	<c:if test = "${library.id == information.libraryId}">
-		図書館:<c:out value="${library.name}" /></br>
-	</c:if>
-</c:forEach>
-投稿日時:
-<fmt:parseDate var="date" value="${information.registeredDate}" pattern="yyyy-MM-dd HH:mm:ss" />
-<fmt:formatDate pattern = "yyyy年MM月dd日" value = "${date}" />
+<table>
+	<tr>
+		<td><h1>タイトル:<c:out value="${information.title}" /></h1></td>
+	</tr>
+	<tr>
+		<td>
+			<c:forEach items="${libraries}" var="library">
+				<c:if test = "${library.id == information.libraryId}">
+					<h2>『<c:out value="${library.name}" />』図書館からのお知らせだよ～～～</h2>
+				</c:if>
+			</c:forEach>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			投稿日時:
+			<fmt:parseDate var="date" value="${information.registeredDate}" pattern="yyyy-MM-dd HH:mm:ss" />
+			<fmt:formatDate pattern = "yyyy年MM月dd日" value = "${date}" />
+		</td>
+	</tr>
+	<tr>
+		<td>お知らせ内容:<c:out value="${information.message}" /></td>
+	</tr>
+</table>
+
+
+
+
 
 </body>
 </html>
