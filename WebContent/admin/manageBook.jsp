@@ -25,10 +25,12 @@
 		}
 		</script>
 	</head>
-	<body>
+	<body class="admin">
+	<h1>図書システム借りたいナ☆</h1>
+	<h2>本の情報管理</h2>
 	<p class="center"><a href="./manage">管理画面</a></p>
 	<div class="center">
-		<h2>◎検索</h2>
+		<h3>検索</h3>
 		<table border="2" class="manage">
 			<tr>
 				<td>
@@ -191,14 +193,14 @@
 						</tr>
 					</table>
 						<input type="hidden" name="isSearching" value="1">
-						<input type="submit" value="絞込み">
-						<input type="button" onclick="location.href='./manageBook'"value="クリア">
+						<input class="focus" type="submit" value="絞込み">
+						<input class="clear" type="button" onclick="location.href='./manageBook'"value="クリア">
 						<hr width="150px">
 					</form>
 				</td>
 				<td>
 					<form action="addBook" method ="get">
-						<input type = "submit" value = "本の追加" />
+						<input class="addBook" type = "submit" value = "本の追加" />
 					</form>
 				</td>
 			</tr>
@@ -280,13 +282,13 @@
 						<td>
 					   	 	<form action = "editBook" method = "get">
 					   	 		<input type = "hidden" name = "id" value = "${book.id}" >
-					   	 		<input type = "submit" value = "編集" />
+					   	 		<input class="edit" type = "submit" value = "編集" />
 					   	 	</form>
 				   	 	</td>
 				   	 	<td>
 					   	 	<form action = "circulation" method = "get">
 					   	 		<input type = "hidden" name = "id" value = "${book.id}" >
-					   	 		<input type = "submit" value = "貸出履歴" />
+					   	 		<input class="circulation" type = "submit" value = "貸出履歴" />
 					   	 	</form>
 				   	 	</td>
 				   	 	<td>
@@ -295,7 +297,7 @@
 								<c:if test="${reservation.count !=-1}">
 								   	 <form action = "reservation" method = "get">
 								   	 	<input type = "hidden" name = "id" value = "${book.id}" >
-								   	 	<input type = "submit" value = "予約一覧" />
+								   	 	<input class="reservation" type = "submit" value = "予約一覧" />
 								   	 	<c:set var="data" value="1" />
 								   	</form>
 									</c:if>
@@ -304,19 +306,7 @@
 						<c:if test="${empty data}">予約なし</c:if>
 							<c:remove var="data" />
 				   	 	</td>
-				   	 	<td>
-				   	 	<c:forEach items="${notReturnedCounts}" var="count" varStatus="statusCount">
-							<c:if test="${statusBook.index == statusCount.index}">
-								<c:if test="${count ==1}">
-								   	<form action = "notReturned" method = "get">
-								   		 <input type = "hidden" name = "id" value = "${book.id}" >
-								   	 	<input type = "submit" value = "未返却者情報" />
-								   	</form>
-					   	 		</c:if>
 
-					   	 	</c:if>
-					   	 </c:forEach>
-				   	 	</td>
 					</tr>
 				</c:forEach>
 			</table>

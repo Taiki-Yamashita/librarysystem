@@ -30,7 +30,7 @@
 		<p class="center"><a href="./manage">管理画面</a></p>
 
 	<div class="center">
-		<h2>◎検索</h2>
+		<h3>検索</h3>
 
 		<table border="1" class="manage">
 			<tr>
@@ -76,13 +76,13 @@
 							</tr>
 						</table>
 						<input type="hidden" name="isSearching" value="1">
-						<input type="submit" value="絞込み">
-						<input type="button" onclick="location.href='./manageUser'"value="クリア">
+						<input class="focus" type="submit" value="絞込み">
+						<input class="clear" type="button" onclick="location.href='./manageUser'"value="クリア">
 					</form>
 				</td>
 				<td>
 					<form action="addUser" method ="get">
-						<input type = "submit" value = "ユーザーの追加" />
+						<input class="addBook" type = "submit" value = "ユーザーの追加" />
 					</form>
 				</td>
 			</tr>
@@ -139,7 +139,7 @@
 			   	 			<form action="editUser" method="get">
 					   	 		<input type="hidden" name="id" value="${user.id }" >
 					   	 		<input type = "hidden" name = "time" value = "${user.registerDate }">
-					   	 		<input type="submit" value="編集" />
+					   	 		<input class="edit" type="submit" value="編集" />
 			   	 			</form>
 					 	</td>
 					 	<td>
@@ -148,11 +148,11 @@
 			   	 				<input type = "hidden" name = "time" value = "${user.registerDate }">
 								<c:if test = "${user.stopping == 0 }">
 									<input type = "hidden" name = "num" value = 1 >
-									<input type = "submit" value = "停止" />
+									<input class="stop" type = "submit" value = "停止" />
 								</c:if>
 								<c:if test = "${user.stopping == 1 }">
 									<input type = "hidden" name = "num" value = 0>
-									<input type = "submit" value = "復活" />
+									<input class="fenix" type = "submit" value = "復活" />
 								</c:if>
 			   	 			</form>
 		   	 			</td>
