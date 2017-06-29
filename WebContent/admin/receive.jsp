@@ -73,7 +73,7 @@ function check(){
 				<th>著者</th>
 				<th>出版社</th>
 				<th>リクエスト日</th>
-				<th>既読</th>
+				<th></th>
 				<th>既読チェック</th>
 				<th>削除チェック</th>
 
@@ -104,7 +104,7 @@ function check(){
 								<td><input type="checkbox" name="receiveId" id="receiveId" value="${receive.id}"></td>
 							</c:if>
 							<c:if test="${receive.showing != 0 }">
-								<c:out value="済"></c:out>
+								<c:out value="既読"></c:out>
 								<input type="hidden" name="flag" id="flag" value="0">
 								<td><input type="checkbox" name="receiveId2" id="receiveId2" value="${receive.id}"></td>
 								<td><input type="checkbox" name="deleteId" value="${receive.id}"></td>
@@ -149,7 +149,7 @@ function check(){
 								<input type="checkbox" name="receiveId2" id="receiveId2" value="${ReaquiredBook.id}">
 							</c:if>
 							<c:if test="${ReaquiredBook.showing != 1 }">
-								<c:out value="未読なう"></c:out>
+								<c:out value="未読"></c:out>
 							</c:if>
 						</td>
 						<td>
