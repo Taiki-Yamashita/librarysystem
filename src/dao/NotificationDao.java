@@ -35,6 +35,31 @@ public class NotificationDao {
 		}
 	}
 
+
+	public List<Notification> selectRefinedInformation(Connection connection, String library){
+
+		PreparedStatement ps = null;
+		try {
+
+			String sql = "SELECT * FROM notifications WHERE library_id = ?";
+
+			ps = connection.prepareStatement(sql);
+			ps.setString(1, library);
+
+			ResultSet rs = ps.executeQuery();
+			List<Notification> notificationList = toNotificationList(rs);
+			if (notificationList.isEmpty()) {
+				return null;
+			}else {
+				return notificationList;
+			}
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
+
 	private List<Notification> toNotificationList(ResultSet rs) throws SQLException {
 
 		List<Notification> ret = new ArrayList<Notification>();

@@ -26,12 +26,18 @@ public class TopServlet extends HttpServlet{
 		List<Notification> informations = new NotificationService().selectAll();
 		List<Library> libraries = new LibraryService().selectAll();
 
+		if(request.getParameter("isRefine") != null){
+			String selectedLibrary = request.getParameter("selectedLibrary");
+			request.setAttribute("selectedLibrary", selectedLibrary);
+			if(!selectedLibrary.equals("0")) informations = new NotificationService().selectRefinedInformation(selectedLibrary);
+		}
+
 		request.setAttribute("informations", informations);
 		request.setAttribute("libraries", libraries);
 
 		/*ページ遷移管理*/
 		request.setAttribute("pageCountList", getPageCount(informations.size()));
-		if(request.getParameter("pageNumber") == null) request.setAttribute("pageNumber", "1");
+		if(request.getParameter("pageNumber") == null || request.getParameter("isRefine") != null) request.setAttribute("pageNumber", "1");
 		else request.setAttribute("pageNumber", request.getParameter("pageNumber"));
 
 		request.getRequestDispatcher("/top.jsp").forward(request, response);

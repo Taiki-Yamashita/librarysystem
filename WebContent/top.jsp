@@ -63,7 +63,7 @@
 					<td><input type="button" onclick="location.href='./logout'"value="ログアウト"></td>
 				</tr>
 			</table>
-			<table border="1" class="menuBar">
+			<table class="menuBar">
 				<tr>
 					<td><input type="button" onclick="location.href='./user'"value="マイページ"></td>
 					<td><input type="button" onclick="location.href='./favorite'"value="お気に入り"></td>
@@ -81,6 +81,47 @@
 
 		<div class="notification">
 			<h5>お知らせ</h5>
+			<form action="./" method="GET">
+				<table border="1">
+					<tr>
+						<td>図書館</td>
+						<td>
+							<c:if test="${empty selectedLibrary}">
+								<input type="radio" name="selectedLibrary" value="0" checked>全て
+								<c:forEach items="${libraries}" var="library">
+									<input type="radio" name="selectedLibrary" value="${library.id}">${library.name}
+								</c:forEach>
+							</c:if>
+							<c:if test="${not empty selectedLibrary}">
+								<c:if test="${selectedLibrary == 0}">
+									<input type="radio" name="selectedLibrary" value="0" checked>全て
+									<c:forEach items="${libraries}" var="library">
+										<input type="radio" name="selectedLibrary" value="${library.id}">${library.name}
+									</c:forEach>
+								</c:if>
+								<c:if test="${selectedLibrary != 0}">
+									<input type="radio" name="selectedLibrary" value="0">全て
+									<c:forEach items="${libraries}" var="library">
+										<c:if test="${selectedLibrary == library.id}">
+											<input type="radio" name="selectedLibrary" value="${library.id}" checked>${library.name}
+										</c:if>
+										<c:if test="${selectedLibrary != library.id}">
+											<input type="radio" name="selectedLibrary" value="${library.id}">${library.name}
+										</c:if>
+									</c:forEach>
+								</c:if>
+							</c:if>
+						</td>
+						<td>
+							<input type="hidden" name="pageNumber" value="${pageNumber}">
+							<input type="hidden" name="isRefine" value="1">
+							<input type="submit" value="絞込み">
+						</td>
+					</tr>
+				</table>
+			</form>
+
+
 			<c:forEach items="${informations}" var="information" varStatus="count">
 				<c:if test="${count.index >= (pageNumber-1)*4 && count.index <= (pageNumber*4)-1}">
 					<a href="information?id=${information.id }"name="id"><c:out value="${information.title}"/></a>
