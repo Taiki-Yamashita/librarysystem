@@ -33,6 +33,28 @@ public class NotificationService {
 		}
 	}
 
+	public List<Notification> selectRefinedInformation(String library) {
+
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			List<Notification> notifications = new NotificationDao().selectRefinedInformation(connection, library);
+
+			commit(connection);
+
+			return notifications;
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
+
 	public Notification select(int id) {
 
 		Connection connection = null;
