@@ -9,6 +9,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>お気に入り</title>
 		<link href="./css/styleOkada.css" rel="stylesheet" type="text/css">
+		<link href="./css/styleTaiki.css" rel="stylesheet" type="text/css">
 	</head>
 	<body>
 
@@ -40,7 +41,7 @@
 		</c:if>
 
 		<c:if test="${not empty favorites && flag == '1'}">
-			<table>
+			<table border="2" class="manage">
 				<tr>
 					<th>書籍名</th>
 					<th>著者</th>
@@ -51,6 +52,7 @@
 					<th>ISBNID</th>
 					<th>状態</th>
 					<th>予約</th>
+					<th>削除</th>
 				</tr>
 				<c:forEach items="${favorites}" var="favorite">
 					<c:if test = "${loginUser.id == favorite.userId}">
