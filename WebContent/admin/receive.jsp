@@ -7,12 +7,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>問い合わせ、リクエスト受信</title>
+<title>問合わせ受取</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript">
 function check(){
 
-	if(window.confirm('よろしいですか？')){ // 確認ダイアログを表示
+	if(window.confirm('本当によろしいですか？')){ // 確認ダイアログを表示
 
 		return true; // 「OK」時は送信を実行
 
@@ -26,8 +26,9 @@ function check(){
 </script>
 </head>
 <body>
+	<h1>図書システム借りたいナ☆</h1>
+	<h2>問合わせ受取</h2>
 	<a href = "manage">管理画面</a>
-	<h1>未読と削除一緒に押すと削除が反映されるお</h1>
 	<form action="receive" method = "post">
 		<c:if test="${empty num}">
 			<input type="radio" name="num" value="2" checked><label for = "num" >全て</label>
@@ -62,6 +63,7 @@ function check(){
 	<c:if test="${empty errorMessages }">
 
 	<form action="receive" method = "post" onSubmit="return check()">
+				<button type="submit" value="edit">実行</button>
 
 		<table>
 
@@ -71,9 +73,10 @@ function check(){
 				<th>著者</th>
 				<th>出版社</th>
 				<th>リクエスト日</th>
-				<th>既読</th>
-				<th>未読にするよ</th>
-				<th>削除</th>
+				<th></th>
+				<th>既読チェック</th>
+				<th>削除チェック</th>
+
 			</tr>
 
 			<c:if test="${not empty receives}">
@@ -96,27 +99,19 @@ function check(){
 						</td>
 						<td>
 							<c:if test="${receive.showing == 0 }">
+								<c:out value="未読"></c:out>
 								<input type="hidden" name="flag" id="flag" value="1">
-								<input type="checkbox" name="receiveId" id="receiveId" value="${receive.id}">
+								<td><input type="checkbox" name="receiveId" id="receiveId" value="${receive.id}"></td>
 							</c:if>
 							<c:if test="${receive.showing != 0 }">
 								<c:out value="既読"></c:out>
-							</c:if>
-						</td>
-						<td>
-							<c:if test="${receive.showing == 1 }">
 								<input type="hidden" name="flag" id="flag" value="0">
-								<input type="checkbox" name="receiveId2" id="receiveId2" value="${receive.id}">
-							</c:if>
-							<c:if test="${receive.showing != 1 }">
-								<c:out value="未読なう"></c:out>
+								<td><input type="checkbox" name="receiveId2" id="receiveId2" value="${receive.id}"></td>
+								<td><input type="checkbox" name="deleteId" value="${receive.id}"></td>
 							</c:if>
 						</td>
-						<td>
-							<c:if test="${receive.showing == 1 }">
-								<input type="checkbox" name="deleteId" value="${receive.id}">
-							</c:if>
-						</td>
+
+
 					</tr>
 				</c:forEach>
 			</c:if>
@@ -154,7 +149,7 @@ function check(){
 								<input type="checkbox" name="receiveId2" id="receiveId2" value="${ReaquiredBook.id}">
 							</c:if>
 							<c:if test="${ReaquiredBook.showing != 1 }">
-								<c:out value="未読なう"></c:out>
+								<c:out value="未読"></c:out>
 							</c:if>
 						</td>
 						<td>
@@ -166,7 +161,6 @@ function check(){
 				</c:forEach>
 			</c:if>
 		</table>
-		<button type="submit" value="edit">確認</button>
 	</form>
 	</c:if>
 	<c:remove var="errorMessages" scope="session"/>

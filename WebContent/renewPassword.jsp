@@ -6,12 +6,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="./css/styleTaiki.css" rel="stylesheet" type="text/css">
 <title>パスワード変更画面</title>
 </head>
 <body>
-	<a href = "./">トップ</a>
 	<h1>パスワード変更画面</h1>
-	<a href = "./">トップ</a>
 	<c:if test="${ not empty errorMessages }">
 		<div class="errorMessages">
 			<ul>
@@ -22,6 +21,17 @@
 		</div>
 		<c:remove var="errorMessages" scope="session"/>
 	</c:if>
+	<a href = "./logout">ログアウト</a>
+
+		<table border="1">
+			<tr>
+				<td><a href = "./">トップ</a></td>
+				<td><a href = "./search">検索</a></td>
+				<td><a href = "./ranking">ランキング</a></td>
+				<td><a href = "./user">マイページ</a></td>
+			</tr>
+		</table>
+
 
 	<form action="renewPassword" method="post">
 		<input type="hidden" value="${loginUser.id}" id="id" name="id"/>

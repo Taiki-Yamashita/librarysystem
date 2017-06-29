@@ -1,0 +1,76 @@
+@CHARSET "UTF-8";
+
+ul.pageNav01 {
+	margin: 0 0 10px;
+	padding: 10px 10px 5px;
+	background: #eee;
+	text-align: center;
+}
+
+ul.pageNav01 li {
+	display: inline;
+	margin: 0 2px;
+	padding: 0;
+}
+
+ul.pageNav01 li span,
+ul.pageNav01 li a {
+	display: inline-block;
+	margin-bottom: 5px;
+	padding: 1px 8px;
+	background: #fff;
+	border: 1px solid #aaa;
+	text-decoration: none;
+	vertical-align: middle;
+}
+
+ul.pageNav01 li a:hover {
+	background: #eeeff7;
+	border-color: #00f;
+}
+
+h1 {
+	text-align: center;
+}
+h2 {
+	text-align: center;
+}
+ul, menu, dir {
+	text-align: center;
+    display: block;
+    list-style-type: disc;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 40px;
+}
+
+form {
+    display: block;
+    margin-left: 100px;
+}
+
+
+.register {
+	font-size: 30px;
+    text-align: center;
+    line-height: 1;
+	width: 150px;
+    height: 60px;
+    display: inline-block;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    background: #668ad8;/*ボタン色*/
+    color: #FFF;
+    border-bottom: solid 4px #627295;
+    border-radius: 3px;
+    cursor:pointer;
+}
+.register {/*ボタンを押したとき*/
+    -ms-transform: translateY(4px);
+    -webkit-transform: translateY(4px);
+    transform: translateY(4px);/*下に動く*/
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);/*影を小さく*/
+    border-bottom: none;
+}

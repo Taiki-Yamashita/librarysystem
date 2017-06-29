@@ -7,27 +7,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>本登録</title>
+<link href="../css/styleOkada.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-	<br>
+	<h1>図書システム借りたいナ☆</h1>
+	<h2>ユーザー登録画面</h2>
 	<a href = "./manageBook">本の情報管理</a>
-	<a href = "manage">管理画面</a>
-
 <c:if test="${ not empty errorMessages }">
 	<div class="errorMessages">
-		<ul>
-			<c:forEach items="${errorMessages}" var="message">
-				<li><c:out value="${message}" />
-				</c:forEach>
-				</ul>
+		<c:forEach items="${errorMessages}" var="message">
+			<p><c:out value="${message}" /></p>
+		</c:forEach>
 	</div>
 	<c:remove var="errorMessages" scope="session"/>
 </c:if>
-
-
-
-
-<form action = "./addBook"method = "post"><br />
+<div class=addBookText></div>
+<form action = "./addBook"method = "post" name="register"><br />
 	<label for = "name">名前</label>*必須<br>
 	<input name = "name" id = "name" value = "${newBook.name }"/><br />
 
@@ -36,8 +31,6 @@
 
 	<label for = "publisher">出版社</label>*必須<br>
 	<input name = "publisher" id = "publisher" value = "${newBook.publisher }"/><br />
-
-
 	<label for = "category">カテゴリ</label>*必須<br>
 						<%
 							String[] checkBoxCategoryNumbers = {"1","2","3","4","5","6","7","8","9"};
@@ -83,7 +76,6 @@
 									<input type="radio" name="category" value="9" >SF
 								</c:if>
 							</c:forEach>
-
 							<c:if test="${checkCategory == 0 && checkBoxCategoryNumber == 1}">
 								<input type="radio" name="category" value="1" >文学
 							</c:if>
@@ -112,10 +104,6 @@
 								<input type="radio" name="category" value="9">SF
 							</c:if>
 						</c:forEach><br>
-
-
-
-
 	<label for = "type">種類</label>*必須<br>
 				<%
 					String[] checkBoxTypeNumbers = {"1","2","3","4"};
@@ -155,10 +143,6 @@
 								<input type="radio" name="type" value="4">コミックス
 							</c:if>
 						</c:forEach><br>
-
-
-
-
 	<label for = "library">図書館</label>*必須<br>
 				<%
 					String[] checkBoxLibraryNumbers = {"1","2","3","4","5"};
@@ -218,10 +202,7 @@
 	<input name = "publishedDate2" id = "publishedDate2" value ="${publishedDate2 }"/>月
 	<input name = "publishedDate3" id = "publishedDate3" value ="${publishedDate3 }"/>日
 	<br>
-
-
-	<input type="submit" value="登録" />
-
+	<input class ="register" type="submit" value="登録" />
 	</form>
 </body>
 </html>

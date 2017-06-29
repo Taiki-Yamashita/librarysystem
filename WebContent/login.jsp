@@ -8,15 +8,19 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<link href="./css/styleTaiki.css" rel="stylesheet" type="text/css">
 		<title>ログイン</title>
 	</head>
 	<body>
 		<h1>図書システム借りたいナ☆</h1>
 
 		<c:if test="${ not empty errorMessages }">
-			<c:forEach items="${errorMessages}" var="message">
-				<font color="#ff0000"><c:out value="${message}" /></font><br>
-			</c:forEach>
+			<div class="errorMessages">
+				<c:forEach items="${errorMessages}" var="message">
+					<p><c:out value="${message}" /></p>
+				</c:forEach>
+			</div>
+			<c:remove var="errorMessages" scope="session"/>
 		</c:if>
 
 		<form action="./login" method="POST">
@@ -27,7 +31,12 @@
 			<input type="submit"  value="ログイン" />
 		</form>
 
-		<!-- エラーメッセージ -->
-		<c:remove var="errorMessages" scope="session"/>
+		<table border="1">
+			<tr>
+				<td><a href = "./search">検索</a></td>
+				<td><a href = "./ranking">ランキング</a></td>
+			</tr>
+		</table>
+
 	</body>
 </html>
