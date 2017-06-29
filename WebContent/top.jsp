@@ -39,10 +39,9 @@
 			<c:remove var="registerMessage" scope="session"/>
 		</c:if>
 
-		<p>ログインするといろいろな機能がつかえます(*^◯^*)</p>
 		<c:if test="${loginUser.id == null}">
-			<table class="notLoginTopTable">
-
+			<p>ログインするといろいろな機能がつかえます(*^◯^*)</p>
+			<table class="topTable">
 				<tr>
 					<td rowspan="2"><input class="searchButton" type="button" onclick="location.href='./search'"value="検索"></td>
 					<td><input class="rankingButton" type="button" onclick="location.href='./ranking'"value="ランキング"></td>
@@ -54,23 +53,28 @@
 		</c:if>
 
 		<c:if test="${loginUser.id != null}">
-			<c:if test="${loginUser.id == 0}">
-				<input type="button" onclick="location.href='./admin/manage'"value="管理用">
-			</c:if>
-			<input type="button" onclick="location.href='./logout'"value="ログアウト">
-			<table border="1">
+			<table class="subButton">
+				<tr>
+					<td>
+						<c:if test="${loginUser.id == 0}">
+							<input type="button" onclick="location.href='./admin/manage'"value="管理用">
+						</c:if>
+					</td>
+					<td><input type="button" onclick="location.href='./logout'"value="ログアウト"></td>
+				</tr>
+			</table>
+			<table border="1" class="menuBar">
 				<tr>
 					<td><input type="button" onclick="location.href='./user'"value="マイページ"></td>
-					<td><input type="button" onclick="location.href='./ranking'"value="ランキング"></td>
 					<td><input type="button" onclick="location.href='./favorite'"value="お気に入り"></td>
 					<td><input type="button" onclick="location.href='./require'"value="本のリクエスト"></td>
 					<td><input type="button" onclick="location.href='./renewPassword'"value="パスワード編集"></td>
 				</tr>
 			</table>
-			<table border="1" class="loginTopTable">
+			<table class="topTable">
 				<tr>
-					<td><input type="button" onclick="location.href='./search'"value="検索"></td>
-					<td><input type="button" onclick="location.href='./ranking'"value="ランキング"></td>
+					<td><input class="loginedSearchButton" type="button" onclick="location.href='./search'"value="検索"></td>
+					<td><input class="loginedRankingButton" type="button" onclick="location.href='./ranking'"value="ランキング"></td>
 				</tr>
 			</table>
 		</c:if>

@@ -9,9 +9,10 @@
 <title>お知らせフォーム</title>
 <link href="../css/styleOkada.css" rel="stylesheet" type="text/css">
 </head>
-<body>
+
+<body class="admin">
 	<h1>図書システム借りたいナ☆</h1>
-	<h2>ユーザー登録画面</h2>
+	<h2>お知らせ投稿フォーム</h2>
 	<a href = "./manage">管理画面</a><br>
 
 	<c:if test="${ not empty errorMessages }">
@@ -23,7 +24,7 @@
 		</c:if>
 
 
-<form action = "notification"method = "post"><br />
+<form class = "notificationForm" action = "notification"method = "post"><br />
 
 	<label for="libraryId">図書館</label><br>
 	<select name="libraryId">
