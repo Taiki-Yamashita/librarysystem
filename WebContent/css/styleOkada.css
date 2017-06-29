@@ -216,7 +216,97 @@ ul, menu, dir {
     border-bottom: none;
     outline: none;
 }
-.ranking{
-
+.delete {
+	font-size: 20px;
+    text-align: center;
+    line-height: 1;
+	width: 100px;
+    height: 50px;
+    display: inline-block;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    background: #668ad8;/*ボタン色*/
+    color: #FFF;
+    border-bottom: solid 4px #627295;
+    border-radius: 14px;
+    cursor:pointer;
 }
+.delete {/*ボタンを押したとき*/
+    -ms-transform: translateY(4px);
+    -webkit-transform: translateY(4px);
+    transform: translateY(4px);/*下に動く*/
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);/*影を小さく*/
+    border-bottom: none;
+    outline: none;
+}
+.clear {
+	font-size: 20px;
+    text-align: center;
+    line-height: 1;
+	width: 100px;
+    height: 50px;
+    display: inline-block;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    background: #668ad8;/*ボタン色*/
+    color: #FFF;
+    border-bottom: solid 4px #627295;
+    border-radius: 14px;
+    cursor:pointer;
+}
+.clear {/*ボタンを押したとき*/
+    -ms-transform: translateY(4px);
+    -webkit-transform: translateY(4px);
+    transform: translateY(4px);/*下に動く*/
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);/*影を小さく*/
+    border-bottom: none;
+    outline: none;
+}
+
+.sort {
+	font-size: 20px;
+    text-align: center;
+    line-height: 1;
+	width: 100px;
+    height: 50px;
+    display: inline-block;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    background: #668ad8;/*ボタン色*/
+    color: #FFF;
+    border-bottom: solid 4px #627295;
+    border-radius: 14px;
+    cursor:pointer;
+}
+.sort {/*ボタンを押したとき*/
+    -ms-transform: translateY(4px);
+    -webkit-transform: translateY(4px);
+    transform: translateY(4px);/*下に動く*/
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);/*影を小さく*/
+    border-bottom: none;
+    outline: none;
+}
+
+.userChange {
+	font-size: 20px;
+    text-align: center;
+    line-height: 1;
+	width: 100px;
+    height: 50px;
+    display: inline-block;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    background: #668ad8;/*ボタン色*/
+    color: #FFF;
+    border-bottom: solid 4px #627295;
+    border-radius: 14px;
+    cursor:pointer;
+}
+.userChange {/*ボタンを押したとき*/
+    -ms-transform: translateY(4px);
+    -webkit-transform: translateY(4px);
+    transform: translateY(4px);/*下に動く*/
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);/*影を小さく*/
+    border-bottom: none;
+    outline: none;
 }

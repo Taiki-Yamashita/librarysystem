@@ -8,6 +8,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>お気に入り</title>
+		<link href="./css/styleOkada.css" rel="stylesheet" type="text/css">
 	</head>
 	<body>
 
@@ -88,7 +89,7 @@
 										<c:if test="${not empty lendingFlag}"><input type="hidden" name="lendingFlag" value="1"></c:if>
 										<c:remove var="lendingFlag" />
 
-										<input type = "submit" value = "予約">
+										<input class="reserve" type = "submit" value = "予約">
 									</form>
 								</c:if>
 								<c:if test="${favorite.reserving != 0}">予約済み</c:if>
@@ -98,7 +99,7 @@
 									<!-- ログインユーザーのID -->
 									<input type="hidden" value="${favorite.userId}" name="favoriteUserId">
 									<input type="hidden" value="${favorite.bookId}" name="favoriteBookId">
-									<input type="submit"  value="お気に入り削除" />
+									<input class="delete" type="submit"  value="解除" />
 								</form>
 							</td>
 						</tr>
