@@ -10,10 +10,11 @@
 <link href="./css/styleOkada.css" rel="stylesheet" type="text/css">
 <link href="./css/styleTaiki.css" rel="stylesheet" type="text/css">
 <link href="./css/styleKuniyoshi.css" rel="stylesheet" type="text/css">
-<title>リクエスト</title>
+<title>本のリクエスト</title>
 </head>
 <body>
-	<h1>リクエスト</h1>
+	<h1>図書システム借りたいナ☆</h1>
+	<h2>本のリクエスト</h2>
 
 		<c:if test="${ not empty errorMessages }">
 			<div class="errorMessages">
@@ -72,7 +73,7 @@
 	</tr>
 	<tr>
 		<td>
-			<input type="submit" value="申請" />
+			<input class="request" type="submit" value="申請" />
 		</td>
 	</tr>
 </table>
