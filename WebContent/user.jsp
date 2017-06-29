@@ -5,155 +5,175 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>予約管理</title>
-</head>
-<body>
-	<p>マイページ管理画面</p>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>予約管理</title>
+	</head>
+	<body>
+		<h1>図書システムかりたいナ☆</h1>
+		<h2>${loginUser.name}さんのマイページ</h2>
+		<input type="button" onclick="location.href='./logout'"value="ログアウト">
 
-	<a href = "./">トップ</a>
-	<a href = "./search">検索</a>
-	<a href = "./favorite">お気に入り</a>
-	<a href = "./require">本のリクエスト</a>
-	<a href = "./admin/manage">管理画面</a>
-
-<p>ユーザー情報</p>
-
-
-	<table>
-		<tr>
-			<th>ユーザー</th>
-			<th>ユーザーID</th>
-			<th>登録図書館</th>
-			<th>ポイント</th>
-		</tr>
-
-<!-- ユーザー情報 -->
-	<c:forEach items="${users}" var="user">
-		<c:if test="${user.id == loginUser.id }">
+		<table border="1">
 			<tr>
-				<td>${user.name }</td>
-				<td>${user.id }</td>
-				<td>
-					<c:forEach items="${ libraries}" var="library">
-						<c:if test="${library.id == user.libraryId}">${library.name}</c:if>
-					</c:forEach>
-				</td>
-				<td>${user.point }</td>
-			</tr>
-		</c:if>
-	</c:forEach>
-
-	</table>
-
-	<!-- 貸出 -->
-
-	<c:forEach items="${circulations}" var="circulation">
-		<c:if test="${circulation.userId == loginUser.id && circulation.returning == 0 && circulation.lending ==1}">
-			<c:set var="flag" value="1" />
-		</c:if>
-	</c:forEach>
-	<c:if test="${not empty flag}">
-		<p>借りている本の一覧</p>
-		<table>
-			<tr>
-				<th>本の名前</th>
-				<th>貸出日</th>
-				<th>期限</th>
-				<th>貸出図書館</th>
-
-			</tr>
-			<c:forEach items="${circulations}" var="circulation">
-
-				<c:if test="${circulation.userId == loginUser.id && circulation.returning == 0 && circulation.lending ==1}">
-					<tr>
-						<td>
-							<c:forEach items="${books}" var="book">
-								<c:if test="${book.id == circulation.bookId}">${book.name}</c:if>
-							</c:forEach>
-						</td>
-						<td>
-							<fmt:parseDate var="date" value="${circulation.lentDate}" pattern="yyyy-MM-dd HH:mm:ss" />
-							<fmt:formatDate pattern = "yyyy年MM月dd日" value = "${date}" />
-						</td>
-						<td>
-							<fmt:parseDate var="date" value="${circulation.limitedDate}" pattern="yyyy-MM-dd HH:mm:ss" />
-							<fmt:formatDate pattern = "yyyy年MM月dd日" value = "${date}" />
-						</td>
-
-						<td>
-							<c:forEach items="${ libraries}" var="library">
-								<c:if test="${library.id == circulation.libraryId}">${library.name}</c:if>
-							</c:forEach>
-						</td>
-
-					</tr>
-				</c:if>
-			</c:forEach>
+				<td><input type="button" onclick="location.href='./'"value="トップ"></td>
+				<td><input type="button" onclick="location.href='./search'"value="検索"></td>
+				<td><input type="button" onclick="location.href='./ranking'"value="ランキング"></td>
+				<td><input type="button" onclick="location.href='./favorite'"value="お気に入り"></td>
+				</tr>
 		</table>
-	</c:if>
 
-	<c:if test="${empty flag}">
-		<h3>借りている本はありません</h3>
-	</c:if>
+		<p>登録情報</p>
+		<table border="1">
+			<tr>
+				<td>
+					<!-- ユーザー情報 -->
+					<table>
+						<tr>
+							<th>住所</th>
+							<td>${loginUser.address}</td>
+						</tr>
+						<tr>
+							<th>電話番号</th>
+							<td>${loginUser.tel}</td>
+						</tr>
+						<tr>
+							<th>メールアドレス</th>
+							<td>${loginUser.mail}</td>
+						</tr>
+						<tr>
+							<th>受取図書館</th>
+							<td>
+								<c:forEach items="${libraries}" var="library">
+									<c:if test="${library.id == loginUser.libraryId}">${library.name}</c:if>
+								</c:forEach>
+							</td>
+						</tr>
+						<tr>
+							<th>アカウントの有効期限</th>
+							<td>${loginUser.registerDate}(現在は登録日)</td>
+						</tr>
+						<tr>
+							<th>ポイント</th>
+							<td>${loginUser.point}</td>
+						</tr>
+					</table>
+				</td>
+				<td>
+					<input type="button" onclick="location.href='./renewPassword'"value="ログインID/パスワード編集">
+					<p>住所などの変更は窓口まで</p>
+				</td>
+			</tr>
+		</table>
 
-	<!-- 予約テーブル -->
-	<c:forEach items="${reservations}" var="reservation">
-			<c:if test="${reservation.userId == loginUser.id && reservation.canceling == 0 && reservation.delivering == 0}">
-				<c:set var="flag2" value="1" />
+
+
+		<!-- 貸出 -->
+		<c:forEach items="${circulations}" var="circulation">
+			<c:if test="${circulation.userId == loginUser.id && circulation.returning == 0 && circulation.lending ==1}">
+				<c:set var="flag" value="1" />
 			</c:if>
-	</c:forEach>
-
-	<c:if test="${not empty flag2}">
-		<p>予約一覧</p>
+		</c:forEach>
+		<c:if test="${not empty flag}">
+			<h4>借りている本の一覧</h4>
 			<table>
 				<tr>
 					<th>本の名前</th>
-					<th>受取図書館</th>
-					<th>予約日</th>
-					<th>キャンセル</th>
-				</tr>
-				<c:forEach items="${reservations}" var="reservation">
+					<th>貸出日</th>
+					<th>期限</th>
+					<th>貸出図書館</th>
 
-					<c:if test="${reservation.userId == loginUser.id && reservation.canceling == 0 && reservation.delivering == 0}">
+				</tr>
+				<c:forEach items="${circulations}" var="circulation">
+
+					<c:if test="${circulation.userId == loginUser.id && circulation.returning == 0 && circulation.lending ==1}">
 						<tr>
 							<td>
 								<c:forEach items="${books}" var="book">
-									<c:if test="${book.id == reservation.bookId}">${reservation.bookName}</c:if>
-
+									<c:if test="${book.id == circulation.bookId}">${book.name}</c:if>
 								</c:forEach>
 							</td>
 							<td>
-								<c:forEach items="${ libraries}" var="library">
-									<c:if test="${library.id == reservation.libraryId}">${library.name}</c:if>
-								</c:forEach>
-							</td>
-							<td>
-								<fmt:parseDate var="date" value="${reservation.reservedDate}" pattern="yyyy-MM-dd HH:mm:ss" />
+								<fmt:parseDate var="date" value="${circulation.lentDate}" pattern="yyyy-MM-dd HH:mm:ss" />
 								<fmt:formatDate pattern = "yyyy年MM月dd日" value = "${date}" />
 							</td>
 							<td>
-								<form action = "cancelingBook" method = "post">
-									<input type = "hidden" name = "bookId" value = "${reservation.bookId}" >
-									<input type = "hidden" name ="bookName" value= "${reservation.bookName}" >
-									<input type = "hidden" id = "libraryId" name = "libraryId" value = "${reservation.libraryId }" >
-									<input type = "hidden" name = "time" value = "${reservation.reservedDate }">
-									<c:if test="${reservation.canceling == 0 }">
-										<input type = "hidden" name = "num" value =1>
-										<input type = "submit" value = "キャンセル" />
-									</c:if>
-								</form>
+								<fmt:parseDate var="date" value="${circulation.limitedDate}" pattern="yyyy-MM-dd HH:mm:ss" />
+								<fmt:formatDate pattern = "yyyy年MM月dd日" value = "${date}" />
 							</td>
+
+							<td>
+								<c:forEach items="${ libraries}" var="library">
+									<c:if test="${library.id == circulation.libraryId}">${library.name}</c:if>
+								</c:forEach>
+							</td>
+
 						</tr>
 					</c:if>
 				</c:forEach>
 			</table>
-	</c:if>
+		</c:if>
 
-	<c:if test="${empty flag2}">
-		<h3>予約してる本はありません</h3>
-	</c:if>
-</body>
+		<c:if test="${empty flag}">
+			<h3>借りている本はありません</h3>
+		</c:if>
+
+		<!-- 予約テーブル -->
+		<c:forEach items="${reservations}" var="reservation">
+				<c:if test="${reservation.userId == loginUser.id && reservation.canceling == 0 && reservation.delivering == 0}">
+					<c:set var="flag2" value="1" />
+				</c:if>
+		</c:forEach>
+
+		<c:if test="${not empty flag2}">
+			<h4>予約一覧</h4>
+				<table>
+					<tr>
+						<th>本の名前</th>
+						<th>受取図書館</th>
+						<th>予約日</th>
+						<th>キャンセル</th>
+					</tr>
+					<c:forEach items="${reservations}" var="reservation">
+
+						<c:if test="${reservation.userId == loginUser.id && reservation.canceling == 0 && reservation.delivering == 0}">
+							<tr>
+								<td>
+									<c:forEach items="${books}" var="book">
+										<c:if test="${book.id == reservation.bookId}">${reservation.bookName}</c:if>
+
+									</c:forEach>
+								</td>
+								<td>
+									<c:forEach items="${ libraries}" var="library">
+										<c:if test="${library.id == reservation.libraryId}">${library.name}</c:if>
+									</c:forEach>
+								</td>
+								<td>
+									<fmt:parseDate var="date" value="${reservation.reservedDate}" pattern="yyyy-MM-dd HH:mm:ss" />
+									<fmt:formatDate pattern = "yyyy年MM月dd日" value = "${date}" />
+								</td>
+								<td>
+									<form action = "cancelingBook" method = "post">
+										<input type = "hidden" name = "bookId" value = "${reservation.bookId}" >
+										<input type = "hidden" name ="bookName" value= "${reservation.bookName}" >
+										<input type = "hidden" id = "libraryId" name = "libraryId" value = "${reservation.libraryId }" >
+										<input type = "hidden" name = "time" value = "${reservation.reservedDate }">
+										<c:if test="${reservation.canceling == 0 }">
+											<input type = "hidden" name = "num" value =1>
+											<input type = "submit" value = "キャンセル" />
+										</c:if>
+									</form>
+								</td>
+							</tr>
+						</c:if>
+					</c:forEach>
+				</table>
+		</c:if>
+
+		<c:if test="${empty flag2}">
+			<h3>予約してる本はありません</h3>
+		</c:if>
+	</body>
 </html>
 

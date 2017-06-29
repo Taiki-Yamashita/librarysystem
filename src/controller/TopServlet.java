@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -11,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import beans.Library;
 import beans.Notification;
-import beans.User;
 import service.LibraryService;
 import service.NotificationService;
 
@@ -24,16 +24,30 @@ public class TopServlet extends HttpServlet{
 			throws ServletException, IOException {
 
 		List<Notification> informations = new NotificationService().selectAll();
-
 		List<Library> libraries = new LibraryService().selectAll();
-
-		User loginUser = (User) request.getSession().getAttribute("loginUser");
 
 		request.setAttribute("informations", informations);
 		request.setAttribute("libraries", libraries);
-		request.setAttribute("loginUser", loginUser);
+
+		/*ページ遷移管理*/
+		request.setAttribute("pageCountList", getPageCount(informations.size()));
+		if(request.getParameter("pageNumber") == null) request.setAttribute("pageNumber", "1");
+		else request.setAttribute("pageNumber", request.getParameter("pageNumber"));
 
 		request.getRequestDispatcher("/top.jsp").forward(request, response);
+	}
+
+	public List<String> getPageCount(int informationCount){
+
+		List<String> pageCountList = new ArrayList<>();
+		int pageCount = informationCount / 4 + 1;
+		if(informationCount % 4 == 0) pageCount--;
+
+		for(int i = 1; i <= pageCount; i++){
+			pageCountList.add(String.valueOf(i));
+		}
+
+		return pageCountList;
 	}
 
 }

@@ -10,10 +10,26 @@
 		<title>ランキング</title>
 	</head>
 	<body>
-
-		<a href="./">トップ</a>
-
+		<h1>図書システムかりたいナ☆</h1>
 		<h2>人気ランキング</h2>
+
+		<c:if test="${empty loginUser}">
+			<input type="button" onclick="location.href='./login'"value="ログイン">
+		</c:if>
+
+		<c:if test="${not empty loginUser}">
+			<input type="button" onclick="location.href='./logout'"value="ログアウト">
+		</c:if>
+		<br>
+
+		<table border="1">
+			<tr>
+				<td><input type="button" onclick="location.href='./'"value="トップ"></td>
+				<td><input type="button" onclick="location.href='./search'"value="検索"></td>
+				<td><input type="button" onclick="location.href='./user'"value="マイページ"></td>
+				<td><input type="button" onclick="location.href='./favorite'"value="お気に入り"></td>
+			</tr>
+		</table>
 
 		<c:if test="${ not empty errorMessages }">
 			<div class="errorMessages">
