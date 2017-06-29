@@ -17,13 +17,9 @@ import javax.servlet.http.HttpSession;
 
 import beans.User;
 
-<<<<<<< HEAD
-@WebFilter(urlPatterns = {"/favorite", "/require", "/user/*", "/require"})
-=======
 
-@WebFilter(urlPatterns = {"/require", "/user/*", "/require"})
+@WebFilter(urlPatterns = {"/require", "/user/*", "/require","/renewPassword"})
 
->>>>>>> 40b2aad63428f52ed58b6ae3b91c2515f1b256ac
 public class LoginCheckFilter implements Filter {
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -38,7 +34,6 @@ public class LoginCheckFilter implements Filter {
 		if (!isLogined((HttpServletRequest)request)){
 			/* まだ認証されていない */
 				if(!target.equals("/LibrarySystem/login") && !target.matches(".*css$")){
-					System.out.println(target);
 					List<String> messages = new ArrayList<String>();
 					messages.add("ログインしてください");
 					session.setAttribute("errorMessages", messages);

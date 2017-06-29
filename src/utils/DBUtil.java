@@ -14,13 +14,10 @@ public class DBUtil {
 	private static final String DRIVER = "com.mysql.jdbc.Driver";
 	private static final String URL = "jdbc:mysql://localhost:3306/library_system";
 	private static final String USER = "root";
-<<<<<<< HEAD
 	//private static final String PASSWORD = "9244Tatsuya";
 	//private static final String PASSWORD = "Okada0121washo";
 	private static final String PASSWORD = "H06-m10-d31";
-=======
-	private static final String PASSWORD = "Okada0121washo";
->>>>>>> 40b2aad63428f52ed58b6ae3b91c2515f1b256ac
+	//private static final String PASSWORD = "Okada0121washo";
 
 	static {
 

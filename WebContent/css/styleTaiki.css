@@ -28,3 +28,12 @@ ul.pageNav01 li a:hover {
 	background: #eeeff7;
 	border-color: #00f;
 }
+.errorMessages {
+	margin-top: 30px;
+	margin-right: 30px;
+	margin-bottom: 30px;
+	margin-left: 30px;
+	color: red;
+	font-size:25px;
+	text-align: center;
+}
