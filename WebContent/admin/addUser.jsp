@@ -6,11 +6,11 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>ユーザー登録</title>
 	</head>
-
 	<body>
-		<h1>ユーザー登録画面</h1>
+		<h1>図書システム借りたいナ☆</h1>
+		<h2>ユーザー登録画面</h2>
 
-		<a href = "./manage">管理画面</a><br>
+		<a href = "./manageUser">ユーザー管理画面</a><br>
 
 <c:if test="${ not empty errorMessages }">
 	<div class="errorMessages">

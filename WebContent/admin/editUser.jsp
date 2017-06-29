@@ -11,6 +11,8 @@
 <link href="css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+	<h1>図書システム借りたいナ☆</h1>
+	<h2>ユーザー登録画面</h2>
 		<c:if test="${ not empty errorMessages }">
 			<c:forEach items="${errorMessages}" var="message">
 				<c:out value="${message}"/>
