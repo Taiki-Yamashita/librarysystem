@@ -7,7 +7,7 @@
 	<head>
 	<title>ユーザー編集</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<link href="./css/styleTaiki.css" rel="stylesheet" type="text/css">
+		<link href="../css/styleTaiki.css" rel="stylesheet" type="text/css">
 		<script type="text/javascript">
 		function check(){
 
@@ -25,12 +25,13 @@
 		</script>
 	</head>
 	<body>
-		<p>ユーザー編集</p>
-		<p><a href="./manage">管理画面</a></p>
+		<h1>ユーザー編集</h1>
+		<p class="center"><a href="./manage">管理画面</a></p>
 
+	<div class="center">
 		<p>◎検索</p>
 
-		<table border="1">
+		<table border="1" class="center">
 			<tr>
 				<td>
 					<form action="./manageUser" method="GET">
@@ -85,7 +86,7 @@
 				</td>
 			</tr>
 		</table>
-
+	</div>
 
 		<hr width="1500px">
 

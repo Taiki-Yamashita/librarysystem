@@ -57,9 +57,7 @@
 					</c:if>
 				</c:forEach>
 			</select>
-
-
-			<input type="submit" value="登録" />
+		<input class ="register" type="submit" value="登録" />
 		</form>
 	</body>
 </html>

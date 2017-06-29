@@ -8,6 +8,7 @@
 <html>
 <head>
 <title>問合わせ受取</title>
+<link href="../css/styleOkada.css" rel="stylesheet" type="text/css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript">
 function check(){
@@ -49,10 +50,10 @@ function check(){
 			<c:if test="${num != 1}">
 				<input type="radio" name="num" value="1"><label for = "num">既読表示</label>
 			</c:if>
-		</c:if>
+		</c:if><br>
 		<label for="freeWord">フリーワード検索</label>
 		<input type="text" name="freeWord" id="freeWord" value="${freeWord}">
-		<input type="submit" value="絞込み" />
+		<input class="focus" type="submit" value="絞込み" />
 	</form>
 
 	<c:if test="${ not empty errorMessages }">
@@ -63,7 +64,7 @@ function check(){
 	<c:if test="${empty errorMessages }">
 
 	<form action="receive" method = "post" onSubmit="return check()">
-				<button type="submit" value="edit">実行</button>
+		<input class="exception" type="submit" value="実行" />
 
 		<table>
 

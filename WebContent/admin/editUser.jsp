@@ -8,7 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>ユーザーの編集</title>
-<link href="css/style.css" rel="stylesheet" type="text/css">
+<link href="../css/styleOkada.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<h1>図書システム借りたいナ☆</h1>
@@ -67,7 +67,7 @@
 		<input type="hidden" name="registerDate" id="registerDate" value="${editUser.registerDate }"/>
 		<fmt:parseDate var="date" value="${editUser.registerDate}" pattern="yyyy-MM-dd HH:mm:ss" />
 		<fmt:formatDate pattern = "yyyy年MM月dd日" value = "${date}" />
-		<button type="submit" name="post2" >編集</button>
+			<input class ="register" type="submit" value="登録" />
 </form>
 <form action="renewUser" method="post">
 	<input type="hidden" name=renewDate >
