@@ -1,0 +1,68 @@
+@CHARSET "UTF-8";
+
+/*未ログイン時のトップページ*/
+.notLoginTopTable {
+	width: 80%;
+	height: 200px;
+	border-collapse: separate;
+	border-spacing: 5px;
+	border-color: red;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
+.rankingButton{
+	font-size: 1.4em;
+	font-weight: bold;
+	padding: 10px 30px;
+	background-color: #248;
+	color: #fff;
+	border-style: none;
+}
+
+.searchButton{
+	font-size: 70px;
+	width : 300px;
+	height : 200px;
+	font-weight: bold;
+	padding: 10px 30px;
+	background-color: #248;
+	color: #fff;
+	border-style: none;
+}
+
+p{
+	text-align: center;
+}
+
+/*お知らせ*/
+.notification{
+	text-align: center;
+}
+
+/*ページナンバー*/
+.pageNumber{
+	margin-left: auto;
+	margin-right: auto;
+	padding: 10px 10px 5px;
+    text-align: center;
+}
+
+.pageNumber tr td{
+    margin-left: 0px;
+	margin-right: 0px;
+}
+
+.currentPage{
+	font-size: 20px;
+}
+
+.otherPage{
+	font-size: 20px;
+	font-weight: bold;
+	background-color: #248;
+	color: #fff;
+	border-style: none;
+	cursor : pointer;
+}

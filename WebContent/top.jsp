@@ -8,7 +8,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<link href="./css/style.css" rel="stylesheet" type="text/css">
+		<link href="./css/styleKuniyoshi.css" rel="stylesheet" type="text/css">
 		<title>トップ</title>
 	</head>
 	<body>
@@ -39,14 +39,13 @@
 			<c:remove var="registerMessage" scope="session"/>
 		</c:if>
 
+		<p>ログインするといろいろな機能がつかえます(*^◯^*)</p>
 		<c:if test="${loginUser.id == null}">
-			ログインするといろいろな機能がつかえます
-			(*^◯^*)
+			<table border="1" class="notLoginTopTable">
 
-			<table border="1">
 				<tr>
-					<td rowspan="2"><input type="button" onclick="location.href='./search'"value="検索"></td>
-					<td><input type="button" onclick="location.href='./ranking'"value="ランキング"></td>
+					<td rowspan="2"><input class="searchButton" type="button" onclick="location.href='./search'"value="検索"></td>
+					<td><input class="rankingButton" type="button" onclick="location.href='./ranking'"value="ランキング"></td>
 				</tr>
 				<tr>
 					<td><input type="button" onclick="location.href='./login'"value="ログイン"></td>
@@ -68,7 +67,7 @@
 					<td><input type="button" onclick="location.href='./renewPassword'"value="パスワード編集"></td>
 				</tr>
 			</table>
-			<table border="1">
+			<table border="1" class="loginTopTable">
 				<tr>
 					<td><input type="button" onclick="location.href='./search'"value="検索"></td>
 					<td><input type="button" onclick="location.href='./ranking'"value="ランキング"></td>
@@ -76,40 +75,46 @@
 			</table>
 		</c:if>
 
-		<h5>お知らせ</h5>
-		<c:forEach items="${informations}" var="information" varStatus="count">
-			<c:if test="${count.index >= (pageNumber-1)*4 && count.index <= (pageNumber*4)-1}">
-				<a href="information?id=${information.id }"name="id"><c:out value="${information.title}"/></a>
-				<div class="registeredDate">投稿日時:
-					<fmt:parseDate var="date" value="${information.registeredDate}" pattern="yyyy-MM-dd HH:mm:ss" />
-					<fmt:formatDate pattern = "yyyy年MM月dd日" value = "${date}" />
-				</div>
-				<div class="libraryId">
-					<c:forEach items="${libraries}" var="library">
-						<c:if test = "${library.id == information.libraryId}">
-							図書館:<c:out value="${library.name}" /></br>
-							-------------------------------------------------------------------------
-						</c:if>
-					</c:forEach>
-				</div>
-			</c:if>
-		</c:forEach>
-
-		<table>
-			<tr>
-				<c:forEach items="${pageCountList}" var="pageCount">
-					<form action="./" method="GET">
-						<td>
-							<c:if test="${pageNumber == pageCount}"><c:out value="${pageCount}"></c:out></c:if>
-							<c:if test="${pageNumber != pageCount}">
-								<input type="submit" value="${pageCount}"/>
-								<input type="hidden" name="pageNumber" value="${pageCount}">
+		<div class="notification">
+			<h5>お知らせ</h5>
+			<c:forEach items="${informations}" var="information" varStatus="count">
+				<c:if test="${count.index >= (pageNumber-1)*4 && count.index <= (pageNumber*4)-1}">
+					<a href="information?id=${information.id }"name="id"><c:out value="${information.title}"/></a>
+					<div class="registeredDate">投稿日時:
+						<fmt:parseDate var="date" value="${information.registeredDate}" pattern="yyyy-MM-dd HH:mm:ss" />
+						<fmt:formatDate pattern = "yyyy年MM月dd日" value = "${date}" />
+					</div>
+					<div class="libraryId">
+						<c:forEach items="${libraries}" var="library">
+							<c:if test = "${library.id == information.libraryId}">
+								図書館:<c:out value="${library.name}" /></br>
+								-------------------------------------------------------------------------
 							</c:if>
-						</td>
-					</form>
-				</c:forEach>
-			</tr>
-		</table>
+						</c:forEach>
+					</div>
+				</c:if>
+			</c:forEach>
+
+			<table class="pageNumber">
+				<tr>
+					<c:forEach items="${pageCountList}" var="pageCount">
+						<form action="./" method="GET">
+							<td>
+								<div class="currentPage">
+									<c:if test="${pageNumber == pageCount}">
+										<c:out value="${pageCount}"></c:out>
+									</c:if>
+								</div>
+								<c:if test="${pageNumber != pageCount}">
+									<input class="otherPage" type="submit" value="${pageCount}"/>
+									<input type="hidden" name="pageNumber" value="${pageCount}">
+								</c:if>
+							</td>
+						</form>
+					</c:forEach>
+				</tr>
+			</table>
+		</div>
 
 	</body>
 </html>

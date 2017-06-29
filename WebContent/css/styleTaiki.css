@@ -1,40 +1,5 @@
 @CHARSET "UTF-8";
 
-<<<<<<< HEAD:WebContent/css/style.css
-table {
-    display: table;
-    border-collapse: separate;
-    border-spacing: 5px;
-    border-color: red;
-=======
-ul.pageNav01 {
-	margin: 0 0 10px;
-	padding: 10px 10px 5px;
-	background: #eee;
-	text-align: center;
-}
-
-ul.pageNav01 li {
-	display: inline;
-	margin: 0 2px;
-	padding: 0;
-}
-
-ul.pageNav01 li span,
-ul.pageNav01 li a {
-	display: inline-block;
-	margin-bottom: 5px;
-	padding: 1px 8px;
-	background: #fff;
-	border: 1px solid #aaa;
-	text-decoration: none;
-	vertical-align: middle;
-}
-
-ul.pageNav01 li a:hover {
-	background: #eeeff7;
-	border-color: #00f;
-}
 .errorMessages {
 	margin-top: 30px;
 	margin-right: 30px;
@@ -43,5 +8,4 @@ ul.pageNav01 li a:hover {
 	color: red;
 	font-size:25px;
 	text-align: center;
->>>>>>> 2966823eb967244563c7186712f586ffca0cf34d:WebContent/css/styleTaiki.css
 }
