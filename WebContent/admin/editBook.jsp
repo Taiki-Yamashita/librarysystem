@@ -8,11 +8,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>本の編集</title>
-<link href="css/style.css" rel="stylesheet" type="text/css">
+<link href="../css/styleOkada.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<h1>図書システム借りたいナ☆</h1>
-	<h2>ユーザー登録画面</h2>
+	<h2>本の編集</h2>
 
 	<a href = "./manageBook">本の情報管理</a>
 
@@ -103,12 +103,9 @@
 	<c:if test="${editBook.lending == '2'}"><input type="radio" name="status" value="2" checked >貸出中</c:if>
 	<c:if test="${editBook.keeping != '2'}"><input type="radio" name="status" value="2">貸出中</c:if>
 	<c:if test="${editBook.disposing == '3'}"><input type="radio" name="status" value="2">整理中</c:if>
-	<c:if test="${editBook.keeping != '3'}"><input type="radio" name="status" value="3">整理中</c:if>
-
-	<br>
-	<br><input type="submit" value="投稿">
+	<c:if test="${editBook.keeping != '3'}"><input type="radio" name="status" value="3">整理中</c:if><br>
+	<input class ="register" type="submit" value="登録">
 </form>
-
 		<c:remove var="checkBoxLibraryNumber" scope="session"/>
 		<c:remove var="checkLibrary" scope="session"/>
 		<c:remove var="checkBoxCategoryNumber" scope="session"/>

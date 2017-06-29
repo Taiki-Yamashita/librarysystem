@@ -7,6 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>お知らせフォーム</title>
+<link href="../css/styleOkada.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<h1>図書システム借りたいナ☆</h1>
@@ -41,7 +42,7 @@
 	投稿<br>
 	<textarea name="message" id="message" cols="100" rows="5" ><c:out value="${newNotification.message }"></c:out></textarea><br>
 
-	<input type="submit" value="登録" />
+	<input class="post" type="submit" value="投稿" />
 
 	</form>
 </body>
