@@ -41,7 +41,7 @@ a.font {
 	font-size:30px;
 }
 table.manage {
-	width:100%; /* 600px以下は幅いっぱいに広げる */
+	width:80%; /* 600px以下は幅いっぱいに広げる */
 	margin-left:auto;
 	margin-right:auto;
 	text-align:center; /* インライン要素の中央揃え */

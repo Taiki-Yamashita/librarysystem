@@ -15,9 +15,11 @@
 	<body>
 		<h1>図書システムかりたいナ☆</h1>
 		<h2>${loginUser.name}さんのマイページ</h2>
-		<input type="button" onclick="location.href='./logout'"value="ログアウト">
+		<div class="subButton">
+			<input type="button" onclick="location.href='./logout'"value="ログアウト">
+		</div><br><br>
 
-		<table border="2" class="center">
+		<table class="menuBar">
 			<tr>
 				<td><input type="button" onclick="location.href='./'"value="トップ"></td>
 				<td><input type="button" onclick="location.href='./search'"value="検索"></td>

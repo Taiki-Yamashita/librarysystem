@@ -25,7 +25,7 @@
 		</c:if>
 		<br>
 
-		<table border="1">
+		<table border="1" class="menuBar">
 			<tr>
 				<td><input type="button" onclick="location.href='./'"value="トップ"></td>
 				<td><input type="button" onclick="location.href='./ranking'"value="ランキング"></td>
