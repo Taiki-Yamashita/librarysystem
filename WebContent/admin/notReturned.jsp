@@ -7,6 +7,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>未返却リスト</title>
+<link href="../css/styleOkada.css" rel="stylesheet" type="text/css">
+<link href="../css/styleTaiki.css" rel="stylesheet" type="text/css">
+<link href="../css/styleKuniyoshi.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 未返却リストだよ

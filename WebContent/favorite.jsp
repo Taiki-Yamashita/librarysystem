@@ -10,6 +10,7 @@
 		<title>お気に入り</title>
 		<link href="./css/styleOkada.css" rel="stylesheet" type="text/css">
 		<link href="./css/styleTaiki.css" rel="stylesheet" type="text/css">
+		<link href="./css/styleKuniyoshi.css" rel="stylesheet" type="text/css">
 	</head>
 	<body>
 

@@ -10,6 +10,7 @@
 <title>問合わせ受取</title>
 <link href="../css/styleOkada.css" rel="stylesheet" type="text/css">
 <link href="../css/styleTaiki.css" rel="stylesheet" type="text/css">
+<link href="../css/styleKuniyoshi.css" rel="stylesheet" type="text/css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript">
 function check(){

@@ -10,6 +10,7 @@
 		<title>予約管理</title>
 		<link href="./css/styleOkada.css" rel="stylesheet" type="text/css">
 		<link href="./css/styleTaiki.css" rel="stylesheet" type="text/css">
+		<link href="./css/styleKuniyoshi.css" rel="stylesheet" type="text/css">
 	</head>
 	<body>
 		<h1>図書システムかりたいナ☆</h1>

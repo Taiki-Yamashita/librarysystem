@@ -7,8 +7,9 @@
 	<head>
 	<title>ユーザー編集</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<link href="../css/styleTaiki.css" rel="stylesheet" type="text/css">
-		<link href="../css/styleOkada.css" rel="stylesheet" type="text/css">
+			<link href="../css/styleOkada.css" rel="stylesheet" type="text/css">
+			<link href="../css/styleTaiki.css" rel="stylesheet" type="text/css">
+			<link href="../css/styleKuniyoshi.css" rel="stylesheet" type="text/css">
 		<script type="text/javascript">
 		function check(){
 
