@@ -13,7 +13,7 @@
 <body>
 	<p>予約管理</p>
 	<p><a href="./manageBook">管理画面</a></p>
-	<table>
+	<table border="2" class="manage">
 		<tr><th>予約者ID</th>
 			<th>予約者</th>
 			<th>本の名前</th>
