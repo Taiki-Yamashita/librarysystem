@@ -22,21 +22,22 @@
 			</div>
 			<c:remove var="errorMessages" scope="session"/>
 		</c:if>
+		<div class = "center">
+			<form action="./login" method="POST">
+				<table border="1" class="center">
+					<tr><td>ログインID:<input name="loginId" type="text"/></td></tr>
+					<tr><td>パスワード:<input name="password" type="password"/></td></tr>
+				</table>
+				<input type="submit"  value="ログイン" />
+			</form>
 
-		<form action="./login" method="POST">
-			<table border="1">
-				<tr><td>ログインID:<input name="loginId" type="text"/></td></tr>
-				<tr><td>パスワード:<input name="password" type="password"/></td></tr>
+			<table border="1" class="center">
+				<tr>
+					<td><a href = "./search">検索</a></td>
+					<td><a href = "./ranking">ランキング</a></td>
+				</tr>
 			</table>
-			<input type="submit"  value="ログイン" />
-		</form>
-
-		<table border="1">
-			<tr>
-				<td><a href = "./search">検索</a></td>
-				<td><a href = "./ranking">ランキング</a></td>
-			</tr>
-		</table>
+		</div>
 
 	</body>
 </html>

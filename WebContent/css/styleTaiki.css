@@ -28,6 +28,7 @@ ul.pageNav01 li a:hover {
 	background: #eeeff7;
 	border-color: #00f;
 }
+
 .errorMessages {
 	margin-top: 30px;
 	margin-right: 30px;
@@ -36,4 +37,22 @@ ul.pageNav01 li a:hover {
 	color: red;
 	font-size:25px;
 	text-align: center;
+}
+p.center {
+	width:50%; /* 600px以下は幅いっぱいに広げる */
+	margin-left:auto;
+	margin-right:auto;
+	text-align:center; /* インライン要素の中央揃え */
+}
+.center {
+	width:50%; /* 600px以下は幅いっぱいに広げる */
+	margin-left:auto;
+	margin-right:auto;
+	text-align:center; /* インライン要素の中央揃え */
+}
+table.center {
+	width:50%; /* 600px以下は幅いっぱいに広げる */
+	margin-left:auto;
+	margin-right:auto;
+	text-align:center; /* インライン要素の中央揃え */
 }
