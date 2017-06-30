@@ -15,6 +15,7 @@
 	</head>
 	<body>
 		<h1>図書システム借りたいナ☆</h1>
+		<h2>☆トップページ☆</h2>
 
 		<c:if test="${ not empty errorMessages }">
 			<div class="errorMessages">
@@ -59,7 +60,7 @@
 				<tr>
 					<td>
 						<c:if test="${loginUser.id == 0}">
-							<input type="button" onclick="location.href='./admin/manage'"value="管理用">
+							<input class="admineter" type="button" onclick="location.href='./admin/manage'"value="管理用">
 						</c:if>
 					</td>
 					<td><input class="logout" type="button" onclick="location.href='./logout'"value="ログアウト"></td>
@@ -114,7 +115,7 @@
 								</c:if>
 							</c:if>
 						</td>
-						<td>
+						<td >
 							<input type="hidden" name="pageNumber" value="${pageNumber}">
 							<input type="hidden" name="isRefine" value="1">
 							<input class="topRefineButton" type="submit" value="絞込み">

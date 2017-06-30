@@ -39,7 +39,7 @@
 
 		<div class="center">
 
-			<form action="require" method="post">
+			<form class="requireForm" action="require" method="post">
 <table class="form">
 	<tr>
 		<td>
