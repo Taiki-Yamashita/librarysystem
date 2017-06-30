@@ -1,5 +1,28 @@
 @CHARSET "UTF-8";
 
+/*ログイン画面*/
+.loginMenu{
+	width:100%;
+	height:100px;
+	margin-left:auto;
+	margin-right:auto;
+	text-align:left;
+	border: 10px solid #800040;
+	vertical-align : middle;
+}
+
+.loginButtonforLogin{
+	height:100px;
+	width:150px;
+}
+
+.loginLine{
+	width:79.5%;
+	margin-left : auto;
+	margin-right : auto;
+	font-size : 30px;
+}
+
 /*トップ画面*/
 
 .subButton{
