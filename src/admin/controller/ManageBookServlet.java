@@ -81,6 +81,10 @@ public class ManageBookServlet extends HttpServlet {
 				}
 				isValid(refinedBooks, request);
 				request.setAttribute("books", refinedBooks);
+
+				request.setAttribute("pageCountList", getPageCount(refinedBooks.size()));
+				if(request.getParameter("pageNumber") == null) request.setAttribute("pageNumber", "1");
+				else request.setAttribute("pageNumber", request.getParameter("pageNumber"));
 			}
 			if(delay.equals("3")){
 				List<Book> refinedBooks = new ArrayList<Book>();
@@ -93,6 +97,17 @@ public class ManageBookServlet extends HttpServlet {
 				}
 				isValid(refinedBooks, request);
 				request.setAttribute("books", refinedBooks);
+
+				request.setAttribute("pageCountList", getPageCount(refinedBooks.size()));
+				if(request.getParameter("pageNumber") == null) request.setAttribute("pageNumber", "1");
+				else request.setAttribute("pageNumber", request.getParameter("pageNumber"));
+			}
+
+			/*ページ遷移管理*/
+			if(request.getParameter("delay").equals("1")){
+				request.setAttribute("pageCountList", getPageCount(books.size()));
+				if(request.getParameter("pageNumber") == null) request.setAttribute("pageNumber", "1");
+				else request.setAttribute("pageNumber", request.getParameter("pageNumber"));
 			}
 
 			/*値の保持*/
@@ -105,6 +120,12 @@ public class ManageBookServlet extends HttpServlet {
 			request.setAttribute("isReserving", isReserving);
 			request.setAttribute("delay", delay);
 			request.setAttribute("bookStatus", bookStatus);
+		}
+
+		/*ページ遷移管理*/
+		if(request.getParameter("isSearching") == null){
+			request.setAttribute("pageCountList", getPageCount(books.size()));
+			request.setAttribute("pageNumber", "1");
 		}
 
 		request.getRequestDispatcher("/admin/manageBook.jsp").forward(request, response);
@@ -161,6 +182,19 @@ public class ManageBookServlet extends HttpServlet {
 		}
 
 		return notReturnedCounts;
+	}
+
+	public List<String> getPageCount(int informationCount){
+
+		List<String> pageCountList = new ArrayList<>();
+		int pageCount = informationCount / 10 + 1;
+		if(informationCount % 10 == 0) pageCount--;
+
+		for(int i = 1; i <= pageCount; i++){
+			pageCountList.add(String.valueOf(i));
+		}
+
+		return pageCountList;
 	}
 
 }
