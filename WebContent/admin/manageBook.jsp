@@ -206,16 +206,16 @@
 			</tr>
 		</table>
 	</div>
-
-		<h2>◎本リスト</h2>
-
+	<div class="errorMessages">
 		<c:if test="${ not empty errorMessages }">
 			<c:forEach items="${errorMessages}" var="message">
-				<font color="#ff0000"><c:out value="${message}" /></font><br>
+				<c:out value="${message}" /><br>
 			</c:forEach>
 		</c:if>
+	</div>
 
 		<c:if test="${not empty books}">
+		<h2>◎本一覧</h2>
 			<table border="2" class="manage">
 				<tr class="font1">
 					<th>名前</th>

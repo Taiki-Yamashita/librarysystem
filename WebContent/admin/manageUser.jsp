@@ -28,9 +28,9 @@
 	</head>
 	<body class="admin">
 	<p class="center"><a href="./manage">管理画面</a></p>
-		<h1>ユーザー編集</h1>
+		<h1>ユーザー管理</h1>
 	<div class="center">
-		<h3>◎検索</h3>
+		<h2>◎検索</h2>
 
 		<table border="1" class="manage">
 			<tr class="font1">
@@ -97,6 +97,7 @@
 		</c:if>
 	</div>
 		<c:if test="${not empty users}">
+		<h2>◎ユーザー一覧</h2>
 			<table border="2" class="manage">
 				<tr class="font1">
 					<th>ID</th>
