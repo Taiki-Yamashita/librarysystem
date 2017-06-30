@@ -27,11 +27,11 @@
 		</script>
 	</head>
 	<body class="admin">
+	<p class="center"><a href="./manage">管理画面</a></p>
 	<h1>図書システム借りたいナ☆</h1>
 	<h2>本の情報管理</h2>
-	<p class="center"><a href="./manage">管理画面</a></p>
 	<div class="center">
-		<h3>検索</h3>
+		<h3>◎検索</h3>
 		<table border="2" class="manage">
 			<tr>
 				<td>
@@ -208,7 +208,7 @@
 		</table>
 	</div>
 
-		<p>◎本リスト</p>
+		<h3>◎本リスト</h3>
 
 		<c:if test="${ not empty errorMessages }">
 			<c:forEach items="${errorMessages}" var="message">

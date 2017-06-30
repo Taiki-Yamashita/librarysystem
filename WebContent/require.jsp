@@ -26,7 +26,7 @@
 		</c:if>
 		<a href = "./logout" class="right">ログアウト</a>
 		<br/>
-		<table border="1" class="center">
+		<table border="1"class="center">
 			<tr>
 				<td><a href = "./">トップ</a></td>
 				<td><a href = "./search">検索</a></td>

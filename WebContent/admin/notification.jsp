@@ -13,9 +13,9 @@
 </head>
 
 <body class="admin">
+<p><a href = "./manage">管理画面</a></p>
 	<h1>図書システム借りたいナ☆</h1>
 	<h2>お知らせ投稿フォーム</h2>
-	<a href = "./manage">管理画面</a><br>
 
 	<c:if test="${ not empty errorMessages }">
 			<c:forEach items="${errorMessages}" var="message">
