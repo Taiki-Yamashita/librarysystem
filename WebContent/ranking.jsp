@@ -22,9 +22,11 @@
 		</c:if>
 
 		<c:if test="${not empty loginUser}">
-			<input type="button" onclick="location.href='./logout'"value="ログアウト">
+		<div class="subButton">
+			<input class="logout" type="button" onclick="location.href='./logout'"value="ログアウト">
+		</div>
 		</c:if>
-		<br>
+		<br><br>
 
 		<table class="menuBar">
 			<tr>
@@ -52,7 +54,7 @@
 			</c:forEach>
 		</c:if>
 	</div>
-		貸出件数ランキング<br>
+		<h3>貸出件数ランキング</h3><br>
 		<c:if test="${not empty circulations }">
 		<table border="2" class="manage">
 			<tr>
@@ -199,14 +201,13 @@
 							<input type="hidden" value="1" name="num">
 						</form>
 					</td>
-				</tr>
 			</c:forEach>
 		</table>
 		</c:if>
 		<c:if test="${empty circulations }">貸出がありません</c:if>
 
 		<br>
-		予約件数ランキング<br>
+		<h3>予約件数ランキング</h3><br>
 		<c:if test="${not empty reservations }">
 		<table border="2" class="manage">
 			<tr>

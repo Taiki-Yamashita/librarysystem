@@ -18,6 +18,11 @@ select {
 	margin-left: 120px;
 	font-size: 16px;
 }
+
+.receiveForm{
+	margin-left: 120px;
+	font-size: 16px;
+}
 .passForm{
 	font-size:16px;
 }
@@ -155,12 +160,13 @@ ul, menu, dir {
 }
 
 .exception {
+	margin-left: 970px;
 	margin-top: 3%;
 	font-weight: 900;
 	font-size: 20px;
     text-align: center;
     line-height: 1;
-	width: 100px;
+	width: 300px;
     height: 50px;
     display: inline-block;
     padding: 0.5em 1em;
@@ -630,10 +636,12 @@ button {/*ボタンを押したとき*/
 .winner{
 	font-weight:900;
 	font-size:20px;
+	background: #ffff80;
 }
 .semiWinner{
 	font-weight:600;
 	font-size:18px;
+    background: #ffff80;
 }
 .lent {
 	margin-top: 3%;
@@ -710,4 +718,9 @@ button {/*ボタンを押したとき*/
     box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);/*影を小さく*/
     border-bottom: none;
     outline: none;
+}
+
+
+.manageToTop{
+	cursor:pointer;
 }

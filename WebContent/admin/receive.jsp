@@ -28,12 +28,12 @@ function check(){
 }
 </script>
 </head>
-<body>
+<body class="admin">
 <p><a href = "manage">管理画面</a></p>
 	<h1>図書システム借りたいナ☆</h1>
 	<h2>問合わせ受取</h2>
 	<div class="bigsize">
-	<form action="receive" method = "post">
+	<form class="receiveForm" action="receive" method = "post">
 		<c:if test="${empty num}">
 			<input type="radio" name="num" value="2" checked><label for = "num" >全て</label>
 			<input type="radio" name="num" value="0"><label for = "num">未読表示</label>
@@ -69,7 +69,7 @@ function check(){
 	<c:if test="${empty errorMessages }">
 
 	<form action="receive" method = "post" onSubmit="return check()">
-		<input class="exception" type="submit" value="実行" /><br><br>
+		<input class="exception" type="submit" value="チェック項目を全て実行" /><br><br>
 		<table border="2" class="manage">
 
 

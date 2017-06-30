@@ -19,7 +19,7 @@
 		<h2>${loginUser.name}さんのお気に入り</h2>
 
 		<div class="subButton">
-			<input type="button" onclick="location.href='./logout'"value="ログアウト">
+			<input class="logout" type="button" onclick="location.href='./logout'"value="ログアウト">
 		</div>
 		<br/><br>
 		<table class="menuBar">
