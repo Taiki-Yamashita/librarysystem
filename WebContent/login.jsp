@@ -42,10 +42,15 @@
 					</tr>
 				</table>
 			</form>
-			<table class="topTable">
+			<table  class="topTable">
 				<tr>
 					<td><input class="loginedSearchButton" type="button" onclick="location.href='./search'"value="検索"></td>
 					<td><input class="loginedRankingButton" type="button" onclick="location.href='./ranking'"value="貸出/予約ランキング"></td>
+				</tr>
+			</table>
+			<table border="1" class="loginTopButton">
+				<tr>
+					<td><input type="button" onclick="location.href='./'"value="トップ"></td>
 				</tr>
 			</table>
 		</div>
