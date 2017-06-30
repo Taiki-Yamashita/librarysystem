@@ -33,7 +33,7 @@
 		<h3>◎検索</h3>
 
 		<table border="1" class="manage">
-			<tr>
+			<tr class="font1">
 				<td>
 					<form action="./manageUser" method="GET">
 						<table>
@@ -52,7 +52,7 @@
 
 						<table>
 							<tr>
-								<td>登録図書館</td>
+								<td>登録図書館:</td>
 								<td>
 									<c:if test="${empty selectedLibrary}">
 										<input type="radio" name="selectedLibrary" value="0" checked>全て
@@ -88,18 +88,17 @@
 			</tr>
 		</table>
 	</div>
-
-		<hr width="1500px">
-
+<br>
+	<div class="errorMessages">
 		<c:if test="${ not empty errorMessages }">
 			<c:forEach items="${errorMessages}" var="message">
-				<font color="#ff0000"><c:out value="${message}" /></font><br>
+				<c:out value="${message}" /><br>
 			</c:forEach>
 		</c:if>
-
+	</div>
 		<c:if test="${not empty users}">
 			<table border="2" class="manage">
-				<tr>
+				<tr class="font1">
 					<th>ID</th>
 					<th>ログインID</th>
 					<th>パスワード</th>
@@ -114,7 +113,7 @@
 					<th>停止</th>
 				</tr>
 				<c:forEach items="${users}" var="user">
-					<tr>
+					<tr class="font2">
 						<td>${user.id}</td>
 						<td>${user.loginId}</td>
 						<td>${user.password}</td>

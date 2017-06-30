@@ -36,11 +36,11 @@
 
 		<hr width="1500px">
 
-		<p>◎探す</p>
+		<h2>◎探す</h2>
 		<form action="./search" method="GET">
 			<table>
-				<tr>
-					<td>状態</td>
+				<tr class="font1">
+					<td>状態:</td>
 					<td>
 						<c:if test="${empty bookStatus}">
 							<input type="radio" name="bookStatus" value="1" checked>全て
@@ -59,7 +59,7 @@
 				</tr>
 			</table>
 			<table>
-				<tr>
+				<tr class="font1">
 					<td>
 						<select name="selectBox">
 							<c:if test="${not empty selectBox}">
@@ -99,7 +99,7 @@
 			</table>
 
 			<table>
-				<tr>
+				<tr class="font1">
 					<td>
 						<c:forEach items="${libraryList}" var="libraryName" varStatus="libraryCount">
 							<%session.setAttribute("checkLibrary", 0);%>
@@ -115,7 +115,7 @@
 						</c:forEach>
 					</td>
 				</tr>
-				<tr>
+				<tr class="font1">
 					<td>
 						<%
 							String[] checkBoxCategoryNumbers = {"1","2","3","4","5","6","7","8","9"};
@@ -192,7 +192,7 @@
 						</c:forEach>
 					</td>
 				</tr>
-				<tr>
+				<tr class="font1">
 					<td>
 						<%
 							String[] checkBoxTypeNumbers = {"1","2","3","4"};
@@ -234,7 +234,7 @@
 						</c:forEach>
 					</td>
 				</tr>
-				<tr>
+				<tr class="font1">
 					<td>
 						で
 						<input type="hidden" name="isSearching" value="1">
@@ -251,8 +251,53 @@
 		<hr width="1500px">
 
 		<c:if test="${not empty isSearching}">
-			<p>◎並び替え</p>
+			<h2>◎並び替え</h2>
 			<form action="./search" method="GET">
+				<table>
+					<tr>
+						<td>
+						<c:if test="${sort == 1}"><input type="radio" name="sort" value="1" checked>新しい順</c:if>
+				<c:if test="${sort != 1}">
+					<c:if test="${sort == 0}"><input type="radio" name="sort" value="1" checked>新しい順</c:if>
+					<c:if test="${sort != 0}"><input type="radio" name="sort" value="1">新しい順</c:if>
+				</c:if>
+
+						</td>
+						<td>
+						<c:if test="${sort == 2}"><input type="radio" name="sort" value="2" checked>古い順</c:if>
+				<c:if test="${sort != 2}"><input type="radio" name="sort" value="2">古い順</c:if>
+						</td>
+						<td>
+						<c:if test="${sort == 3}"><input type="radio" name="sort" value="3" checked>書籍名順</c:if>
+				<c:if test="${sort != 3}"><input type="radio" name="sort" value="3">書籍名順</c:if>
+						</td>
+						<td>
+						<c:if test="${sort == 4}"><input type="radio" name="sort" value="4" checked>著者名順</c:if>
+				<c:if test="${sort != 4}"><input type="radio" name="sort" value="4">著者名順</c:if>
+
+						</td>
+						<td>
+						<c:if test="${sort == 5}"><input type="radio" name="sort" value="5" checked>カテゴリ名順</c:if>
+				<c:if test="${sort != 5}"><input type="radio" name="sort" value="5">カテゴリ名順</c:if>
+						</td>
+						<td>
+						<c:if test="${sort == 6}"><input type="radio" name="sort" value="6" checked>出版社名順</c:if>
+				<c:if test="${sort != 6}"><input type="radio" name="sort" value="6">出版社名順</c:if>
+						</td>
+						<td>
+
+						</td>
+						<td>
+
+						</td>
+						<td>
+
+						</td>
+						<td>
+
+						</td>
+					</tr>
+				</table>
 				<c:if test="${sort == 1}"><input type="radio" name="sort" value="1" checked>新しい順</c:if>
 				<c:if test="${sort != 1}">
 					<c:if test="${sort == 0}"><input type="radio" name="sort" value="1" checked>新しい順</c:if>
@@ -332,7 +377,7 @@
 
 		<c:if test="${not empty books}">
 			<table border="2" class="manage">
-				<tr>
+				<tr class="font1">
 					<th>書籍</th>
 					<th>著者</th>
 					<th>出版日</th>
@@ -347,7 +392,7 @@
 				<c:forEach items="${books}" var="book" varStatus="count">
 					<c:if test="${book.id != 0}">
 						<c:if test="${count.index >= (pageNumber-1)*10 && count.index <= (pageNumber*10)-1}">
-							<tr>
+							<tr class="font2">
 								<td><c:out value="${book.name}"/></td>
 								<td><c:out value="${book.author}"/></td>
 								<td>

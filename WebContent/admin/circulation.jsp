@@ -17,7 +17,7 @@
 	<c:if test="${not empty circulations }">
 	<form action="circulation" method="post">
 		<table border="2" class="manage">
-			<tr>
+			<tr class="font1">
 				<th>ユーザー名</th>
 				<th>書籍名</th>
 				<th>最寄り図書館</th>
@@ -25,7 +25,7 @@
 				<th>期限</th>
 				<th></th>
 			</tr>
-			<tr>
+			<tr class="font2">
 				<c:forEach items = "${circulations}" var="circulation">
 					<td><c:out value = "${circulation.userName}" /></td>
 					<td><c:out value = "${circulation.bookName}" /></td>

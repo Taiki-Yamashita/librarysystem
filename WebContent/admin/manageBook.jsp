@@ -31,9 +31,9 @@
 	<h1>図書システム借りたいナ☆</h1>
 	<h2>本の情報管理</h2>
 	<div class="center">
-		<h3>◎検索</h3>
+		<h2>◎検索</h2>
 		<table border="2" class="manage">
-			<tr>
+			<tr class="font1">
 				<td>
 					<form action="./manageBook" method="GET">
 					<table>
@@ -77,8 +77,8 @@
 					</table>
 
 					<table>
-						<tr>
-							<td>状態</td>
+						<tr class="font1">
+							<td>状態:</td>
 							<td>
 								<c:if test="${empty bookStatus}">
 									<input type="radio" name="bookStatus" value="1" checked>全て
@@ -101,8 +101,8 @@
 					</table>
 
 					<table>
-						<tr>
-							<td>図書館</td>
+						<tr class="font1">
+							<td>図書館:</td>
 							<td>
 								<c:if test="${empty selectedLibrary}">
 									<input type="radio" name="selectedLibrary" value="0" checked>全て
@@ -127,8 +127,8 @@
 					</table>
 
 					<table>
-						<tr>
-							<td>棚番号</td>
+						<tr class="font1">
+							<td>棚番号:</td>
 							<td>
 								<c:if test="${empty selectedShelfId}">
 									<input type="radio" name="selectedShelfId" value="0" checked>全て
@@ -153,8 +153,8 @@
 					</table>
 
 					<table>
-						<tr>
-							<td>予約の有無</td>
+						<tr class="font1">
+							<td>予約の有無:</td>
 							<td>
 								<c:if test="${empty isReserving}">
 									<input type="radio" name="isReserving" value="1" checked>全て
@@ -174,8 +174,8 @@
 					</table>
 
 					<table>
-						<tr>
-							<td>延滞の有無</td>
+						<tr class="font1">
+							<td>延滞の有無:</td>
 							<td>
 								<c:if test="${empty delay}">
 									<input type="radio" name="delay" value="1" checked>全て
@@ -196,7 +196,6 @@
 						<input type="hidden" name="isSearching" value="1">
 						<input class="focus" type="submit" value="絞込み">
 						<input class="clear" type="button" onclick="location.href='./manageBook'"value="クリア">
-						<hr width="150px">
 					</form>
 				</td>
 				<td>
@@ -208,7 +207,7 @@
 		</table>
 	</div>
 
-		<h3>◎本リスト</h3>
+		<h2>◎本リスト</h2>
 
 		<c:if test="${ not empty errorMessages }">
 			<c:forEach items="${errorMessages}" var="message">
@@ -218,7 +217,7 @@
 
 		<c:if test="${not empty books}">
 			<table border="2" class="manage">
-				<tr>
+				<tr class="font1">
 					<th>名前</th>
 					<th>著者</th>
 					<th>出版社</th>
@@ -233,7 +232,7 @@
 				</tr>
 
 				<c:forEach items="${books}" var="book" varStatus="statusBook">
-					<tr>
+					<tr class="font2">
 						<td>${book.name}</td>
 						<td>${book.author}</td>
 						<td>${book.publisher}</td>
