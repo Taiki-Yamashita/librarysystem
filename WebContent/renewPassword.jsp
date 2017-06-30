@@ -12,7 +12,8 @@
 <title>パスワード変更画面</title>
 </head>
 <body class="renewPassPage">
-	<h1>パスワード変更画面</h1>
+	<h1>図書システム借りたいナ☆</h1>
+	<h2>☆パスワード変更画面☆</h2>
 	<c:if test="${ not empty errorMessages }">
 		<div class="errorMessages">
 			<ul>
@@ -24,7 +25,7 @@
 		<c:remove var="errorMessages" scope="session"/>
 	</c:if>
 	<div class="subButton">
-		<input type="button" onclick="location.href='./logout'"value="ログアウト">
+		<input class="logout" type="button" onclick="location.href='./logout'"value="ログアウト">
 	</div>
 	<br/><br>
 		<table class="menuBar">

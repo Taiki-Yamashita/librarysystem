@@ -16,6 +16,7 @@
 
 
 		<h1>図書システムかりたいナ☆</h1>
+		<h2>☆マイページ☆</h2>
 
 		<div class="subButton">
 			<input class="logout" type="button" onclick="location.href='./logout'"value="ログアウト">

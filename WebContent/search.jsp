@@ -14,18 +14,20 @@
 	</head>
 	<body>
 		<h1>図書システム借りたいナ☆</h1>
-		<h2>検索</h2>
+		<h2>☆検索☆</h2>
 
 		<c:if test="${empty loginUser}">
 			<input type="button" onclick="location.href='./login'"value="ログイン">
 		</c:if>
 
 		<c:if test="${not empty loginUser}">
-			<input type="button" onclick="location.href='./logout'"value="ログアウト">
+			<div class="subButton">
+			<input class="logout" type="button" class="subButton" onclick="location.href='./logout'"value="ログアウト">
+		</div><br>
 		</c:if>
 		<br>
 
-		<table border="1" class="menuBar">
+		<table class="menuBar">
 			<tr>
 				<td><input type="button" onclick="location.href='./'"value="トップ"></td>
 				<td><input type="button" onclick="location.href='./ranking'"value="ランキング"></td>
