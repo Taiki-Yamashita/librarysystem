@@ -42,7 +42,7 @@
 		</c:if>
 
 		<c:if test="${loginUser.id == null}">
-			<p>ログインするといろいろな機能がつかえます(*^◯^*)</p>
+			<p>ログインするといろいろな機能がつかえます!(*^◯^*)</p>
 			<table class="topTable">
 				<tr>
 					<td rowspan="2"><input class="searchButton" type="button" onclick="location.href='./search'"value="検索"></td>
@@ -84,7 +84,7 @@
 		<div class="notification">
 			<h5>お知らせ</h5>
 			<form action="./" method="GET">
-				<table border="1">
+				<table border="2" class="notificationRefine">
 					<tr>
 						<td>図書館</td>
 						<td>
@@ -117,30 +117,34 @@
 						<td>
 							<input type="hidden" name="pageNumber" value="${pageNumber}">
 							<input type="hidden" name="isRefine" value="1">
-							<input type="submit" value="絞込み">
+							<input class="topRefineButton" type="submit" value="絞込み">
 						</td>
 					</tr>
 				</table>
 			</form>
 
-
-			<c:forEach items="${informations}" var="information" varStatus="count">
-				<c:if test="${count.index >= (pageNumber-1)*4 && count.index <= (pageNumber*4)-1}">
-					<a href="information?id=${information.id }"name="id"><c:out value="${information.title}"/></a>
-					<div class="registeredDate">投稿日時:
-						<fmt:parseDate var="date" value="${information.registeredDate}" pattern="yyyy-MM-dd HH:mm:ss" />
-						<fmt:formatDate pattern = "yyyy年MM月dd日" value = "${date}" />
-					</div>
-					<div class="libraryId">
-						<c:forEach items="${libraries}" var="library">
-							<c:if test = "${library.id == information.libraryId}">
-								図書館:<c:out value="${library.name}" /></br>
-								-------------------------------------------------------------------------
-							</c:if>
-						</c:forEach>
-					</div>
-				</c:if>
-			</c:forEach>
+			<br>
+			<table border="2" class="notificationText">
+				<tr><td>
+					<c:forEach items="${informations}" var="information" varStatus="count">
+						<c:if test="${count.index >= (pageNumber-1)*4 && count.index <= (pageNumber*4)-1}">
+							<a href="information?id=${information.id }"name="id"><c:out value="${information.title}"/></a>
+							<div class="registeredDate">投稿日時:
+								<fmt:parseDate var="date" value="${information.registeredDate}" pattern="yyyy-MM-dd HH:mm:ss" />
+								<fmt:formatDate pattern = "yyyy年MM月dd日" value = "${date}" />
+							</div>
+							<div class="libraryId">
+								<c:forEach items="${libraries}" var="library">
+									<c:if test = "${library.id == information.libraryId}">
+										図書館:<c:out value="${library.name}" /></br>
+										<hr width="1000px">
+									</c:if>
+								</c:forEach>
+							</div>
+						</c:if>
+					</c:forEach>
+				</td></tr>
+			</table>
 
 			<table class="pageNumber">
 				<tr>
