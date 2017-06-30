@@ -31,8 +31,8 @@
 						<td>
 							<table border="2" class="loginMenu">
 								<tr>
-									<td>ログインID:<input name="loginId" type="text" size="29"/></td>
-									<td>パスワード:<input name="password" type="password" size="29"/></td>
+									<td>ログインID:<input name="loginId" type="text" size="38"/></td>
+									<td>パスワード:<input name="password" type="password" size="38"/></td>
 								</tr>
 							</table>
 						</td>
@@ -42,10 +42,15 @@
 					</tr>
 				</table>
 			</form>
-			<table class="topTable">
+			<table  class="topTable">
 				<tr>
 					<td><input class="loginedSearchButton" type="button" onclick="location.href='./search'"value="検索"></td>
 					<td><input class="loginedRankingButton" type="button" onclick="location.href='./ranking'"value="貸出/予約ランキング"></td>
+				</tr>
+			</table>
+			<table border="1" class="loginTopButton">
+				<tr>
+					<td><input type="button" onclick="location.href='./'"value="トップ"></td>
 				</tr>
 			</table>
 		</div>
