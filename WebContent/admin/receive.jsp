@@ -80,7 +80,7 @@ function check(){
 				<th>出版社</th>
 				<th>リクエスト日</th>
 				<th></th>
-				<th>既読チェック</th>
+				<th>既読/未読</th>
 				<th>削除チェック</th>
 
 			</tr>
