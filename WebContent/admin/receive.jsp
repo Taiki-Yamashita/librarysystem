@@ -72,7 +72,6 @@ function check(){
 		<input class="exception" type="submit" value="チェック項目を全て実行" /><br><br>
 		<table border="2" class="manage">
 
-
 			<tr class="font1">
 				<th>ユーザー名</th>
 				<th>書籍名</th>

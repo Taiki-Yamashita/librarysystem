@@ -24,8 +24,8 @@
 	</div>
 	<c:remove var="errorMessages" scope="session"/>
 </c:if>
-<div class=addBookText></div>
-<form class="addBookForm" action = "./addBook"method = "post" name="register"><br />
+<div class="center">
+<form action = "./addBook"method = "post" name="register"><br />
 	<label for = "name">名前</label>*必須<br>
 	<input name = "name" id = "name" value = "${newBook.name }"/><br />
 
@@ -206,5 +206,6 @@
 	<input name = "publishedDate3" id = "publishedDate3" value ="${publishedDate3 }"/>日<br>
 	<input class ="register" type="submit" value="登録" />
 	</form>
+	</div>
 </body>
 </html>
