@@ -12,7 +12,7 @@
 		<link href="../css/styleTaiki.css" rel="stylesheet" type="text/css">
 		<link href="../css/styleKuniyoshi.css" rel="stylesheet" type="text/css">
 	</head>
-	<body>
+	<body class="admin">
 		<h1>かりたいナ管理</h1>
 		<input class="manageToTop" type="button" onclick="location.href='../'"value="トップ画面">
 		<table border="1" class="manageTable">
