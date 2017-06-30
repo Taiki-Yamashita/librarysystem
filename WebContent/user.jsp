@@ -12,7 +12,7 @@
 		<link href="./css/styleTaiki.css" rel="stylesheet" type="text/css">
 		<link href="./css/styleKuniyoshi.css" rel="stylesheet" type="text/css">
 	</head>
-	<body>
+	<body class="userPage">
 		<h1>図書システムかりたいナ☆</h1>
 		<h2>${loginUser.name}さんのマイページ</h2>
 		<div class="subButton">
@@ -68,7 +68,7 @@
 					</table>
 				</td>
 				<td>
-					<input type="button" class="userChange" onclick="location.href='./renewPassword'"value="ログインID/パスワード編集">
+					<button type='submit' class="userChange" onclick="location.href='./renewPassword'">ログインID<br>パスワード編集</button>
 					<p>住所などの変更は窓口まで</p>
 				</td>
 			</tr>
@@ -140,7 +140,7 @@
 						<th>本の名前</th>
 						<th>受取図書館</th>
 						<th>予約日</th>
-						<th>キャンセル</th>
+						<th>予約取消し</th>
 					</tr>
 					<c:forEach items="${reservations}" var="reservation">
 
@@ -169,7 +169,7 @@
 										<input type = "hidden" name = "time" value = "${reservation.reservedDate }">
 										<c:if test="${reservation.canceling == 0 }">
 											<input type = "hidden" name = "num" value =1>
-											<input class="cancel" type = "submit" value = "キャンセル" />
+											<input class="cancel" type = "submit" value = "取消" />
 										</c:if>
 									</form>
 								</td>
