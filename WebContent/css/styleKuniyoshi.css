@@ -24,7 +24,6 @@
 }
 
 /*トップ画面*/
-
 .subButton{
 	margin-right : 10%;
 	float : right;
@@ -175,4 +174,36 @@ p{
 	color: #fff;
 	border-style: none;
 	cursor : pointer;
+}
+
+/*管理画面*/
+table.manageTable{
+	width: 80%;
+	height: 400px;
+	margin-left: auto;
+	margin-right: auto;
+	border-collapse: separate;
+	border-spacing: 5px;
+	border-color: #248;
+	text-align: center;
+}
+table.manageTable tr td{
+	text-align : center;
+	width : 50%;
+}
+
+table.manageTable input{
+	width : 100%;
+	height : 200px;
+	cursor : pointer;
+	font-size : 50px;
+	font-weight: bold;
+	padding: 10px 20px;
+}
+
+.manageToTop{
+	height:50px;
+	width:150px;
+	margin-right : 10.1%;
+	float : right;
 }

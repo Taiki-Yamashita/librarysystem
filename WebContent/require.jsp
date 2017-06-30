@@ -24,14 +24,16 @@
 			</div>
 			<c:remove var="errorMessages" scope="session"/>
 		</c:if>
-		<a href = "./logout" class="right">ログアウト</a>
-		<br/>
-		<table border="1"class="center">
+		<div class="subButton">
+			<input type="button" onclick="location.href='./logout'"value="ログアウト">
+		</div>
+		<br/><br>
+		<table class="menuBar">
 			<tr>
-				<td><a href = "./">トップ</a></td>
-				<td><a href = "./search">検索</a></td>
-				<td><a href = "./ranking">ランキング</a></td>
-				<td><a href = "./user">マイページ</a></td>
+				<td><input type="button" onclick="location.href='./'"value="トップ"></td>
+				<td><input type="button" onclick="location.href='./search'"value="検索"></td>
+				<td><input type="button" onclick="location.href='./ranking'"value="貸出/予約ランキング"></td>
+				<td><input type="button" onclick="location.href='./user'"value="マイページ"></td>
 			</tr>
 		</table>
 
