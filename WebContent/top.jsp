@@ -62,7 +62,7 @@
 							<input type="button" onclick="location.href='./admin/manage'"value="管理用">
 						</c:if>
 					</td>
-					<td><input type="button" onclick="location.href='./logout'"value="ログアウト"></td>
+					<td><input class="logout" type="button" onclick="location.href='./logout'"value="ログアウト"></td>
 				</tr>
 			</table>
 			<table class="menuBar">

@@ -16,7 +16,7 @@
 		<h1>図書システムかりたいナ☆</h1>
 		<h2>${loginUser.name}さんのマイページ</h2>
 		<div class="subButton">
-			<input type="button" onclick="location.href='./logout'"value="ログアウト">
+			<input type="button" class="subButton" onclick="location.href='./logout'"value="ログアウト">
 		</div><br><br>
 
 		<table class="menuBar">
@@ -28,7 +28,7 @@
 				</tr>
 		</table>
 
-		<h2>登録情報</h2>
+		<h2>【登録情報】</h2>
 		<table border="2" class="manage">
 			<tr class="font1">
 				<td>
@@ -83,7 +83,7 @@
 			</c:if>
 		</c:forEach>
 		<c:if test="${not empty flag}">
-			<h2>借りている本の一覧</h2>
+			<h2>【借りている本の一覧】</h2>
 			<table border="2" class="manage">
 				<tr class="font1">
 					<th>本の名前</th>
@@ -123,7 +123,7 @@
 		</c:if>
 
 		<c:if test="${empty flag}">
-			<h3>借りている本はありません</h3>
+			<h3>※借りている本はありません</h3>
 		</c:if>
 
 		<!-- 予約テーブル -->
@@ -134,7 +134,7 @@
 		</c:forEach>
 
 		<c:if test="${not empty flag2}">
-			<h2>予約一覧</h2>
+			<h2>【予約一覧】</h2>
 				<table border="2" class="manage">
 					<tr class="font1">
 						<th>本の名前</th>
@@ -180,7 +180,7 @@
 		</c:if>
 
 		<c:if test="${empty flag2}">
-			<h3>予約してる本はありません</h3>
+			<h2>※予約してる本はありません</h2>
 		</c:if>
 	</body>
 </html>

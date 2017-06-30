@@ -16,10 +16,9 @@
 
 
 		<h1>図書システムかりたいナ☆</h1>
-		<h2>${loginUser.name}さんのお気に入り</h2>
 
 		<div class="subButton">
-			<input type="button" onclick="location.href='./logout'"value="ログアウト">
+			<input class="logout" type="button" onclick="location.href='./logout'"value="ログアウト">
 		</div>
 		<br/><br>
 		<table class="menuBar">
@@ -36,14 +35,15 @@
 				<c:set var="flag" value="1" />
 			</c:if>
 		</c:forEach>
-
+	<div class="errorMessages">
 		<c:if test="${ not empty errorMessages }">
 			<c:forEach items="${errorMessages}" var="message">
-				<font color="#ff0000"><c:out value="${message}" /></font><br>
+				<c:out value="${message}" /><br>
 			</c:forEach>
 		</c:if>
-
+	</div>
 		<c:if test="${not empty favorites && flag == '1'}">
+		<h2>☆${loginUser.name}さんのお気に入り☆</h2>
 			<table border="2" class="manage">
 				<tr class="font1">
 					<th>書籍名</th>

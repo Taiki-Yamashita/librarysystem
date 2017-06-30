@@ -26,7 +26,7 @@
 		}
 		</script>
 	</head>
-	<body>
+	<body class="admin">
 	<p class="center"><a href="./manage">管理画面</a></p>
 		<h1>ユーザー編集</h1>
 	<div class="center">
