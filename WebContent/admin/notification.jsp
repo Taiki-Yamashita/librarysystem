@@ -17,36 +17,38 @@
 	<h1>図書システム借りたいナ☆</h1>
 	<h2>お知らせ投稿フォーム</h2>
 
-	<c:if test="${ not empty errorMessages }">
+	<div class="errorMessages">
+		<c:if test="${ not empty errorMessages }">
 			<c:forEach items="${errorMessages}" var="message">
 				<c:out value="${message}"/>
 			</c:forEach>
-
 			<c:remove var="errorMessages" scope="session"/>
 		</c:if>
+	</div>
 
+<div class="center">
+	<form class = "notificationForm" action = "notification"method = "post"><br />
 
-<form class = "notificationForm" action = "notification"method = "post"><br />
+		<label for="libraryId">図書館</label><br>
+		<select name="libraryId">
+			<option value="0">選択してください</option>
+				<c:forEach items="${libraries}" var="library">
+				<c:if test="${newNotification.libraryId == library.id }">
+						<option selected value="${library.id}">${library.name } </option>
+					</c:if>
+					<c:if test="${newNotification.libraryId != library.id }">
+						<option  value="${library.id}">${library.name } </option>
+					</c:if>
+			</c:forEach>
+		</select><br>
+		タイトル<br>
+		<textarea name="title" id="title" cols="100" rows="1" ><c:out value="${newNotification.title }"></c:out></textarea><br>
+		投稿<br>
+		<textarea name="message" id="message" cols="100" rows="5" ><c:out value="${newNotification.message }"></c:out></textarea><br>
 
-	<label for="libraryId">図書館</label><br>
-	<select name="libraryId">
-		<option value="0">選択してください</option>
-			<c:forEach items="${libraries}" var="library">
-			<c:if test="${newNotification.libraryId == library.id }">
-					<option selected value="${library.id}">${library.name } </option>
-				</c:if>
-				<c:if test="${newNotification.libraryId != library.id }">
-					<option  value="${library.id}">${library.name } </option>
-				</c:if>
-		</c:forEach>
-	</select><br>
-	タイトル<br>
-	<textarea name="title" id="title" cols="100" rows="1" ><c:out value="${newNotification.title }"></c:out></textarea><br>
-	投稿<br>
-	<textarea name="message" id="message" cols="100" rows="5" ><c:out value="${newNotification.message }"></c:out></textarea><br>
-
-	<input class="post" type="submit" value="投稿" />
+		<input class="post" type="submit" value="投稿" />
 
 	</form>
+</div>
 </body>
 </html>

@@ -25,8 +25,8 @@
 	<c:remove var="errorMessages" scope="session"/>
 </c:if>
 
-
-		<form class="addUserForm" action="addUser" method="post">
+	<div class="center">
+		<form  action="addUser" method="post">
 
 			<label for="name">名前</label>*必須<br>
 			<input name="name" value="${newUser.name}" id="name"/><br/>
@@ -60,5 +60,6 @@
 			</select>
 		<br><input class ="register" type="submit" value="登録" />
 		</form>
-	</body>
+	</div>
+</body>
 </html>
