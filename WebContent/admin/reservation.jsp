@@ -14,14 +14,14 @@
 <p><a href="./manageBook">管理画面</a></p>
 	<h1>予約一覧</h1>
 	<table border="2" class="manage">
-		<tr><th>予約者ID</th>
+		<tr class="font1"><th>予約者ID</th>
 			<th>予約者</th>
 			<th>本の名前</th>
 			<th>受取図書館</th>
 			<th>予約日</th>
 		</tr>
 		<c:forEach items="${reservations}" var="reservation">
-			<tr>
+			<tr class="font2">
 				<td>${reservation.userId}</td>
 				<td>
 					<c:forEach items="${users}" var="user">

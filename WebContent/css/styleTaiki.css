@@ -60,3 +60,18 @@ h3 {
 	margin-left:auto;
 	margin-right:auto;
 }
+table tr.font1 {
+	font-family: "ＭＳ Ｐ明朝";
+	font-size:25px;
+}
+table tr.font2 {
+	font-size:20px;
+}
+table tr.font3 {
+	font-size:20px;
+	font-family: "ＭＳ Ｐゴシック";
+}
+.bigsize {
+	font-family: "ＭＳ Ｐ明朝";
+	font-size:25px;
+}
