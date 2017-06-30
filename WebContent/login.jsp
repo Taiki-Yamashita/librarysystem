@@ -31,8 +31,8 @@
 						<td>
 							<table border="2" class="loginMenu">
 								<tr>
-									<td>ログインID:<input name="loginId" type="text" size="29"/></td>
-									<td>パスワード:<input name="password" type="password" size="29"/></td>
+									<td>ログインID:<input name="loginId" type="text" size="38"/></td>
+									<td>パスワード:<input name="password" type="password" size="38"/></td>
 								</tr>
 							</table>
 						</td>
