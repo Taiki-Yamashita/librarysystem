@@ -43,7 +43,7 @@
 
 		<c:if test="${not empty favorites && flag == '1'}">
 			<table border="2" class="manage">
-				<tr>
+				<tr class="font1">
 					<th>書籍名</th>
 					<th>著者</th>
 					<th>出版社</th>
@@ -57,7 +57,7 @@
 				</tr>
 				<c:forEach items="${favorites}" var="favorite">
 					<c:if test = "${loginUser.id == favorite.userId}">
-						<tr>
+						<tr class="font2">
 							<td><c:out value="${favorite.bookName}" /></td>
 							<td><c:out value="${favorite.author}" /></td>
 							<td><c:out value="${favorite.publisher}" /></td>

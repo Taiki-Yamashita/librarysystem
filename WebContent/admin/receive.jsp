@@ -32,6 +32,7 @@ function check(){
 <p><a href = "manage">管理画面</a></p>
 	<h1>図書システム借りたいナ☆</h1>
 	<h2>問合わせ受取</h2>
+	<div class="bigsize">
 	<form action="receive" method = "post">
 		<c:if test="${empty num}">
 			<input type="radio" name="num" value="2" checked><label for = "num" >全て</label>
@@ -53,10 +54,11 @@ function check(){
 				<input type="radio" name="num" value="1"><label for = "num">既読表示</label>
 			</c:if>
 		</c:if><br>
-		<label for="freeWord">フリーワード検索</label>
+		<label for="freeWord">フリーワード検索:</label>
 		<input type="text" name="freeWord" id="freeWord" value="${freeWord}">
 		<input class="focus" type="submit" value="絞込み" />
 	</form>
+	</div>
 	<div class="errorMessages">
 		<c:if test="${ not empty errorMessages }">
 			<c:forEach items="${errorMessages}" var="message">
@@ -71,7 +73,7 @@ function check(){
 		<table border="2" class="manage">
 
 
-			<tr>
+			<tr class="font1">
 				<th>ユーザー名</th>
 				<th>書籍名</th>
 				<th>著者</th>
@@ -85,7 +87,7 @@ function check(){
 
 			<c:if test="${not empty receives}">
 				<c:forEach items="${receives}" var="receive">
-					<tr>
+					<tr class="font2">
 						<td><c:out value="${receive.userName}" /></td>
 						<td>
 							<c:if test="${receive.comment == '特になし' || empty receive.comment}">
