@@ -82,7 +82,7 @@ public class ManageBookServlet extends HttpServlet {
 				isValid(refinedBooks, request);
 				request.setAttribute("books", refinedBooks);
 
-				request.setAttribute("pageCountList", getPageCount(refinedBooks.size()));
+				if(refinedBooks != null) request.setAttribute("pageCountList", getPageCount(refinedBooks.size()));
 				if(request.getParameter("pageNumber") == null) request.setAttribute("pageNumber", "1");
 				else request.setAttribute("pageNumber", request.getParameter("pageNumber"));
 			}
@@ -98,14 +98,14 @@ public class ManageBookServlet extends HttpServlet {
 				isValid(refinedBooks, request);
 				request.setAttribute("books", refinedBooks);
 
-				request.setAttribute("pageCountList", getPageCount(refinedBooks.size()));
+				if(refinedBooks != null) request.setAttribute("pageCountList", getPageCount(refinedBooks.size()));
 				if(request.getParameter("pageNumber") == null) request.setAttribute("pageNumber", "1");
 				else request.setAttribute("pageNumber", request.getParameter("pageNumber"));
 			}
 
 			/*ページ遷移管理*/
 			if(request.getParameter("delay").equals("1")){
-				request.setAttribute("pageCountList", getPageCount(books.size()));
+				if(books != null) request.setAttribute("pageCountList", getPageCount(books.size()));
 				if(request.getParameter("pageNumber") == null) request.setAttribute("pageNumber", "1");
 				else request.setAttribute("pageNumber", request.getParameter("pageNumber"));
 			}
@@ -124,8 +124,9 @@ public class ManageBookServlet extends HttpServlet {
 
 		/*ページ遷移管理*/
 		if(request.getParameter("isSearching") == null){
-			request.setAttribute("pageCountList", getPageCount(books.size()));
-			request.setAttribute("pageNumber", "1");
+			if(books != null) request.setAttribute("pageCountList", getPageCount(books.size()));
+			if(request.getParameter("pageNumber") == null) request.setAttribute("pageNumber", "1");
+			else request.setAttribute("pageNumber", request.getParameter("pageNumber"));
 		}
 
 		request.getRequestDispatcher("/admin/manageBook.jsp").forward(request, response);

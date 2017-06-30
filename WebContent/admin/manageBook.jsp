@@ -232,83 +232,115 @@
 				</tr>
 
 				<c:forEach items="${books}" var="book" varStatus="statusBook">
-					<tr class="font2">
-						<td>${book.name}</td>
-						<td>${book.author}</td>
-						<td>${book.publisher}</td>
-						<td>${book.category}</td>
-						<td>${book.type}</td>
-						<td>
-							<c:forEach items="${libraryList}" var="library">
-								<c:if test="${book.libraryId ==library.id}">
-									<option value="${library.id}">${library.name}</option>
-								</c:if>
-							</c:forEach>
-						</td>
-						<td>${book.shelfId}</td>
-
-						<td>
-							<fmt:parseDate var="date" value="${book.publishedDate}" pattern="yyyy-MM-dd HH:mm:ss" />
-							<fmt:formatDate pattern = "yyyy年MM月dd日" value = "${date}" />
-						</td>
-						<td>
-							<c:if test="${book.keeping ==1}">保管中</c:if>
-							<c:if test="${book.lending ==1}">貸出中</c:if>
-							<c:if test="${book.disposing ==1}">整理中</c:if>
-						<td>
-							<c:forEach items="${reservations }" var="reservation">
-								<c:if test="${reservation.bookId == book.id }">
-									<c:if test="${reservation.count !=-1}">
-										<option value="${reservation.count}">${reservation.count}件</option>
-										<c:set var="data" value="1" />
+					<c:if test="${statusBook.index >= (pageNumber-1)*10 && statusBook.index <= (pageNumber*10)-1}">
+						<tr class="font2">
+							<td>${book.name}</td>
+							<td>${book.author}</td>
+							<td>${book.publisher}</td>
+							<td>${book.category}</td>
+							<td>${book.type}</td>
+							<td>
+								<c:forEach items="${libraryList}" var="library">
+									<c:if test="${book.libraryId ==library.id}">
+										<option value="${library.id}">${library.name}</option>
 									</c:if>
-								</c:if>
-							</c:forEach>
-							<c:if test="${empty data}">0件</c:if>
-							<c:remove var="data" />
-						</td>
-						<td>
-							<c:forEach items="${notReturnedCounts}" var="count" varStatus="statusCount">
-								<c:if test="${statusBook.index == statusCount.index}">
-									<c:if test="${count ==1}">
-										<option value="${count}">！</option>
+								</c:forEach>
+							</td>
+							<td>${book.shelfId}</td>
+
+							<td>
+								<fmt:parseDate var="date" value="${book.publishedDate}" pattern="yyyy-MM-dd HH:mm:ss" />
+								<fmt:formatDate pattern = "yyyy年MM月dd日" value = "${date}" />
+							</td>
+							<td>
+								<c:if test="${book.keeping ==1}">保管中</c:if>
+								<c:if test="${book.lending ==1}">貸出中</c:if>
+								<c:if test="${book.disposing ==1}">整理中</c:if>
+							<td>
+								<c:forEach items="${reservations }" var="reservation">
+									<c:if test="${reservation.bookId == book.id }">
+										<c:if test="${reservation.count !=-1}">
+											<option value="${reservation.count}">${reservation.count}件</option>
+											<c:set var="data" value="1" />
 										</c:if>
-									<c:if test="${count !=1}">
-
 									</c:if>
-								</c:if>
-							</c:forEach>
-						</td>
-						<td>
-					   	 	<form action = "editBook" method = "get">
-					   	 		<input type = "hidden" name = "id" value = "${book.id}" >
-					   	 		<input class="edit" type = "submit" value = "編集" />
-					   	 	</form>
-				   	 	</td>
-				   	 	<td>
-					   	 	<form action = "circulation" method = "get">
-					   	 		<input type = "hidden" name = "id" value = "${book.id}" >
-					   	 		<input class="circulation" type = "submit" value = "貸出履歴" />
-					   	 	</form>
-				   	 	</td>
-				   	 	<td>
-							<c:forEach items="${reservations }" var="reservation">
-								<c:if test="${reservation.bookId == book.id }">
-								<c:if test="${reservation.count !=-1}">
-								   	 <form action = "reservation" method = "get">
-								   	 	<input type = "hidden" name = "id" value = "${book.id}" >
-								   	 	<input class="reservation" type = "submit" value = "予約一覧" />
-								   	 	<c:set var="data" value="1" />
-								   	</form>
-									</c:if>
-								</c:if>
-							</c:forEach>
-						<c:if test="${empty data}">予約なし</c:if>
-							<c:remove var="data" />
-				   	 	</td>
+								</c:forEach>
+								<c:if test="${empty data}">0件</c:if>
+								<c:remove var="data" />
+							</td>
+							<td>
+								<c:forEach items="${notReturnedCounts}" var="count" varStatus="statusCount">
+									<c:if test="${statusBook.index == statusCount.index}">
+										<c:if test="${count ==1}">
+											<option value="${count}">！</option>
+											</c:if>
+										<c:if test="${count !=1}">
 
-					</tr>
+										</c:if>
+									</c:if>
+								</c:forEach>
+							</td>
+							<td>
+						   	 	<form action = "editBook" method = "get">
+						   	 		<input type = "hidden" name = "id" value = "${book.id}" >
+						   	 		<input class="edit" type = "submit" value = "編集" />
+						   	 	</form>
+					   	 	</td>
+					   	 	<td>
+						   	 	<form action = "circulation" method = "get">
+						   	 		<input type = "hidden" name = "id" value = "${book.id}" >
+						   	 		<input class="circulation" type = "submit" value = "貸出履歴" />
+						   	 	</form>
+					   	 	</td>
+					   	 	<td>
+								<c:forEach items="${reservations }" var="reservation">
+									<c:if test="${reservation.bookId == book.id }">
+									<c:if test="${reservation.count !=-1}">
+									   	 <form action = "reservation" method = "get">
+									   	 	<input type = "hidden" name = "id" value = "${book.id}" >
+									   	 	<input class="reservation" type = "submit" value = "予約一覧" />
+									   	 	<c:set var="data" value="1" />
+									   	</form>
+										</c:if>
+									</c:if>
+								</c:forEach>
+							<c:if test="${empty data}">予約なし</c:if>
+								<c:remove var="data" />
+					   	 	</td>
+						</tr>
+					</c:if>
 				</c:forEach>
+
+			</table>
+			<table class="pageNumber">
+				<tr>
+					<c:forEach items="${pageCountList}" var="pageCount">
+						<form action="./manageBook" method="GET">
+							<td>
+								<div class="currentPage">
+									<c:if test="${pageNumber == pageCount}">
+										<c:out value="${pageCount}"></c:out>
+									</c:if>
+								</div>
+								<c:if test="${pageNumber != pageCount}">
+									<input class="otherPage" type="submit" value="${pageCount}"/>
+									<input type="hidden" name="pageNumber" value="${pageCount}">
+								</c:if>
+							</td>
+							<c:if test="${not empty isSearching}">
+								<input type="hidden" name="selectBox" value="${selectBox}">
+								<input type="hidden" name="selectBoxId" value="${selectBoxId}">
+								<input type="hidden" name="freeWord" value="${freeWord}">
+								<input type="hidden" name="condition" value="${condition}">
+								<input type="hidden" name="selectedLibrary" value="${selectedLibrary}">
+								<input type="hidden" name="selectedShelfId" value="${selectefShelfId}">
+								<input type="hidden" name="isReserving" value="${isReserving}">
+								<input type="hidden" name="delay" value="${delay}">
+								<input type="hidden" name="bookStatus" value="${bookStatus}">
+							</c:if>
+						</form>
+					</c:forEach>
+				</tr>
 			</table>
 		</c:if>
 
