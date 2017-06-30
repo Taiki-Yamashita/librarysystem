@@ -254,70 +254,36 @@
 			<h2>◎並び替え</h2>
 			<form action="./search" method="GET">
 				<table>
-					<tr>
+					<tr class="font1">
 						<td>
-						<c:if test="${sort == 1}"><input type="radio" name="sort" value="1" checked>新しい順</c:if>
-				<c:if test="${sort != 1}">
-					<c:if test="${sort == 0}"><input type="radio" name="sort" value="1" checked>新しい順</c:if>
-					<c:if test="${sort != 0}"><input type="radio" name="sort" value="1">新しい順</c:if>
-				</c:if>
-
+							<c:if test="${sort == 1}"><input type="radio" name="sort" value="1" checked>新しい順</c:if>
+							<c:if test="${sort != 1}">
+								<c:if test="${sort == 0}"><input type="radio" name="sort" value="1" checked>新しい順</c:if>
+								<c:if test="${sort != 0}"><input type="radio" name="sort" value="1">新しい順</c:if>
+							</c:if>
 						</td>
 						<td>
-						<c:if test="${sort == 2}"><input type="radio" name="sort" value="2" checked>古い順</c:if>
-				<c:if test="${sort != 2}"><input type="radio" name="sort" value="2">古い順</c:if>
+							<c:if test="${sort == 2}"><input type="radio" name="sort" value="2" checked>古い順</c:if>
+							<c:if test="${sort != 2}"><input type="radio" name="sort" value="2">古い順</c:if>
 						</td>
 						<td>
-						<c:if test="${sort == 3}"><input type="radio" name="sort" value="3" checked>書籍名順</c:if>
-				<c:if test="${sort != 3}"><input type="radio" name="sort" value="3">書籍名順</c:if>
+							<c:if test="${sort == 3}"><input type="radio" name="sort" value="3" checked>書籍名順</c:if>
+							<c:if test="${sort != 3}"><input type="radio" name="sort" value="3">書籍名順</c:if>
 						</td>
 						<td>
-						<c:if test="${sort == 4}"><input type="radio" name="sort" value="4" checked>著者名順</c:if>
-				<c:if test="${sort != 4}"><input type="radio" name="sort" value="4">著者名順</c:if>
-
+							<c:if test="${sort == 4}"><input type="radio" name="sort" value="4" checked>著者名順</c:if>
+							<c:if test="${sort != 4}"><input type="radio" name="sort" value="4">著者名順</c:if>
 						</td>
 						<td>
-						<c:if test="${sort == 5}"><input type="radio" name="sort" value="5" checked>カテゴリ名順</c:if>
-				<c:if test="${sort != 5}"><input type="radio" name="sort" value="5">カテゴリ名順</c:if>
+							<c:if test="${sort == 5}"><input type="radio" name="sort" value="5" checked>カテゴリ名順</c:if>
+							<c:if test="${sort != 5}"><input type="radio" name="sort" value="5">カテゴリ名順</c:if>
 						</td>
 						<td>
-						<c:if test="${sort == 6}"><input type="radio" name="sort" value="6" checked>出版社名順</c:if>
-				<c:if test="${sort != 6}"><input type="radio" name="sort" value="6">出版社名順</c:if>
-						</td>
-						<td>
-
-						</td>
-						<td>
-
-						</td>
-						<td>
-
-						</td>
-						<td>
-
+							<c:if test="${sort == 6}"><input type="radio" name="sort" value="6" checked>出版社名順</c:if>
+							<c:if test="${sort != 6}"><input type="radio" name="sort" value="6">出版社名順</c:if>
 						</td>
 					</tr>
 				</table>
-				<c:if test="${sort == 1}"><input type="radio" name="sort" value="1" checked>新しい順</c:if>
-				<c:if test="${sort != 1}">
-					<c:if test="${sort == 0}"><input type="radio" name="sort" value="1" checked>新しい順</c:if>
-					<c:if test="${sort != 0}"><input type="radio" name="sort" value="1">新しい順</c:if>
-				</c:if>
-
-				<c:if test="${sort == 2}"><input type="radio" name="sort" value="2" checked>古い順</c:if>
-				<c:if test="${sort != 2}"><input type="radio" name="sort" value="2">古い順</c:if>
-
-				<c:if test="${sort == 3}"><input type="radio" name="sort" value="3" checked>書籍名順</c:if>
-				<c:if test="${sort != 3}"><input type="radio" name="sort" value="3">書籍名順</c:if>
-
-				<c:if test="${sort == 4}"><input type="radio" name="sort" value="4" checked>著者名順</c:if>
-				<c:if test="${sort != 4}"><input type="radio" name="sort" value="4">著者名順</c:if>
-
-				<c:if test="${sort == 5}"><input type="radio" name="sort" value="5" checked>カテゴリ名順</c:if>
-				<c:if test="${sort != 5}"><input type="radio" name="sort" value="5">カテゴリ名順</c:if>
-
-				<c:if test="${sort == 6}"><input type="radio" name="sort" value="6" checked>出版社名順</c:if>
-				<c:if test="${sort != 6}"><input type="radio" name="sort" value="6">出版社名順</c:if>
 
 				<!-- freeWord -->
 				<input type="hidden" name="selectBox" value="${selectBoxId}">
@@ -352,8 +318,13 @@
 
 				<input type="hidden" name="isSearching" value="1">
 				<input type="hidden" name="bookStatus" value="${bookStatus}">
+				<table>
+					<tr class="font1">
+						<td>で</td>
+						<td><input class="sort" type="submit" value="並び替え"></td>
+					</tr>
+				</table>
 
-				<input class="sort" type="submit" value="並び替え">
 			</form>
 			<hr width="1500px">
 		</c:if>
