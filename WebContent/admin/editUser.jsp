@@ -24,8 +24,8 @@
 			<c:remove var="errorMessages" scope="session"/>
 		</c:if>
 	</div>
-
-<form class="editUserForm" action="editUser"method="post"><br />
+<div class="center">
+<form  action="editUser"method="post"><br />
 
 	<input name="id" type="hidden" value="${editUser.id}"/>
 
@@ -64,14 +64,14 @@
 		</select>
 
 		<br>
-
 		<label for="registerDate">登録日（更新日）</label><br>
 		<input type="hidden" name="registerDate" id="registerDate" value="${editUser.registerDate }"/>
 		<fmt:parseDate var="date" value="${editUser.registerDate}" pattern="yyyy-MM-dd HH:mm:ss" />
-		<fmt:formatDate pattern = "yyyy年MM月dd日" value = "${date}" />
-	</form>
-	<div class="set">
+		<fmt:formatDate pattern = "yyyy年MM月dd日" value = "${date}" /><br>
 		<input class ="register" type="submit" value="登録" />
+	</form>
+	</div>
+	<div class="center">
 		<form action="renewUser" method="post">
 			<input type="hidden" name=renewDate >
 			<input type="hidden" name=renewUserId value="${editUser.id}">

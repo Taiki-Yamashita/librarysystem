@@ -17,16 +17,18 @@
 	<h1>図書システム借りたいナ☆</h1>
 	<h2>本の編集</h2>
 
-<c:if test="${ not empty errorMessages }">
-	<div class="errorMessages">
-		<c:forEach items="${errorMessages}" var="message">
-			<c:out value="${message}" /><br>
-		</c:forEach>
-	</div>
-	<c:remove var="errorMessages" scope="session"/>
-</c:if>
+<div class="errorMessages">
+	<c:if test="${ not empty errorMessages }">
+		<div class="errorMessages">
+			<c:forEach items="${errorMessages}" var="message">
+				<c:out value="${message}" /><br>
+			</c:forEach>
+		</div>
+		<c:remove var="errorMessages" scope="session"/>
+	</c:if>
+</div>
 
-
+<div class="center">
 <form class="editBookForm" action="editBook"method="post"><br />
 
 	<input name="book_id" type="hidden" value="${editBook.id}"/>
@@ -105,6 +107,7 @@
 	<c:if test="${editBook.keeping != '3'}"><input type="radio" name="status" value="3">整理中</c:if><br>
 	<input class ="register" type="submit" value="登録">
 </form>
+</div>
 		<c:remove var="checkBoxLibraryNumber" scope="session"/>
 		<c:remove var="checkLibrary" scope="session"/>
 		<c:remove var="checkBoxCategoryNumber" scope="session"/>
@@ -113,6 +116,5 @@
 		<c:remove var="checkType" scope="session"/>
 		<c:remove var="checkBoxStatusNumber" scope="session"/>
 		<c:remove var="checkStatus" scope="session"/>
-
 </body>
 </html>
