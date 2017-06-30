@@ -23,7 +23,7 @@
 			<tr>
 				<td><input type="button" onclick="location.href='./'"value="トップ"></td>
 				<td><input type="button" onclick="location.href='./search'"value="検索"></td>
-				<td><input type="button" onclick="location.href='./ranking'"value="ランキング"></td>
+				<td><input type="button" onclick="location.href='./ranking'"value="貸出/予約ランキング"></td>
 				<td><input type="button" onclick="location.href='./favorite'"value="お気に入り"></td>
 				</tr>
 		</table>

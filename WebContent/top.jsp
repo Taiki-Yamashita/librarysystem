@@ -46,7 +46,7 @@
 			<table class="topTable">
 				<tr>
 					<td rowspan="2"><input class="searchButton" type="button" onclick="location.href='./search'"value="検索"></td>
-					<td><input class="rankingButton" type="button" onclick="location.href='./ranking'"value="ランキング"></td>
+					<td><input class="rankingButton" type="button" onclick="location.href='./ranking'"value="貸出/予約ランキング"></td>
 				</tr>
 				<tr>
 					<td><input class="loginButton" type="button" onclick="location.href='./login'"value="ログイン"></td>
@@ -76,7 +76,7 @@
 			<table class="topTable">
 				<tr>
 					<td><input class="loginedSearchButton" type="button" onclick="location.href='./search'"value="検索"></td>
-					<td><input class="loginedRankingButton" type="button" onclick="location.href='./ranking'"value="ランキング"></td>
+					<td><input class="loginedRankingButton" type="button" onclick="location.href='./ranking'"value="貸出/予約ランキング"></td>
 				</tr>
 			</table>
 		</c:if>

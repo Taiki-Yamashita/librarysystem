@@ -26,17 +26,26 @@
 		</c:if>
 		<div class="center">
 			<form action="./login" method="POST" class="default">
-				<table border="1" class="center">
-					<tr><td>ログインID:<input name="loginId" type="text"/></td></tr>
-					<tr><td>パスワード:<input name="password" type="password"/></td></tr>
+				<table class="loginLine">
+					<tr>
+						<td>
+							<table border="2" class="loginMenu">
+								<tr>
+									<td>ログインID:<input name="loginId" type="text" size="29"/></td>
+									<td>パスワード:<input name="password" type="password" size="29"/></td>
+								</tr>
+							</table>
+						</td>
+						<td>
+							<input class="loginButtonforLogin" type="submit"  value="ログイン" />
+						</td>
+					</tr>
 				</table>
-				<input type="submit"  value="ログイン" />
 			</form>
-
-			<table border="1" class="center">
+			<table class="topTable">
 				<tr>
-					<td><a href = "./search">検索</a></td>
-					<td><a href = "./ranking">ランキング</a></td>
+					<td><input class="loginedSearchButton" type="button" onclick="location.href='./search'"value="検索"></td>
+					<td><input class="loginedRankingButton" type="button" onclick="location.href='./ranking'"value="貸出/予約ランキング"></td>
 				</tr>
 			</table>
 		</div>
