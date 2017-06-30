@@ -14,7 +14,7 @@
 	</head>
 	<body>
 		<h1>図書システムかりたいナ☆</h1>
-		<h2>人気ランキング</h2>
+		<h2>☆人気ランキング☆</h2>
 
 
 		<c:if test="${empty loginUser}">
@@ -22,7 +22,8 @@
 		</c:if>
 
 		<c:if test="${not empty loginUser}">
-			<input type="button" onclick="location.href='./logout'"value="ログアウト">
+			<input type="button" class="subButton" onclick="location.href='./logout'"value="ログアウト">
+			<br>
 		</c:if>
 		<br>
 
@@ -52,17 +53,19 @@
 			</c:forEach>
 		</c:if>
 	</div>
-		貸出件数ランキング<br>
+		<h2>【貸出件数ランキング】</h2>
 		<c:if test="${not empty circulations }">
 		<table border="2" class="manage">
-			<tr>
+			<tr class="font1">
 				<th>順位</th><th>貸出数</th><th>書籍</th><th>著者</th><th>出版社</th><th>カテゴリ</th>
 				<th>種類</th><th>図書館</th><th>状態</th><th>ISBN</th><th>予約</th><th>お気に入り</th>
 			</tr>
+
 			<c:forEach  begin="0" end="19" step="1" varStatus="status" items="${circulations}" var="circulation">
+			<tr class="font2">
 				<c:if test="${status.count ==1 }"><tr class="winner"></c:if>
 				<c:if test="${status.count ==2 || status.count ==3}"><tr class="semiWinner"></c:if>
-				<c:if test="${status.count >3}"><tr ></c:if>
+				<c:if test="${status.count >3}"></c:if>
 					<td><c:out value="${status.count}"/>位</td>
 					<td>
 						<c:forEach items="${circulationCounts}" var="count" varStatus="statusCount">
@@ -206,17 +209,18 @@
 		<c:if test="${empty circulations }">貸出がありません</c:if>
 
 		<br>
-		予約件数ランキング<br>
+		<h2>【予約件数ランキング】</h2>
 		<c:if test="${not empty reservations }">
 		<table border="2" class="manage">
-			<tr>
+			<tr class="font1">
 				<th>順位</th><th>予約数</th><th>書籍</th><th>著者</th><th>出版社</th><th>カテゴリ</th>
 				<th>種類</th><th>図書館</th><th>状態</th><th>ISBN</th><th>予約</th><th>お気に入り</th>
 			</tr>
 			<c:forEach  begin="0" end="19" step="1" varStatus="status" items="${reservations}" var="reservation">
+			<tr class="font2">
 				<c:if test="${status.count ==1 }"><tr class="winner"></c:if>
 				<c:if test="${status.count ==2 || status.count ==3}"><tr class="semiWinner"></c:if>
-				<c:if test="${status.count >3}"><tr ></c:if>
+				<c:if test="${status.count >3}"></c:if>
 					<td><c:out value="${status.count}"/>位</td>
 					<td>
 							<c:forEach items="${reservationCounts}" var="count" varStatus="statusCount">
