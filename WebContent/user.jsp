@@ -28,9 +28,9 @@
 				</tr>
 		</table>
 
-		<p>登録情報</p>
+		<h2>登録情報</h2>
 		<table border="2" class="manage">
-			<tr>
+			<tr class="font1">
 				<td>
 					<!-- ユーザー情報 -->
 					<table>
@@ -83,9 +83,9 @@
 			</c:if>
 		</c:forEach>
 		<c:if test="${not empty flag}">
-			<h4>借りている本の一覧</h4>
+			<h2>借りている本の一覧</h2>
 			<table border="2" class="manage">
-				<tr>
+				<tr class="font1">
 					<th>本の名前</th>
 					<th>貸出日</th>
 					<th>期限</th>
@@ -95,7 +95,7 @@
 				<c:forEach items="${circulations}" var="circulation">
 
 					<c:if test="${circulation.userId == loginUser.id && circulation.returning == 0 && circulation.lending ==1}">
-						<tr>
+						<tr class="font2">
 							<td>
 								<c:forEach items="${books}" var="book">
 									<c:if test="${book.id == circulation.bookId}">${book.name}</c:if>
@@ -134,9 +134,9 @@
 		</c:forEach>
 
 		<c:if test="${not empty flag2}">
-			<h4>予約一覧</h4>
+			<h2>予約一覧</h2>
 				<table border="2" class="manage">
-					<tr>
+					<tr class="font1">
 						<th>本の名前</th>
 						<th>受取図書館</th>
 						<th>予約日</th>
@@ -145,7 +145,7 @@
 					<c:forEach items="${reservations}" var="reservation">
 
 						<c:if test="${reservation.userId == loginUser.id && reservation.canceling == 0 && reservation.delivering == 0}">
-							<tr>
+							<tr class="font2">
 								<td>
 									<c:forEach items="${books}" var="book">
 										<c:if test="${book.id == reservation.bookId}">${reservation.bookName}</c:if>
