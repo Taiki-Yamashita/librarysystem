@@ -13,14 +13,21 @@
 <title>貸出用ページ</title>
 </head>
 <body>
-	<a href = "./">トップ</a>
-	<a href = "./search">検索</a>
-	<a href = "./favorite">お気に入り</a>
-	<a href = "./require">本のリクエスト</a>
-	<a href = "./admin/manage">管理画面</a>
-	<a href = "./user">マイページ</a>
+	<h1>図書システムかりたいナ☆</h1>
+		<h2>${loginUser.name}さんのマイページ</h2>
+		<div class="subButton">
+			<input type="button" onclick="location.href='./logout'"value="ログアウト">
+		</div><br><br>
 
-<table>
+		<table class="menuBar">
+			<tr>
+				<td><input type="button" onclick="location.href='./'"value="トップ"></td>
+				<td><input type="button" onclick="location.href='./search'"value="検索"></td>
+				<td><input type="button" onclick="location.href='./ranking'"value="貸出/予約ランキング"></td>
+				<td><input type="button" onclick="location.href='./user'"value="マイページ"></td>
+			</tr>
+		</table>
+<table class="lentDate">
 		<tr>
 			<th>書籍名</th>
 			<th>状態</th>
@@ -35,10 +42,10 @@
 			<tr>
 				<td>${book.name}</td>
 				<c:if test="${book.lending == 1 }">
-				<td>貸出中</td>
+				<td class="lending">貸出中</td>
 				</c:if>
 				<c:if test="${book.lending != 1 }">
-				<td>貸出可</td>
+				<td class="canLent">貸出可</td>
 				</c:if>
 
 	   	 		<td>
@@ -48,7 +55,7 @@
 		   	 				<input type = "hidden" id = "libraryId" name = "libraryId" value = "${book.libraryId}" >
 							<input type ="hidden" name = "userId" value = "${loginUser.id }" >
 							<input type = "hidden" name = "num" value = 0 >
-							<input type = "submit" value = "返却" />
+							<input class="return" type = "submit" value = "返却" />
 		   	 			</form>
 	   	 			</c:if>
 
@@ -59,7 +66,7 @@
 		   	 				<input type = "hidden" id = "libraryId" name = "libraryId" value = "${book.libraryId}" >
 							<input type ="hidden" name = "userId" value = "${loginUser.id }" >
 							<input type = "hidden" name = "num" value = 1 >
-							<input type = "submit" value = "貸出" />
+							<input class="lent" type = "submit" value = "貸出" />
 		   	 			</form>
 		   	 			</c:if>
 		   	 			<c:if test="${circulationSize>7}">貸出NG</c:if>

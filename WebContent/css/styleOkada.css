@@ -1,4 +1,6 @@
 @CHARSET "UTF-8";
+
+
 input {
 	font-size:16px;
 }
@@ -8,10 +10,18 @@ select {
 .admin {
     background-color: rgb(236, 255, 223);
 }
+.userPage{
+	font-size:16px;
+}
+
 .notificationForm{
 	margin-left: 120px;
 	font-size: 16px;
 }
+.passForm{
+	font-size:16px;
+}
+
 .addBookForm{
 	margin-left: 120px;
 	font-size: 16px;
@@ -68,12 +78,19 @@ ul.pageNav01 li a:hover {
 	background: #eeeff7;
 	border-color: #00f;
 }
-
 h1 {
-	text-align: center;
+    text-align: center;
+   	font-size:50px;
 }
+
 h2 {
 	text-align: center;
+	font-size:30px;
+}
+.lentDate{
+margin-left: auto;
+margin-right: auto;
+font-size:20px;
 }
 ul, menu, dir {
 	text-align: center;
@@ -249,7 +266,7 @@ ul, menu, dir {
     display: inline-block;
     padding: 0.5em 1em;
     text-decoration: none;
-    background: #668ad8;/*ボタン色*/
+    background: #0080c0;/*ボタン色*/
     color: #FFF;
     border-bottom: solid 4px #627295;
     border-radius: 14px;
@@ -342,12 +359,12 @@ ul, menu, dir {
 	font-weight: 900;
     text-align: center;
     line-height: 1;
-	width: 100px;
-    height: 50px;
+	width: 250px;
+    height: 150px;
     display: inline-block;
     padding: 0.5em 1em;
     text-decoration: none;
-    background: #668ad8;/*ボタン色*/
+    background: #f28c8c;/*ボタン色*/
     color: #FFF;
     border-bottom: solid 4px #627295;
     border-radius: 14px;
@@ -617,4 +634,80 @@ button {/*ボタンを押したとき*/
 .semiWinner{
 	font-weight:600;
 	font-size:18px;
+}
+.lent {
+	margin-top: 3%;
+	font-weight: 900;
+	font-size: 20px;
+    text-align: center;
+    line-height: 1;
+	width: 100px;
+    height: 50px;
+    display: inline-block;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    background: #0080ff;/*ボタン色*/
+    color: #FFF;
+    border-bottom: solid 4px #627295;
+    border-radius: 14px;
+    cursor:pointer;
+}
+.lent {/*ボタンを押したとき*/
+    -ms-transform: translateY(4px);
+    -webkit-transform: translateY(4px);
+    transform: translateY(4px);/*下に動く*/
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);/*影を小さく*/
+    border-bottom: none;
+    outline: none;
+}
+.return {
+	margin-top: 3%;
+	font-weight: 900;
+	font-size: 20px;
+    text-align: center;
+    line-height: 1;
+	width: 100px;
+    height: 50px;
+    display: inline-block;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    background: #800040;/*ボタン色*/
+    color: #FFF;
+    border-bottom: solid 4px #627295;
+    border-radius: 14px;
+    cursor:pointer;
+}
+.return {/*ボタンを押したとき*/
+    -ms-transform: translateY(4px);
+    -webkit-transform: translateY(4px);
+    transform: translateY(4px);/*下に動く*/
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);/*影を小さく*/
+    border-bottom: none;
+    outline: none;
+}
+
+.new {
+	margin-top: 2%;
+	font-weight: 900;
+	font-size: 20px;
+    text-align: center;
+    line-height: 1;
+	width: 100px;
+    height: 50px;
+    display: inline-block;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    background: rgb(202, 0, 0);/*ボタン色*/
+    color: #FFF;
+    border-bottom: solid 4px #627295;
+    border-radius: 14px;
+    cursor:pointer;
+}
+.new {/*ボタンを押したとき*/
+    -ms-transform: translateY(4px);
+    -webkit-transform: translateY(4px);
+    transform: translateY(4px);/*下に動く*/
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);/*影を小さく*/
+    border-bottom: none;
+    outline: none;
 }
