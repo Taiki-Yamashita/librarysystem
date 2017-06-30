@@ -18,7 +18,7 @@
 
 
 		<c:if test="${empty loginUser}">
-			<input type="button" onclick="location.href='./login'"value="ログイン">
+			<input class="login_bottun" type="button" onclick="location.href='./login'"value="ログイン">
 		</c:if>
 
 		<c:if test="${not empty loginUser}">

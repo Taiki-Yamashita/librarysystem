@@ -26,6 +26,10 @@ select {
 .passForm{
 	font-size:16px;
 }
+.requireForm{
+	margin-left:18px;
+	font-size: 16px;
+}
 
 .addBookForm{
 	margin-left: 120px;
@@ -748,3 +752,106 @@ button {/*ボタンを押したとき*/
     border-bottom: none;
     outline: none;
 }
+.topRefineButton{
+	width : 100%;
+	font-weight: 900;
+	font-size: 18px;
+    text-align: center;
+    line-height: 1;
+	width: 200px;
+    height: 50px;
+    display: inline-block;
+    text-decoration: none;
+    background: #248;/*ボタン色*/
+    color: #FFF;
+    border-bottom: solid 4px #627295;
+    border-radius: 14px;
+    cursor:pointer;
+}
+.logout {/*ボタンを押したとき*/
+    -ms-transform: translateY(4px);
+    -webkit-transform: translateY(4px);
+    transform: translateY(4px);/*下に動く*/
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);/*影を小さく*/
+    border-bottom: none;
+    outline: none;
+}
+
+.admineter{
+	width : 100%;
+	font-weight: 900;
+	font-size: 18px;
+    text-align: center;
+    line-height: 1;
+	width: 100px;
+    height: 50px;
+    display: inline-block;
+    text-decoration: none;
+    background: #e38782;/*ボタン色*/
+    color: #FFF;
+    border-bottom: solid 4px #627295;
+    border-radius: 14px;
+    cursor:pointer;
+}
+.admineter {/*ボタンを押したとき*/
+    -ms-transform: translateY(4px);
+    -webkit-transform: translateY(4px);
+    transform: translateY(4px);/*下に動く*/
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);/*影を小さく*/
+    border-bottom: none;
+    outline: none;
+}
+.em{
+	color:red;
+	font-size:22px;
+}
+.requestBottun{
+	width : 100%;
+	font-weight: 900;
+	font-size: 18px;
+    text-align: center;
+    line-height: 1;
+	width: 300px;
+    height: 50px;
+    display: inline-block;
+    text-decoration: none;
+    background: #ff8000;/*ボタン色*/
+    color: #FFF;
+    border-bottom: solid 4px #627295;
+    border-radius: 14px;
+    cursor:pointer;
+}
+.requestBottun {/*ボタンを押したとき*/
+    -ms-transform: translateY(4px);
+    -webkit-transform: translateY(4px);
+    transform: translateY(4px);/*下に動く*/
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);/*影を小さく*/
+    border-bottom: none;
+    outline: none;
+}
+.login_bottun{
+	margin-left:1100px;
+	width : 100%;
+	font-weight: 900;
+	font-size: 18px;
+    text-align: center;
+    line-height: 1;
+	width: 100px;
+    height: 50px;
+    display: inline-block;
+    text-decoration: none;
+    background: rgb(202, 0, 0);/*ボタン色*/
+    color: #FFF;
+    border-bottom: solid 4px #627295;
+    border-radius: 14px;
+    cursor:pointer;
+}
+.login_bottun {/*ボタンを押したとき*/
+    -ms-transform: translateY(4px);
+    -webkit-transform: translateY(4px);
+    transform: translateY(4px);/*下に動く*/
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);/*影を小さく*/
+    border-bottom: none;
+    outline: none;
+}
+

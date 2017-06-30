@@ -17,15 +17,15 @@
 		<h2>☆検索☆</h2>
 
 		<c:if test="${empty loginUser}">
-			<input type="button" onclick="location.href='./login'"value="ログイン">
+			<input class="login_bottun" type="button" onclick="location.href='./login'"value="ログイン">
 		</c:if>
 
 		<c:if test="${not empty loginUser}">
 			<div class="subButton">
 			<input class="logout" type="button" class="subButton" onclick="location.href='./logout'"value="ログアウト">
-		</div><br>
+		</div>
 		</c:if>
-		<br>
+		<br><br>
 
 		<table class="menuBar">
 			<tr>
@@ -80,6 +80,7 @@
 						</c:if>
 						<c:if test="${empty freeWord}">
 							<input type="text" name="freeWord" placeholder="未記入で全て検索"/>
+
 						</c:if>
 					</td>
 					<td>
@@ -238,7 +239,6 @@
 				</tr>
 				<tr class="font1">
 					<td>
-						で
 						<input type="hidden" name="isSearching" value="1">
 						<input type="hidden" name="sort" value="0">
 						<input class="focus" type="submit" value="絞込み">
@@ -332,14 +332,19 @@
 		</c:if>
 
 		<c:if test="${ not empty errorMessages }">
+			<div class="em">
 			<c:forEach items="${errorMessages}" var="message">
-				<font color="#ff0000"><c:out value="${message}" /></font><br>
+				<c:out value="${message}" /><br>
 			</c:forEach>
+			</div>
+			<p><input class="requestBottun" type="button" onclick="location.href='./require'"value="本をリクエストする"></p>
 		</c:if>
 		<c:if test="${ not empty loginErrorMessages }">
+			<div class="em">
 			<c:forEach items="${loginErrorMessages}" var="message">
 				<font color="#ff0000"><c:out value="${message}" /></font><br>
 			</c:forEach>
+			</div>
 		</c:if>
 
 		<c:if test="${ empty errorMessages && not empty booksCount}">
